@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI・AWS Daily Report 2026-05-02</title>
+<style>
+:root{--ai:#4f46e5;--aws:#ff9900;--dark:#232f3e;--red:#dc2626;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--r:12px;--sh:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI','Noto Sans JP','Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px}
+a{color:var(--ai);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:0 1.25rem}
+header{background:var(--dark);color:#fff;padding:2.5rem 0 2rem;text-align:center}
+.header-badges{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.badge{font-size:.7rem;font-weight:700;padding:.2rem .7rem;border-radius:999px;letter-spacing:.05em}
+.badge-ai{background:rgba(79,70,229,.25);color:#a5b4fc;border:1px solid rgba(79,70,229,.4)}
+.badge-aws{background:rgba(255,153,0,.2);color:#fcd34d;border:1px solid rgba(255,153,0,.4)}
+.badge-report{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}
+h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:.5rem}
+.header-meta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.6);margin-top:.75rem}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+nav .container{display:flex;gap:.25rem;overflow-x:auto;padding:.6rem 1.25rem}
+.nav-link{font-size:.8rem;font-weight:600;color:var(--muted);padding:.35rem .75rem;border-radius:6px;white-space:nowrap}
+.nav-link:hover{background:var(--bg);color:var(--text);text-decoration:none}
+main{padding:2rem 0 3rem}
+.section{margin-bottom:2.5rem}
+.section-header{display:flex;align-items:center;gap:1rem;padding-bottom:.75rem;border-bottom:2px solid var(--border);margin-bottom:1.25rem}
+.section-icon{width:2.5rem;height:2.5rem;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.section-title{font-size:1.15rem;font-weight:800}
+.section-subtitle{font-size:.8rem;color:var(--muted);margin-top:.1rem}
+.section-ai .section-icon{background:#eef2ff}.section-ai .section-title{color:var(--ai)}.section-ai .section-header{border-bottom-color:var(--ai)}
+.section-aws .section-icon{background:#fff7ed}.section-aws .section-title{color:var(--aws)}.section-aws .section-header{border-bottom-color:var(--aws)}
+.section-research .section-icon{background:#fee2e2}.section-research .section-title{color:var(--red)}.section-research .section-header{border-bottom-color:var(--red)}
+.summary-box{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;box-shadow:var(--sh);margin-bottom:1.5rem}
+.summary-text{color:#334155;line-height:1.9;margin-bottom:1rem}
+.summary-highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.75rem}
+.highlight-item{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem;text-align:center}
+.highlight-num{font-size:1.75rem;font-weight:800;color:var(--ai)}
+.highlight-label{font-size:.75rem;color:var(--muted);margin-top:.1rem}
+.update-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--sh)}
+.update-card.ai-card{border-left:4px solid var(--ai)}
+.update-card.aws-card{border-left:4px solid var(--aws)}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.service-name{font-weight:700;font-size:.95rem}
+.ai-card .service-name{color:var(--ai)}.aws-card .service-name{color:var(--aws)}
+.card-meta{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.impact-badge{font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:999px}
+.impact-high{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+.impact-medium{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.impact-low{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.date-badge{font-size:.7rem;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:.15rem .5rem;border-radius:999px}
+.update-title-link{display:block;font-size:.975rem;font-weight:700;color:var(--text);margin-bottom:.4rem;line-height:1.4}
+.update-title-link:hover{color:var(--ai)}
+.update-card p{color:#334155;font-size:.9rem;line-height:1.8}
+.timeline{list-style:none;padding:0;border-left:2px solid var(--border);margin-left:.75rem}
+.timeline li{padding:.1rem 0 1.25rem 2rem;position:relative}
+.timeline li::before{content:'';position:absolute;left:-.5625rem;top:.4rem;width:.875rem;height:.875rem;background:var(--red);border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 2px var(--red)}
+.timeline-date{font-size:.72rem;font-weight:700;color:var(--red);letter-spacing:.05em;margin-bottom:.2rem}
+.timeline-item-title{font-weight:700;margin-bottom:.25rem}
+.timeline-item-desc{font-size:.875rem;color:#4b5563;line-height:1.75}
+footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;padding:1.5rem;font-size:.8rem}
+@media(max-width:640px){.summary-highlights{grid-template-columns:1fr 1fr};header{padding:2rem 0 1.5rem}}
+@media print{nav,footer{display:none};.update-card{break-inside:avoid};body{font-size:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-badges">
+      <span class="badge badge-report">&#128203; Daily Report</span>
+      <span class="badge badge-ai">&#129302; AI</span>
+      <span class="badge badge-aws">&#9729;&#65039; AWS</span>
+    </div>
+    <h1>AI・AWS 過去24時間アップデート</h1>
+    <div class="header-meta">
+      <span>&#128197; 2026-05-02</span>
+      <span>&#128269; 過去24時間以内</span>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#summary">&#128204; サマリー</a>
+    <a class="nav-link" href="#ai-updates">&#129302; AIアップデート</a>
+    <a class="nav-link" href="#aws-updates">&#9729;&#65039; AWSアップデート</a>
+    <a class="nav-link" href="#research">&#128300; 最新動向</a>
+  </div>
+</nav>
+<main><div class="container">
+
+  <section class="section" id="summary">
+    <div class="section-header">
+      <div class="section-icon">&#128204;</div>
+      <div><div class="section-title">エグゼクティブサマリー</div></div>
+    </div>
+    <div class="summary-box">
+      <p class="summary-text">
+        2026年5月2日（過去24時間）は、米国防総省が人工知能分野で7社の大手テクノロジー企業と新たなAI調達契約を締結したほか、OpenAIがサイバーセキュリティ用AIツールのアクセス制限を実施した。
+        AWS側では、Amazon Bedrock AgentCore が南米（サンパウロ）リージョンへ展開し、エージェントパフォーマンス最適化機能（プレビュー）と SAP 向け MCP サーバーの一般提供を開始するなど、エージェント基盤の整備が着実に進んでいる。
+        全体として、生成AIのエンタープライズ利用と政府・防衛分野への展開が加速している動向が見て取れる。
+      </p>
+      <div class="summary-highlights">
+        <div class="highlight-item">
+          <div class="highlight-num">2</div>
+          <div class="highlight-label">AIアップデート</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">3</div>
+          <div class="highlight-label">AWSアップデート</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-ai" id="ai-updates">
+    <div class="section-header">
+      <div class="section-icon">&#129302;</div>
+      <div><div class="section-title">AI最新アップデート</div><div class="section-subtitle">過去24時間のモデル・機能リリース</div></div>
+    </div>
+
+    <div class="update-card ai-card">
+      <div class="card-header">
+        <div class="service-name">US Pentagon / Anthropic・各社</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-01</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://www.cnn.com/2026/05/01/tech/pentagon-ai-anthropic" target="_blank" rel="noopener">米国防総省、AnthropicなどAI大手7社と新契約を締結 &#8594;</a>
+      <p>
+        米国防総省（Pentagon）がAnthropicを含む大手テクノロジー7社と新たなAI調達契約を締結したことが報じられた。
+        同省はこれまでAnthropicとの契約を保留していたが、今回の合意により防衛・安全保障分野における生成AIの活用が本格化する見込み。
+        政府によるAI調達の拡大は、AIプロバイダー各社の政府契約市場への参入加速を示す象徴的な動きとして注目されている。
+      </p>
+    </div>
+
+    <div class="update-card ai-card">
+      <div class="card-header">
+        <div class="service-name">OpenAI</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-medium">重要度: 中</span>
+          <span class="date-badge">2026-04-30</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://techcrunch.com/2026/04/30/after-dissing-anthropic-for-limiting-mythos-openai-restricts-access-to-cyber-too/" target="_blank" rel="noopener">OpenAI、セキュリティ用 Cyber モデルのアクセスを制限 &#8594;</a>
+      <p>
+        Anthropicがサイバーセキュリティ特化モデル「Mythos Preview」のアクセスを制限したことを批判していた OpenAI が、自社のセキュリティ用AIツール「Cyber」についても同様のアクセス制限を実施した。
+        高度なサイバー攻撃能力を持つAIモデルの悪用リスクへの対応として、両社ともに責任あるAI利用の枠組みを強化している状況が浮き彫りになった。
+        TechCrunchによると、この方針転換はAI業界全体におけるオフェンシブAIのアクセス管理の難しさを示している。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="section section-aws" id="aws-updates">
+    <div class="section-header">
+      <div class="section-icon">&#9729;&#65039;</div>
+      <div><div class="section-title">AWSサービス最新動向</div><div class="section-subtitle">過去24時間のリリース・新機能</div></div>
+    </div>
+
+    <div class="update-card aws-card">
+      <div class="card-header">
+        <div class="service-name">Amazon Bedrock AgentCore</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-01</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://aws.amazon.com/about-aws/whats-new/2026/05/agentcore-sao-paulo-region/" target="_blank" rel="noopener">Amazon Bedrock AgentCore、南米（サンパウロ）リージョンで利用可能に &#8594;</a>
+      <p>
+        Amazon Bedrock AgentCore が AWS 南米（サンパウロ）リージョンで正式提供開始となった。
+        エージェントランタイム・アイデンティティ・ゲートウェイ・ポリシー・オブザーバビリティ・コードインタープリター・ブラウザツールのすべての機能が利用可能で、南米のお客様はエンドユーザーに近い場所でエージェントを展開でき、レイテンシ低減やデータレジデンシー要件への対応が可能になる。
+      </p>
+    </div>
+
+    <div class="update-card aws-card">
+      <div class="card-header">
+        <div class="service-name">Amazon Bedrock AgentCore</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-02</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://aws.amazon.com/about-aws/whats-new/2026/05/bedrock-agentcore-optimization-preview/" target="_blank" rel="noopener">AgentCore、エージェントパフォーマンス最適化機能をプレビュー提供開始 &#8594;</a>
+      <p>
+        Amazon Bedrock AgentCore が、本番AIエージェントの「観察 → 評価 → 改善」サイクルを完結させる最適化機能（プレビュー）を追加した。
+        レコメンデーション機能は本番トレースと評価出力を解析し、ワークロードに最適化されたシステムプロンプトとツール説明を自動生成する。
+        またバッチ評価と A/B テストの2方式でパフォーマンス検証が可能で、A/B テストでは変更を適用する前に統計的有意性が報告される仕組みとなっている。
+      </p>
+    </div>
+
+    <div class="update-card aws-card">
+      <div class="card-header">
+        <div class="service-name">AWS for SAP / Amazon Bedrock AgentCore</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-medium">重要度: 中</span>
+          <span class="date-badge">2026-05-02</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://aws.amazon.com/about-aws/whats-new/2026/05/aws-sap-mcp-amazon-bedrock/" target="_blank" rel="noopener">AWS for SAP MCP Server、Amazon Bedrock AgentCore で一般提供（GA） &#8594;</a>
+      <p>
+        SAP システムと Amazon Bedrock AgentCore を連携させる「AWS for SAP MCP Server」が一般提供（GA）となった。
+        MCP（Model Context Protocol）サーバーを通じて、AIエージェントがSAPの基幹業務データや機能に直接アクセスできるようになり、SAP環境上での自律的なエージェント処理が実現可能になる。
+        SAP を利用するエンタープライズ企業の AI エージェント化ユースケースを大幅に拡張する重要なアップデート。
+      </p>
+    </div>
+
+  </section>
+
+  <section class="section section-research" id="research">
+    <div class="section-header">
+      <div class="section-icon">&#128300;</div>
+      <div><div class="section-title">最新動向</div><div class="section-subtitle">過去24時間のまとめと今後の展望</div></div>
+    </div>
+    <ul class="timeline">
+      <li>
+        <div class="timeline-date">2026-04-28</div>
+        <div class="timeline-item-title">OpenAI × AWS 提携拡大：GPT-5.5・Codex・Managed Agents が Amazon Bedrock に登場</div>
+        <div class="timeline-item-desc">
+          OpenAI と AWS が戦略的パートナーシップを拡大し、GPT-5.5・GPT-5.4 をはじめとするフロンティアモデル、コーディングエージェント「Codex」、マルチステップ処理向け「Managed Agents」を Amazon Bedrock で（限定プレビューとして）利用可能にすると発表。
+          AWSのセキュリティ・ガバナンス・コスト管理の枠組みを活用しながら OpenAI モデルを使えるようになる点が企業にとって大きなメリット。
+          参照: <a href="https://openai.com/index/openai-on-aws/" target="_blank" rel="noopener">openai.com</a> / <a href="https://www.theregister.com/2026/04/28/openai_climbs_into_amazons_bedrock" target="_blank" rel="noopener">The Register</a>
+        </div>
+      </li>
+      <li>
+        <div class="timeline-date">2026-04-28</div>
+        <div class="timeline-item-title">Amazon Quick デスクトップ AI アシスタント発表</div>
+        <div class="timeline-item-desc">
+          「What's Next with AWS 2026」イベントで AWS が発表した AI ワーク アシスタント。Google Workspace・Microsoft 365・Slack・Zoom・Salesforce などと連携し、ローカルファイル・カレンダー・コミュニケーションに接続するデスクトップアプリ（プレビュー）も公開。
+          Free プランと Plus プランが提供開始され、AWS アカウント不要で Google/Apple/GitHub/Amazon 認証からサインアップ可能。
+          参照: <a href="https://www.aboutamazon.com/news/aws/amazon-quick-desktop-ai-assistant" target="_blank" rel="noopener">aboutamazon.com</a>
+        </div>
+      </li>
+      <li>
+        <div class="timeline-date">2026-04-16</div>
+        <div class="timeline-item-title">Anthropic、Claude Opus 4.7 を一般提供開始</div>
+        <div class="timeline-item-desc">
+          Anthropic が Claude Opus 4.7 を GA リリース。高度なソフトウェアエンジニアリングタスクと複雑な長時間コーディングに特化した改善を実施し、最大 2,576 ピクセルに対応する高解像度ビジョン機能と 1M トークンコンテキストウィンドウを提供。
+          価格は Opus 4.6 と同一（入力 $5/MTok・出力 $25/MTok）で、Amazon Bedrock・Google Cloud Vertex AI・Microsoft Foundry でも利用可能。
+          参照: <a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank" rel="noopener">anthropic.com</a>
+        </div>
+      </li>
+      <li>
+        <div class="timeline-date">2026-04-07</div>
+        <div class="timeline-item-title">Anthropic、高度サイバーセキュリティ特化モデル「Mythos Preview」を限定公開</div>
+        <div class="timeline-item-desc">
+          Anthropic がサイバーセキュリティ特化の新モデル「Claude Mythos Preview」をプレビュー公開。主要 OS・ブラウザ上の高深刻度脆弱性を多数発見できる能力を持つとされ、悪用リスクから Apple・Amazon・Microsoft など 40 社超の精鋭コンソーシアム「Project Glasswing」にのみ限定提供。
+          過去 24 時間では、同モデルへの不正アクセス事案も報告されており、オフェンシブ AI のアクセス管理問題として業界全体の課題となっている。
+          参照: <a href="https://red.anthropic.com/2026/mythos-preview/" target="_blank" rel="noopener">red.anthropic.com</a>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+</div></main>
+<footer>過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。生成日時: 2026-05-02</footer>
+</body>
+</html>
