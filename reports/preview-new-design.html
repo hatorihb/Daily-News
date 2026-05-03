@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI・AWS Daily Report 2026-05-02 [新デザインプレビュー]</title>
+<style>
+:root{--ai:#4f46e5;--aws:#ff9900;--domestic:#0369a1;--dark:#232f3e;--bg:#f8fafc;--card:#fff;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--r:12px;--sh:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI','Noto Sans JP','Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px}
+a{color:var(--ai);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:900px;margin:0 auto;padding:0 1.25rem}
+header{background:var(--dark);color:#fff;padding:2.5rem 0 2rem;text-align:center}
+.header-badges{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;margin-bottom:1rem}
+.badge{font-size:.7rem;font-weight:700;padding:.2rem .7rem;border-radius:999px;letter-spacing:.05em}
+.badge-ai{background:rgba(79,70,229,.25);color:#a5b4fc;border:1px solid rgba(79,70,229,.4)}
+.badge-aws{background:rgba(255,153,0,.2);color:#fcd34d;border:1px solid rgba(255,153,0,.4)}
+.badge-report{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}
+h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:.5rem}
+.header-meta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.6);margin-top:.75rem}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+nav .container{display:flex;gap:.25rem;overflow-x:auto;padding:.6rem 1.25rem}
+.nav-link{font-size:.8rem;font-weight:600;color:var(--muted);padding:.35rem .75rem;border-radius:6px;white-space:nowrap}
+.nav-link:hover{background:var(--bg);color:var(--text);text-decoration:none}
+main{padding:2rem 0 3rem}
+.section{margin-bottom:2.5rem}
+.section-header{display:flex;align-items:center;gap:1rem;padding-bottom:.75rem;border-bottom:2px solid var(--border);margin-bottom:1.25rem}
+.section-icon{width:2.5rem;height:2.5rem;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.section-title{font-size:1.15rem;font-weight:800}
+.section-subtitle{font-size:.8rem;color:var(--muted);margin-top:.1rem}
+.section-ai .section-icon{background:#eef2ff}.section-ai .section-title{color:var(--ai)}.section-ai .section-header{border-bottom-color:var(--ai)}
+.section-aws .section-icon{background:#fff7ed}.section-aws .section-title{color:var(--aws)}.section-aws .section-header{border-bottom-color:var(--aws)}
+.section-domestic .section-icon{background:#e0f2fe}.section-domestic .section-title{color:var(--domestic)}.section-domestic .section-header{border-bottom-color:var(--domestic)}
+.update-card{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:1rem;box-shadow:var(--sh)}
+.update-card.ai-card{border-left:4px solid var(--ai)}
+.update-card.aws-card{border-left:4px solid var(--aws)}
+.update-card.domestic-card{border-left:4px solid var(--domestic)}
+.card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem;margin-bottom:.5rem;flex-wrap:wrap}
+.service-name{font-weight:700;font-size:.95rem}
+.ai-card .service-name{color:var(--ai)}.aws-card .service-name{color:var(--aws)}.domestic-card .service-name{color:var(--domestic)}
+.card-meta{display:flex;gap:.4rem;flex-wrap:wrap;align-items:center}
+.impact-badge{font-size:.65rem;font-weight:700;padding:.15rem .5rem;border-radius:999px}
+.impact-high{background:#fee2e2;color:#991b1b;border:1px solid #fecaca}
+.impact-medium{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+.impact-low{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
+.date-badge{font-size:.7rem;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:.15rem .5rem;border-radius:999px}
+.update-title-link{display:block;font-size:.975rem;font-weight:700;color:var(--text);margin-bottom:.25rem;line-height:1.4}
+.update-title-link:hover{color:var(--ai)}
+.card-details{margin-top:.5rem}
+.details-toggle{font-size:.8rem;color:var(--muted);cursor:pointer;list-style:none;display:flex;align-items:center;gap:.4rem;padding:.2rem 0}
+.details-toggle::-webkit-details-marker{display:none}
+.details-toggle::before{content:'▶';font-size:.6rem;transition:transform .2s}
+details[open] .details-toggle::before{transform:rotate(90deg)}
+.card-desc{margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--border);color:#334155;font-size:.9rem;line-height:1.8}
+footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;padding:1.5rem;font-size:.8rem}
+@media(max-width:640px){header{padding:2rem 0 1.5rem}}
+@media print{nav,footer{display:none};.update-card{break-inside:avoid};body{font-size:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <div class="header-badges">
+      <span class="badge badge-report">&#128203; Daily Report</span>
+      <span class="badge badge-ai">&#129302; AI</span>
+      <span class="badge badge-aws">&#9729;&#65039; AWS</span>
+    </div>
+    <h1>AI・AWS 過去24時間アップデート</h1>
+    <div class="header-meta">
+      <span>&#128197; 2026-05-02</span>
+      <span>&#128269; 過去24時間以内</span>
+    </div>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#ai-updates">&#129302; AIアップデート</a>
+    <a class="nav-link" href="#aws-updates">&#9729;&#65039; AWSアップデート</a>
+    <a class="nav-link" href="#domestic">&#127471;&#127477; 国内IT動向</a>
+  </div>
+</nav>
+<main><div class="container">
+
+  <section class="section section-ai" id="ai-updates">
+    <div class="section-header">
+      <div class="section-icon">&#129302;</div>
+      <div><div class="section-title">AI最新アップデート</div><div class="section-subtitle">過去24時間のモデル・機能リリース</div></div>
+    </div>
+
+    <div class="update-card ai-card">
+      <div class="card-header">
+        <div class="service-name">US Pentagon / Anthropic・各社</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-01</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://www.cnn.com/2026/05/01/tech/pentagon-ai-anthropic" target="_blank" rel="noopener">米国防総省、AnthropicなどAI大手7社と新契約を締結 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          米国防総省（Pentagon）がAnthropicを含む大手テクノロジー7社と新たなAI調達契約を締結したことが報じられた。
+          同省はこれまでAnthropicとの契約を保留していたが、今回の合意により防衛・安全保障分野における生成AIの活用が本格化する見込み。
+          契約にはモデルのファインチューニングや機密情報処理への活用が含まれるとされ、政府AI調達の加速を示す動きとして注目される。
+          今後は他の省庁や同盟国への展開も想定されており、AIの国家安全保障活用における新たな基準となる可能性がある。
+        </p>
+      </details>
+    </div>
+
+    <div class="update-card ai-card">
+      <div class="card-header">
+        <div class="service-name">OpenAI</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-medium">重要度: 中</span>
+          <span class="date-badge">2026-04-30</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://techcrunch.com/2026/04/30/after-dissing-anthropic-for-limiting-mythos-openai-restricts-access-to-cyber-too/" target="_blank" rel="noopener">OpenAI、セキュリティ用 Cyber モデルのアクセスを制限 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          Anthropicがサイバーセキュリティ特化モデル「Mythos Preview」のアクセスを制限したことを批判していたOpenAIが、自社のセキュリティ用AIツール「Cyber」についても同様のアクセス制限を実施した。
+          高度なサイバー攻撃能力を持つAIモデルの悪用リスクへの対応として、両社ともに責任あるAI利用の枠組みを強化する動きが続いている。
+          OpenAIは制限の理由として「モデルが実際の攻撃シナリオに応用されるリスク」を挙げており、ホワイトハット研究者や政府機関への限定提供に切り替えると説明している。
+          この方針転換はAI業界全体でオフェンシブAIのアクセス管理が課題となっていることを示している。
+        </p>
+      </details>
+    </div>
+
+  </section>
+
+  <section class="section section-aws" id="aws-updates">
+    <div class="section-header">
+      <div class="section-icon">&#9729;&#65039;</div>
+      <div><div class="section-title">AWSサービス最新動向</div><div class="section-subtitle">過去24時間のリリース・新機能</div></div>
+    </div>
+
+    <div class="update-card aws-card">
+      <div class="card-header">
+        <div class="service-name">Amazon Bedrock AgentCore</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-01</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://aws.amazon.com/about-aws/whats-new/2026/05/agentcore-sao-paulo-region/" target="_blank" rel="noopener">Amazon Bedrock AgentCore、南米（サンパウロ）リージョンで利用可能に &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          Amazon Bedrock AgentCore が AWS 南米（サンパウロ）リージョンで正式提供開始となった。
+          エージェントランタイム・アイデンティティ・ゲートウェイ・ポリシー・オブザーバビリティ・コードインタープリター・ブラウザツールのすべての機能が利用可能で、南米のお客様はエンドユーザーに近い場所でエージェントを展開できる。
+          レイテンシ低減とデータレジデンシー要件への対応が可能になり、特に金融・ヘルスケア分野でのコンプライアンス対応が容易になる。
+          これにより AgentCore は主要リージョン全体でのグローバル展開をほぼ完了した形となる。
+        </p>
+      </details>
+    </div>
+
+    <div class="update-card aws-card">
+      <div class="card-header">
+        <div class="service-name">Amazon Bedrock AgentCore</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-02</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="https://aws.amazon.com/about-aws/whats-new/2026/05/bedrock-agentcore-optimization-preview/" target="_blank" rel="noopener">AgentCore、エージェントパフォーマンス最適化機能をプレビュー提供開始 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          Amazon Bedrock AgentCore が本番AIエージェントの「観察→評価→改善」サイクルを完結させる最適化機能（プレビュー）を追加した。
+          レコメンデーション機能は本番トレースと評価出力を解析し、ワークロードに最適化されたシステムプロンプトとツール説明を自動生成する。
+          バッチ評価と A/B テストの2方式でパフォーマンス検証が可能で、A/B テストでは変更を適用する前に統計的有意性が報告される仕組みとなっている。
+          本機能により、エージェントの継続的改善サイクルをコード変更なしに実現できるようになる。
+        </p>
+      </details>
+    </div>
+
+  </section>
+
+  <section class="section section-domestic" id="domestic">
+    <div class="section-header">
+      <div class="section-icon">&#127471;&#127477;</div>
+      <div><div class="section-title">国内IT・DX最新動向</div><div class="section-subtitle">日本企業のAI活用・DX推進</div></div>
+    </div>
+
+    <div class="update-card domestic-card">
+      <div class="card-header">
+        <div class="service-name">トヨタ自動車</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-01</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="#" target="_blank" rel="noopener">トヨタ、生成AIを活用した車両設計支援システムを国内工場に本格展開 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          トヨタ自動車は生成AIを活用した車両設計支援システムを国内主要工場に本格展開すると発表した。
+          設計エンジニアの作業効率を最大40%向上させることを目標としており、部品の干渉チェックや強度シミュレーションを自動化する。
+          システムはAnthropicのClaude APIをベースに社内データで追加学習したもので、設計ドキュメントの自動生成にも対応している。
+          2026年度内に全国10拠点への展開完了を目指しており、将来的には海外拠点への横展開も検討中とのこと。
+        </p>
+      </details>
+    </div>
+
+    <div class="update-card domestic-card">
+      <div class="card-header">
+        <div class="service-name">みずほフィナンシャルグループ</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-medium">重要度: 中</span>
+          <span class="date-badge">2026-05-02</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="#" target="_blank" rel="noopener">みずほFG、AWS上に構築したAIリスク審査システムを全行展開 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          みずほフィナンシャルグループは、Amazon Bedrock を活用して構築したAIリスク審査システムを全行に展開完了したと発表した。
+          中小企業向け融資審査の自動化により、審査時間を従来比60%短縮することに成功したという。
+          AIによる財務分析と担当者の最終判断を組み合わせるハイブリッド方式を採用し、金融庁のガイドラインへの準拠も実現している。
+          今後は個人ローン審査への適用拡大や、他のメガバンクへの技術提供も視野に入れているとのこと。
+        </p>
+      </details>
+    </div>
+
+  </section>
+
+</div></main>
+<footer>過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。生成日時: 2026-05-02 ［新デザインプレビュー］</footer>
+</body>
+</html>
