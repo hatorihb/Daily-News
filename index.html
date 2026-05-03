@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI・AWS Daily Report</title>
+<style>
+:root{--ai:#4f46e5;--aws:#ff9900;--dark:#232f3e;--bg:#f8fafc;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--r:12px;--sh:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI','Noto Sans JP','Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+a{color:var(--ai);text-decoration:none}a:hover{text-decoration:underline}
+.container{max-width:800px;margin:0 auto;padding:0 1.25rem}
+header{background:var(--dark);color:#fff;padding:2.5rem 0 2rem;text-align:center}
+h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:.5rem}
+.subtitle{font-size:.9rem;color:rgba(255,255,255,.6)}
+main{padding:2.5rem 0}
+h2{font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--dark)}
+.report-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.report-item{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;box-shadow:var(--sh);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.report-date{font-weight:700;font-size:1rem;color:var(--dark)}
+.report-link{font-size:.85rem;background:var(--ai);color:#fff;padding:.3rem .9rem;border-radius:999px;white-space:nowrap}
+.report-link:hover{background:#4338ca;text-decoration:none}
+.loading{color:var(--muted);text-align:center;padding:2rem}
+.empty{color:var(--muted);text-align:center;padding:2rem}
+footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.25rem;font-size:.8rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>&#129302; AI・AWS Daily Report</h1>
+    <p class="subtitle">過去24時間のAI・AWSアップデートを毎朝自動収集</p>
+  </div>
+</header>
+<main>
+  <div class="container">
+    <h2>&#128203; レポート一覧</h2>
+    <div id="app"><p class="loading">読み込み中...</p></div>
+  </div>
+</main>
+<footer>自動収集レポート &mdash; hatorihb/Daily-News</footer>
+<script>
+const REPO = 'hatorihb/Daily-News';
+
+fetch(`https://api.github.com/repos/${REPO}/contents/reports`)
+  .then(r => {
+    if (!r.ok) throw new Error(r.status);
+    return r.json();
+  })
+  .then(files => {
+    const htmlFiles = files
+      .filter(f => f.name.endsWith('.html'))
+      .sort((a, b) => b.name.localeCompare(a.name));
+
+    if (htmlFiles.length === 0) {
+      document.getElementById('app').innerHTML = '<p class="empty">レポートはまだありません。</p>';
+      return;
+    }
+
+    const ul = document.createElement('ul');
+    ul.className = 'report-list';
+    htmlFiles.forEach(f => {
+      const date = (f.name.match(/(\d{4}-\d{2}-\d{2})/) || [])[1] || f.name;
+      const url  = `https://${REPO.split('/')[0]}.github.io/Daily-News/reports/${f.name}`;
+      const li = document.createElement('li');
+      li.className = 'report-item';
+      li.innerHTML = `
+        <span class="report-date">&#128197; ${date}</span>
+        <a class="report-link" href="${url}" target="_blank" rel="noopener">レポートを見る &rarr;</a>`;
+      ul.appendChild(li);
+    });
+    document.getElementById('app').replaceWith(ul);
+    // ul is already in DOM via replaceWith, wrap it
+    const wrapper = document.createElement('div');
+    wrapper.id = 'app';
+    ul.parentNode.insertBefore(wrapper, ul);
+    wrapper.appendChild(ul);
+  })
+  .catch(() => {
+    document.getElementById('app').innerHTML = '<p class="empty">レポートの取得に失敗しました。</p>';
+  });
+</script>
+</body>
+</html>

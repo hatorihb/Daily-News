@@ -1,0 +1,62 @@
+name: Tweet Daily Report
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'reports/**.html'
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get new report info
+        id: info
+        run: |
+          FILE=$(git diff --name-only HEAD~1 HEAD -- 'reports/*.html' | head -1)
+          if [ -z "$FILE" ]; then
+            echo "No new report found, skipping."
+            exit 0
+          fi
+          echo "file=$FILE" >> $GITHUB_OUTPUT
+          DATE=$(echo "$FILE" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+          echo "date=$DATE" >> $GITHUB_OUTPUT
+          echo "url=https://hatorihb.github.io/Daily-News/$FILE" >> $GITHUB_OUTPUT
+
+      - name: Post to X
+        if: steps.info.outputs.file != ''
+        run: |
+          pip install tweepy --quiet
+          python3 - <<'PYEOF'
+          import tweepy, os, sys
+
+          client = tweepy.Client(
+              consumer_key=os.environ['X_API_KEY'],
+              consumer_secret=os.environ['X_API_SECRET'],
+              access_token=os.environ['X_ACCESS_TOKEN'],
+              access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET']
+          )
+
+          date = os.environ['REPORT_DATE']
+          url  = os.environ['REPORT_URL']
+          text = (
+              f"【AI・AWS Daily Report {date}】\n\n"
+              f"過去24時間のAI・AWSアップデートをまとめました。\n\n"
+              f"{url}\n\n"
+              f"#AI #AWS #生成AI #LLM"
+          )
+
+          response = client.create_tweet(text=text)
+          print(f"Tweet posted! ID: {response.data['id']}")
+          PYEOF
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_SECRET: ${{ secrets.X_API_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          REPORT_DATE: ${{ steps.info.outputs.date }}
+          REPORT_URL: ${{ steps.info.outputs.url }}
