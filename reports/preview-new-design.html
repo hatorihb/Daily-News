@@ -75,12 +75,60 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;paddi
 </header>
 <nav>
   <div class="container">
-    <a class="nav-link" href="#ai-updates">&#129302; AIアップデート</a>
-    <a class="nav-link" href="#aws-updates">&#9729;&#65039; AWSアップデート</a>
-    <a class="nav-link" href="#domestic">&#127471;&#127477; 国内IT動向</a>
+    <a class="nav-link" href="#domestic">&#127471;&#127477; 国内IT・DX動向</a>
+    <a class="nav-link" href="#ai-updates">&#129302; AI最新アップデート</a>
+    <a class="nav-link" href="#aws-updates">&#9729;&#65039; AWS最新アップデート</a>
   </div>
 </nav>
 <main><div class="container">
+
+  <section class="section section-domestic" id="domestic">
+    <div class="section-header">
+      <div class="section-icon">&#127471;&#127477;</div>
+      <div><div class="section-title">国内IT・DX最新動向</div><div class="section-subtitle">日本企業のAI活用・DX推進</div></div>
+    </div>
+
+    <div class="update-card domestic-card">
+      <div class="card-header">
+        <div class="service-name">トヨタ自動車</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-high">重要度: 高</span>
+          <span class="date-badge">2026-05-01</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="#" target="_blank" rel="noopener">トヨタ、生成AIを活用した車両設計支援システムを国内工場に本格展開 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          トヨタ自動車は生成AIを活用した車両設計支援システムを国内主要工場に本格展開すると発表した。
+          設計エンジニアの作業効率を最大40%向上させることを目標としており、部品の干渉チェックや強度シミュレーションを自動化する。
+          システムはAnthropicのClaude APIをベースに社内データで追加学習したもので、設計ドキュメントの自動生成にも対応している。
+          2026年度内に全国10拠点への展開完了を目指しており、将来的には海外拠点への横展開も検討中とのこと。
+        </p>
+      </details>
+    </div>
+
+    <div class="update-card domestic-card">
+      <div class="card-header">
+        <div class="service-name">みずほフィナンシャルグループ</div>
+        <div class="card-meta">
+          <span class="impact-badge impact-medium">重要度: 中</span>
+          <span class="date-badge">2026-05-02</span>
+        </div>
+      </div>
+      <a class="update-title-link" href="#" target="_blank" rel="noopener">みずほFG、AWS上に構築したAIリスク審査システムを全行展開 &#8594;</a>
+      <details class="card-details">
+        <summary class="details-toggle">詳細を表示</summary>
+        <p class="card-desc">
+          みずほフィナンシャルグループは、Amazon Bedrock を活用して構築したAIリスク審査システムを全行に展開完了したと発表した。
+          中小企業向け融資審査の自動化により、審査時間を従来比60%短縮することに成功したという。
+          AIによる財務分析と担当者の最終判断を組み合わせるハイブリッド方式を採用し、金融庁のガイドラインへの準拠も実現している。
+          今後は個人ローン審査への適用拡大や、他のメガバンクへの技術提供も視野に入れているとのこと。
+        </p>
+      </details>
+    </div>
+
+  </section>
 
   <section class="section section-ai" id="ai-updates">
     <div class="section-header">
@@ -133,7 +181,7 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;paddi
   <section class="section section-aws" id="aws-updates">
     <div class="section-header">
       <div class="section-icon">&#9729;&#65039;</div>
-      <div><div class="section-title">AWSサービス最新動向</div><div class="section-subtitle">過去24時間のリリース・新機能</div></div>
+      <div><div class="section-title">AWS最新アップデート</div><div class="section-subtitle">過去24時間のリリース・新機能</div></div>
     </div>
 
     <div class="update-card aws-card">
@@ -172,54 +220,6 @@ footer{background:var(--dark);color:rgba(255,255,255,.6);text-align:center;paddi
           レコメンデーション機能は本番トレースと評価出力を解析し、ワークロードに最適化されたシステムプロンプトとツール説明を自動生成する。
           バッチ評価と A/B テストの2方式でパフォーマンス検証が可能で、A/B テストでは変更を適用する前に統計的有意性が報告される仕組みとなっている。
           本機能により、エージェントの継続的改善サイクルをコード変更なしに実現できるようになる。
-        </p>
-      </details>
-    </div>
-
-  </section>
-
-  <section class="section section-domestic" id="domestic">
-    <div class="section-header">
-      <div class="section-icon">&#127471;&#127477;</div>
-      <div><div class="section-title">国内IT・DX最新動向</div><div class="section-subtitle">日本企業のAI活用・DX推進</div></div>
-    </div>
-
-    <div class="update-card domestic-card">
-      <div class="card-header">
-        <div class="service-name">トヨタ自動車</div>
-        <div class="card-meta">
-          <span class="impact-badge impact-high">重要度: 高</span>
-          <span class="date-badge">2026-05-01</span>
-        </div>
-      </div>
-      <a class="update-title-link" href="#" target="_blank" rel="noopener">トヨタ、生成AIを活用した車両設計支援システムを国内工場に本格展開 &#8594;</a>
-      <details class="card-details">
-        <summary class="details-toggle">詳細を表示</summary>
-        <p class="card-desc">
-          トヨタ自動車は生成AIを活用した車両設計支援システムを国内主要工場に本格展開すると発表した。
-          設計エンジニアの作業効率を最大40%向上させることを目標としており、部品の干渉チェックや強度シミュレーションを自動化する。
-          システムはAnthropicのClaude APIをベースに社内データで追加学習したもので、設計ドキュメントの自動生成にも対応している。
-          2026年度内に全国10拠点への展開完了を目指しており、将来的には海外拠点への横展開も検討中とのこと。
-        </p>
-      </details>
-    </div>
-
-    <div class="update-card domestic-card">
-      <div class="card-header">
-        <div class="service-name">みずほフィナンシャルグループ</div>
-        <div class="card-meta">
-          <span class="impact-badge impact-medium">重要度: 中</span>
-          <span class="date-badge">2026-05-02</span>
-        </div>
-      </div>
-      <a class="update-title-link" href="#" target="_blank" rel="noopener">みずほFG、AWS上に構築したAIリスク審査システムを全行展開 &#8594;</a>
-      <details class="card-details">
-        <summary class="details-toggle">詳細を表示</summary>
-        <p class="card-desc">
-          みずほフィナンシャルグループは、Amazon Bedrock を活用して構築したAIリスク審査システムを全行に展開完了したと発表した。
-          中小企業向け融資審査の自動化により、審査時間を従来比60%短縮することに成功したという。
-          AIによる財務分析と担当者の最終判断を組み合わせるハイブリッド方式を採用し、金融庁のガイドラインへの準拠も実現している。
-          今後は個人ローン審査への適用拡大や、他のメガバンクへの技術提供も視野に入れているとのこと。
         </p>
       </details>
     </div>
