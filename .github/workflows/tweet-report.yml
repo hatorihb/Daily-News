@@ -1,4 +1,4 @@
-name: Tweet Daily Report
+name: Post Daily Report to Threads
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - 'reports/**.html'
 
 jobs:
-  tweet:
+  post:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,36 +27,37 @@ jobs:
           echo "date=$DATE" >> $GITHUB_OUTPUT
           echo "url=https://hatorihb.github.io/Daily-News/$FILE" >> $GITHUB_OUTPUT
 
-      - name: Post to X
+      - name: Post to Threads
         if: steps.info.outputs.file != ''
-        run: |
-          pip install tweepy --quiet
-          python3 - <<'PYEOF'
-          import tweepy, os, sys
-
-          client = tweepy.Client(
-              consumer_key=os.environ['X_API_KEY'],
-              consumer_secret=os.environ['X_API_SECRET'],
-              access_token=os.environ['X_ACCESS_TOKEN'],
-              access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET']
-          )
-
-          date = os.environ['REPORT_DATE']
-          url  = os.environ['REPORT_URL']
-          text = (
-              f"【AI・AWS Daily Report {date}】\n\n"
-              f"過去24時間のAI・AWSアップデートをまとめました。\n\n"
-              f"{url}\n\n"
-              f"#AI #AWS #生成AI #LLM"
-          )
-
-          response = client.create_tweet(text=text)
-          print(f"Tweet posted! ID: {response.data['id']}")
-          PYEOF
         env:
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_SECRET: ${{ secrets.X_API_SECRET }}
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+          THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+          THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
           REPORT_DATE: ${{ steps.info.outputs.date }}
           REPORT_URL: ${{ steps.info.outputs.url }}
+        run: |
+          TEXT="【AI・AWS Daily Report ${REPORT_DATE}】
+
+過去24時間のAI・AWSアップデートをまとめました。
+
+${REPORT_URL}
+
+#AI #AWS #生成AI #LLM"
+
+          # Step 1: メディアコンテナを作成
+          CONTAINER=$(curl -s -X POST \
+            "https://graph.threads.net/v1.0/${THREADS_USER_ID}/threads" \
+            --data-urlencode "text=${TEXT}" \
+            -d "media_type=TEXT" \
+            -d "access_token=${THREADS_ACCESS_TOKEN}")
+
+          echo "Container response: $CONTAINER"
+          CONTAINER_ID=$(echo "$CONTAINER" | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+
+          # Step 2: 投稿を公開
+          RESULT=$(curl -s -X POST \
+            "https://graph.threads.net/v1.0/${THREADS_USER_ID}/threads_publish" \
+            -d "creation_id=${CONTAINER_ID}" \
+            -d "access_token=${THREADS_ACCESS_TOKEN}")
+
+          echo "Publish response: $RESULT"
+          echo "Post published successfully!"
