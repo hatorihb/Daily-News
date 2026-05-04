@@ -62,7 +62,7 @@ details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
-.no-update{padding:2rem 0;color:var(--mid);font-size:.875rem;line-height:1.7;border-bottom:1px solid var(--border)}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.8}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
@@ -103,7 +103,35 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </div>
       </div>
 
-      <p class="no-update">本日（2026-05-04 みどりの日）はゴールデンウィーク期間中のため、過去24時間以内に確認できる国内IT・DX企業からの新規発表はありませんでした。</p>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">経済産業省 / NHK</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-05-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.web.nhk.or.jp/newsweb/na/na-k10015113001000" target="_blank" rel="noopener">高性能AI悪用に備え — 経産省が電力事業者に緊急点検を要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">経済産業省は、米国の先進AI企業が開発した高性能モデルを悪用したサイバー攻撃リスクの急増を受け、電力分野の事業者に対してITシステムの緊急点検を要請しました。AIを活用した高度なフィッシングや脆弱性の自動探索など、重要インフラを標的とする攻撃が現実的な脅威として認識されています。電力・ガス・水道といった社会基盤事業者のAI対応型セキュリティ体制の整備が急務となっており、今後は国内他業種への対応要請にも発展する可能性があります。ゴールデンウィーク（4月29日〜5月5日）中の公表として、政府の危機意識の高さが伝わります。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ITmedia / Microsoft・OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">注目</span>
+            <span class="card-date">2026-05-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/pcuser/articles/2605/01/news059.html" target="_blank" rel="noopener">MicrosoftとOpenAIの「独占契約終了」が意味するもの — AI覇権を巡る両社のしたたかな戦略</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MicrosoftとOpenAIが2020年以来続けてきた独占的クラウドインフラ提供契約が段階的に終了し、OpenAIがAWS・GCPなど複数クラウドとの協業へと移行しつつあることが明らかになりました。日本のエンタープライズIT担当者にとっては、Azure一辺倒だったOpenAI利用の選択肢が広がる転換点を意味します。マルチクラウド・マルチモデル戦略が加速する中、AI基盤の選定を改めて見直す契機となっています。また、AWSがOpenAIのモデルをAmazon Bedrockで提供開始したことと連動した動きとして、IT調達戦略全体の再設計が求められる局面です。</p>
+        </details>
+      </div>
 
     </div>
   </section>
@@ -132,7 +160,37 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         <div class="card-title"><a href="https://mistral.ai/news/vibe-remote-agents-mistral-medium-3-5" target="_blank" rel="noopener">Mistral Medium 3.5（128B）+ Vibe リモートエージェント — SWE-Bench 77.6%達成のオープンウェイトモデルとクラウド非同期コーディングエージェントを同時リリース</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">Mistral AIが128Bパラメータの統合フラッグシップモデル「Mistral Medium 3.5」を修正MITライセンスでオープンウェイト公開した。256kトークンのコンテキストウィンドウを持ち、チャット・推論・コーディングを単一モデルで処理する設計でSWE-Bench Verified 77.6%を達成、Le Chatのデフォルトモデルにもなっている。同時に公開されたリモートコーディングエージェント「Vibe」はクラウド上で非同期実行され、CLIまたはLe Chatからセッションを起動してローカル作業の中断なくコーディングタスクを並列処理できる。ローカルセッションをクラウドへ転送しても履歴・タスク状態が保持されるため、シームレスな開発体験を提供する。OpenAI・Anthropicのエージェント製品との直接競合を明確に意識した戦略的リリースとなっている。</p>
+          <p class="card-desc">Mistral AIが128Bパラメータの統合フラッグシップモデル「Mistral Medium 3.5」を修正MITライセンスでオープンウェイト公開した。256kトークンのコンテキストウィンドウを持ち、チャット・推論・コーディングを単一モデルで処理する設計でSWE-Bench Verified 77.6%を達成、Le Chatのデフォルトモデルにもなっている。同時に公開されたリモートコーディングエージェント「Vibe」はクラウド上で非同期実行され、CLIまたはLe Chatからセッションを起動してローカル作業の中断なくコーディングタスクを並列処理できる。GitHub・Linear・Jira・Sentry・Slack等とのネイティブ統合を備え、作業完了後にPRを自動作成して通知する機能も搭載。OpenAI・AnthropicのエージェントAI製品との直接競合を明確に意識した戦略的リリースとなっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-05-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-whats-next-with-aws-2026-amazon-quick-openai-partnership-and-more-may-4-2026/" target="_blank" rel="noopener">AWS × OpenAI 戦略的パートナーシップ拡張 — GPT-5.5・GPT-5.4がAmazon Bedrockでプレビュー提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSとOpenAIは「What's Next with AWS 2026」（4月28日開催）でパートナーシップの大幅拡張を発表し、本日（5月4日）のAWS Weekly RoundupでOpenAI最新モデルのBedrock統合が改めて注目を集めています。GPT-5.5・GPT-5.4・Codexが既存のBedrock APIから利用可能になり、追加インフラ設定なしでBedrockのセキュリティ・ガバナンス・コスト管理を活用できます。さらに「Amazon Bedrock Managed Agents」により、OpenAIモデルを搭載した本番対応AIエージェントを迅速に構築・デプロイできる環境が整いました。MicrosoftのAzure OpenAI独占が崩れる中、企業のマルチクラウドAI戦略を後押しする重要なマイルストーンです。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">xAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-04-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.apiyi.com/en/grok-4-3-api-release-may-2026-news-en.html" target="_blank" rel="noopener">Grok 4.3 API — 全展開完了・入力価格40%削減・100万トークン・ネイティブ動画入力対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">xAIはGrok 4.3 APIの全展開を完了し、入力価格を約40%削減、コンテキストウィンドウを100万トークンに拡張、さらにネイティブ動画入力サポートを初めて導入しました。これらの変更でエージェント型アプリケーションのコストモデルが大幅に改善され、長文ドキュメント処理やマルチメディア入力が必要なシナリオへの適用範囲が広がります。SpaceXによるxAI買収後の企業体制強化とともにGrokの競争力が増しており、OpenAI・Anthropicと並ぶサードプレーヤーとしての地位を固めつつあります。日本語対応や国内利用環境の整備状況は今後の焦点です。</p>
         </details>
       </div>
 
@@ -154,7 +212,37 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">AWS</div>
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-05-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/bedrock-agentcore-optimization-preview/" target="_blank" rel="noopener">Amazon Bedrock AgentCore — エージェントパフォーマンス最適化機能（Recommendations・Batch Evaluations・A/Bテスト）をプレビュー提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCoreに、本番AIエージェントの品質を継続改善するための最適化機能3点がプレビュー提供された。「Recommendations」は本番トレースと評価結果を分析してシステムプロンプト・ツール定義を自動最適化し、「Batch Evaluations」で事前定義テストケースへの検証、「A/Bテスト」で本番トラフィックを使った統計的有意性検証まで一貫したサイクルが完結する。変更はすべてユーザーの明示的な承認を経て反映される設計で、人間の判断を介したガバナンスを維持しながら品質を向上できる。AgentCore Evaluationsが利用可能なすべてのAWSリージョンで同機能が利用可能となっており、エージェントAIの「作って終わり」から「継続改善」フェーズへの移行を強力に支援する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-05-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/aws-sap-mcp-amazon-bedrock/" target="_blank" rel="noopener">AWS for SAP MCP Server — Amazon Bedrock AgentCoreで一般提供（GA）開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS for SAP MCP ServerがAmazon Bedrock AgentCoreで一般提供を開始しました。AIエージェントからSAP ERP（販売注文・購買注文・材料・財務書類等）に直接安全にアクセスできる企業向けソリューションで、Model Context Protocol (MCP) とSAP ODataプロトコル標準に基づいています。CloudFormationテンプレートで数分以内にデプロイ可能で、Amazon Quick・Strands SDK・SAP Jouleなどのクライアントとシームレスに連携します。Fortescue・Harman International・PLDTなどの先行企業がProcure-to-Pay自動化やテスト管理近代化ですでに効果を確認しており、大規模SAP資産を持つ日本企業への展開が注目されます。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
           <div class="card-badges">
             <span class="impact impact-medium">注目</span>
             <span class="card-date">2026-05-03</span>
@@ -163,22 +251,37 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/agentcore-sao-paulo-region/" target="_blank" rel="noopener">Amazon Bedrock AgentCore — 南米（サンパウロ）リージョンで正式提供開始</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">Amazon Bedrock AgentCoreがAWS南米（サンパウロ）リージョンで新たに利用可能になった。エージェントランタイム・ID管理・ゲートウェイ・ポリシー・オブザービリティ・コードインタープリター・ブラウザツールといった全機能がサンパウロリージョンでサポートされる。南米の顧客はエンドユーザーへのレイテンシ低減とデータレジデンシー要件への対応が可能になり、任意のフレームワーク・モデルと組み合わせて本番AIエージェントを迅速にデプロイできる。AgentCoreの地理的カバレッジが継続的に拡大しており、現在15リージョンで利用可能となっている。</p>
+          <p class="card-desc">Amazon Bedrock AgentCoreがAWS南米（サンパウロ）リージョンで新たに利用可能になった。エージェントランタイム・ID管理・ゲートウェイ・ポリシー・オブザービリティ・コードインタープリター・ブラウザツールといった全機能がサンパウロリージョンでサポートされる。南米の顧客はエンドユーザーへのレイテンシ低減とデータレジデンシー要件への対応が可能になり、任意のフレームワーク・モデルと組み合わせて本番AIエージェントを迅速にデプロイできる。AgentCoreの地理的カバレッジが継続的に拡大しており、現在15リージョン以上で利用可能となっている。</p>
         </details>
       </div>
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">AWS</div>
+          <div class="card-service">Amazon CloudFront</div>
           <div class="card-badges">
             <span class="impact impact-medium">注目</span>
-            <span class="card-date">2026-05-04</span>
+            <span class="card-date">2026-05-01</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/bedrock-agentcore-optimization-preview/" target="_blank" rel="noopener">Amazon Bedrock AgentCore — エージェントパフォーマンス最適化機能（推奨・バッチ評価・A/Bテスト）をプレビュー公開</a></div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-cloudfront-websockets-vpc-origins/" target="_blank" rel="noopener">Amazon CloudFront — VPCオリジン向けWebSocketサポートを発表</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">Amazon Bedrock AgentCoreに、本番AIエージェントのパフォーマンスを継続的に改善するための最適化機能3点がプレビュー提供された。「Recommendations」は本番トレースと評価結果を分析してシステムプロンプト・ツール定義を自動最適化し、「Batch Evaluations」で事前定義テストケースへの検証、「A/Bテスト」で本番トラフィックを使った統計的有意性検証まで一貫したサイクルが完結する。変更はすべてユーザーの明示的な承認を経て反映される設計のため、人間の判断を介したガバナンスを維持しながら品質を継続改善できる。AgentCore Evaluationsが利用可能なすべてのAWSリージョンで同機能が利用可能となっている。</p>
+          <p class="card-desc">Amazon CloudFrontがVPCオリジン経由のWebSocketトラフィックをサポートするようになりました。これにより、チャットアプリ・ライブダッシュボード・IoTバックエンドなど双方向リアルタイム通信を必要とするアプリケーションを、ALB・NLB・EC2インスタンスごとプライベートサブネットに配置しながらCloudFrontを単一エントリポイントとして利用できます。従来はWebSocketサーバーをパブリックサブネットに置く必要があったため、ACLなどで追加のアクセス制御が必要でしたが、今回の対応でその手間が解消されます。DDoS保護とセキュリティ管理の一元化が実現し、追加料金はかかりません。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Transform</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-05-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/quick-bi-migration/" target="_blank" rel="noopener">AWS Transform — Power BI・TableauをAmazon QuickSightへ自動移行するBIエージェントを提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS TransformにBIマイグレーションエージェントが追加され、Power BIとTableauのダッシュボードをAmazon QuickSightへ自動移行できるようになりました。移行期間を従来の数ヶ月から数日に短縮できるとされており、データセット・計算フィールド・ビジュアライゼーション・フィルター制御を自動変換します。Analyzer（準備状況評価）とConverter（変換実行）の2種のエージェントがAWS Marketplaceから入手可能で、全処理はお客様自身のAWSアカウント内で完結するためデータが外部に出ません。既存のBIツールライセンスコストや管理負担の削減を狙う企業のクラウドネイティブ化を後押しします。</p>
         </details>
       </div>
 
