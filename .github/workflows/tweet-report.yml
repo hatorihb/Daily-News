@@ -94,7 +94,7 @@ domestic_items = extract_items('domestic', 2)
 mm_dd = date_str[5:].replace('-', '/')   # "05/04"
 
 lines = [
-    f"🔥 AI・AWS・国内IT 速報｜{mm_dd}",
+    f"🔥 DX・AI・AWS｜{mm_dd}",
     "",
     "今日の見逃せないアップデート👇",
     "",
