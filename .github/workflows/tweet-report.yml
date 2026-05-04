@@ -88,13 +88,13 @@ def extract_items(section_id, limit=2):
 
 ai_items       = extract_items('ai',       2)
 aws_items      = extract_items('aws',      2)
-domestic_items = extract_items('domestic', 1)
+domestic_items = extract_items('domestic', 2)
 
 # ─── ツイート本文を組み立て ────────────────────────────────────
 mm_dd = date_str[5:].replace('-', '/')   # "05/04"
 
 lines = [
-    f"🔥 AI・AWS速報｜{mm_dd}",
+    f"🔥 AI・AWS・国内IT 速報｜{mm_dd}",
     "",
     "今日の見逃せないアップデート👇",
     "",

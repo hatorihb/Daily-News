@@ -35,7 +35,7 @@ AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件f
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih_X's AI &amp; AWS Update</title>
+<title>hatorih_X's AI・AWS・国内IT Update</title>
 <style>
 :root{
   --black:#0a0a0a;
@@ -106,7 +106,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 <header>
   <div class="container">
     <p class="header-label">hatorih_X's Daily Tech Report</p>
-    <h1>AI &amp; AWS<br>Update</h1>
+    <h1>AI・AWS・<br>国内IT Update</h1>
     <p class="header-date">{YYYY} — {MM} — {DD} &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
@@ -188,7 +188,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
 <footer>
   <div class="container">
-    <span class="footer-brand">hatorih_X's AI &amp; AWS Update</span>
+    <span class="footer-brand">hatorih_X's AI・AWS・国内IT Update</span>
     <span>{YYYY-MM-DD} &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
   </div>
 </footer>
