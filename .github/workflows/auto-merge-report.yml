@@ -1,0 +1,32 @@
+name: Auto Merge Daily Report to Main
+
+on:
+  push:
+    branches: [claude/daily-report]
+    paths:
+      - 'reports/**.html'
+
+permissions:
+  contents: write
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          # GITHUB_TOKEN で main への直接 push が必要。
+          # ブランチ保護が有効な場合は secrets.GH_PAT（repo スコープ）を使用:
+          #   token: ${{ secrets.GH_PAT }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Merge claude/daily-report into main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin claude/daily-report
+          git merge origin/claude/daily-report --no-ff \
+            -m "chore: merge daily report $(date +%Y-%m-%d)"
+          git push origin main
