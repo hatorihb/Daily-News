@@ -82,6 +82,8 @@ tweet = "\n".join(lines)
 actual_len = len(re.sub(r'https?://\S+', 'x' * 23, tweet))
 print(f"--- Tweet ({actual_len} weighted chars) ---\n{tweet}\n---")
 
+import time
+
 client = tweepy.Client(
     consumer_key=os.environ['X_API_KEY'],
     consumer_secret=os.environ['X_API_SECRET'],
@@ -89,5 +91,23 @@ client = tweepy.Client(
     access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET'],
 )
 
-response = client.create_tweet(text=tweet, user_auth=True)
-print(f"✅ Tweet posted! ID: {response.data['id']}")
+for attempt in range(1, 4):
+    try:
+        response = client.create_tweet(text=tweet, user_auth=True)
+        print(f"✅ Tweet posted! ID: {response.data['id']}")
+        break
+    except tweepy.errors.Forbidden as e:
+        body = e.response.text if hasattr(e, 'response') and e.response else ''
+        print(f"⚠️ Attempt {attempt}/3 — 403 Forbidden: {body}")
+        if attempt < 3:
+            time.sleep(10 * attempt)
+        else:
+            print("❌ Tweet failed after 3 attempts. Skipping (report is still published).")
+            raise SystemExit(0)
+    except tweepy.errors.TweepyException as e:
+        print(f"⚠️ Attempt {attempt}/3 — {type(e).__name__}: {e}")
+        if attempt < 3:
+            time.sleep(10 * attempt)
+        else:
+            print("❌ Tweet failed after 3 attempts. Skipping (report is still published).")
+            raise SystemExit(0)
