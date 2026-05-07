@@ -98,7 +98,7 @@ except Exception as e:
     raise
 
 try:
-    response = client.create_tweet(text=tweet)
+    response = client.create_tweet(text=tweet, user_auth=True)
     print(f"✅ Tweet posted! ID: {response.data['id']}")
 except tweepy.errors.Forbidden as e:
     print(f"❌ 403 Forbidden")
