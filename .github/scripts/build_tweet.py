@@ -89,24 +89,5 @@ client = tweepy.Client(
     access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET'],
 )
 
-# Verify authentication and token permissions
-try:
-    me = client.get_me(user_auth=True)
-    print(f"✅ Auth OK: @{me.data.username}")
-except Exception as e:
-    print(f"❌ Auth failed: {e}")
-    raise
-
-try:
-    response = client.create_tweet(text=tweet, user_auth=True)
-    print(f"✅ Tweet posted! ID: {response.data['id']}")
-except tweepy.errors.Forbidden as e:
-    print(f"❌ 403 Forbidden")
-    if hasattr(e, 'response') and e.response is not None:
-        print(f"Response body: {e.response.text}")
-    raise
-except tweepy.errors.TweepyException as e:
-    print(f"❌ Tweepy error: {type(e).__name__}: {e}")
-    if hasattr(e, 'response') and e.response is not None:
-        print(f"Response body: {e.response.text}")
-    raise
+response = client.create_tweet(text=tweet, user_auth=True)
+print(f"✅ Tweet posted! ID: {response.data['id']}")
