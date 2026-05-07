@@ -88,6 +88,15 @@ client = tweepy.Client(
     access_token=os.environ['X_ACCESS_TOKEN'],
     access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET'],
 )
+
+# Verify authentication and token permissions
+try:
+    me = client.get_me(user_auth=True)
+    print(f"✅ Auth OK: @{me.data.username}")
+except Exception as e:
+    print(f"❌ Auth failed: {e}")
+    raise
+
 try:
     response = client.create_tweet(text=tweet)
     print(f"✅ Tweet posted! ID: {response.data['id']}")
