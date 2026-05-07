@@ -36,7 +36,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.info.outputs.file != ''
-        run: pip install tweepy beautifulsoup4 --quiet
+        run: pip install requests requests-oauthlib beautifulsoup4 --quiet
 
       - name: Build tweet and post to X
         if: steps.info.outputs.file != ''

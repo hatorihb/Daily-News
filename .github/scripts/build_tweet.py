@@ -1,5 +1,6 @@
-import tweepy, os, re
+import os, re, time, requests
 from bs4 import BeautifulSoup
+from requests_oauthlib import OAuth1
 
 html_file = os.environ['REPORT_FILE']
 date_str  = os.environ['REPORT_DATE']
@@ -82,30 +83,29 @@ tweet = "\n".join(lines)
 actual_len = len(re.sub(r'https?://\S+', 'x' * 23, tweet))
 print(f"--- Tweet ({actual_len} weighted chars) ---\n{tweet}\n---")
 
-import time
-
-client = tweepy.Client(
-    consumer_key=os.environ['X_API_KEY'],
-    consumer_secret=os.environ['X_API_SECRET'],
-    access_token=os.environ['X_ACCESS_TOKEN'],
-    access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET'],
+auth = OAuth1(
+    os.environ['X_API_KEY'],
+    os.environ['X_API_SECRET'],
+    os.environ['X_ACCESS_TOKEN'],
+    os.environ['X_ACCESS_TOKEN_SECRET'],
 )
 
 for attempt in range(1, 4):
-    try:
-        response = client.create_tweet(text=tweet, user_auth=True)
-        print(f"✅ Tweet posted! ID: {response.data['id']}")
+    resp = requests.post(
+        "https://api.twitter.com/2/tweets",
+        json={"text": tweet},
+        auth=auth,
+    )
+    print(f"Attempt {attempt}: HTTP {resp.status_code} — {resp.text}")
+    if resp.status_code == 201:
+        tweet_id = resp.json().get('data', {}).get('id', '?')
+        print(f"✅ Tweet posted! ID: {tweet_id}")
         break
-    except tweepy.errors.Forbidden as e:
-        body = e.response.text if hasattr(e, 'response') and e.response else ''
-        print(f"⚠️ Attempt {attempt}/3 — 403 Forbidden: {body}")
-        if attempt < 3:
-            time.sleep(10 * attempt)
-        else:
-            print("❌ Tweet failed after 3 attempts. Skipping (report is still published).")
-            raise SystemExit(0)
-    except tweepy.errors.TweepyException as e:
-        print(f"⚠️ Attempt {attempt}/3 — {type(e).__name__}: {e}")
+    elif resp.status_code in (429, 503):
+        wait = 30 * attempt
+        print(f"Rate limited, waiting {wait}s...")
+        time.sleep(wait)
+    else:
         if attempt < 3:
             time.sleep(10 * attempt)
         else:
