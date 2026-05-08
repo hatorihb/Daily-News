@@ -36,13 +36,11 @@ jobs:
 
       - name: Install dependencies
         if: steps.info.outputs.file != ''
-        run: pip install requests requests-oauthlib beautifulsoup4 --quiet
+        run: pip install tweepy beautifulsoup4 --quiet
 
       - name: Build tweet and post to X
         if: steps.info.outputs.file != ''
         run: python3 .github/scripts/build_tweet.py
-        continue-on-error: true
-        id: tweet
         env:
           X_API_KEY:              ${{ secrets.X_API_KEY }}
           X_API_SECRET:           ${{ secrets.X_API_SECRET }}
