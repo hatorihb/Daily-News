@@ -40,7 +40,9 @@ jobs:
 
       - name: Install dependencies
         if: steps.info.outputs.file != ''
-        run: pip install "tweepy>=4.14,<6" beautifulsoup4 --quiet
+        run: |
+          pip install "tweepy~=4.14" beautifulsoup4 --quiet
+          python3 -c "import tweepy; print('tweepy version:', tweepy.__version__)"
 
       - name: Build tweet and post to X
         if: steps.info.outputs.file != ''
