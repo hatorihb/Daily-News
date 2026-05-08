@@ -4,6 +4,38 @@ import os
 import re
 from bs4 import BeautifulSoup
 
+api_key            = os.environ['X_API_KEY']
+api_secret         = os.environ['X_API_SECRET']
+access_token       = os.environ['X_ACCESS_TOKEN']
+access_token_secret= os.environ['X_ACCESS_TOKEN_SECRET']
+
+# 認証情報の先頭4文字を表示（デバッグ用 - 全体は公開しない）
+print(f"[DEBUG] X_API_KEY           : {api_key[:4]}...{api_key[-4:]} (len={len(api_key)})")
+print(f"[DEBUG] X_API_SECRET        : {api_secret[:4]}...{api_secret[-4:]} (len={len(api_secret)})")
+print(f"[DEBUG] X_ACCESS_TOKEN      : {access_token[:4]}...{access_token[-4:]} (len={len(access_token)})")
+print(f"[DEBUG] X_ACCESS_TOKEN_SECRET: {access_token_secret[:4]}...{access_token_secret[-4:]} (len={len(access_token_secret)})")
+
+client = tweepy.Client(
+    consumer_key=api_key,
+    consumer_secret=api_secret,
+    access_token=access_token,
+    access_token_secret=access_token_secret,
+)
+
+# 認証テスト: 自分のユーザー情報を取得
+print("[DIAG] Testing OAuth 1.0a authentication via get_me()...")
+try:
+    me = client.get_me(user_auth=True)
+    print(f"[DIAG] ✅ Authentication OK — user: @{me.data.username} (id={me.data.id})")
+except tweepy.errors.Unauthorized as e:
+    print(f"[DIAG] ❌ Authentication FAILED (401) — Consumer Key/Secret or Access Token/Secret が間違っています")
+    print(f"       detail: {e}")
+    sys.exit(1)
+except tweepy.errors.Forbidden as e:
+    print(f"[DIAG] ⚠️  get_me() returned 403 — {e}")
+except Exception as e:
+    print(f"[DIAG] ⚠️  get_me() unexpected error: {type(e).__name__}: {e}")
+
 html_file = os.environ['REPORT_FILE']
 date_str  = os.environ['REPORT_DATE']
 url       = os.environ['REPORT_URL']
@@ -52,15 +84,15 @@ domestic_items = extract_items('domestic', 2)
 mm_dd = date_str[5:].replace('-', '/')
 
 lines = [
-    f"🔥 DX・AI・AWS｜{mm_dd}",
+    f"\U0001f525 DX・AI・AWS｜{mm_dd}",
     "",
-    "今日の見逃せないアップデート👇",
+    "今日の見逃せないアップデート\U0001f447",
     "",
 ]
 
 if ai_items:
     for item in ai_items:
-        lines.append(f"🤖 {item}")
+        lines.append(f"\U0001f916 {item}")
 
 if aws_items:
     if ai_items:
@@ -71,11 +103,11 @@ if aws_items:
 if domestic_items:
     lines.append("")
     for item in domestic_items:
-        lines.append(f"🇯🇵 {item}")
+        lines.append(f"\U0001f1ef\U0001f1f5 {item}")
 
 lines += [
     "",
-    "詳細レポートはこちら👇",
+    "詳細レポートはこちら\U0001f447",
     url,
     "",
     "#AI #AWS #生成AI #LLM #DX",
@@ -84,13 +116,6 @@ lines += [
 tweet = "\n".join(lines)
 actual_len = len(re.sub(r'https?://\S+', 'x' * 23, tweet))
 print(f"--- Tweet ({actual_len} weighted chars) ---\n{tweet}\n---")
-
-client = tweepy.Client(
-    consumer_key=os.environ['X_API_KEY'],
-    consumer_secret=os.environ['X_API_SECRET'],
-    access_token=os.environ['X_ACCESS_TOKEN'],
-    access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET'],
-)
 
 try:
     response = client.create_tweet(text=tweet, user_auth=True)
@@ -102,7 +127,6 @@ except tweepy.errors.Forbidden as e:
             body = e.response.json()
         except Exception:
             body = e.response.text
-    # 重複ツイートは成功扱い（ワークフロー再実行時の誤検知を防ぐ）
     body_str = str(body).lower()
     if '187' in body_str or 'duplicate' in body_str:
         print(f"⚠️ Tweet already posted (duplicate). Treating as success.")
