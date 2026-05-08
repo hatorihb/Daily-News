@@ -1,4 +1,7 @@
-import tweepy, os, re
+import sys
+import tweepy
+import os
+import re
 from bs4 import BeautifulSoup
 
 html_file = os.environ['REPORT_FILE']
@@ -88,5 +91,27 @@ client = tweepy.Client(
     access_token=os.environ['X_ACCESS_TOKEN'],
     access_token_secret=os.environ['X_ACCESS_TOKEN_SECRET'],
 )
-response = client.create_tweet(text=tweet)
-print(f"✅ Tweet posted! ID: {response.data['id']}")
+
+try:
+    response = client.create_tweet(text=tweet, user_auth=True)
+    print(f"✅ Tweet posted! ID: {response.data['id']}")
+except tweepy.errors.Forbidden as e:
+    body = ""
+    if hasattr(e, 'response') and e.response is not None:
+        try:
+            body = e.response.json()
+        except Exception:
+            body = e.response.text
+    # 重複ツイートは成功扱い（ワークフロー再実行時の誤検知を防ぐ）
+    body_str = str(body).lower()
+    if '187' in body_str or 'duplicate' in body_str:
+        print(f"⚠️ Tweet already posted (duplicate). Treating as success.")
+        sys.exit(0)
+    print(f"❌ 403 Forbidden — response body: {body}")
+    print("ℹ️  Access Token に書き込み権限がない可能性があります。")
+    print("   X Developer Portal でトークンを Read+Write 権限で再生成し、")
+    print("   GitHub Secrets (X_ACCESS_TOKEN / X_ACCESS_TOKEN_SECRET) を更新してください。")
+    sys.exit(1)
+except tweepy.errors.TweepyException as e:
+    print(f"❌ Tweet failed: {type(e).__name__}: {e}")
+    sys.exit(1)
