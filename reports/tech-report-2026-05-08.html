@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's AI &amp; AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <p class="header-label">hatorih_X's Daily Tech Report</p>
+    <h1>AI &amp; AWS<br>Update</h1>
+    <p class="header-date">2026 — 05 — 08 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本経済新聞 / 文部科学</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nikkei.com/article/DGXZQOFH070QR0X00C26A5000000/" target="_blank" rel="noopener">AIが東大理科3類入試で「首席合格」水準を達成、課題は日本語読解力</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年度の東京大学理科三類入試問題に複数の最新AIが挑戦し、最難関の理三で合格者最高点（453.60点）を超える503.59点を記録した。理系数学では満点を連発するなど、AIの定量的推論能力は人間のトップ水準を超えた。一方で、日本語論述での文章の流れの構築や、画像に込められた視覚的意図の読み取りなど、人間的な文脈理解に依然として課題が残る。教育・試験制度への影響が現実のものとなりつつあり、日本の大学入試のあり方に関する議論が加速することが予想される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">タレスDISジャパン</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000031.000106675.html" target="_blank" rel="noopener">タレスDISジャパン、「2026年デジタル信頼指数」を発表 — 企業のUI・データ管理が信頼を左右</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">タレスDISジャパンが2026年デジタル信頼指数を発表した。13業種・15,000人以上の消費者、ビジネスパートナー、IT意思決定者を対象にした大規模調査で、企業のデジタルサービスへの信頼がユーザーインターフェースや個人データ管理プロセスの中で形成・毀損されることが明らかになった。日本企業のDX推進において、セキュリティとユーザー体験の両立がますます重要な経営課題となっていることを示す調査結果。AI活用が広がる中、データ主権と信頼性確保の重要性が高まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本経済新聞 / 経済安保</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nikkei.com/article/DGXZQOGN07B2L0X00C26A5000000/" target="_blank" rel="noopener">米商務省、AI技術の輸出管理強化に向け日本企業へ参画を要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米商務省がAI技術の輸出管理を強化する国際的な枠組みの構築に向け、日本の主要IT・半導体企業に参画を要請した。日米間のAI技術ガバナンスの協調が目的で、経済安全保障の観点から重要な動きとなっている。輸出制限リストの拡充やデュアルユース技術の取り扱いに関する協議が含まれるとみられ、日本政府や関連省庁との調整も進む。国内主要企業への直接的な影響が今後注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / SpaceX xAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/higher-limits-spacex" target="_blank" rel="noopener">Anthropic × SpaceX/xAI、Colossus 1データセンター全リソースを年間$50億規模で契約 — Claudeのレート制限を撤廃</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicがSpaceX-xAIのColossus 1データセンター（テネシー州メンフィス）の全計算リソースを利用する大型契約を締結した。300MW超・22万台以上のNVIDIA GPUへの即時アクセスを取得し、2026年Q1に前年比80倍を記録した急増需要に対応する。Claude ProおよびMax有料ユーザーの5時間レートキャップが撤廃され、ピーク時の制限も解消。年間推定50億ドル規模の巨大契約であり、イーロン・マスク氏もAnthropicチームを公式に評価。将来的には軌道上AI計算施設の共同開発も視野に入れている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Cloud</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cloud.google.com/blog/products/ai-machine-learning/gemini-3-1-flash-lite-is-now-generally-available" target="_blank" rel="noopener">Google、Gemini 3.1 Flash-Lite を正式リリース（GA） — 超低レイテンシ・高コスト効率の最速Geminiモデル</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleがGemini 3シリーズで最速・最コスト効率を誇るGemini 3.1 Flash-Liteを正式GA（General Availability）リリースした。2026年3月のプレビュー提供から約2か月での本番移行となる。Gemini 2.0 Flash-Liteと比較して大幅な品質向上を実現しながら、Gemini 2.5 Flashと同等の能力を低コストで提供。超低レイテンシ・高ボリューム処理を必要とするソフトウェアエンジニアリング、カスタマーサービス、金融サービスなどの業種をターゲットとしており、大規模LLMトラフィックのコスト最適化に有効。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ServiceNow / NVIDIA</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-extends-agentic-AI-governance-from-desktops-to-data-centers-with-NVIDIA/default.aspx" target="_blank" rel="noopener">ServiceNow × NVIDIA、Knowledge 2026でエージェントAIのガバナンスをデスクトップからデータセンターへ拡張</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ServiceNowとNVIDIAがKnowledge 2026イベントで提携を拡大し、エンタープライズ向けエージェントAIガバナンスの新機能群を発表した。NVIDIA OpenShellサンドボックス上で動作する自律型デスクトップエージェント「Project Arc」を導入し、ServiceNow AI Control TowerがNVIDIA Enterprise AI Factory検証済み設計と統合。インフラ層のAIワークロード管理を統合的に実現する。企業全体のAIエージェント能力を標準評価するオープンベンチマーク「NOWAI-Bench」も策定され、エンタープライズAI導入の加速が期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/04/amazon-bedrock-agentcore-payments-preview/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Payments — AIエージェントが自律的にAPI・コンテンツの支払いを実行するプレビュー開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSがAmazon Bedrock AgentCoreにAIエージェント向け自律型決済機能「Payments」のプレビューを公開した。CoinbaseおよびStripeと共同開発したもので、エージェントがAPI・MCPサーバー・Webコンテンツ・他エージェントへの支払いをHTTP 402レスポンスを受け取った時点で自動処理できる。ステーブルコイン決済とプルーフ配信を推論ループを中断せずに実行し、セッションレベルの支出上限設定によるガバナンスも提供。金融分析エージェントによるデータセット購入や、コーディングエージェントによるクラウドツールサブスクリプション取得などのユースケースを想定しており、米東・米西・欧州（フランクフルト）・アジア太平洋（シドニー）でプレビュー利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/bedrock-agentcore-launch-aws-govcloud-us/" target="_blank" rel="noopener">Amazon Bedrock AgentCore が AWS GovCloud (US-West) リージョンで正式提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCoreがAWS GovCloud (US-West) リージョンで利用可能になった。政府機関・規制準拠が必要な組織向けに、AIエージェントのセキュアな構築・運用基盤を提供する。AgentCoreはエージェント向けのメモリ・ツール実行・コード実行・ブラウザ操作など各種機能をマネージドサービスとして提供するプラットフォームで、今回のGovCloud展開により米連邦政府や防衛関連機関でのAIエージェント活用が加速する見込み。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Security</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/security/security-bulletins/rss/2026-026-aws/" target="_blank" rel="noopener">AWSセキュリティアドバイザリ CVE-2026-31431 — Amazon Linux向けLinuxカーネル特権昇格脆弱性への対応パッチを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSがLinuxカーネルの特権昇格脆弱性（CVE-2026-31431）に関するセキュリティアドバイザリを公開し、対応パッチをリリースした。認証済みのローカルユーザーが特権昇格できる可能性があるもので、Amazon Linux カーネル 4.14・5.4・5.10・5.15・6.1・6.12・6.18 が影響を受ける。Amazon LinuxのセキュリティアップデートをAWSが配布しており、対象インスタンスの速やかなパッチ適用が推奨される。EC2やコンテナ環境を運用する管理者は至急確認が必要。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's AI &amp; AWS Update</span>
+    <span>2026-05-08 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
