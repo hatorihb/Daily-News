@@ -23,18 +23,26 @@ jobs:
             echo "file=" >> $GITHUB_OUTPUT
             exit 0
           fi
-          echo "file=$FILE" >> $GITHUB_OUTPUT
           DATE=$(echo "$FILE" | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+          # 同じ日付のツイートが既に成功している場合はスキップ
+          if git log --oneline --all --grep="tweeted: $DATE" | grep -q .; then
+            echo "Tweet for $DATE already sent, skipping."
+            echo "file=" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          echo "file=$FILE" >> $GITHUB_OUTPUT
           echo "date=$DATE" >> $GITHUB_OUTPUT
           echo "url=https://hatorihb.github.io/Daily-News/$FILE" >> $GITHUB_OUTPUT
 
       - name: Install dependencies
         if: steps.info.outputs.file != ''
-        run: pip install tweepy beautifulsoup4 --quiet
+        run: pip install requests requests-oauthlib beautifulsoup4 --quiet
 
       - name: Build tweet and post to X
         if: steps.info.outputs.file != ''
         run: python3 .github/scripts/build_tweet.py
+        continue-on-error: true
+        id: tweet
         env:
           X_API_KEY:              ${{ secrets.X_API_KEY }}
           X_API_SECRET:           ${{ secrets.X_API_SECRET }}
