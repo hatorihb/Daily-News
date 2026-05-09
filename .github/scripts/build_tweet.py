@@ -1,38 +1,36 @@
 import sys
+import tweepy
 import os
 import re
-import subprocess
-import requests
 from bs4 import BeautifulSoup
 
-client_id     = os.environ['X_OAUTH2_CLIENT_ID']
-client_secret = os.environ['X_OAUTH2_CLIENT_SECRET']
-refresh_token = os.environ['X_OAUTH2_REFRESH_TOKEN']
-gh_pat        = os.environ.get('GH_PAT', '')
+api_key            = os.environ['X_API_KEY']
+api_secret         = os.environ['X_API_SECRET']
+access_token       = os.environ['X_ACCESS_TOKEN']
+access_token_secret= os.environ['X_ACCESS_TOKEN_SECRET']
 
-# --- 1. Refresh OAuth 2.0 access token ---
-print("[DIAG] Refreshing OAuth 2.0 access token...")
-token_resp = requests.post(
-    "https://api.twitter.com/2/oauth2/token",
-    data={
-        "grant_type": "refresh_token",
-        "refresh_token": refresh_token,
-        "client_id": client_id,
-    },
-    auth=(client_id, client_secret),
+print(f"[DEBUG] X_API_KEY           : {api_key[:4]}...{api_key[-4:]} (len={len(api_key)})")
+print(f"[DEBUG] X_API_SECRET        : {api_secret[:4]}...{api_secret[-4:]} (len={len(api_secret)})")
+print(f"[DEBUG] X_ACCESS_TOKEN      : {access_token[:4]}...{access_token[-4:]} (len={len(access_token)})")
+print(f"[DEBUG] X_ACCESS_TOKEN_SECRET: {access_token_secret[:4]}...{access_token_secret[-4:]} (len={len(access_token_secret)})")
+
+client = tweepy.Client(
+    consumer_key=api_key,
+    consumer_secret=api_secret,
+    access_token=access_token,
+    access_token_secret=access_token_secret,
 )
-token_data = token_resp.json()
-print(f"[DIAG] Token refresh status: {token_resp.status_code}")
 
-if "error" in token_data:
-    print(f"❌ Token refresh failed: {token_data}")
+print("[DIAG] Testing OAuth 1.0a via get_me()...")
+try:
+    me = client.get_me(user_auth=True)
+    print(f"[DIAG] ✅ Auth OK — @{me.data.username} (id={me.data.id})")
+except tweepy.errors.Unauthorized as e:
+    print(f"[DIAG] ❌ Auth FAILED (401): {e}")
     sys.exit(1)
+except Exception as e:
+    print(f"[DIAG] ⚠️ get_me() error: {type(e).__name__}: {e}")
 
-new_access_token  = token_data["access_token"]
-new_refresh_token = token_data.get("refresh_token", refresh_token)
-print("[DIAG] ✅ Access token refreshed")
-
-# --- 2. Build tweet text ---
 html_file = os.environ['REPORT_FILE']
 date_str  = os.environ['REPORT_DATE']
 url       = os.environ['REPORT_URL']
@@ -90,44 +88,20 @@ tweet = "\n".join(lines)
 actual_len = len(re.sub(r'https?://\S+', 'x' * 23, tweet))
 print(f"--- Tweet ({actual_len} weighted chars) ---\n{tweet}\n---")
 
-# --- 3. Post tweet via OAuth 2.0 user context ---
-print("[DIAG] Posting tweet via OAuth 2.0 user context...")
-tweet_resp = requests.post(
-    "https://api.twitter.com/2/tweets",
-    headers={
-        "Authorization": f"Bearer {new_access_token}",
-        "Content-Type": "application/json",
-    },
-    json={"text": tweet},
-)
-print(f"[DIAG] POST /2/tweets status: {tweet_resp.status_code}")
-
-if tweet_resp.status_code == 201:
-    tweet_id = tweet_resp.json()["data"]["id"]
-    print(f"✅ Tweet posted! ID: {tweet_id}")
-elif tweet_resp.status_code == 403:
-    body = tweet_resp.json()
+try:
+    response = client.create_tweet(text=tweet, user_auth=True)
+    print(f"✅ Tweet posted! ID: {response.data['id']}")
+except tweepy.errors.Forbidden as e:
+    body = ""
+    if hasattr(e, 'response') and e.response is not None:
+        try: body = e.response.json()
+        except Exception: body = e.response.text
     body_str = str(body).lower()
     if '187' in body_str or 'duplicate' in body_str:
-        print("⚠️ Tweet already posted (duplicate). Treating as success.")
-    else:
-        print(f"❌ 403 Forbidden: {body}")
-        sys.exit(1)
-else:
-    print(f"❌ POST /2/tweets failed: {tweet_resp.status_code} {tweet_resp.json()}")
+        print("⚠️ Duplicate tweet. Treating as success.")
+        sys.exit(0)
+    print(f"❌ 403 Forbidden: {body}")
     sys.exit(1)
-
-# --- 4. Persist rotated refresh token to GitHub Secrets ---
-if new_refresh_token and new_refresh_token != refresh_token and gh_pat:
-    print("[DIAG] Refresh token rotated — updating GitHub Secrets...")
-    result = subprocess.run(
-        ["gh", "secret", "set", "X_OAUTH2_REFRESH_TOKEN",
-         "--body", new_refresh_token,
-         "--repo", "hatorihb/Daily-News"],
-        env={**os.environ, "GH_TOKEN": gh_pat},
-        capture_output=True, text=True,
-    )
-    if result.returncode == 0:
-        print("[DIAG] ✅ X_OAUTH2_REFRESH_TOKEN updated in GitHub Secrets")
-    else:
-        print(f"[DIAG] ⚠️  Failed to update token: {result.stderr.strip()}")
+except tweepy.errors.TweepyException as e:
+    print(f"❌ Tweet failed: {type(e).__name__}: {e}")
+    sys.exit(1)
