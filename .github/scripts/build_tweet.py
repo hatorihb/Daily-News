@@ -9,7 +9,6 @@ api_secret         = os.environ['X_API_SECRET']
 access_token       = os.environ['X_ACCESS_TOKEN']
 access_token_secret= os.environ['X_ACCESS_TOKEN_SECRET']
 
-# 認証情報の先頭4文字を表示（デバッグ用 - 全体は公開しない）
 print(f"[DEBUG] X_API_KEY           : {api_key[:4]}...{api_key[-4:]} (len={len(api_key)})")
 print(f"[DEBUG] X_API_SECRET        : {api_secret[:4]}...{api_secret[-4:]} (len={len(api_secret)})")
 print(f"[DEBUG] X_ACCESS_TOKEN      : {access_token[:4]}...{access_token[-4:]} (len={len(access_token)})")
@@ -22,7 +21,6 @@ client = tweepy.Client(
     access_token_secret=access_token_secret,
 )
 
-# 認証テスト: 自分のユーザー情報を取得
 print("[DIAG] Testing OAuth 1.0a authentication via get_me()...")
 try:
     me = client.get_me(user_auth=True)
@@ -53,7 +51,7 @@ def shorten(title, max_len=24):
     if len(title) <= max_len:
         return title
     for i in range(max_len, max(max_len - 6, 8), -1):
-        if title[i] in '、。（】 ':
+        if title[i] in '、。（》 ':
             return title[:i] + '…'
     return title[:max_len] + '…'
 
@@ -117,6 +115,31 @@ tweet = "\n".join(lines)
 actual_len = len(re.sub(r'https?://\S+', 'x' * 23, tweet))
 print(f"--- Tweet ({actual_len} weighted chars) ---\n{tweet}\n---")
 
+
+def _try_v1(tweet_text):
+    """v1.1 API fallback. Returns True on success."""
+    print("[DIAG] Trying v1.1 API (statuses/update) as fallback...")
+    try:
+        v1_auth = tweepy.OAuthHandler(api_key, api_secret)
+        v1_auth.set_access_token(access_token, access_token_secret)
+        v1_api = tweepy.API(v1_auth)
+        result = v1_api.update_status(tweet_text)
+        print(f"✅ Tweet posted via v1.1! ID: {result.id}")
+        return True
+    except tweepy.errors.Forbidden as e2:
+        v1_body = ""
+        if hasattr(e2, 'response') and e2.response is not None:
+            try:
+                v1_body = e2.response.json()
+            except Exception:
+                v1_body = e2.response.text
+        print(f"❌ v1.1 also 403 — body: {v1_body}")
+        print("ℹ️  error code 261 = App にwrite権限なし / error code 89 = Token期限切れ")
+    except tweepy.TweepyException as e2:
+        print(f"❌ v1.1 failed: {type(e2).__name__}: {e2}")
+    return False
+
+
 try:
     response = client.create_tweet(text=tweet, user_auth=True)
     print(f"✅ Tweet posted! ID: {response.data['id']}")
@@ -131,11 +154,12 @@ except tweepy.errors.Forbidden as e:
     if '187' in body_str or 'duplicate' in body_str:
         print(f"⚠️ Tweet already posted (duplicate). Treating as success.")
         sys.exit(0)
-    print(f"❌ 403 Forbidden — response body: {body}")
-    print("ℹ️  Access Token に書き込み権限がない可能性があります。")
-    print("   X Developer Portal でトークンを Read+Write 権限で再生成し、")
-    print("   GitHub Secrets (X_ACCESS_TOKEN / X_ACCESS_TOKEN_SECRET) を更新してください。")
-    sys.exit(1)
+    print(f"❌ v2 403 Forbidden — response body: {body}")
+    if not _try_v1(tweet):
+        print("ℹ️  Access Token に書き込み権限がない可能性があります。")
+        print("   X Developer Portal でアプリ権限を Read+Write に設定して保存した後、")
+        print("   Access Token を再生成し、GitHub Secrets を更新してください。")
+        sys.exit(1)
 except tweepy.errors.TweepyException as e:
     print(f"❌ Tweet failed: {type(e).__name__}: {e}")
     sys.exit(1)

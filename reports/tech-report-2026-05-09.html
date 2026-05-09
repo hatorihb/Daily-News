@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's AI &amp; AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <p class="header-label">hatorih_X's Daily Tech Report</p>
+    <h1>AI &amp; AWS<br>Update</h1>
+    <p class="header-date">2026 &mdash; 05 &mdash; 09 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">内閣官房 / デジタル庁</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://asiatechdaily.com/japans-ai-reset-what-the-governments-first-national-plan-means-for-startups/" target="_blank" rel="noopener">政府生成AI「源内」、国家公務員10万人超への本格展開を5月より開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本政府が整備を進めてきた政府専用の生成AIプラットフォーム「源内（Gennai）」の本格展開が5月から始まった。2026年1月の試験運用を経て、中央省庁を中心に10万人以上の国家公務員が利用可能になる。源内は国内インフラ上で動作するソブリンAIとして設計されており、機密性の高い政府業務での活用を想定。文書作成支援・Q&amp;A・議事録生成などの業務効率化用途での導入が先行し、2026年度末までに活用ガイドラインの整備も予定されている。日本政府のAI活用が民間を牽引する形となっており、公務DX加速の試金石として注目されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">経済産業省 / 内閣府</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tecnish.com/breaking-japan-ai-regulation-news-today-update-2026-ai/" target="_blank" rel="noopener">DXクレジット2.0 — 国産ソブリンAI導入企業にソフト・ハードコスト40%控除を適用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">政府は「DXクレジット2.0」制度を通じ、国産・ソブリンAIを導入する企業に対してソフトウェアおよびハードウェアコストの40%を税額控除する優遇措置を正式適用することを発表した。2025年12月に策定されたAI基本計画（5年間で1兆円規模の支援策）の一環として位置づけられ、海外クラウド依存からの脱却と国内AI産業の競争力強化が狙い。半導体・クラウドインフラへの国内投資促進にも連動しており、NEC・富士通・さくらインターネットなど国内ベンダーへの発注増加が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">経済産業省 / METI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ainewsdesk.app/japan-ai-regulation-2026-policy-shift-developers/" target="_blank" rel="noopener">経産省、アナログ規制の98%撤廃完了 — フィジカルAIドローンに2026年新安全認証基準を施行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">経済産業省は2026年5月時点でアナログ規制撤廃の進捗率が98%に達したことを発表した。とりわけフィジカルAI分野では、VLA（Vision-Language-Action）モデルを搭載した自律型ドローンが2026年新安全認証基準のもとで合法的に飛行・稼働できる道筋が整った。建設現場の点検、農業、インフラ巡視などの分野でフィジカルAI活用が急速に拡大する見込みで、スタートアップの参入障壁も大幅に低下。製造現場でのVLAモデル活用と組み合わせ、日本発のフィジカルAIエコシステム形成が加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/index/openai-on-aws/" target="_blank" rel="noopener">OpenAI × AWS、GPT-5.5とCodexをAmazon Bedrockで提供 — Microsoft独占終了後初の他社クラウド展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIとAWSが戦略的パートナーシップを拡大し、GPT-5.5・GPT-5.4をAmazon Bedrockで限定プレビュー提供することを発表した。2019年からMicrosoftが保持していたOpenAI製品の独占ライセンスが2026年に改定され、OpenAIが初めてAzure以外のクラウドにモデルを展開する歴史的な動きとなる。Codex（コーディングエージェント）のBedrock版も同時提供され、AWSの認証情報でOpenAIのフロンティアモデルをBedrockのAPI・ガバナンス・セキュリティ基盤そのままで利用可能になる。Amazon Bedrock Managed Agents powered by OpenAIも限定プレビューを開始しており、日本のエンタープライズにおける活用加速が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NVIDIA / 産業界</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.sbbit.jp/article/st/182182" target="_blank" rel="noopener">フィジカルAI元年2026 — VLAモデルが製造・物流・農業現場へ本格展開、NVIDIAが市場牽引</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年は「フィジカルAI元年」とも呼ばれ、Vision-Language-Action（VLA）モデルを搭載したロボット・ドローン・自律搬送機が製造・物流・農業の各現場に本格展開され始めた。NVIDIAのIsaacシミュレーター上で学習したVLAモデルは、現実環境の変化にリアルタイムで対応しながら最適な動作を推論できる。日本国内でも三菱電機・ファナックらが産業用フィジカルAIの実証実験を加速させており、経産省の規制緩和と相まって2026年内の商用化事例が相次ぐ見込みだ。従来型ロボットとの差別化要因となる「環境適応性」が産業現場のゲームチェンジャーとなっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">各社 / LLM市場</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://a-x.inc/blog/local-ai/" target="_blank" rel="noopener">推論コスト最適化が経営課題に — 軽量ローカルLLMが企業導入の主流へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年のAI市場トレンドとして「推論コスト最適化」が浮上している。フロンティアモデルの性能向上が一段落した一方、クラウドAPIの従量課金コストが中堅・中小企業の課題となり、オンプレミスや端末上で動作する軽量LLM（ローカルAI）の需要が急拡大している。Mistral・Phi・Llamaシリーズなど7〜14Bパラメータ規模のモデルが商用品質を達成し、PC・スマートフォン・エッジデバイス上での実用運用が可能になった。日本企業でもセキュリティ・コスト・レイテンシを重視する業種を中心にローカルLLM導入が加速しており、クラウドAIとの使い分け戦略が2026年の重要な経営判断となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Quick / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">Amazon Quick、デスクトップアプリとFree/Plusプランを「What's Next with AWS 2026」で発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが「What's Next with AWS 2026」イベントで、AIワークアシスタント「Amazon Quick」の大幅アップデートを発表した。新たにデスクトップアプリ（Windows/Mac）が提供開始となり、FreeプランとPlusプランの料金体系も設定。Quickはメールや社内ドキュメント、カレンダー、各種SaaSと接続し、ユーザーの仕事の文脈を学習しながらタスクを代行する。チャット内での画像・ビジュアル生成にも対応し、さらに多くのサードパーティアプリとの連携が可能になった。Microsoft 365 CopilotやGoogle Workspaceに対抗するAWS版AIワークスペースとして、日本企業でも採用検討が進む見込みだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/04/bedrock-openai-models-codex-managed-agents/" target="_blank" rel="noopener">Amazon Bedrock Managed Agents powered by OpenAI が限定プレビュー開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSとOpenAIの拡大パートナーシップの一環として、「Amazon Bedrock Managed Agents powered by OpenAI」の限定プレビューが始まった。OpenAIのフロンティアモデル（GPT-5.5ほか）とAWSのインフラを組み合わせ、Bedrock上で本番環境対応のOpenAIエージェントをゼロからの設定なしで構築できる。Bedrockの既存セキュリティ・コスト管理・ガバナンス機能をそのまま活用できるため、既存AWS環境に統合しやすい。Codex on Bedrockと合わせてコーディングエージェントの利用もAWS認証情報で行えるようになり、企業のAWS支出コミットメントへの計上も可能だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EC2</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-whats-next-with-aws-2026-amazon-quick-openai-partnership-and-more-may-4-2026/" target="_blank" rel="noopener">Amazon EC2 M8in・M8ib インスタンスがGA — 第6世代Intel Xeonで前世代比43%高速化・600Gbps帯域</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが第6世代Intelカスタム Xeon スケーラブルプロセッサと第6世代 Nitro カードを搭載したAmazon EC2 M8in/M8ibインスタンスを一般提供（GA）開始した。前世代M6in/M6ibと比較して最大43%の性能向上を実現。M8inは600Gbpsのネットワーク帯域幅を提供し、M8ibは最大300GbpsのEBS帯域幅に対応する。ネットワーク集約型ワークロード（分散データ処理、リアルタイム分析、NFV/SDNなど）に最適化されており、クラスタ環境でのAIトレーニング補助や高頻度取引基盤でも活用が見込まれる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's AI &amp; AWS Update</span>
+    <span>2026-05-09 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
