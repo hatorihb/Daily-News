@@ -2,6 +2,8 @@ import sys
 import tweepy
 import os
 import re
+import requests
+from requests_oauthlib import OAuth1
 from bs4 import BeautifulSoup
 
 api_key            = os.environ['X_API_KEY']
@@ -13,6 +15,12 @@ print(f"[DEBUG] X_API_KEY           : {api_key[:4]}...{api_key[-4:]} (len={len(a
 print(f"[DEBUG] X_API_SECRET        : {api_secret[:4]}...{api_secret[-4:]} (len={len(api_secret)})")
 print(f"[DEBUG] X_ACCESS_TOKEN      : {access_token[:4]}...{access_token[-4:]} (len={len(access_token)})")
 print(f"[DEBUG] X_ACCESS_TOKEN_SECRET: {access_token_secret[:4]}...{access_token_secret[-4:]} (len={len(access_token_secret)})")
+
+# --- x-access-level check (definitive permission diagnostic) ---
+auth1 = OAuth1(api_key, api_secret, access_token, access_token_secret)
+diag_resp = requests.get("https://api.twitter.com/2/users/me", auth=auth1)
+print(f"[DIAG] x-access-level header : {diag_resp.headers.get('x-access-level', '(not present)')}")
+print(f"[DIAG] GET /2/users/me status : {diag_resp.status_code}")
 
 client = tweepy.Client(
     consumer_key=api_key,
