@@ -3,82 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI・AWS Daily Report</title>
+<title>hatorih_X's AI &amp; AWS Daily Report</title>
 <style>
-:root{--ai:#4f46e5;--aws:#ff9900;--dark:#232f3e;--bg:#f8fafc;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;--r:12px;--sh:0 1px 3px rgba(0,0,0,.08),0 4px 16px rgba(0,0,0,.04)}
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI','Noto Sans JP','Hiragino Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
-a{color:var(--ai);text-decoration:none}a:hover{text-decoration:underline}
-.container{max-width:800px;margin:0 auto;padding:0 1.25rem}
-header{background:var(--dark);color:#fff;padding:2.5rem 0 2rem;text-align:center}
-h1{font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:.5rem}
-.subtitle{font-size:.9rem;color:rgba(255,255,255,.6)}
-main{padding:2.5rem 0}
-h2{font-size:1.1rem;font-weight:700;margin-bottom:1.25rem;color:var(--dark)}
-.report-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
-.report-item{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1rem 1.25rem;box-shadow:var(--sh);display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-.report-date{font-weight:700;font-size:1rem;color:var(--dark)}
-.report-link{font-size:.85rem;background:var(--ai);color:#fff;padding:.3rem .9rem;border-radius:999px;white-space:nowrap}
-.report-link:hover{background:#4338ca;text-decoration:none}
-.loading{color:var(--muted);text-align:center;padding:2rem}
-.empty{color:var(--muted);text-align:center;padding:2rem}
-footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.25rem;font-size:.8rem}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem}
+.header-sub{font-size:.85rem;color:#888;letter-spacing:.05em}
+main{flex:1;padding:3rem 0}
+.section-label{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:2rem;padding-bottom:.75rem;border-bottom:2px solid var(--black)}
+.report-list{list-style:none}
+.report-item{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:1.5rem;
+  padding:1.5rem 0;
+  border-bottom:1px solid var(--border);
+  transition:background .15s;
+}
+.report-item:first-child{border-top:1px solid var(--border)}
+.report-item:hover{background:var(--gray);margin:0 -2rem;padding:1.5rem 2rem}
+.report-num{font-size:2rem;font-weight:900;color:var(--border);letter-spacing:-.04em;min-width:3rem;text-align:right;line-height:1}
+.report-info{min-width:0}
+.report-date{font-size:1.1rem;font-weight:800;letter-spacing:-.01em;margin-bottom:.2rem}
+.report-date-sub{font-size:.72rem;color:var(--mid);letter-spacing:.1em;text-transform:uppercase}
+.report-btn{
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  border:2px solid var(--black);
+  padding:.5rem 1.2rem;
+  white-space:nowrap;
+  transition:background .15s,color .15s;
+}
+.report-btn:hover{background:var(--black);color:var(--white)}
+.report-item.latest .report-num{color:#ffe0e0}
+.report-item.latest .report-date{color:var(--red)}
+.report-item.latest .report-btn{border-color:var(--red);color:var(--red)}
+.report-item.latest .report-btn:hover{background:var(--red);color:var(--white)}
+.loading,.empty,.error{
+  padding:3rem 0;
+  color:var(--mid);
+  font-size:.9rem;
+  letter-spacing:.05em;
+}
+footer{background:var(--black);color:#555;padding:2rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:.9rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){
+  h1{font-size:2rem}
+  .report-item{grid-template-columns:1fr auto;gap:1rem}
+  .report-num{display:none}
+  .report-item:hover{margin:0 -1rem;padding:1.5rem 1rem}
+  .container{padding:0 1rem}
+}
 </style>
 </head>
 <body>
+
 <header>
   <div class="container">
-    <h1>&#129302; AI・AWS・国内IT Daily Report</h1>
-    <p class="subtitle">過去24時間のAI・AWS・国内ITアップデートを毎朝自動収集</p>
+    <p class="header-label">hatorih_X's Daily Tech Report</p>
+    <h1>AI &amp; AWS<br>Update Archive</h1>
+    <p class="header-sub">過去24時間のAI・AWS・国内ITアップデートを毎朝自動収集</p>
   </div>
 </header>
+
 <main>
   <div class="container">
-    <h2>&#128203; レポート一覧</h2>
-    <div id="app"><p class="loading">読み込み中...</p></div>
+    <p class="section-label">Reports</p>
+    <ul class="report-list" id="list">
+      <li class="loading">読み込み中...</li>
+    </ul>
   </div>
 </main>
-<footer>自動収集レポート &mdash; hatorihb/Daily-News</footer>
-<script>
-const REPO = 'hatorihb/Daily-News';
 
-fetch(`https://api.github.com/repos/${REPO}/contents/reports`)
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's AI &amp; AWS Update</span>
+    <span>hatorihb/Daily-News</span>
+  </div>
+</footer>
+
+<script>
+const OWNER = 'hatorihb';
+const REPO  = 'Daily-News';
+const BASE  = `https://${OWNER}.github.io/${REPO}`;
+
+fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
   .then(r => {
     if (!r.ok) throw new Error(r.status);
     return r.json();
   })
   .then(files => {
-    const htmlFiles = files
-      .filter(f => f.name.endsWith('.html'))
+    const reports = files
+      .filter(f => /^tech-report-\d{4}-\d{2}-\d{2}\.html$/.test(f.name))
       .sort((a, b) => b.name.localeCompare(a.name));
 
-    if (htmlFiles.length === 0) {
-      document.getElementById('app').innerHTML = '<p class="empty">レポートはまだありません。</p>';
+    const list = document.getElementById('list');
+
+    if (reports.length === 0) {
+      list.innerHTML = '<li class="empty">レポートはまだありません。</li>';
       return;
     }
 
-    const ul = document.createElement('ul');
-    ul.className = 'report-list';
-    htmlFiles.forEach(f => {
-      const date = (f.name.match(/(\d{4}-\d{2}-\d{2})/) || [])[1] || f.name;
-      const url  = `https://${REPO.split('/')[0]}.github.io/Daily-News/reports/${f.name}`;
+    list.innerHTML = '';
+    reports.forEach((f, i) => {
+      const dateStr = (f.name.match(/(\d{4}-\d{2}-\d{2})/) || [])[1];
+      const [y, m, d] = dateStr.split('-');
+      const label = `${y}年${parseInt(m)}月${parseInt(d)}日`;
+      const dayNames = ['日','月','火','水','木','金','土'];
+      const dow = dayNames[new Date(`${dateStr}T00:00:00+09:00`).getDay()];
+      const url = `${BASE}/reports/${f.name}`;
+      const num = String(reports.length - i).padStart(2, '0');
+      const isLatest = i === 0;
+
       const li = document.createElement('li');
-      li.className = 'report-item';
+      li.className = 'report-item' + (isLatest ? ' latest' : '');
       li.innerHTML = `
-        <span class="report-date">&#128197; ${date}</span>
-        <a class="report-link" href="${url}" target="_blank" rel="noopener">レポートを見る &rarr;</a>`;
-      ul.appendChild(li);
+        <div class="report-num">${num}</div>
+        <div class="report-info">
+          <div class="report-date">${label}（${dow}）</div>
+          <div class="report-date-sub">${isLatest ? 'Latest &mdash; ' : ''}${dateStr}</div>
+        </div>
+        <a class="report-btn" href="${url}" target="_blank" rel="noopener">読む &rarr;</a>`;
+      list.appendChild(li);
     });
-    document.getElementById('app').replaceWith(ul);
-    // ul is already in DOM via replaceWith, wrap it
-    const wrapper = document.createElement('div');
-    wrapper.id = 'app';
-    ul.parentNode.insertBefore(wrapper, ul);
-    wrapper.appendChild(ul);
   })
   .catch(() => {
-    document.getElementById('app').innerHTML = '<p class="empty">レポートの取得に失敗しました。</p>';
+    document.getElementById('list').innerHTML =
+      '<li class="error">レポートの取得に失敗しました。ページを再読み込みしてください。</li>';
   });
 </script>
+
 </body>
 </html>
