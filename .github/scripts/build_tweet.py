@@ -1,43 +1,30 @@
 import sys
-import tweepy
 import os
 import re
 import requests
-from requests_oauthlib import OAuth1
+from requests_oauthlib import OAuth1, OAuth1Session
 from bs4 import BeautifulSoup
 
-api_key            = os.environ['X_API_KEY']
-api_secret         = os.environ['X_API_SECRET']
-access_token       = os.environ['X_ACCESS_TOKEN']
-access_token_secret= os.environ['X_ACCESS_TOKEN_SECRET']
+api_key             = os.environ['X_API_KEY']
+api_secret          = os.environ['X_API_SECRET']
+access_token        = os.environ['X_ACCESS_TOKEN']
+access_token_secret = os.environ['X_ACCESS_TOKEN_SECRET']
 
 print(f"[DEBUG] X_API_KEY           : {api_key[:4]}...{api_key[-4:]} (len={len(api_key)})")
 print(f"[DEBUG] X_API_SECRET        : {api_secret[:4]}...{api_secret[-4:]} (len={len(api_secret)})")
 print(f"[DEBUG] X_ACCESS_TOKEN      : {access_token[:4]}...{access_token[-4:]} (len={len(access_token)})")
 print(f"[DEBUG] X_ACCESS_TOKEN_SECRET: {access_token_secret[:4]}...{access_token_secret[-4:]} (len={len(access_token_secret)})")
 
-# --- x-access-level check (definitive permission diagnostic) ---
+# --- x-access-level check ---
 auth1 = OAuth1(api_key, api_secret, access_token, access_token_secret)
 diag_resp = requests.get("https://api.twitter.com/2/users/me", auth=auth1)
 print(f"[DIAG] x-access-level header : {diag_resp.headers.get('x-access-level', '(not present)')}")
 print(f"[DIAG] GET /2/users/me status : {diag_resp.status_code}")
-
-client = tweepy.Client(
-    consumer_key=api_key,
-    consumer_secret=api_secret,
-    access_token=access_token,
-    access_token_secret=access_token_secret,
-)
-
-print("[DIAG] Testing OAuth 1.0a via get_me()...")
-try:
-    me = client.get_me(user_auth=True)
-    print(f"[DIAG] ✅ Auth OK — @{me.data.username} (id={me.data.id})")
-except tweepy.errors.Unauthorized as e:
-    print(f"[DIAG] ❌ Auth FAILED (401): {e}")
+if diag_resp.status_code != 200:
+    print(f"[DIAG] GET /2/users/me body: {diag_resp.text}")
     sys.exit(1)
-except Exception as e:
-    print(f"[DIAG] ⚠️ get_me() error: {type(e).__name__}: {e}")
+me = diag_resp.json()
+print(f"[DIAG] Authenticated as: @{me['data']['username']} (id={me['data']['id']})")
 
 html_file = os.environ['REPORT_FILE']
 date_str  = os.environ['REPORT_DATE']
@@ -96,20 +83,36 @@ tweet = "\n".join(lines)
 actual_len = len(re.sub(r'https?://\S+', 'x' * 23, tweet))
 print(f"--- Tweet ({actual_len} weighted chars) ---\n{tweet}\n---")
 
-try:
-    response = client.create_tweet(text=tweet, user_auth=True)
-    print(f"✅ Tweet posted! ID: {response.data['id']}")
-except tweepy.errors.Forbidden as e:
-    body = ""
-    if hasattr(e, 'response') and e.response is not None:
-        try: body = e.response.json()
-        except Exception: body = e.response.text
-    body_str = str(body).lower()
+# --- Direct POST via OAuth1Session (bypassing tweepy) ---
+oauth = OAuth1Session(
+    api_key,
+    client_secret=api_secret,
+    resource_owner_key=access_token,
+    resource_owner_secret=access_token_secret,
+)
+
+resp = oauth.post(
+    "https://api.twitter.com/2/tweets",
+    json={"text": tweet},
+)
+
+print(f"[DIAG] POST /2/tweets status          : {resp.status_code}")
+print(f"[DIAG] POST x-access-level            : {resp.headers.get('x-access-level', 'N/A')}")
+print(f"[DIAG] POST x-rate-limit-remaining    : {resp.headers.get('x-rate-limit-remaining', 'N/A')}")
+print(f"[DIAG] POST x-rate-limit-limit        : {resp.headers.get('x-rate-limit-limit', 'N/A')}")
+print(f"[DIAG] POST content-type              : {resp.headers.get('content-type', 'N/A')}")
+print(f"[DIAG] POST body                      : {resp.text}")
+
+if resp.status_code == 201:
+    data = resp.json()
+    print(f"✅ Tweet posted! ID: {data['data']['id']}")
+elif resp.status_code == 403:
+    body_str = resp.text.lower()
     if '187' in body_str or 'duplicate' in body_str:
         print("⚠️ Duplicate tweet. Treating as success.")
         sys.exit(0)
-    print(f"❌ 403 Forbidden: {body}")
+    print(f"❌ 403 Forbidden")
     sys.exit(1)
-except tweepy.errors.TweepyException as e:
-    print(f"❌ Tweet failed: {type(e).__name__}: {e}")
+else:
+    print(f"❌ Unexpected status: {resp.status_code}")
     sys.exit(1)
