@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWSアップデート</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <p class="header-label">hatorih's Daily Tech Report</p>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>アップデート</h1>
+    <p class="header-date">2026 — 05 — 10 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JIPDEC / 企業IT調査2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.jipdec.or.jp/news/2026/05-it-survey.html" target="_blank" rel="noopener">JIPDEC「企業IT利活用動向調査2026」— AI活用36%・ランサムウェア被害45.8%に拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">一般財団法人日本情報経済社会推進協会（JIPDEC）が2026年版の企業IT利活用動向調査を発表した。国内企業のAI活用率は前年比12ポイント増の36%に達し、生成AIを業務プロセスに組み込む動きが急加速している。一方で深刻なのはセキュリティ面で、過去1年間にランサムウェア被害を受けた企業は45.8%に上り、中小企業を中心に被害が拡大。特に製造業・医療機関での攻撃が増加しており、経営層のサイバーリスク認識強化が急務となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">デジタル庁 / マイナンバーカード</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.digital.go.jp/news/2026-android-mynumber/" target="_blank" rel="noopener">デジタル庁、Androidスマートフォンへのマイナンバーカード機能搭載を2026年秋に提供開始へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">デジタル庁はAndroidスマートフォン向けにマイナンバーカードの機能を内蔵する「スマホ用電子証明書」サービスを2026年秋から段階的に提供すると発表した。iOSに続くAndroid対応により、健康保険証・運転免許証・公的個人認証など幅広いユースケースへの対応が可能になる見込みだ。対応端末の要件や本人確認フローの詳細は今後公開予定で、各行政・民間サービスとの連携拡大に向けた準備も並行して進んでいる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">経済産業省 / DX銘柄2026</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.meti.go.jp/press/2026/dx-brands-2026.html" target="_blank" rel="noopener">経産省「DX銘柄2026」を選定 — 初の「AX（AIトランスフォーメーション）」評価基準を導入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">経済産業省と東京証券取引所は「DX銘柄2026」を発表した。今年から新設された「AX（AIトランスフォーメーション）」評価基準が初導入され、単なるデジタル化の推進にとどまらず、AIを経営戦略の中核に位置づけている企業が高く評価される。製造業・金融・流通など多業種の上場企業を評価対象とし、AIを活用したビジネスモデル変革・収益創出まで実践している企業が上位にランクインした。DX推進における「AI活用の深度」が今後の評価軸として定着しそうだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/research/mythos-preview" target="_blank" rel="noopener">Anthropic、Claude Mythos Preview を公開 — 自律エージェントが数万件のゼロデイ脆弱性を発見</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicが次世代の自律型AIエージェント「Claude Mythos Preview」を研究プレビューとして公開した。セキュリティ研究分野での実証実験で、既存ソフトウェアにおける数万件のゼロデイ脆弱性を自律的に発見・分類したことが報告されている。人間の監督下で動作するが、長時間の複合タスクをほぼ自律的にこなす能力を持ち、ソフトウェア開発・科学研究・セキュリティ監査の分野で人間の生産性を大幅に拡張するとされる。責任あるAI開発の観点から段階的な公開となっており、安全性評価が並行して進行中。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.deepseek.com/news/v4-flash" target="_blank" rel="noopener">DeepSeek V4 Flash リリース — 284B MoEモデルが$0.14/1Mトークンの超低コストを実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国のAI企業DeepSeekが新モデル「DeepSeek V4 Flash」をリリースした。総パラメータ数284BのMixture-of-Experts（MoE）アーキテクチャを採用しながら、入力トークン$0.14/1Mという驚異的な低価格を実現した。ベンチマーク性能ではコーディング・数学・推論タスクでGPT-4o相当の性能を示すとされ、コストパフォーマンスで既存の主要モデルを大幅に凌駕する。APIはDeepSeekプラットフォームおよびOpenAI互換エンドポイント経由で利用可能で、コスト重視のエンタープライズ活用に大きな影響を与えそうだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / OpenAI / 市場動向</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theinformation.com/articles/anthropic-revenue-2026" target="_blank" rel="noopener">AnthropicのARRがOpenAIを逆転か — 300億ドル vs 240億ドルと報道</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">複数のメディアが、AnthropicのARR（年間経常収益）が2026年初頭にOpenAIを初めて上回ったと報じた。Anthropicの推計ARRは約300億ドル、OpenAIは約240億ドルとされる。Claude 3.5系・Claude 4系の企業向け採用急拡大と、AWSや主要クラウドへの深い統合が収益を押し上げたとみられる。一方OpenAIはGPT-5系・Codexの展開を加速しており、AI企業間の競争は収益面でも熾烈になっている。両社の数字はいずれも非公開のため精度には留意が必要。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/amazon-bedrock-openai-integration-2026/" target="_blank" rel="noopener">Amazon BedrockがOpenAIモデルと連携 — GPT-5.5・Codex・Managed Agentsをネイティブ提供へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon BedrockプラットフォームでOpenAIのGPT-5.5・Codex・Managed Agentsをネイティブに利用できるパートナーシップを発表した。AWS IAM・VPC・CloudWatchとの統合を維持したままOpenAIモデルをBedrockのAPI・コンソール・SDK経由で呼び出せるようになる。企業はAWS上で既存のセキュリティ・コンプライアンス・コスト管理の仕組みを変えずにOpenAIモデルを活用でき、マルチモデル戦略の実装が大幅に簡素化される。2026年下半期のGA（一般提供）を目指して段階的なプレビューが開始される見込み。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Connect / AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/contact-center/amazon-connect-ai-suite-2026/" target="_blank" rel="noopener">Amazon Connect AIスイート強化 — 通話要約・感情分析・ガイダンス・予測分析の4領域を一括提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSがAmazon ConnectのAIスイートを大幅強化し、コンタクトセンター向けに通話要約・感情分析・リアルタイムガイダンス・予測分析の4機能をパッケージとして提供すると発表した。生成AIを活用したContact Lens for Amazon Connectとの連携強化により、オペレーターの作業効率向上と顧客満足度改善を同時に実現できる。国内の金融・通信・小売などコンタクトセンター規模の大きい業種での導入が見込まれ、人員最適化とCX（顧客体験）の両立を支援する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Google Cloud / Multicloud</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/networking-and-content-delivery/aws-interconnect-google-cloud-ga/" target="_blank" rel="noopener">AWS Interconnect マルチクラウド接続がGA — Google Cloud 5リージョンとの専用線接続を正式提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAWSとGoogle Cloud間をプライベート専用線で接続する「AWS Interconnect for Google Cloud」の一般提供（GA）を発表した。東京・大阪・バージニア・アイルランド・シンガポールの5リージョンでサポートされ、インターネットを経由せずに両クラウド間でデータ転送が可能になる。マルチクラウド戦略を採用する大企業・金融機関が主なターゲットで、ネットワーク遅延の低減・帯域保証・セキュリティ強化を同時に実現する。AzureとのInterconnectも2026年後半にプレビュー提供予定とされている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih's Daily Tech Report</span>
+    <span>2026-05-10 &nbsp;&mdash;&nbsp; 国内IT・DX &amp; AI &amp; AWS</span>
+  </div>
+</footer>
+
+</body>
+</html>
