@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWSアップデート</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.no-update{padding:2.5rem 0;color:var(--mid);font-size:.9rem;letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <p class="header-label">hatorih's Daily Tech Report</p>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>アップデート</h1>
+    <p class="header-date">2026 — 05 — 13 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="no-update">本日（2026-05-13）の過去24時間以内において、URLが確認できる国内IT・DX関連の新発表は見つかりませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-for-small-business" target="_blank" rel="noopener">Anthropic、中小企業向け「Claude for Small Business」を正式ローンチ——15種のAIワークフローを即時利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年5月13日、中小企業向けの新パッケージ「Claude for Small Business」を正式発表した。QuickBooks・PayPal・HubSpot・Canva・DocuSign・Google Workspace・Microsoft 365など中小企業が日常的に使うツールへClaudeをトグル一つで統合できる設計で、財務・営業・マーケティング・人事・顧客サービスをカバーする15種のすぐ使えるAIワークフローを同梱する。また5月14日からシカゴ・ダラス・サンノゼなど米国10都市で地域の中小企業オーナーを対象とした無料の半日AIトレーニングツアーも開始する。エンタープライズ路線を補完する新たな顧客層開拓の一手として注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">UiPath</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://martechedge.com/news/uipath-expands-enterprise-automation-platform-for-ai-coding-agents" target="_blank" rel="noopener">UiPath、AIコーディングエージェント向け統合フレームワーク「UiPath for Coding Agents」を発表——Claude Code・OpenAI Codexに対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">UiPathは2026年5月13日、Claude CodeやOpenAI Codexなど主要AIコーディングエージェントをエンタープライズの自動化・ガバナンス・デプロイ環境に直接接続するプラットフォーム統合フレームワーク「UiPath for Coding Agents」を発表した。AI生成のオートメーションを本番システムで大規模に運用できる仕組みを提供し、同社は「ビジネスオーケストレーションプラットフォームとして初めてコーディングエージェントをネイティブ統合した」と強調する。企業が複数のAIエージェントを同時並行で活用しながら、ガバナンスを一元管理できる点が特徴だ。エンタープライズ向けにはClaude Codeを皮切りに、2026年内に追加エージェント対応が予定されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Signadot</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://sdtimes.com/ai/news-roundup-may-13-2026-aws-kiro-uipath-signadot/" target="_blank" rel="noopener">Signadot、AIコーディングエージェント向けテスト隔離スキル「signadot-validate」をリリース</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Signadotは2026年5月13日、Claude Code・Cursor・Codexなど主要AIコーディングエージェントに対応したテスト環境管理スキル「signadot-validate」をリリースした。インフラリソースの管理やコード変更を本番環境に影響を与えずに隔離されたサンドボックス環境で検証できる機能を提供する。設定をハードコードせずに済み、手動操作なしでエージェントがテスト環境を自律的に操作できる設計が特徴。AIが生成したコードを安全に本番適用するまでのパイプラインを自動化したい開発チームに向けた機能拡張となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Kiro IDE</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://siliconangle.com/2026/05/12/aws-kiro-accelerates-software-development-proving-code-correctness-gets-work/" target="_blank" rel="noopener">AWS Kiro、3つの新機能を発表——ニューロシンボリックAIが要件の矛盾・曖昧さをコーディング前に検出</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年5月12日、アジェンティックIDE「Kiro」に3つの新機能を追加した。「Parallel Task Execution」は独立したコーディングタスクを並列実行して開発速度を向上させ、「Quick Plan」は事前に質問を集約した後、要件・設計・タスクを一括生成する。最大の注目機能「Requirements Analysis」はLLMとSMTソルバーを組み合わせたニューロシンボリックAIがコーディング開始前に要件の矛盾・曖昧さ・ギャップ・未定義の挙動を自動検出し、開発者が約15秒で回答できる平易な2択の質問として提示する。曖昧な要件は精度を20〜40ポイント低下させるとされており、早期発見によって開発品質の大幅改善が期待される。なお、Amazon Q Developerは2027年4月30日にサポート終了予定となっており、KiroがIDEベースのAI開発支援の後継として位置付けられている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih's Daily Tech Report</span>
+    <span>2026-05-13 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+</body>
+</html>
