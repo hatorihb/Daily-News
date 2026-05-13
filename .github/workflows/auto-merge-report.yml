@@ -1,16 +1,16 @@
-name: Auto Merge Daily Report to Main
+name: Auto Sync Daily Report to Main
 
 on:
   push:
-    branches: [claude/daily-report]
+    branches: ['claude/**']
     paths:
-      - 'reports/**.html'
+      - 'reports/tech-report-*.html'
 
 permissions:
   contents: write
 
 jobs:
-  merge:
+  sync:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,11 +19,31 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GH_PAT }}
 
-      - name: Merge claude/daily-report into main
+      - name: Copy new report files to main
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin claude/daily-report
-          git merge origin/claude/daily-report --no-ff \
-            -m "chore: merge daily report $(date +%Y-%m-%d)"
+
+          SOURCE_BRANCH="${{ github.ref_name }}"
+          git fetch origin "$SOURCE_BRANCH"
+
+          # pushed された差分から report ファイルだけ抽出
+          CHANGED=$(git diff --name-only \
+            "origin/${SOURCE_BRANCH}^" "origin/${SOURCE_BRANCH}" \
+            | grep '^reports/tech-report-.*\.html$' || true)
+
+          if [ -z "$CHANGED" ]; then
+            echo "No report files to sync."
+            exit 0
+          fi
+
+          for FILE in $CHANGED; do
+            git checkout "origin/${SOURCE_BRANCH}" -- "$FILE"
+            echo "Synced: $FILE"
+          done
+
+          git diff --cached --quiet && exit 0
+
+          DATE=$(echo "$CHANGED" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' | head -1)
+          git commit -m "chore: sync daily report ${DATE} from ${SOURCE_BRANCH}"
           git push origin main
