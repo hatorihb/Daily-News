@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWSアップデート</title>
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWS &amp; セキュリティ</title>
 <style>
 :root{
   --black:#0a0a0a;
   --white:#ffffff;
   --red:#E60012;
+  --orange:#D84315;
   --gray:#f2f2f2;
   --mid:#888;
   --border:#e0e0e0;
@@ -41,6 +42,8 @@ main{padding:0}
 .section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
 .section-domestic .section-num{color:#ffe0e0}
 .section-domestic .section-title{color:var(--red)}
+.section-security .section-num{color:#fbe9e7}
+.section-security .section-title{color:var(--orange)}
 .card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
 .card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
@@ -49,11 +52,13 @@ main{padding:0}
 .impact-high{background:var(--red);color:var(--white)}
 .impact-medium{background:var(--black);color:var(--white)}
 .impact-low{background:var(--gray);color:var(--black)}
+.impact-critical{background:var(--orange);color:var(--white)}
 .card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
 .card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
 .card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
 .card-title a:hover{border-bottom-color:var(--black)}
 .section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+.section-security .card-title a:hover{border-bottom-color:var(--orange)}
 details{margin-top:.75rem}
 summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
 summary::-webkit-details-marker{display:none}
@@ -61,6 +66,7 @@ summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-
 details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
 .no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
@@ -74,7 +80,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 <header>
   <div class="container">
     <p class="header-label">hatorih's Daily Tech Report</p>
-    <h1>国内IT・DX<br>AI &amp; AWS<br>アップデート</h1>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>&amp; セキュリティ</h1>
     <p class="header-date">2026 — 05 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
@@ -83,6 +89,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
 <main>
@@ -221,6 +228,97 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         <details>
           <summary>詳細を表示</summary>
           <p class="card-desc">Amazon SageMaker Data AgentがIAM Identity Center（IDC）ドメインに対応し、企業のSSO（シングルサインオン）環境でもデータエージェント機能を活用できるようになった。これにより、既存のID管理基盤との統合が簡素化され、セキュリティポリシーを維持しながらSageMakerのAIエージェント機能を組織全体に展開しやすくなった。管理者はIDCを通じてきめ細かなアクセス制御を実施できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">nginx / IPA</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/" target="_blank" rel="noopener">nginx に複数の脆弱性 — クリティカル評価を含む、早急なアップデートを推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Webサーバソフトウェア「nginx」に複数の脆弱性が発見され、うち1件は「クリティカル」評価を受けていることが報告された。nginxは世界中の多くのWebサーバやリバースプロキシで利用されており、影響範囲は非常に広い。悪用された場合、リモートコード実行や権限昇格などの深刻な被害につながる可能性がある。開発元からパッチがリリースされており、利用中の組織・個人は速やかにアップデートを適用することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">キヤノンマーケティングジャパン</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/" target="_blank" rel="noopener">GUARDIANWALL MailSuite に脆弱性 — 実際の悪用を確認、利用組織は即時対応が必要</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">キヤノンマーケティングジャパンが提供するメールセキュリティ製品「GUARDIANWALL MailSuite」に脆弱性が発覚し、すでに実際の攻撃への悪用が確認されている。本製品は国内企業を中心に広く導入されており、メールの無害化・検疫機能を担う重要なセキュリティ製品である。悪用が現実に発生していることから、利用中の組織は公式情報を確認のうえ、提供されているパッチや回避策を即座に適用することが求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/" target="_blank" rel="noopener">FortiAuthenticator に深刻な脆弱性 — 認証管理基盤への攻撃リスク</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinetが提供する多要素認証・シングルサインオン管理ソリューション「FortiAuthenticator」に深刻な脆弱性が明らかになった。FortiAuthenticatorは企業の認証基盤として広く利用されており、悪用されると組織全体のID管理システムへの不正アクセスや権限奪取につながる恐れがある。Fortinetからセキュリティアドバイザリが公開されており、影響を受けるバージョンを使用している場合は速やかにアップデートを適用することが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/" target="_blank" rel="noopener">Apple が iOS / iPadOS のセキュリティアップデートをリリース — 複数の脆弱性に対処</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Appleが iOS および iPadOS に対するセキュリティアップデートをリリースし、複数の脆弱性を修正した。対処された脆弱性の中には、悪意のあるアプリや細工されたWebコンテンツを通じて任意コードが実行される可能性のあるものも含まれている。iPhoneおよびiPadを業務利用している企業や個人は、設定アプリから速やかにソフトウェアアップデートを確認・適用することが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thewindowsupdate.com/2026/05/14/cve-2026-41615-microsoft-authenticator-information-disclosure-vulnerability/" target="_blank" rel="noopener">CVE-2026-41615: Microsoft Authenticator に情報漏洩の脆弱性</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft Authenticatorアプリに情報漏洩（Information Disclosure）の脆弱性（CVE-2026-41615）が発見・公開された。Microsoft AuthenticatorはMFA（多要素認証）に広く利用されているアプリであり、多くの企業・個人ユーザーに影響する可能性がある。なお5月12日のPatch Tuesdayでは同社から120件超の脆弱性修正も提供されており（Netlogon RCE、DNS Client RCEなどを含む）、関連するアップデートの適用状況もあわせて確認することが望ましい。</p>
         </details>
       </div>
 
