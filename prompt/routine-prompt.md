@@ -14,7 +14,7 @@
 4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
 5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
 6. `site:nikkei.com OR site:itmedia.co.jp OR site:sbbit.jp AI 導入 発表 {YYYY-MM-DD}`
-7. `セキュリティ 脆弱性 情報流出 サイバー攻撃 {YYYY-MM-DD}`
+7. `セキュリティ 脆弱性 情報流出 サイバー攻撃 {YYYY-MM-DD} site:security-next.com OR site:internet.watch.impress.co.jp`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
