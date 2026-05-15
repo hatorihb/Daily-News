@@ -1,11 +1,11 @@
-今日の日付を確認し、過去24時間以内に発表されたAI・AWS・国内IT業界のアップデート情報を収集して、HTMLレポートをリポジトリにコミットしてください。
+今日の日付を確認し、過去24時間以内に発表されたAI・AWS・国内IT業界・セキュリティのアップデート情報を収集して、HTMLレポートをリポジトリにコミットしてください。
 
 ## 手順
 
 ### 1. 日付確認
 `date` コマンドで今日の日付（YYYY-MM-DD）を取得する。以降の検索クエリにこの日付を使う。
 
-### 2. Web検索（最大5回）
+### 2. Web検索（最大7回）
 以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
 
 1. `AI new model feature release announcement {YYYY-MM-DD}`
@@ -13,6 +13,8 @@
 3. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
 4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
 5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
+6. `site:nikkei.com OR site:itmedia.co.jp OR site:sbbit.jp AI 導入 発表 {YYYY-MM-DD}`
+7. `セキュリティ 脆弱性 情報流出 サイバー攻撃 {YYYY-MM-DD}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
@@ -35,12 +37,13 @@ AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件f
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih_X's DX・AI・AWS Update</title>
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWS &amp; セキュリティ</title>
 <style>
 :root{
   --black:#0a0a0a;
   --white:#ffffff;
   --red:#E60012;
+  --orange:#D84315;
   --gray:#f2f2f2;
   --mid:#888;
   --border:#e0e0e0;
@@ -73,6 +76,8 @@ main{padding:0}
 .section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
 .section-domestic .section-num{color:#ffe0e0}
 .section-domestic .section-title{color:var(--red)}
+.section-security .section-num{color:#fbe9e7}
+.section-security .section-title{color:var(--orange)}
 .card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
 .card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
@@ -81,11 +86,13 @@ main{padding:0}
 .impact-high{background:var(--red);color:var(--white)}
 .impact-medium{background:var(--black);color:var(--white)}
 .impact-low{background:var(--gray);color:var(--black)}
+.impact-critical{background:var(--orange);color:var(--white)}
 .card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
 .card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
 .card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
 .card-title a:hover{border-bottom-color:var(--black)}
 .section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+.section-security .card-title a:hover{border-bottom-color:var(--orange)}
 details{margin-top:.75rem}
 summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
 summary::-webkit-details-marker{display:none}
@@ -93,7 +100,9 @@ summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-
 details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
@@ -102,24 +111,22 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 </style>
 </head>
 <body>
-
 <header>
   <div class="container">
-    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-label">hatorih's Daily Tech Report</p>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>&amp; セキュリティ</h1>
     <p class="header-date">{YYYY} — {MM} — {DD} &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
-
 <nav>
   <div class="container">
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
-
 <main>
-
   <!-- 01 国内IT・DX -->
   <section class="section section-domestic" id="domestic">
     <div class="container">
@@ -132,7 +139,10 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-      <!-- 国内ITカードをここに繰り返し挿入：
+      <!-- 国内ITカードをここに繰り返し挿入。情報がない場合は以下を使用：
+      <div class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</div>
+
+      カード例：
       <div class="card">
         <div class="card-top">
           <div class="card-service">企業名・組織名</div>
@@ -163,7 +173,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-      <!-- AIカードをここに繰り返し挿入（card-title a:hoverは黒） -->
+      <!-- AIカードをここに繰り返し挿入。情報がない場合は no-update クラスを使用 -->
     </div>
   </section>
 
@@ -179,19 +189,50 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-      <!-- AWSカードをここに繰り返し挿入 -->
+      <!-- AWSカードをここに繰り返し挿入。情報がない場合は no-update クラスを使用 -->
     </div>
   </section>
 
-</main>
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+      <!-- セキュリティカードをここに繰り返し挿入。情報がない場合は no-update クラスを使用
+           重要度バッジは impact-critical（緊急）/ impact-high / impact-medium を使い分ける
 
+      カード例：
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">製品名・企業名</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">YYYY-MM-DD</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="URL" target="_blank" rel="noopener">タイトル</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">説明文（3〜5文）</p>
+        </details>
+      </div>
+      -->
+    </div>
+  </section>
+</main>
 <footer>
   <div class="container">
-    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span class="footer-brand">hatorih's Daily Tech Report</span>
     <span>{YYYY-MM-DD} &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
   </div>
 </footer>
-
 </body>
 </html>
 ```
@@ -202,7 +243,7 @@ git checkout -b claude/daily-report 2>/dev/null || git checkout claude/daily-rep
 mkdir -p reports
 # 上記HTMLを reports/tech-report-{YYYY-MM-DD}.html として保存
 git add reports/tech-report-{YYYY-MM-DD}.html
-git commit -m "report: hatorih_X AI・AWS daily report {YYYY-MM-DD}"
+git commit -m "report: hatorih's Daily Tech Report {YYYY-MM-DD}"
 git push origin claude/daily-report
 ```
 
