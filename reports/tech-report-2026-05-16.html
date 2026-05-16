@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWSアップデート</title>
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWS &amp; セキュリティ</title>
 <style>
 :root{
   --black:#0a0a0a;
   --white:#ffffff;
   --red:#E60012;
+  --orange:#D84315;
   --gray:#f2f2f2;
   --mid:#888;
   --border:#e0e0e0;
@@ -41,6 +42,8 @@ main{padding:0}
 .section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
 .section-domestic .section-num{color:#ffe0e0}
 .section-domestic .section-title{color:var(--red)}
+.section-security .section-num{color:#fbe9e7}
+.section-security .section-title{color:var(--orange)}
 .card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
 .card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
@@ -49,11 +52,13 @@ main{padding:0}
 .impact-high{background:var(--red);color:var(--white)}
 .impact-medium{background:var(--black);color:var(--white)}
 .impact-low{background:var(--gray);color:var(--black)}
+.impact-critical{background:var(--orange);color:var(--white)}
 .card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
 .card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
 .card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
 .card-title a:hover{border-bottom-color:var(--black)}
 .section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+.section-security .card-title a:hover{border-bottom-color:var(--orange)}
 details{margin-top:.75rem}
 summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
 summary::-webkit-details-marker{display:none}
@@ -61,7 +66,9 @@ summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-
 details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
@@ -73,7 +80,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 <header>
   <div class="container">
     <p class="header-label">hatorih's Daily Tech Report</p>
-    <h1>国内IT・DX<br>AI &amp; AWS<br>アップデート</h1>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>&amp; セキュリティ</h1>
     <p class="header-date">2026 — 05 — 16 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
@@ -82,6 +89,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
 <main>
@@ -98,23 +106,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-
-      <!-- Card: Runway Japan -->
-      <div class="card">
-        <div class="card-top">
-          <div class="card-service">Runway / クリエイティブAI</div>
-          <div class="card-badges">
-            <span class="impact impact-high">重要度 高</span>
-            <span class="card-date">2026-05-15</span>
-          </div>
-        </div>
-        <div class="card-title"><a href="https://runwayml.com/news/runway-is-coming-to-japan" target="_blank" rel="noopener">動画生成AIのRunwayが日本本格進出——東京オフィス開設と60億円超の初期投資を発表</a></div>
-        <details>
-          <summary>詳細を表示</summary>
-          <p class="card-desc">米Runwayは2026年5月15日、東京に日本法人を設立し4,000万ドル（約60億円）の初期投資を行うと発表した。日本はRunwayにとって世界3番目の市場で、企業顧客は過去12か月間で300%成長。ヤマハ・ソフトバンク・NHNなどが既存顧客として活用中。CEOは「日本は世界で最も洗練されたクリエイティブ産業を持つ国」とコメント。アニメ・ゲーム・広告業界への提案を強化し、日本のIPホルダー向けに特化した連携を進める方針。日経・ITmedia・GIGAZINEが同日報道。</p>
-        </details>
-      </div>
-
+      <div class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</div>
     </div>
   </section>
 
@@ -131,35 +123,33 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </div>
       </div>
 
-      <!-- Card: OpenAI + Plaid Personal Finance -->
       <div class="card">
         <div class="card-top">
           <div class="card-service">OpenAI</div>
           <div class="card-badges">
             <span class="impact impact-high">重要度 高</span>
-            <span class="card-date">2026-05-15</span>
+            <span class="card-date">2026-05-16</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://techcrunch.com/2026/05/15/openai-launches-chatgpt-for-personal-finance-will-let-you-connect-bank-accounts/" target="_blank" rel="noopener">OpenAI、Plaidと連携したChatGPT個人向けパーソナルファイナンス機能を米国でプレビュー開始</a></div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/9624314-model-release-notes" target="_blank" rel="noopener">GPT-Realtime-2 リリース、ChatGPT for Excel/Google Sheets がグローバル展開、GPT-5.5 Instant に Gmail・過去会話参照機能を追加</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">OpenAIはフィンテック企業Plaidと提携し、ChatGPT上でパーソナルファイナンス機能のプレビューを開始した。米国のChatGPT Proユーザーが対象で、Chase・Fidelity・Schwab・Robinhoodなど1万2,000以上の金融機関のアカウントをChatGPTに連携できる。収支の分析や将来の資産計画を自然言語で問い合わせることができ、財務アドバイスの民主化を目指す取り組み。データはユーザーの明示的な同意のもとで共有され、プライバシーへの配慮が明示されている。Bloomberg・TechCrunchが5月15日付けで報道した。</p>
+          <p class="card-desc">OpenAIは音声対話に特化した新モデル「GPT-Realtime-2」をリリースした。推論中もリアルタイムで会話を維持し、ツール呼び出し・割り込み・修正などの複雑なインタラクションを自然にハンドリングできる。ChatGPT Business ユーザー向けに ChatGPT for Excel および Google Sheets のグローバル提供が開始され、スプレッドシート内サイドバーでの作成・整理・説明などのAI支援が可能になった。GPT-5.5 Instant には過去の会話・ファイル・Gmail を参照してパーソナライズされた回答を返す検索機能が追加され、コンテキスト精度が向上している。これらの機能追加はエンタープライズ向け統合の急速な拡大を示しており、OpenAI の業務浸透戦略が加速している。</p>
         </details>
       </div>
 
-      <!-- Card: ChatGPT File Library + Codex Mobile -->
       <div class="card">
         <div class="card-top">
-          <div class="card-service">OpenAI / ChatGPT</div>
+          <div class="card-service">Anthropic</div>
           <div class="card-badges">
-            <span class="impact impact-medium">重要度 中</span>
-            <span class="card-date">2026-05-15</span>
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-16</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://releasebot.io/updates/openai/chatgpt" target="_blank" rel="noopener">ChatGPT：ファイルライブラリをFree・Goユーザーへ拡大、Codexのモバイルプレビューも追加</a></div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank" rel="noopener">Claude Opus 4.7 正式発表：高度なエージェントコーディングと 100 万トークンコンテキストウィンドウを搭載</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">ChatGPTのファイルライブラリ機能がFreeおよびGoプランのユーザー（欧州経済圏を含む）へ拡大され、アップロードや作成したファイルの検索・再利用・ストレージ管理が可能になった。さらにCodexのモバイルプレビューが追加され、スマートフォンからMac上で動作するCodexに接続して実行状況の確認・操作ができるようになった。GPT‑5.3 Instant Miniが新たなフォールバックモデルに採用され、またFreeユーザー向けにウェブ画像のインライン表示が強化された。機能が段階的に展開されており、ユーザーにとって実用性が高い複数の改善が一度に提供された。</p>
+          <p class="card-desc">Anthropic が Claude 最上位モデル「Claude Opus 4.7」を発表した。先代の Opus 4.6 に対して高度なソフトウェアエンジニアリングタスクで大幅な性能向上を達成し、特に難易度の高いタスクでの改善が顕著とされる。最大100万トークンのコンテキストウィンドウを備え、長時間実行エージェントタスクへの対応が強化された。Amazon Bedrock・Google Cloud Vertex AI・Microsoft Foundry など主要クラウドプラットフォームでも利用可能で、Claude の全製品ラインおよび API から利用できる。ビジョン機能も強化され、高解像度画像サポートと精度の向上が図られている。</p>
         </details>
       </div>
 
@@ -179,35 +169,109 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </div>
       </div>
 
-      <!-- Card: Amazon Q Developer signup block -->
       <div class="card">
         <div class="card-top">
-          <div class="card-service">Amazon Q Developer / Kiro</div>
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-whats-next-with-aws-2026-amazon-quick-openai-partnership-and-more-may-4-2026/" target="_blank" rel="noopener">Amazon Bedrock に GPT-5.5・GPT-5.4 がプレビュー提供開始、AWS と OpenAI の戦略的提携が拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS と OpenAI が戦略的提携を拡大し、GPT-5.5 および GPT-5.4 を含む最新の OpenAI モデルが Amazon Bedrock でプレビュー利用可能になった。また Codex on Amazon Bedrock と、OpenAI が提供する Amazon Bedrock Managed Agents も同時に発表されている。What's Next with AWS 2026 カンファレンスで明らかにされたこの連携により、開発者は AWS のインフラ上で OpenAI の最先端モデルをシームレスに利用できる。さらに Claude Opus 4.7 も Amazon Bedrock に追加されており、Bedrock はマルチモデル戦略の中核として機能している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://siliconangle.com/2026/04/22/aws-accelerates-ai-agent-development-amazon-bedrock-agentcore/" target="_blank" rel="noopener">Amazon Bedrock AgentCore が推奨提案・バッチ評価・A/B テスト機能を追加、エージェント本番運用を加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCore に新たな最適化機能が追加され、エージェントの observe-evaluate-improve ループが完結するようになった。本番トレースを分析してシステムプロンプトやツール記述の最適化案を提案する Recommendations 機能、大規模なバッチ評価、そして A/B テストの3機能が揃い、エージェントのパフォーマンス改善サイクルを自動化できる。AgentCore は Runtime・Memory・Identity・Gateway・Code Interpreter・Browser Tool・Observability をフルマネージドで提供しており、開発者はエージェントロジックとビジネスロジックに集中できる。さらに Kiro での AWS Transform 統合も発表され、マイグレーション・モダナイゼーション作業が Kiro プラグインから直接実行可能になった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon OpenSearch Service</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-opensearch-cluster-insights/" target="_blank" rel="noopener">Amazon OpenSearch Service の Cluster Insights が全バージョンに拡大、未使用インデックス検出機能を新たに追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon OpenSearch Service の Cluster Insights 機能が OpenSearch 1.0 以降および Elasticsearch 6.8 以降の全バージョンに拡張された。新たに追加された「Unused Index」インサイトは、過去30日間で検索・インデックス操作が一切なかったインデックスを検出し、コスト最適化のためのウォームまたはコールドストレージへの移行を推奨する。クラスターのヘルスとパフォーマンスに関するリスクを本番影響が出る前に特定・解決できるため、SRE・運用チームの負担軽減につながる。この機能は追加費用なく、Amazon OpenSearch Service が利用可能な全リージョンで利用できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco Catalyst SD-WAN</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/05/15/cisco-sd-wan-zero-day-cve-2026-20182/" target="_blank" rel="noopener">CVE-2026-20182（CVSS 10.0）：Cisco Catalyst SD-WAN 認証バイパスのゼロデイが野放し状態で悪用中、CISA が5月17日までのパッチ適用を命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CVSS スコア 10.0 の最高深刻度を持つ認証バイパス脆弱性 CVE-2026-20182 が Cisco Catalyst SD-WAN Controller および Manager で確認され、未認証のリモート攻撃者がシステムに管理者権限でアクセスできる状態にある。脅威アクター UAT-8616 による積極的なゼロデイ悪用が確認されており、CISA は Known Exploited Vulnerabilities Catalog に追加した上で連邦機関に緊急指令 ED 26-03 のもと2026年5月17日までのパッチ適用を義務付けた。Cisco はパッチをリリース済みだが有効なワークアラウンドが存在しないため、アップデートのみが根本的な解決策となる。オンプレミスおよび SD-WAN Cloud デプロイメントの両方が影響を受けるため、即時対応が必要とされている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft Exchange Server</div>
           <div class="card-badges">
             <span class="impact impact-high">重要度 高</span>
             <span class="card-date">2026-05-15</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://aws.amazon.com/blogs/devops/amazon-q-developer-end-of-support-announcement/" target="_blank" rel="noopener">Amazon Q Developer、5月15日より新規サインアップを停止——後継AIエージェントIDEのKiroへ移行</a></div>
+        <div class="card-title"><a href="https://www.securityweek.com/microsoft-warns-of-exchange-server-zero-day-exploited-in-the-wild/" target="_blank" rel="noopener">CVE-2026-42897（CVSS 8.1）：Microsoft Exchange Server の XSS ゼロデイが実環境で悪用中、パッチ未提供のため緩和策の即時適用を推奨</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">AWSは5月15日より、Amazon Q DeveloperのFree Tierアカウント新規作成とProサブスクリプションの新規申し込みを停止した。後継のKiroはスペック駆動開発（Spec-Driven Development）を採用したAI搭載IDEで、構造化仕様書をもとにコードベース全体を計画・実装・検証する新スタイルを提供する。既存サブスクリプションはユーザー追加を含め引き続き利用可能で、IDEプラグインおよびPro有償プランのサポート終了は2027年4月30日を予定。最新コーディングモデル（Claude Opus 4.7等）はKiroでのみ利用可能となる。</p>
+          <p class="card-desc">CVSS 8.1 の Microsoft Exchange Server（2016 / 2019 / Subscription Edition）に影響するゼロデイ脆弱性 CVE-2026-42897 が発見され、5月12日の Patch Tuesday のわずか2日後に実環境での悪用が確認された。Outlook Web Access で細工されたメールを開くと攻撃者がブラウザコンテキストで任意の JavaScript を実行できる XSS ベースのスプーフィング攻撃が成立する仕組みだ。Microsoft はまだ正式パッチをリリースしておらず、Exchange Emergency Mitigation Service（EEMS）を通じた自動緩和と2つの手動緩和策を公開している。Pwn2Own の研究者が追加の攻撃経路を発見したとの報告もあり、オンプレミス Exchange を運用する管理者は直ちに緩和策を適用し、公式パッチのリリースを注視する必要がある。</p>
         </details>
       </div>
 
-      <!-- Card: EC2 M3 Ultra Mac -->
       <div class="card">
         <div class="card-top">
-          <div class="card-service">Amazon EC2</div>
+          <div class="card-service">Microsoft / Patch Tuesday</div>
           <div class="card-badges">
-            <span class="impact impact-medium">重要度 中</span>
-            <span class="card-date">2026-05-15</span>
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-12</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-ec2-m3-ultra-mac-instances-generally-available/" target="_blank" rel="noopener">Amazon EC2 M3 Ultra Macインスタンスが一般提供開始——256GB統合メモリ搭載でApple開発ワークロードを強化</a></div>
+        <div class="card-title"><a href="https://www.sophos.com/en-us/blog/may-patch-tuesday-hauls-out-132-cves" target="_blank" rel="noopener">Microsoft Patch Tuesday 2026年5月：132件の CVE を修正、うち16件がクリティカル — 上記 Exchange ゼロデイはパッチ未提供</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">AWSはApple M3 Ultra Mac Studioを搭載したEC2インスタンスの一般提供を開始した。28コアCPU・60コアGPU・32コアNeural Engine・256GB統合メモリを備え、前世代のM4 Maxと比較してメモリ2倍・CPUコア1.75倍・GPUコア1.5倍・Neural Engineコア2倍のスペックとなる。iOS・macOS・iPadOS・visionOSなどAppleプラットフォーム向けアプリのビルド・テストに最適化されており、AWS Nitro Systemにより最大10 Gbpsのネットワーク帯域を提供。US East（N. Virginia）とUS West（Oregon）の2リージョンで利用可能。The Registerが5月15日付けで報道。</p>
+          <p class="card-desc">Microsoft は2026年5月の月例セキュリティ更新（Patch Tuesday）で計132件の CVE を修正した。内訳はクリティカル16件、重要102件で、Windows・Office・Azure・.NET・Hyper-V など広範なコンポーネントが対象となっている。今月は Patch Tuesday の直後に Exchange Server のゼロデイ CVE-2026-42897 が公開されており、この脆弱性は今回のパッチに含まれていないため別途対応が必要だ。ベルギーの CCB（サイバーセキュリティセンター）も「直ちにパッチを適用せよ」と企業・政府機関に強く推奨しており、特に Critical 16件については優先的な適用を呼び掛けている。</p>
         </details>
       </div>
 
