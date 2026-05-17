@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 18 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">アクセンチュア / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://newsroom.accenture.jp/jp/news/2026/accenture-and-anthropic-to-drive-enterprise-reinvention-with-ai-in-japan" target="_blank" rel="noopener">アクセンチュア、Anthropicとの日本協業を本格始動——3万人超のClaude専門人材で企業AI変革を支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">アクセンチュアが米Anthropicとの「アクセンチュア Anthropic ビジネスグループ」日本拠点を5月1日より始動させ、5月11日に正式発表・メディア報道が拡大している。全社AI変革の設計・実行、Claude を活用したソフトウェア開発ライフサイクル刷新、基幹システムモダナイゼーション、サイバーセキュリティ変革の4領域を軸に国内大企業を支援する。グローバルで約3万人のClaude専門人材体制を持ち、日本市場でもその展開が加速。国内SIer・コンサル大手のAnthropicを中核に据えたAI競争が激化しており、NEC・Runwayに続く国内AI体制強化の動きとして注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Google I/O 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.trendingtopics.eu/google-i-o-2026-ai-takes-center-stage-with-new-gemini-and-video-generator/" target="_blank" rel="noopener">Google I/O 2026 明日開幕——Gemini 4.0・Gemini Omni（映像生成統合）・Android XRグラスを発表へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">明日5月19日10時（PT）開幕のGoogle I/O 2026キーノートを前に、複数のリーク・プレビュー記事が公開されている。最大の目玉は次世代モデル「Gemini 4.0」で、最大200万トークンのコンテキストウィンドウを搭載しGPT-5.5・Claude Opus 4.7に対抗するとみられる。また「Gemini Omni」はテキスト・画像・動画をひとつのパイプラインで生成・編集できる統合マルチモーダルモデルで、Geminiチャット内から会話形式の動画編集が可能になる見込み。Android XRグラスの実機プレビュー、Androidベースのデスクトップ OS「Aluminium OS」、Veo動画生成の最新版なども予告されており、2026年最大規模のAIイベントとして注目が集まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Gemini Omni</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://imini.com/blogs/gemini-omni-google-io-2026" target="_blank" rel="noopener">Gemini Omni 詳細判明——テキスト・画像・動画をひとつのモデルで生成・リミックス・編集</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google I/O 2026での発表が確実視される「Gemini Omni」の詳細が明らかになりつつある。Geminiのインターフェース内でUIの文字列が発見されたことが発端で、単一のモデルがテキスト生成・画像生成・動画生成を統合的に扱える設計となっている。ユーザーは会話形式で映像のリミックスや編集をリクエストでき、従来のSora（OpenAI）やVeo（Google）といった専用動画生成モデルを統合した次世代の体験を提供する。トップクラスのAIモデルで初となる「テキスト・画像・動画のワンパイプライン」として、AIの創造的活用が一段と広がる転換点となりうる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/amazon-bedrock-introduces-new-advanced-prompt-optimization-and-migration-tool/" target="_blank" rel="noopener">Amazon Bedrock、Advanced Prompt Optimization ツールを一般提供開始——最大5モデルを並行比較しながらプロンプトを自動最適化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon BedrockにAdvanced Prompt Optimizationツールが追加・一般提供された。プロンプトテンプレートとサンプル入力・任意の正解例・評価指標を渡すだけで、最大5つのモデルを並行比較しながらフィードバックループでプロンプトを自動改善する。JPG・PNG・PDF等のマルチモーダル入力に対応し、最終的な出力にはコスト見積もりとレイテンシー比較も含まれる。モデル移行（特にAmazon Nova への乗り換え）時のプロンプト調整コストを大幅に削減できるとされており、東京を含む主要リージョンで即時利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/claude-platform-aws/" target="_blank" rel="noopener">Claude Platform on AWS が一般提供開始——AWSアカウントから直接 Anthropic ネイティブ API・コンソールを利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが「Claude Platform on AWS」の一般提供（GA）を発表した。AWSアカウントを持つ顧客が、別途Anthropicのアカウントを作成することなく、AnthropicのネイティブClaude Platform（API・コンソール・早期アクセスベータ機能）をそのまま利用できる。IAM認証・AWS請求一元化・CloudTrail監査ログが標準統合されており、エンタープライズのガバナンス要件を満たす。東京・ソウルを含む世界17のAWSリージョンで提供開始。AWSがAnthropicに27,500億円超を追加出資した協業関係をさらに深化させた象徴的なサービスで、初の「クラウドアカウント内でAnthropicネイティブ体験が使えるサービス」となった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/agentcore-sao-paulo-region/" target="_blank" rel="noopener">Amazon Bedrock AgentCore、南米（サンパウロ）リージョンで利用開始——リージョン展開をさらに加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">エンタープライズグレードのAIエージェント基盤「Amazon Bedrock AgentCore」が南米（サンパウロ）リージョンで新たに利用可能になった。GovCloud（US-West）への展開に続くもので、世界各地のデータレジデンシー要件・コンプライアンスニーズへの対応を強化している。AgentCoreはエージェントの実行（Executor）・メモリ（Memory）・セッション管理・ガードレールなどのAIエージェントライフサイクルを丸ごと管理するフルマネージドサービスで、ラテンアメリカ向けサービスを展開する企業がローカルリージョンで活用できるようになった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon ElastiCache / Valkey</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/valkey-amazon-elasticache/" target="_blank" rel="noopener">Valkey 9.0 が Amazon ElastiCache で利用可能に——Redis 後継のオープンソースキャッシュが最新版へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon ElastiCacheでValkey 9.0が正式サポートされた。ValkyはRedisのライセンス変更（BSL）を受けてLinux Foundationが主導するオープンソースコミュニティが継続開発しているキャッシュ・データストアで、Redis互換のAPIを維持しながら完全なオープンソースライセンスのもとで提供される。バージョン9.0ではパフォーマンスの改善と安定性向上が行われており、Amazon ElastiCacheでの提供により、Redisからのマイグレーションをマネージドサービス上でシームレスに実施できる。ライセンスコストや制約を避けたい企業にとって重要な選択肢となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon RDS for PostgreSQL</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-rds-postgresql-extended-support/" target="_blank" rel="noopener">Amazon RDS for PostgreSQL、延長サポートマイナーバージョン（11.22 / 12.22 / 13.23-rds）を追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon RDS for PostgreSQLが延長サポート（Extended Support）向けの新マイナーバージョン11.22-rds.20260224、12.22-rds.20260224、13.23-rds.20260224を追加した。メジャーバージョンのコミュニティサポート期限切れ後もセキュリティパッチを継続適用できる延長サポートに、最新のマイナー修正が反映される形だ。アップグレードが難しい既存システムを抱える企業でも、セキュリティを維持しながら移行計画を慎重に進めることができる。PostgreSQL 11・12・13系を継続運用している組織は自動マイナーバージョンアップグレードの設定を確認しておくことが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-18 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
