@@ -5,16 +5,18 @@
 ### 1. 日付確認
 `TZ=Asia/Tokyo date +%Y-%m-%d` コマンドで今日の日付（YYYY-MM-DD）を日本時間（JST）で取得する。サーバーが UTC で動作していても必ず JST の日付を使う。以降の検索クエリにこの日付を使う。
 
-### 2. Web検索（最大7回）
+### 2. Web検索（最大8回）
 以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
+`{YYYY-MM-DD-1}` は前日の日付（例：今日が2026-05-17なら2026-05-16）を表す。
 
-1. `AI new model feature release announcement {YYYY-MM-DD}`
-2. `生成AI LLM アップデート 新機能 今日 {YYYY-MM-DD}`
-3. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
-4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
-5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
-6. `site:nikkei.com OR site:itmedia.co.jp OR site:sbbit.jp AI 導入 発表 {YYYY-MM-DD}`
-7. `セキュリティ 脆弱性 情報流出 サイバー攻撃 {YYYY-MM-DD} site:security-next.com OR site:internet.watch.impress.co.jp`
+1. `AI new model feature release announcement {YYYY-MM-DD} OR {YYYY-MM-DD-1}`
+2. `生成AI LLM アップデート 新機能 {YYYY-MM-DD} OR {YYYY-MM-DD-1}`
+3. `AWS new feature release {YYYY-MM-DD} OR {YYYY-MM-DD-1} site:aws.amazon.com`
+4. `AWS アップデート 新機能 {YYYY-MM-DD} OR {YYYY-MM-DD-1}`
+5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD} OR {YYYY-MM-DD-1}`
+6. `site:nikkei.com OR site:itmedia.co.jp OR site:sbbit.jp AI 導入 発表 {YYYY-MM-DD} OR {YYYY-MM-DD-1}`
+7. `セキュリティ 脆弱性 情報流出 サイバー攻撃 {YYYY-MM-DD} OR {YYYY-MM-DD-1} site:security-next.com OR site:internet.watch.impress.co.jp`
+8. `site:bleepingcomputer.com OR site:thehackernews.com OR site:techcrunch.com AI security CVE {YYYY-MM-DD} OR {YYYY-MM-DD-1}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
