@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWS &amp; セキュリティ</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --orange:#D84315;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.section-security .section-num{color:#fbe9e7}
+.section-security .section-title{color:var(--orange)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.impact-critical{background:var(--orange);color:var(--white)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+.section-security .card-title a:hover{border-bottom-color:var(--orange)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <p class="header-label">hatorih's Daily Tech Report</p>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>&amp; セキュリティ</h1>
+    <p class="header-date">2026 — 05 — 17 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <div class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</div>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/9624314-model-release-notes" target="_blank" rel="noopener">GPT-Realtime-2 リリース、ChatGPT for Excel/Google Sheets がグローバル展開、GPT-5.5 Instant に Gmail・過去会話参照機能を追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは音声対話に特化した新モデル「GPT-Realtime-2」をリリースした。推論中もリアルタイムで会話を維持し、ツール呼び出し・割り込み・修正などの複雑なインタラクションを自然にハンドリングできる。ChatGPT Business ユーザー向けに ChatGPT for Excel および Google Sheets のグローバル提供が開始され、スプレッドシート内サイドバーでの作成・整理・説明などのAI支援が可能になった。GPT-5.5 Instant には過去の会話・ファイル・Gmail を参照してパーソナライズされた回答を返す検索機能が追加され、コンテキスト精度が向上している。これらの機能追加はエンタープライズ向け統合の急速な拡大を示しており、OpenAI の業務浸透戦略が加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-opus-4-7" target="_blank" rel="noopener">Claude Opus 4.7 正式発表：高度なエージェントコーディングと 100 万トークンコンテキストウィンドウを搭載</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic が Claude 最上位モデル「Claude Opus 4.7」を発表した。先代の Opus 4.6 に対して高度なソフトウェアエンジニアリングタスクで大幅な性能向上を達成し、特に難易度の高いタスクでの改善が顕著とされる。最大100万トークンのコンテキストウィンドウを備え、長時間実行エージェントタスクへの対応が強化された。Amazon Bedrock・Google Cloud Vertex AI・Microsoft Foundry など主要クラウドプラットフォームでも利用可能で、Claude の全製品ラインおよび API から利用できる。ビジョン機能も強化され、高解像度画像サポートと精度の向上が図られている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-whats-next-with-aws-2026-amazon-quick-openai-partnership-and-more-may-4-2026/" target="_blank" rel="noopener">Amazon Bedrock に GPT-5.5・GPT-5.4 がプレビュー提供開始、AWS と OpenAI の戦略的提携が拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS と OpenAI が戦略的提携を拡大し、GPT-5.5 および GPT-5.4 を含む最新の OpenAI モデルが Amazon Bedrock でプレビュー利用可能になった。また Codex on Amazon Bedrock と、OpenAI が提供する Amazon Bedrock Managed Agents も同時に発表されている。What's Next with AWS 2026 カンファレンスで明らかにされたこの連携により、開発者は AWS のインフラ上で OpenAI の最先端モデルをシームレスに利用できる。さらに Claude Opus 4.7 も Amazon Bedrock に追加されており、Bedrock はマルチモデル戦略の中核として機能している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://siliconangle.com/2026/04/22/aws-accelerates-ai-agent-development-amazon-bedrock-agentcore/" target="_blank" rel="noopener">Amazon Bedrock AgentCore が推奨提案・バッチ評価・A/B テスト機能を追加、エージェント本番運用を加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCore に新たな最適化機能が追加され、エージェントの observe-evaluate-improve ループが完結するようになった。本番トレースを分析してシステムプロンプトやツール記述の最適化案を提案する Recommendations 機能、大規模なバッチ評価、そして A/B テストの3機能が揃い、エージェントのパフォーマンス改善サイクルを自動化できる。AgentCore は Runtime・Memory・Identity・Gateway・Code Interpreter・Browser Tool・Observability をフルマネージドで提供しており、開発者はエージェントロジックとビジネスロジックに集中できる。さらに Kiro での AWS Transform 統合も発表され、マイグレーション・モダナイゼーション作業が Kiro プラグインから直接実行可能になった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon OpenSearch Service</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-opensearch-cluster-insights/" target="_blank" rel="noopener">Amazon OpenSearch Service の Cluster Insights が全バージョンに拡大、未使用インデックス検出機能を新たに追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon OpenSearch Service の Cluster Insights 機能が OpenSearch 1.0 以降および Elasticsearch 6.8 以降の全バージョンに拡張された。新たに追加された「Unused Index」インサイトは、過去30日間で検索・インデックス操作が一切なかったインデックスを検出し、コスト最適化のためのウォームまたはコールドストレージへの移行を推奨する。クラスターのヘルスとパフォーマンスに関するリスクを本番影響が出る前に特定・解決できるため、SRE・運用チームの負担軽減につながる。この機能は追加費用なく、Amazon OpenSearch Service が利用可能な全リージョンで利用できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco Catalyst SD-WAN</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/05/15/cisco-sd-wan-zero-day-cve-2026-20182/" target="_blank" rel="noopener">CVE-2026-20182（CVSS 10.0）：Cisco Catalyst SD-WAN 認証バイパスのゼロデイが野放し状態で悪用中、CISA が5月17日までのパッチ適用を命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CVSS スコア 10.0 の最高深刻度を持つ認証バイパス脆弱性 CVE-2026-20182 が Cisco Catalyst SD-WAN Controller および Manager で確認され、未認証のリモート攻撃者がシステムに管理者権限でアクセスできる状態にある。脅威アクター UAT-8616 による積極的なゼロデイ悪用が確認されており、CISA は Known Exploited Vulnerabilities Catalog に追加した上で連邦機関に緊急指令 ED 26-03 のもと2026年5月17日までのパッチ適用を義務付けた。Cisco はパッチをリリース済みだが有効なワークアラウンドが存在しないため、アップデートのみが根本的な解決策となる。オンプレミスおよび SD-WAN Cloud デプロイメントの両方が影響を受けるため、即時対応が必要とされている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft Exchange Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/microsoft-warns-of-exchange-server-zero-day-exploited-in-the-wild/" target="_blank" rel="noopener">CVE-2026-42897（CVSS 8.1）：Microsoft Exchange Server の XSS ゼロデイが実環境で悪用中、パッチ未提供のため緩和策の即時適用を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CVSS 8.1 の Microsoft Exchange Server（2016 / 2019 / Subscription Edition）に影響するゼロデイ脆弱性 CVE-2026-42897 が発見され、5月12日の Patch Tuesday のわずか2日後に実環境での悪用が確認された。Outlook Web Access で細工されたメールを開くと攻撃者がブラウザコンテキストで任意の JavaScript を実行できる XSS ベースのスプーフィング攻撃が成立する仕組みだ。Microsoft はまだ正式パッチをリリースしておらず、Exchange Emergency Mitigation Service（EEMS）を通じた自動緩和と2つの手動緩和策を公開している。Pwn2Own の研究者が追加の攻撃経路を発見したとの報告もあり、オンプレミス Exchange を運用する管理者は直ちに緩和策を適用し、公式パッチのリリースを注視する必要がある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Patch Tuesday</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.sophos.com/en-us/blog/may-patch-tuesday-hauls-out-132-cves" target="_blank" rel="noopener">Microsoft Patch Tuesday 2026年5月：132件の CVE を修正、うち16件がクリティカル — 上記 Exchange ゼロデイはパッチ未提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft は2026年5月の月例セキュリティ更新（Patch Tuesday）で計132件の CVE を修正した。内訳はクリティカル16件、重要102件で、Windows・Office・Azure・.NET・Hyper-V など広範なコンポーネントが対象となっている。今月は Patch Tuesday の直後に Exchange Server のゼロデイ CVE-2026-42897 が公開されており、この脆弱性は今回のパッチに含まれていないため別途対応が必要だ。ベルギーの CCB（サイバーセキュリティセンター）も「直ちにパッチを適用せよ」と企業・政府機関に強く推奨しており、特に Critical 16件については優先的な適用を呼び掛けている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih's Daily Tech Report</span>
+    <span>2026-05-17 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+</body>
+</html>
