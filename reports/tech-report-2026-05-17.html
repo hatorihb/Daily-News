@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih_X's DX・AI・AWS Update</title>
+<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWS &amp; セキュリティ</title>
 <style>
 :root{
   --black:#0a0a0a;
   --white:#ffffff;
   --red:#E60012;
+  --orange:#D84315;
   --gray:#f2f2f2;
   --mid:#888;
   --border:#e0e0e0;
@@ -41,6 +42,8 @@ main{padding:0}
 .section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
 .section-domestic .section-num{color:#ffe0e0}
 .section-domestic .section-title{color:var(--red)}
+.section-security .section-num{color:#fbe9e7}
+.section-security .section-title{color:var(--orange)}
 .card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
 .card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
@@ -49,11 +52,13 @@ main{padding:0}
 .impact-high{background:var(--red);color:var(--white)}
 .impact-medium{background:var(--black);color:var(--white)}
 .impact-low{background:var(--gray);color:var(--black)}
+.impact-critical{background:var(--orange);color:var(--white)}
 .card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
 .card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
 .card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
 .card-title a:hover{border-bottom-color:var(--black)}
 .section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+.section-security .card-title a:hover{border-bottom-color:var(--orange)}
 details{margin-top:.75rem}
 summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
 summary::-webkit-details-marker{display:none}
@@ -61,8 +66,9 @@ summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-
 details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
-.no-update{padding:2.5rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
@@ -71,22 +77,21 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 </style>
 </head>
 <body>
-
 <header>
   <div class="container">
-    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-label">hatorih's Daily Tech Report</p>
+    <h1>国内IT・DX<br>AI &amp; AWS<br>&amp; セキュリティ</h1>
     <p class="header-date">2026 — 05 — 17 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
-
 <nav>
   <div class="container">
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
-
 <main>
 
   <!-- 01 国内IT・DX -->
@@ -101,7 +106,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-      <p class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+      <div class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</div>
     </div>
   </section>
 
@@ -141,10 +146,10 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
             <span class="card-date">2026-05-16</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://techcrunch.com/2026/05/16/60b-ai-chip-darling-cerebras-almost-died-early-on-burning-8m-a-month/" target="_blank" rel="noopener">Cerebras、2026年最大のIPOで時価総額約7兆円に到達——初日に89%急騰後、翌日は10%反落</a></div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/05/16/60b-ai-chip-darling-cerebras-almost-died-early-on-burning-8m-a-month/" target="_blank" rel="noopener">Cerebras、2026年最大のIPOで時価総額約7兆円に到達——初日89%急騰後、翌日は10%反落</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">AI 専用チップメーカー Cerebras Systems が 5/14 に $5.5B を調達して IPO を実施し、初日に約89%急騰、時価総額は約7兆円（$70B 超）に達した。Nvidia に次ぐ AI チップ企業として注目を集め、OpenAI や AWS とのパートナーシップが評価された。しかし 5/16 には約10%反落し、短期的な過熱感も指摘されている。同社が開発した「夕食皿大」のウエハースケールチップは、従来比58倍以上の面積を持ち、推論処理の高速化に強みを持つ。</p>
+          <p class="card-desc">AI 専用チップメーカー Cerebras Systems が 5/14 に $5.5B を調達して IPO を実施し、初日に約89%急騰、時価総額は約7兆円（$70B 超）に達した。Nvidia に次ぐ AI チップ企業として注目を集め、OpenAI や AWS とのパートナーシップが評価された。しかし 5/16 には約10%反落し、短期的な過熱感も指摘されている。同社が開発した「夕食皿大」のウエハースケールチップは従来比58倍以上の面積を持ち、推論処理の高速化に強みを持つ。</p>
         </details>
       </div>
 
@@ -162,6 +167,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           <p class="card-desc">Anthropic が Claude Code v2.1.143 をリリースした。主な変更点はプラグイン依存関係の強制実行、コンテキストウィンドウの使用コストをリアルタイムで予測・表示するコンテキストコスト予測機能、PowerShell ツールの操作性改善、バックグラウンドセッションの安定性向上、および複数のバグ修正。2.1 系は 1096 コミット超の大型メジャーリリース（2.1.0）以降、毎日マイナーアップデートが続いており、活発な開発サイクルが維持されている。</p>
         </details>
       </div>
+
     </div>
   </section>
 
@@ -177,18 +183,77 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-      <p class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+      <div class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</div>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco Catalyst SD-WAN</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisco-warns-of-new-critical-sd-wan-flaw-exploited-in-zero-day-attacks/" target="_blank" rel="noopener">CVE-2026-20182（CVSS 10.0）：Cisco Catalyst SD-WAN 認証バイパス——CISA パッチ期限が本日 5/17</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco Catalyst SD-WAN Controller / Manager に存在する認証バイパス脆弱性 CVE-2026-20182（CVSS 10.0）がゼロデイ攻撃で悪用されていることが確認された。未認証のリモート攻撃者が管理者権限を取得できる最大深刻度の脆弱性であり、CISA が連邦機関に対して本日（5月17日）を期限としてパッチ適用を義務付けた。有効なワークアラウンドは存在しないため、Cisco が提供済みのパッチ適用が唯一の対処法となる。SD-WAN を利用する国内企業・組織でも対応状況の確認が急務だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft Exchange Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/microsoft-warns-of-exchange-server-zero-day-exploited-in-the-wild/" target="_blank" rel="noopener">CVE-2026-42897（CVSS 8.1）：Microsoft Exchange Server XSS ゼロデイが実環境で悪用中——パッチ未提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Exchange Server（2016 / 2019 / Subscription Edition）に影響する XSS 起因のスプーフィング脆弱性 CVE-2026-42897 が、5/14 の Patch Tuesday 翌日から実環境での悪用が確認されている。Outlook Web Access で細工されたメールを開くと、攻撃者がブラウザコンテキストで任意の JavaScript を実行できる。本日 5/17 時点で正式パッチは未提供のため、Microsoft が公開している Exchange Emergency Mitigation Service（EEMS）による緩和策の即時適用が推奨される。オンプレミス Exchange を運用する組織は優先的な対応が必要だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Patch Tuesday</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ccb.belgium.be/advisories/warning-microsoft-patch-tuesday-may-2026-patches-118-vulnerabilities-16-critical-102" target="_blank" rel="noopener">Microsoft 5月 Patch Tuesday：118件の脆弱性を修正——Critical 16件・Important 102件、即時適用推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft が 5月の月例セキュリティ更新（Patch Tuesday）を公開し、118件の脆弱性を修正した。うち16件が Critical、102件が Important に分類されており、複数の製品にまたがる広範な対応が必要となっている。上記の Exchange Server ゼロデイ（CVE-2026-42897）はこのサイクルで開示されたが、正式パッチは含まれていない。Windows・Office・Azure 関連の修正が中心であり、企業の IT 管理者は優先度を判断したうえで速やかな適用計画の策定が求められる。</p>
+        </details>
+      </div>
+
     </div>
   </section>
 
 </main>
-
 <footer>
   <div class="container">
-    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span class="footer-brand">hatorih's Daily Tech Report</span>
     <span>2026-05-17 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
   </div>
 </footer>
-
 </body>
 </html>
