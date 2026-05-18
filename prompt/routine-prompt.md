@@ -40,6 +40,12 @@ AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件f
 
 ファイル名: `reports/tech-report-{YYYY-MM-DD}.html`
 
+> ⚠️ **必須チェック：** HTML には必ず以下の **4 セクション**をすべて含めること。1 つでも欠けていたらコミットしてはいけない。
+> 1. `id="domestic"` — 国内 IT・DX
+> 2. `id="ai"` — AI
+> 3. `id="aws"` — AWS
+> 4. `id="security"` — セキュリティ ← **毎回忘れやすい。必ず含めること**
+
 以下のHTMLテンプレートの `{{ }}` 部分を収集した情報で置換してファイルを作成し、`claude/daily-report` ブランチにコミットする。
 
 ```html
