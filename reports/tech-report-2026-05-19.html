@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 19 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <p class="no-update">本日は過去24時間以内に確認できた国内 IT・DX の新規アップデートはありませんでした。</p>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Gemini Intelligence</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.engadget.com/2171038/everything-announced-at-android-show-google-io-2026/" target="_blank" rel="noopener">The Android Show が Gemini Intelligence を発表——Android OS に深く統合されたエージェント AI が夏より展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google は Google I/O 2026 の前哨戦として開催した「The Android Show: I/O 2026 Edition」で、Gemini Intelligence を正式発表した。単なるチャット AI から脱却し、Android OS のシステムレベルに統合されたエージェント型 AIとして動作する。Chrome の自動ブラウズ、スマートフォーム入力、AI 生成ウィジェット、Gboard の Rambler 口述清書機能、メール・カレンダーの文脈を読む Android Auto 返信支援などが含まれる。Samsung および Pixel デバイスへの展開が 2026 年夏より開始予定で、ハードウェアとソフトウェアを一体化した「常にユーザーの一歩先を行く AI」として位置づけられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Googlebooks</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.engadget.com/2171038/everything-announced-at-android-show-google-io-2026/" target="_blank" rel="noopener">Google、新カテゴリ「Googlebooks」を発表——Acer・ASUS・Lenovo が Android 搭載プレミアムノート PC を投入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google は Chromebook に続く新たなハードウェアカテゴリ「Googlebooks」を発表した。Android をベースとしたプレミアムノート PC で、Acer・ASUS・Lenovo などの主要 PC メーカーがパートナーとして参画する。Gemini Intelligence を標準搭載し、Google の AI 機能をラップトップ環境でフル活用できる設計となっている。Chromebook がブラウザ中心の軽量路線を取ったのに対し、Googlebooks は本格的な Android アプリエコシステムと AI 機能を組み合わせた「AI ファースト PC」として、Windows・Mac に対抗する新市場の創出を狙う。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Google I/O 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://io.google/2026/" target="_blank" rel="noopener">Google I/O 2026 メインキーノート本日開幕——Gemini 4.0・Android XR グラス・Aluminium OS を発表へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google の年次開発者カンファレンス「Google I/O 2026」のメインキーノートが 5 月 19 日 10:00 AM PT（日本時間 5 月 20 日 2:00 AM）に開幕する。GPT-5.5・Claude Mythos に対抗する次世代 AI モデル「Gemini 4.0」の発表が最大の注目点で、最大 200 万トークンのコンテキストウィンドウが見込まれている。カメラ・スピーカー・マイクを搭載したディスプレイなし版と、レンズ内ディスプレイで地図・翻訳を表示する 2 種類の Android XR グラス、新型ラップトップ OS「Aluminium OS」、Android 17 も発表予定で、2026 年最大規模の AI イベントとして注目が集まっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon OpenSearch Service</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-opensearch-cluster-insights/" target="_blank" rel="noopener">Amazon OpenSearch Service、Cluster Insights を全バージョンに拡張——OpenSearch 全版・Elasticsearch 6.8 以上で利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon OpenSearch Service の Cluster Insights 機能が、すべての OpenSearch バージョンおよび Elasticsearch 6.8 以上に拡大提供された。クラスターの健全性とパフォーマンスをコンソール上でプロアクティブに可視化できる機能で、これまで一部バージョンに限定されていた制限が撤廃された。インデックスの肥大化、シャード数の超過、ノードの高負荷といった問題をインサイトとして自動検出し、対処方法を提示する。運用担当者がクラスター障害を事前に察知しやすくなり、ダウンタイムリスクの低減に貢献する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Kiro IDE</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://kiro.dev/blog/faster-smarter-specs/" target="_blank" rel="noopener">Kiro IDE、Specs の並列実行・Quick Plan・要件分析エンジンを追加——ニューロシンボリック AI で仕様のバグを事前検出</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS の AI ネイティブ IDE「Kiro」が 3 つの主要アップグレードを発表した。「Parallel Task Execution」は独立したコーディングタスクを並列実行して開発速度を向上させ、「Quick Plan」はスコープが明確な場合に承認ゲートをスキップして要件・設計・タスクを一括生成する。最も注目される「Requirements Analysis」は LLM と自動推論エンジン（SMT ソルバー）を組み合わせたニューロシンボリック AI パイプラインで、曖昧な要件を検証可能な基準に書き換え、矛盾・欠落・未定義動作を一行もコードを書く前に検出する。Amazon Q Developer の後継として Kiro のエンタープライズ採用が加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-19 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
