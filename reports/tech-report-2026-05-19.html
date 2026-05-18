@@ -84,6 +84,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
 
@@ -208,6 +209,38 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         <details>
           <summary>詳細を表示</summary>
           <p class="card-desc">AWS の AI ネイティブ IDE「Kiro」が 3 つの主要アップグレードを発表した。「Parallel Task Execution」は独立したコーディングタスクを並列実行して開発速度を向上させ、「Quick Plan」はスコープが明確な場合に承認ゲートをスキップして要件・設計・タスクを一括生成する。最も注目される「Requirements Analysis」は LLM と自動推論エンジン（SMT ソルバー）を組み合わせたニューロシンボリック AI パイプラインで、曖昧な要件を検証可能な基準に書き換え、矛盾・欠落・未定義動作を一行もコードを書く前に検出する。Amazon Q Developer の後継として Kiro のエンタープライズ採用が加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NGINX / F5</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/05/nginx-cve-2026-42945-exploited-in-wild.html" target="_blank" rel="noopener">NGINX Rift（CVE-2026-42945）が野放しで悪用開始——18 年潜伏の RCE 脆弱性、全 NGINX 管理者は即時パッチを</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">世界最大規模で使われる Web サーバー NGINX に 18 年間潜伏していたヒープバッファオーバーフロー脆弱性（CVE-2026-42945、CVSS 9.2）の悪用が 5 月 16 日から観測されており、5 月 18 日付けで野放し悪用が確認された。細工した HTTP リクエスト 1 件を送るだけでサービス妨害（DoS）を引き起こし、条件次第で未認証リモートコード実行（RCE）にも発展する。影響範囲は NGINX Open Source 0.6.27〜1.30.0 と NGINX Plus R32〜R36。修正版（1.31.0 / 1.30.1）へのアップグレードが唯一の根本対策で、緩和策として rewrite ディレクティブの利用制限も有効。</p>
         </details>
       </div>
 
