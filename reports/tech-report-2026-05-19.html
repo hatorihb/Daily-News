@@ -166,6 +166,36 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </details>
       </div>
 
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude Code</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://github.com/anthropics/claude-code/releases" target="_blank" rel="noopener">Claude Code、Fast Mode を Opus 4.7 にデフォルト更新——バックグラウンドセッション向け新フラグを多数追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Claude Code の Fast Mode がデフォルトで Opus 4.7 を使用するようになった（従来は Opus 4.6）。--add-dir・--settings・--mcp-config・--plugin-dir・--permission-mode・--model・--effort・--dangerously-skip-permissions など、バックグラウンドセッションを細かく設定できる新フラグが追加された。プラグイン機能の改善とデーモンの信頼性向上も含まれており、AI エージェントとして長時間稼働させる際の実用性が大きく向上している。コーディングエージェント用途での Claude Code 採用が加速することが見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://venturebeat.com/technology/anthropic-reinstates-openclaw-and-third-party-agent-usage-on-claude-subscriptions-with-a-catch" target="_blank" rel="noopener">Anthropic、Claude サブスクで第三者エージェント利用を条件付きで再開——OpenClaw も対象に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic は OpenClaw をはじめとする第三者エージェントの Claude サブスクリプションでの利用を再開した。ただし条件が付帯されており、API 経由に限定されるなど制約も存在する。開発者コミュニティとの関係修復に向けた動きとして注目されており、外部エージェントエコシステムの拡大が期待される。具体的な制限事項の詳細は VentureBeat の記事および公式ドキュメントで確認できる。</p>
+        </details>
+      </div>
+
     </div>
   </section>
 
@@ -209,6 +239,36 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         <details>
           <summary>詳細を表示</summary>
           <p class="card-desc">AWS の AI ネイティブ IDE「Kiro」が 3 つの主要アップグレードを発表した。「Parallel Task Execution」は独立したコーディングタスクを並列実行して開発速度を向上させ、「Quick Plan」はスコープが明確な場合に承認ゲートをスキップして要件・設計・タスクを一括生成する。最も注目される「Requirements Analysis」は LLM と自動推論エンジン（SMT ソルバー）を組み合わせたニューロシンボリック AI パイプラインで、曖昧な要件を検証可能な基準に書き換え、矛盾・欠落・未定義動作を一行もコードを書く前に検出する。Amazon Q Developer の後継として Kiro のエンタープライズ採用が加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-transform-at-1-year-claude-platform-on-aws-ec2-m3-ultra-mac-instances-and-more-may-18-2026/" target="_blank" rel="noopener">週刊 AWS（5/18）: AWS Transform 1周年・Claude Platform on AWS・EC2 M3 Ultra Mac インスタンスなど多数</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS 公式週刊まとめ（5 月 18 日付）で、AWS Transform の 1 周年とともに複数の重要アップデートが紹介された。Anthropic Claude Platform が AWS 上で利用可能になり、Apple シリコンの EC2 M3 Ultra Mac インスタンスも新たに提供開始となった。AI・クラウドインフラ両面での急速な進化を示す内容で、AWS のエンタープライズ AI 戦略の加速が見て取れる。各アップデートの詳細は公式ブログで一覧確認できる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EVS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-evs-32-hosts/" target="_blank" rel="noopener">Amazon Elastic VMware Service、1環境あたり最大 32 ホストをサポート——従来比 2 倍に拡張</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Elastic VMware Service（Amazon EVS）が、1 環境あたり最大 32 台の ESXi ホストをサポートするようになった。従来の上限 16 台から 2 倍に拡張され、サービスクォータの引き上げ申請により対応可能となっている。複数環境に分割して管理していたワークロードを 1 環境に集約でき、運用オーバーヘッドの削減が見込まれる。大規模 VMware ワークロードの AWS 移行を検討している企業にとって重要なアップデートとなる。</p>
         </details>
       </div>
 
