@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih's Daily Tech Report | 国内IT・DX &amp; AI &amp; AWS &amp; セキュリティ</title>
+<title>hatorih_X's DX・AI・AWS Update</title>
 <style>
 :root{
   --black:#0a0a0a;
   --white:#ffffff;
   --red:#E60012;
-  --orange:#D84315;
   --gray:#f2f2f2;
   --mid:#888;
   --border:#e0e0e0;
@@ -42,8 +41,6 @@ main{padding:0}
 .section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
 .section-domestic .section-num{color:#ffe0e0}
 .section-domestic .section-title{color:var(--red)}
-.section-security .section-num{color:#fbe9e7}
-.section-security .section-title{color:var(--orange)}
 .card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
 .card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
@@ -52,13 +49,11 @@ main{padding:0}
 .impact-high{background:var(--red);color:var(--white)}
 .impact-medium{background:var(--black);color:var(--white)}
 .impact-low{background:var(--gray);color:var(--black)}
-.impact-critical{background:var(--orange);color:var(--white)}
 .card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
 .card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
 .card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
 .card-title a:hover{border-bottom-color:var(--black)}
 .section-domestic .card-title a:hover{border-bottom-color:var(--red)}
-.section-security .card-title a:hover{border-bottom-color:var(--orange)}
 details{margin-top:.75rem}
 summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
 summary::-webkit-details-marker{display:none}
@@ -66,9 +61,7 @@ summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-
 details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
-.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
-.no-update{padding:2rem 0;font-size:.9rem;color:var(--mid);line-height:1.9}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
@@ -77,21 +70,22 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 </style>
 </head>
 <body>
+
 <header>
   <div class="container">
-    <p class="header-label">hatorih's Daily Tech Report</p>
-    <h1>国内IT・DX<br>AI &amp; AWS<br>&amp; セキュリティ</h1>
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
     <p class="header-date">2026 — 05 — 20 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
+
 <nav>
   <div class="container">
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
-    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
+
 <main>
 
   <!-- 01 国内IT・DX -->
@@ -106,7 +100,52 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
           </div>
         </div>
       </div>
-      <p class="no-update">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">コマースロボティクス</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000045.000087427.html" target="_blank" rel="noopener">顧客伴走型オフショアAI開発サービス「Global AI Lab」提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">株式会社コマースロボティクスは2026年5月11日より、企業向けAI開発支援サービス「Global AI Lab（グローバルAIラボ）」の提供を開始した。オフショア開発のコスト優位性と国内水準の品質を両立する顧客伴走型のサービスで、企業がAI活用を内製化する際の技術・体制面のギャップを補う。AIエンジニアの採用が困難な中小・中堅企業においても、高品質なAI開発を実現できる環境を提供することを目指している。専任のAIエンジニアがプロジェクト初期から参画し、要件定義から実装・運用まで一貫してサポートする体制を整備している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTデータ経営研究所</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nttdata-strategy.com/newsrelease/260507/" target="_blank" rel="noopener">金融機関向けAI導入コンサルティングサービス（全18サービス）提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTデータ経営研究所は2026年5月7日より、金融機関向けの「金融機関向けAI導入コンサルティングサービス」として全18サービスの提供を開始した。金融規制対応とAIガバナンスに精通したコンサルタントが設計したサービス群で、銀行・証券・保険など業態ごとの特性に合わせたAI活用を支援する。リスク管理・コンプライアンス対応・業務効率化など多様なユースケースをカバーし、規制環境が厳しい金融業界でのAI実装を安全・確実に推進する体制を整えている。AI導入戦略の策定からPoC実施・本番展開・効果測定まで一気通貫のコンサルティングを提供する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本政府・関西経済連合会</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-上旬</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://wa2.ai/ai-news/ai-jinko-chino-kihon-keikaku-2026-kakugikettei-dx-gabanansu-senryaku" target="_blank" rel="noopener">人工知能基本計画2026閣議決定——企業DXへの影響と関西DX戦略Nextが連動</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本政府が閣議決定した「人工知能基本計画2026」が企業のDX推進に大きな影響を与えている。計画ではAIガバナンスの整備、責任あるAI利用の促進、産業横断的なデータ基盤構築が柱となっており、国内企業に対してAI活用の「実装段階」への移行を促している。これと連動する形で、公益社団法人関西経済連合会は「関西DX戦略Next」を公表し、AIエージェントを活用した業務自動化や産官学連携によるデータ活用促進を新方針として掲げた。生成AIが「ツール」から「エージェント（任せる存在）」へと役割を変える中、企業には利用ルール・リスク評価・責任分界の整備が急務となっている。</p>
+        </details>
+      </div>
+
     </div>
   </section>
 
@@ -125,31 +164,61 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">Google / Gemini API</div>
+          <div class="card-service">Google DeepMind</div>
           <div class="card-badges">
             <span class="impact impact-high">重要度 高</span>
             <span class="card-date">2026-05-20</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini 2.5 Flash preview-05-20 リリース——価格対性能比を最適化した Adaptive Thinking 搭載の最新プレビュー</a></div>
+        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini 2.5 Flash Preview 05-20 リリース——価格性能比最適化・アダプティブ思考機能搭載</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">Google が Google I/O 2026 に合わせ、Gemini API に <code>gemini-2.5-flash-preview-05-20</code> を公開した。価格対性能比の最適化と Adaptive Thinking（タスクの複雑さに応じて推論の深さを自動調整する機能）を主軸に設計されており、前プレビュー版より応答コストを抑えながら思考精度を向上させている。Gemini API および AI Studio から即日利用可能で、同日リリースの TTS モデルや Live API 向け音声モデルとともに Gemini 2.5 ファミリーの充実を図る大型アップデートとなっている。</p>
+          <p class="card-desc">Googleは2026年5月20日、Gemini 2.5 Flash の最新プレビューモデル「gemini-2.5-flash-preview-05-20」をリリースした。価格性能比の最適化とアダプティブ思考（Adaptive Thinking）機能を特長とし、コスト効率の高い推論を実現している。また、思考サマリー（Thought Summaries）が Gemini 2.5 Pro および 2.5 Flash の実験的機能として同日提供開始された。Gemini Live API ではネイティブ音声の音質が向上し、24言語で30種類のHDボイスが利用可能になった。モデルはGemini API および Vertex AI Studio の両環境で即日利用できる。</p>
         </details>
       </div>
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">Google / Gemini API</div>
+          <div class="card-service">Google DeepMind</div>
           <div class="card-badges">
-            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-medium">重要度 中</span>
             <span class="card-date">2026-05-20</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini 2.5 TTS・Lyria Realtime・Gemma 3n を同日リリース——音声生成・リアルタイム音楽・軽量マルチモーダルを一挙公開</a></div>
+        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini 2.5 Pro / Flash TTS モデルリリース——2話者対応の音声合成とリアルタイム音楽生成が利用可能に</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">Google は Gemini API に音声関連モデルを集中投入した。<code>gemini-2.5-pro-preview-tts</code> / <code>gemini-2.5-flash-preview-tts</code> は 1〜2 話者の自然な音声を生成するテキスト読み上げモデルで、感情・速度・話者スタイルの制御が可能。<code>lyria-realtime-exp</code> はリアルタイムで音楽を生成する実験モデル。さらに Live API 向けに <code>gemini-2.5-flash-preview-native-audio-dialog</code> も追加された。加えてオープンウェイト小型モデル <code>gemma-3n-e4b-it</code> のプレビューも公開されており、モバイル・エッジデバイス向けの軽量マルチモーダル推論を想定している。</p>
+          <p class="card-desc">Googleは同日、「gemini-2.5-pro-preview-tts」および「gemini-2.5-flash-preview-tts」の2つのText-to-Speech特化モデルを公開した。1人または2人の話者による自然な音声を生成できる機能を備えており、ポッドキャスト・ナレーション・対話型アプリなど多様なユースケースに対応する。価格効率を意識した設計で低コストの高品質音声コンテンツ生成が可能になった。あわせてリアルタイム音楽生成モデル「lyria-realtime-exp」も公開され、インタラクティブな音楽体験の開発基盤が整備された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-中旬</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener">GPT-5.5 Instant が ChatGPT の新デフォルトモデルに——エージェント機能がコア標準化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは GPT-5.5 Instant を ChatGPT の新たなデフォルトモデルに昇格させた。同モデルはエージェント機能をコアに組み込んでおり、ツール利用・長期タスク実行・外部サービス連携が標準機能として提供される。GPT-5.5、Claude Opus 4.6、Gemini 3.1 Ultra と主要3社のフロンティアモデルすべてがエージェント機能を中核として搭載する時代に突入し、AIの「使い方」が根本から変わるターニングポイントとなっている。全ChatGPTユーザーが追加設定なしにエージェント機能を利用できるようになった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-中旬</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://releasebot.io/updates/anthropic/claude" target="_blank" rel="noopener">Anthropic、NLA（Natural Language Activation）手法を発表——LLMの内部状態を自然言語で可視化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは新手法「NLA（Natural Language Activation）」を発表し、LLMの活性化値を自然言語に変換することでClaudeの内部状態を可視化できるようにした。この技術により、モデルがどのような「思考プロセス」を経て回答を生成しているかを人間が読める形で確認できるようになる。安全性監査・バイアス検出・ハルシネーション分析などへの応用が期待されており、AIの解釈可能性（Interpretability）研究の重要な前進として注目されている。エンタープライズ向けのAIガバナンス整備にも直接活用できる技術として、規制対応を検討している企業からの関心が高い。</p>
         </details>
       </div>
 
@@ -171,77 +240,61 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">Amazon EC2</div>
+          <div class="card-service">AWS / Anthropic</div>
           <div class="card-badges">
             <span class="impact impact-high">重要度 高</span>
-            <span class="card-date">2026-05-20</span>
+            <span class="card-date">2026-05-11</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/category/post-types/announcements/" target="_blank" rel="noopener">Amazon EC2 M8in / M8ib インスタンスが GA——第 6 世代 Intel Xeon で前世代比最大 43% 高速、東京リージョン含む主要 4 リージョンで提供開始</a></div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/claude-platform-aws/" target="_blank" rel="noopener">Claude Platform on AWS が一般提供開始——AWSアカウント経由でAnthropicネイティブ環境を利用可能に</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">Amazon EC2 の M8in および M8ib インスタンスが一般提供（GA）となった。カスタム第 6 世代 Intel Xeon Scalable プロセッサと第 6 世代 AWS Nitro カードを搭載し、前世代の M6in / M6ib と比較して最大 43% の性能向上を実現する。M8in は最大 600 Gbps のネットワーク帯域、M8ib は最大 300 Gbps の EBS 帯域を提供し、高スループットのネットワーク集約型ワークロードに最適。米国東部（バージニア北部）、米国西部（オレゴン）、アジアパシフィック（東京）、欧州（スペイン）の 4 リージョンで即時利用可能。</p>
+          <p class="card-desc">AWSとAnthropicは2026年5月11日、「Claude Platform on AWS」の一般提供（GA）を発表した。既存のAWSアカウントから直接Anthropicのネイティブ環境（API・コンソール・ベータ機能）にアクセスできる初のクラウドサービスで、別途Anthropicアカウントの管理や個別課金が不要になる。マネージドエージェント・コード実行・Web検索・プロンプトキャッシュ・Citations・バッチ処理・Skills・MCPコネクターなどClaude APIのフル機能セットが利用可能。認証はAWS IAM、監査ログはCloudTrail、請求はAWS標準インボイスで統一管理でき、東京リージョンを含む全17リージョンで展開している。</p>
         </details>
       </div>
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">Amazon EC2</div>
+          <div class="card-service">Amazon EVS</div>
           <div class="card-badges">
             <span class="impact impact-medium">重要度 中</span>
-            <span class="card-date">2026-05-20</span>
+            <span class="card-date">2026-05-18</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/category/post-types/announcements/" target="_blank" rel="noopener">Amazon EC2 R8in / R8ib インスタンスが GA——SAP HANA・大規模インメモリ DB 向けメモリ最適化インスタンスが 600 Gbps ネットワークで登場</a></div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-evs-32-hosts/" target="_blank" rel="noopener">Amazon EVS が1環境あたり最大32ホストをサポート——従来比2倍のVMware規模に対応</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">メモリ最適化インスタンス R8in / R8ib も同日 GA となった。M8 系と同じ第 6 世代 Intel Xeon Scalable プロセッサおよび Nitro カードを採用し、600 Gbps ネットワーク帯域・300 Gbps EBS 帯域を提供する。SAP HANA・大規模商用データベース・データレイク・インメモリデータベースなど、メモリ集約型かつネットワーク I/O が激しいワークロードに最適化されている。インメモリ処理の高速化と移行コスト削減を求める企業にとって有力な選択肢となる。</p>
-        </details>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- 04 セキュリティ -->
-  <section class="section section-security" id="security">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-num">04</div>
-        <div>
-          <div class="section-title">
-            <span>Cybersecurity</span>
-            セキュリティ<br>重大トピック
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-top">
-          <div class="card-service">Microsoft Windows</div>
-          <div class="card-badges">
-            <span class="impact impact-critical">緊急</span>
-            <span class="card-date">2026-05-19</span>
-          </div>
-        </div>
-        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/windows-bitlocker-zero-day-gives-access-to-protected-drives-poc-released/" target="_blank" rel="noopener">Windows BitLocker ゼロデイ（YellowKey / GreenPlasma）の PoC が公開——未パッチのまま暗号化ドライブへのアクセスと権限昇格が可能に</a></div>
-        <details>
-          <summary>詳細を表示</summary>
-          <p class="card-desc">セキュリティ研究者が、未修正の Windows 脆弱性 2 件に対する概念実証（PoC）エクスプロイトを公開した。「YellowKey」は BitLocker の暗号化保護をバイパスして保護ドライブの内容にアクセスできる脆弱性で、「GreenPlasma」はローカル権限昇格が可能な脆弱性。いずれも Microsoft への報告済みであるが現時点でパッチは未リリース。PoC 公開により実際の攻撃への転用リスクが高まっており、マイクロソフトの次回セキュリティ更新まで緩和策（BitLocker ネットワーク解錠の無効化等）の適用が推奨される。</p>
+          <p class="card-desc">Amazon Elastic VMware Service（Amazon EVS）は2026年5月18日、1つの環境あたりの ESXi ホスト数の上限を従来の16から32へと倍増させた。サービスクォータの引き上げ申請を行うことで、大規模VMwareワークロードを単一環境で集約管理できるようになり、複数環境への分割運用が不要になる。大企業のオンプレミスVMwareクラスターをAWSに移行する際の制約が大幅に緩和され、運用オーバーヘッドの削減につながる。既存環境にも適用可能なアップデートであり、クォータ申請により現在の利用ユーザーも恩恵を受けられる。</p>
         </details>
       </div>
 
       <div class="card">
         <div class="card-top">
-          <div class="card-service">MongoDB / CISA</div>
+          <div class="card-service">AWS Transform</div>
           <div class="card-badges">
             <span class="impact impact-high">重要度 高</span>
-            <span class="card-date">2026-05-19</span>
+            <span class="card-date">2026-05-11</span>
           </div>
         </div>
-        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-orders-federal-agencies-to-patch-mongobleed-flaw-actively-exploited-in-attacks/" target="_blank" rel="noopener">CISA、MongoBleed 脆弱性を KEV カタログに追加——連邦機関に期限付きパッチ適用を命令、実攻撃での悪用を確認</a></div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/aws-transform-containerization/" target="_blank" rel="noopener">AWS Transform にコンテナ化機能追加——AIエージェントがソースコードをECS/EKS向けに自動変換</a></div>
         <details>
           <summary>詳細を表示</summary>
-          <p class="card-desc">米 CISA が MongoDB に関連する「MongoBleed」脆弱性を既知悪用脆弱性（KEV）カタログへ追加し、連邦機関に対して期限内のパッチ適用を義務付けた。実際の攻撃での悪用が確認されており、広く使われるデータベースミドルウェアを狙うサプライチェーン的な攻撃への発展も懸念される。民間企業も MongoDB を使用している場合は最新バージョンへのアップデートと認証設定の見直しを早急に実施することが推奨される。</p>
+          <p class="card-desc">AWS Transformは2026年5月11日、移行プロセス中にアプリケーションをコンテナへリプラットフォームする機能を追加した。エージェント型AIがソースコードを自動解析してDockerイメージを生成し、Amazon ECRへのプッシュ、ECSまたはEKSへのデプロイまでを一連の流れで自動化する。GitHub・Bitbucket・GitLab・.zipファイルを入力ソースとして利用でき、オンプレミスからクラウドネイティブへの移行と近代化を並行して進めることが可能になった。これによりAWS Transformは「リフト＆シフト」に加え「コンテナ化モダナイゼーション」をサポートする包括的な移行ツールへと進化した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/agent-toolkit/" target="_blank" rel="noopener">Agent Toolkit for AWS 一般提供開始——AIコーディングエージェントのAWS実装を安全・低コストに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年5月6日、AIコーディングエージェント（GitHub Copilot・Cursor・Amazon Q Developer等）がAWS上でのビルドを効率的かつ安全に行えるよう支援する本番対応ツールスイート「Agent Toolkit for AWS」を一般提供した。エラー削減・トークンコスト低減・エンタープライズグレードのセキュリティ制御の3点を主要価値として訴求している。AIエージェントがIAM・S3・Lambda・CloudFormationなどのAWSリソースを操作する際のベストプラクティスとガイダンスを体系化しており、セキュリティポリシーの自動適用も可能。AIエージェントによるクラウドインフラ構築が本格化する中、安全なエージェント運用の基盤として注目されている。</p>
         </details>
       </div>
 
@@ -249,11 +302,13 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
   </section>
 
 </main>
+
 <footer>
   <div class="container">
-    <span class="footer-brand">hatorih's Daily Tech Report</span>
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
     <span>2026-05-20 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
   </div>
 </footer>
+
 </body>
 </html>
