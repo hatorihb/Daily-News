@@ -9,6 +9,7 @@
   --black:#0a0a0a;
   --white:#ffffff;
   --red:#E60012;
+  --orange:#D84315;
   --gray:#f2f2f2;
   --mid:#888;
   --border:#e0e0e0;
@@ -41,6 +42,8 @@ main{padding:0}
 .section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
 .section-domestic .section-num{color:#ffe0e0}
 .section-domestic .section-title{color:var(--red)}
+.section-security .section-num{color:#fbe9e7}
+.section-security .section-title{color:var(--orange)}
 .card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
 .card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
@@ -49,6 +52,7 @@ main{padding:0}
 .impact-high{background:var(--red);color:var(--white)}
 .impact-medium{background:var(--black);color:var(--white)}
 .impact-low{background:var(--gray);color:var(--black)}
+.impact-critical{background:var(--orange);color:var(--white)}
 .card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
 .card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
 .card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
@@ -61,6 +65,8 @@ summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-
 details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.section-security summary:hover{color:var(--orange);border-color:var(--orange)}
+.section-security .card-title a:hover{border-bottom-color:var(--orange)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
@@ -83,6 +89,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
 
@@ -250,6 +257,53 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         <details>
           <summary>詳細を表示</summary>
           <p class="card-desc">AWSは「AWS Interconnect」のマルチクラウド接続対象を拡大し、Google Cloudとの接続が一般提供（GA）に移行、Oracle Cloud Infrastructure（OCI）はプレビュー、Microsoft Azureは2026年後半に対応予定と発表した。AWS Interconnect はパブリックインターネットを経由せず、冗長性・スケーラビリティを備えたプライベート接続を迅速にプロビジョニングできるサービス。マルチクラウド戦略を採用する企業がAWSから他クラウドのサービスを低遅延・高セキュリティで利用できる基盤が整い、ベンダーロックイン回避を求める需要に応える形となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>重大トピック
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft Defender</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/05/21/microsoft-defender-vulnerabilities-cve-2026-41091-cve-2026-45498/" target="_blank" rel="noopener">Microsoft Defender のゼロデイ2件（CVE-2026-41091・CVE-2026-45498）が野放し悪用——CISAがKEVカタログへ追加、連邦機関の対応期限は6月3日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft Defender に存在する2つのゼロデイ脆弱性が実環境での悪用を確認され、CISAが2026年5月20日にKnown Exploited Vulnerabilities（KEV）カタログへ追加した。CVE-2026-41091（CVSS 7.8）はMalware Protection EngineがリンクをSYSTEM権限昇格に悪用される欠陥、CVE-2026-45498 はDefenderをDoS状態に陥らせ検出機能を無効化できる欠陥。修正済みバージョン（Engine v1.1.26040.8 / Platform 4.18.26040.7）への更新が唯一の対策で、米国連邦機関は6月3日までの適用が義務付けられた。エンドポイント防御の要であるDefenderが無効化されることで、他の攻撃の踏み台になるリスクが特に高い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco Secure Workload</div>
+          <div class="card-badges">
+            <span class="impact impact-critical">緊急</span>
+            <span class="card-date">2026-05-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/05/cisco-patches-cvss-100-secure-workload.html" target="_blank" rel="noopener">Cisco Secure Workload に CVSS 10.0 の最大深刻度脆弱性（CVE-2026-20223）——未認証でサイト管理者権限を取得可能、SaaS・オンプレ双方に影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Ciscoは2026年5月20日、Cisco Secure Workload の REST APIエンドポイントに認証バイパスの脆弱性（CVE-2026-20223、CVSS 10.0）が存在すると発表した。攻撃者は細工したHTTPリクエストを内部 REST API に送信するだけで認証を完全に迂回し、サイト管理者（Site Admin）権限を即座に取得できる。SaaS版・オンプレミス版の両バージョンが影響を受け、テナント間のデータアクセス・設定変更・ネットワーク制御ポリシーの改ざんが可能となる。回避策は存在せず、バージョン 3.10.8.3 または 4.0.3.17 以降への即時アップグレードが唯一の対策。</p>
         </details>
       </div>
 
