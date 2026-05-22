@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 22 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">サークレイス</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/yasuhitoo/n/n11872f68d463" target="_blank" rel="noopener">サークレイス、社内AIエージェント社員「CDX-one」の採用を発表——業務プロセスへの常駐型AIエージェント実装が本格化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">クラウドサービス導入支援を行うサークレイスが、社内業務を担うAIエージェント社員「CDX-one」の採用を発表した。CDX-oneは社内申請処理・情報検索・レポート生成などの定型業務を自律的に実行するエージェントとして設計されており、従業員の補助ではなく独立した業務実行者として機能する点が特徴。国内でのAIエージェントの「社員化」という新しいコンセプトが実運用フェーズに移行しつつある先進事例として注目されている。AIエージェントを業務単位で組み込む取り組みが日本のSaaS企業でも急速に広がっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Legal Node</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/yasuhitoo/n/n11872f68d463" target="_blank" rel="noopener">Legal Node、M&amp;A法務デューデリジェンス特化AIエージェント「LegalNode AI M&amp;A System」β版を6月中旬に20社限定で無償提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">リーガルテックスタートアップの Legal Node が、M&amp;A法務デューデリジェンス（DD）に特化したAIエージェント基盤「LegalNode AI M&amp;A System」のβ版を2026年6月中旬に20社限定で無償提供すると発表した。同システムは契約書・開示書類の自動分析からリスク項目の洗い出し、DDレポートの生成まで一連のプロセスをエンドツーエンドで処理する。法務DDに通常要する数週間の工数を大幅に短縮できるとしており、上場企業のM&amp;A担当部門や大手法律事務所向けの本格展開を予定している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.infoq.com/news/2026/05/code-with-claude/" target="_blank" rel="noopener">Anthropic「Code with Claude 2026」でManaged Agents・Dreaming・Capability Curveを発表——長時間自律稼働エージェントが本番運用へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年5月20〜21日にロンドンで開催した開発者イベント「Code with Claude 2026」で、Claude の新エージェント機能群を発表した。Managed Agents はバックグラウンドで長時間稼働する「Dreaming」機能、マルチエージェント協調、成果報酬型課金の「Outcomes」、非同期通知の「Webhooks」を備え、本番環境での自律エージェント運用を実現する。Capability Curve は Claude の能力と安全性のトレードオフをリアルタイムに可視化するダッシュボードで、企業の責任あるAI活用を支援する。ユーザーの行動を先読みしてタスクを先行実行するプロアクティブワークフロー機能も追加された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / KPMG</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news" target="_blank" rel="noopener">KPMG、Anthropicと戦略的提携——世界27.6万人の全従業員業務にClaudeを統合、大手会計・コンサルのAI全社展開が加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">KPMGは2026年5月19日、Anthropicとの戦略的提携を発表し、世界27.6万人超の全従業員業務にClaude AIを統合すると表明した。監査・税務・コンサルティング領域での業務効率化に加え、クライアントへの高度な分析・洞察の提供にも活用する計画。同週にはPwCのClaude拡大提携も発表されており、大手会計・コンサルファームによるAI全社展開が相次いでいる。エンタープライズ向けAI採用が組織の中核業務にまで浸透している段階へ移行しつつある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / ChatGPT</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener">OpenAI、GPT-5.5 InstantをChatGPTデフォルトモデルに移行——Codexエージェントのモバイルアプリ追加とC2PA準拠の出所検証ツールも同時発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIはGPT-5.5 Instantを全ユーザー向けChatGPTのデフォルトモデルへ移行し、応答速度と精度を両立した最新世代への切り替えを完了した。同時にコーディングエージェントのCodexをChatGPTモバイルアプリにプレビュー追加し、スマートフォンからコードのレビュー・コマンド承認・進行中タスクへの接続が可能になった。画像生成分野ではC2PA準拠・SynthIDウォーターマーキングを導入し、AI生成コンテンツの出所を検証する公開ツール（プレビュー）も公開。ChatGPT Businessにはより高度なCodexワークフローと管理者向けの採用率分析ダッシュボードも追加された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-transform-at-1-year-claude-platform-on-aws-ec2-m3-ultra-mac-instances-and-more-may-18-2026/" target="_blank" rel="noopener">Claude Platform on AWS：AWSアカウントから直接 Anthropic の API・コンソール・ベータ機能に統合アクセス可能に——別アカウント不要で一元管理</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAnthropicとの提携強化の一環として、既存のAWSアカウントから直接 Anthropic のネイティブプラットフォーム（Claude API・開発者コンソール・アーリーアクセスベータ機能）を利用できる「Claude Platform on AWS」を発表した。別途 Anthropic アカウントの作成・個別請求管理・利用追跡が不要となり、IAM認証や AWS Organizations によるガバナンスの下で一元管理が可能。Claude の利用分を AWS クラウドコミットメントに充当することもでき、エンタープライズ顧客の運用コスト削減と管理負荷の軽減に直結する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EC2</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-transform-at-1-year-claude-platform-on-aws-ec2-m3-ultra-mac-instances-and-more-may-18-2026/" target="_blank" rel="noopener">Amazon EC2 M3 Ultra Mac インスタンス発表——Apple M3 Ultra 搭載・28コアCPU・256GB統合メモリ、前世代比2倍のメモリ容量でAI・グラフィック処理を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはApple M3 Ultra Mac Studioをベースにした新インスタンス「Amazon EC2 M3 Ultra Mac」を発表した。28コアCPU・60コアGPU・32コアNeural Engineと256GBの統合メモリを搭載し、EC2 M4 Max Macインスタンスと比較してメモリ2倍・CPUコア1.75倍・GPUコア1.5倍・Neural Engineコア2倍を実現する。macOSネイティブ開発・Core ML推論・GPU集約型の映像・グラフィック処理・大規模アプリのビルドキャッシュ用途での活用が期待される。開発者がクラウド上でAppleシリコンの最大パフォーマンスを引き出せる環境が整った。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Interconnect</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-transform-at-1-year-claude-platform-on-aws-ec2-m3-ultra-mac-instances-and-more-may-18-2026/" target="_blank" rel="noopener">AWS Interconnect でマルチクラウド・プライベート接続が拡大——Google Cloud が GA、OCI プレビュー、Azure は2026年後半対応予定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは「AWS Interconnect」のマルチクラウド接続対象を拡大し、Google Cloudとの接続が一般提供（GA）に移行、Oracle Cloud Infrastructure（OCI）はプレビュー、Microsoft Azureは2026年後半に対応予定と発表した。AWS Interconnect はパブリックインターネットを経由せず、冗長性・スケーラビリティを備えたプライベート接続を迅速にプロビジョニングできるサービス。マルチクラウド戦略を採用する企業がAWSから他クラウドのサービスを低遅延・高セキュリティで利用できる基盤が整い、ベンダーロックイン回避を求める需要に応える形となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-22 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
