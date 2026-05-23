@@ -19,6 +19,11 @@
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
+国内IT・DX情報は以下のソースを優先的にfetchする：
+- ITmedia NEWS（https://www.itmedia.co.jp/news/）
+- 日経クロステック（https://xtech.nikkei.com/）
+- @IT（https://atmarkit.itmedia.co.jp/）
+- ZDNet Japan（https://japan.zdnet.com/）
 セキュリティ情報は以下のソースを優先的にfetchする：
 - ITmedia NEWS（https://www.itmedia.co.jp/news/）
 - Security NEXT（https://www.security-next.com/）
