@@ -16,6 +16,8 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 ## Generation rules
 
 - **One report per day**. Do not overwrite a previous day's file.
+- Reports have **4 sections**: 01 国内IT・DX / 02 AI / 03 AWS / 04 セキュリティ. All 4 must be present in every report.
+- The search query list in `prompt/routine-prompt.md` includes a cybersecurity query — do not skip it.
 - Cite sources with real working URLs. Broken links erode trust. If a URL is critical, sanity-check it before pasting.
 - Do not paste raw API responses or request IDs into the report. Summarize, don't dump.
 - Keep the HTML self-contained: inline CSS, no external JS dependencies. The report should render correctly when shared as a single file.
@@ -26,6 +28,7 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 - Push to a `claude/**` branch. The `auto-merge-report.yml` workflow handles syncing to `main`.
 - **Never push directly to `main`**. The tweet workflow fires on merge, so accidental main commits become public.
 - After your push, check the Actions tab to confirm the workflow succeeded. If the auto-merge silently no-ops, the filename probably doesn't match.
+- **Non-report changes** (prompt, hooks, CLAUDE.md, index.html) are NOT synced by auto-merge. Open a separate PR to merge them to main.
 
 ## Prompts (`prompt/`)
 

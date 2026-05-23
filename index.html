@@ -31,6 +31,7 @@ header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
 .header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
 h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1rem}
 .header-sub{font-size:.85rem;color:#888;letter-spacing:.05em}
+.header-date{font-size:2.5rem;font-weight:900;color:var(--white);letter-spacing:-.02em;margin-top:.75rem;line-height:1}
 main{flex:1;padding:3rem 0}
 .section-label{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:2rem;padding-bottom:.75rem;border-bottom:2px solid var(--black)}
 .report-list{list-style:none}
@@ -89,6 +90,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <p class="header-label">hatorih's Daily Tech Report</p>
     <h1>国内IT・DX<br>AI &amp; AWS<br>アップデート</h1>
     <p class="header-sub">過去24時間の国内IT・DX・AI・AWSアップデートを毎朝自動収集</p>
+    <p class="header-date" id="header-date"></p>
   </div>
 </header>
 
@@ -128,6 +130,14 @@ fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
     if (reports.length === 0) {
       list.innerHTML = '<li class="empty">レポートはまだありません。</li>';
       return;
+    }
+
+    // 最新レポートの日付をヘッダーに表示
+    const latestDate = (reports[0].name.match(/(\d{4}-(\d{2})-(\d{2}))/) || []);
+    if (latestDate[2] && latestDate[3]) {
+      const m = parseInt(latestDate[2]);
+      const d = parseInt(latestDate[3]);
+      document.getElementById('header-date').textContent = `${m}/${d}`;
     }
 
     list.innerHTML = '';
