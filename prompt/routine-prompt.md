@@ -5,7 +5,7 @@
 ### 1. 日付確認
 `date` コマンドで今日の日付（YYYY-MM-DD）を取得する。以降の検索クエリにこの日付を使う。
 
-### 2. Web検索（最大5回）
+### 2. Web検索（最大6回）
 以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
 
 1. `AI new model feature release announcement {YYYY-MM-DD}`
@@ -13,6 +13,7 @@
 3. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
 4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
 5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
+6. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
@@ -115,6 +116,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
 
@@ -180,6 +182,22 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </div>
       </div>
       <!-- AWSカードをここに繰り返し挿入 -->
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+      <!-- セキュリティカードをここに繰り返し挿入（アップデートなし時は empty-note を使用） -->
     </div>
   </section>
 
