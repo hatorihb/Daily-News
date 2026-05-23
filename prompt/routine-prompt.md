@@ -5,7 +5,7 @@
 ### 1. 日付確認
 `date` コマンドで今日の日付（YYYY-MM-DD）を取得する。以降の検索クエリにこの日付を使う。
 
-### 2. Web検索（最大5回）
+### 2. Web検索（最大8回）
 以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
 
 1. `AI new model feature release announcement {YYYY-MM-DD}`
@@ -13,9 +13,21 @@
 3. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
 4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
 5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
+6. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
+7. `セキュリティ 不正アクセス 脆弱性 インシデント {YYYY-MM-DD}`
+8. `情報漏洩 サイバー攻撃 ランサムウェア 標的型攻撃 {YYYY-MM-DD}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
+国内IT・DX情報は以下のソースを優先的にfetchする：
+- ITmedia NEWS（https://www.itmedia.co.jp/news/）
+- 日経クロステック（https://xtech.nikkei.com/）
+- @IT（https://atmarkit.itmedia.co.jp/）
+- ZDNet Japan（https://japan.zdnet.com/）
+セキュリティ情報は以下のソースを優先的にfetchする：
+- ITmedia NEWS（https://www.itmedia.co.jp/news/）
+- Security NEXT（https://www.security-next.com/）
+- 日本のCERT/CC（https://jvndb.jvn.jp/）
 
 **除外ルール：**
 - 公開日が24時間以上前の記事は掲載しない
@@ -94,6 +106,7 @@ details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
 summary:hover{color:var(--black);border-color:var(--black)}
 .section-domestic summary:hover{color:var(--red);border-color:var(--red)}
 .card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
@@ -115,6 +128,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
     <a class="nav-link" href="#ai">02 &nbsp; AI</a>
     <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
   </div>
 </nav>
 
@@ -148,6 +162,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </details>
       </div>
       -->
+      <!-- アップデートなし時: <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p> -->
     </div>
   </section>
 
@@ -164,6 +179,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </div>
       </div>
       <!-- AIカードをここに繰り返し挿入（card-title a:hoverは黒） -->
+      <!-- アップデートなし時: <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p> -->
     </div>
   </section>
 
@@ -180,6 +196,24 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         </div>
       </div>
       <!-- AWSカードをここに繰り返し挿入 -->
+      <!-- アップデートなし時: <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p> -->
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+      <!-- セキュリティカードをここに繰り返し挿入 -->
+      <!-- アップデートなし時: <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p> -->
     </div>
   </section>
 
