@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 23 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTデータ / ソフトバンク / 富士通 / NEC</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nttdata.com/global/ja/news/topics/2026/041502/" target="_blank" rel="noopener">xIPFコンソーシアム設立記念式典開催 — 企業横断AI・データ連携基盤が本格始動</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTデータグループ、ソフトバンク、富士通、NECなど主要IT企業が参画する「一般社団法人xIPFコンソーシアム」の設立記念式典が2026年5月21日に開催され、活動が本格始動した。xIPF（cross Integrated Platform）は企業・組織をまたいでAIとデータを安全に連携させる超分散コンピューティング基盤を目指すもので、東京大学大学院 越塚研究室も参加。社会課題解決とAI×DX推進を業界横断で取り組む枠組みとして注目を集めている。コンソーシアムへの参加企業はさらなる拡大が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTデータ経営研究所</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nttdata-strategy.com/newsrelease/260507/" target="_blank" rel="noopener">金融機関向けAI導入コンサルティング全18サービスの提供を開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTデータ経営研究所は、金融機関向けAI導入コンサルティングサービス全18サービスの提供を2026年5月7日より開始した。金融規制対応とAIガバナンスに精通したコンサルタントが設計を担当し、特定のAIベンダーに依存しない独立した立場でAI活用と金融規制対応を両立する。国内金融機関でのAI導入加速を後押しするサービスとして位置づけられており、メガバンクから地銀・保険会社まで幅広い対応を想定している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tech.yahoo.com/ai/gemini/articles/google-updates-gemini-app-chatgpt-174500026.html" target="_blank" rel="noopener">Google I/O 2026：Geminiアプリ大幅刷新 — Gemini Spark・Daily Brief・Omniを発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google I/O 2026でGeminiアプリの大規模アップデートが発表された。「Gemini Spark」は24時間365日バックグラウンドで動作するパーソナルAIエージェントで、スマートフォンをロックしている間も自律的にタスクをこなす。「Daily Brief」はメール・カレンダー・タスクを統合した朝のパーソナルダイジェスト機能。新AIビデオモデル「Gemini Omni」も同時公開され、Geminiが従来のアシスタントから能動的に動くエージェントへと進化したことを印象づけた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://llm-stats.com/llm-updates" target="_blank" rel="noopener">Gemini 3.5 Flash が一般提供開始 — フロンティア級の性能を4倍高速・低コストで提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google I/O 2026にてGemini 3.5 FlashがGA（一般提供開始）となった。同等モデルと比較して4倍の処理速度を実現しながら、フロンティアレベルの知能を維持する設計が特徴。価格は入力100万トークンあたり$1.50、出力100万トークンあたり$9.00と競争力のある水準に設定されており、最大100万トークンのコンテキストウィンドウをサポートする。大規模バッチ処理や低レイテンシが求められるエンタープライズ用途での採用が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://releasebot.io/updates/openai/chatgpt" target="_blank" rel="noopener">GPT-5.5 Instant がChatGPTの新デフォルトモデルに — 精度向上・幻覚低減を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年5月5日より、GPT-5.5 InstantをChatGPT（無料・有料両プラン）の新デフォルトモデルに切り替えた。GPT-5.3 Instantから置き換わる形で、回答の正確性向上・幻覚の低減・個人化コントロールの強化が主な改善点となっている。低レイテンシかつ軽量な設計を維持しながら、画像・STEM・Web検索との連携精度も向上。Plus・Proユーザーにはより豊かなコンテキスト活用機能も提供される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-bedrock-agentcore-payments-agent-toolkit-for-aws-and-more-may-11-2026/" target="_blank" rel="noopener">AgentCore Payments プレビュー開始 — AIエージェントが自律的にAPI利用料を決済</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCoreにAIエージェントが自律的にAPI・MCPサーバー・Webコンテンツ・他エージェントの利用料を支払える「AgentCore Payments」機能がプレビュー公開された。CoinbaseおよびStripeとの提携により実装されており、独自の課金システム・認証情報管理・コンプライアンス対応の構築が不要になる。エージェントが外部サービスを経済的に自律活用できる新たなパラダイムを提示するアップデートとして注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Agent Toolkit</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-bedrock-agentcore-payments-agent-toolkit-for-aws-and-more-may-11-2026/" target="_blank" rel="noopener">Agent Toolkit for AWS が一般提供開始 — MCP対応でKiro・Cursor・Claude Codeから直接デプロイ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSのエージェント開発を加速する「Agent Toolkit for AWS」がGAとなり、合わせてAWS MCPサーバーも一般提供を開始した。MCPプロトコルに対応しており、Kiro・Cursor・Claude Code・Amazon Q CLIなどの主要な開発環境から直接AgentCoreへのデプロイ・テストが可能になる。開発環境からインフラへのシームレスなブリッジを提供することで、AIエージェント開発のサイクルを大幅に短縮することを目指している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon QuickSight</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-whats-next-with-aws-2026-amazon-quick-openai-partnership-and-more-may-4-2026/" target="_blank" rel="noopener">QuickSight に BIマイグレーションエージェント追加 — TableauやPower BIを自動変換</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon QuickSightにTableauおよびPower BIのダッシュボードをQuickSightアセットへ自動変換するBIマイグレーションエージェント機能が追加された。従来は数ヶ月規模の工数を要していたBI移行作業を大幅に削減できるとされており、移行コストと期間の圧縮が見込まれる。AWS主催イベント「What's Next with AWS 2026」でのトップ発表の一つとして紹介され、既存のTableau・Power BI環境からAWSへの移行を検討している企業の後押しとなりそうだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-23 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
