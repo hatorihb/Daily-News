@@ -19,6 +19,7 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 - Reports have **4 sections**: 01 国内IT・DX / 02 AI / 03 AWS / 04 セキュリティ. All 4 must be present in every report.
 - The search query list in `prompt/routine-prompt.md` includes a cybersecurity query — do not skip it.
 - Cite sources with real working URLs. Broken links erode trust. If a URL is critical, sanity-check it before pasting.
+- `card-date` is the **publication date of the source article or announcement page**, not the original product announcement date. If a feature was announced days ago but a new article covering it was published today, use today's article date. The hook enforces `card-date ≥ prev_day (report date − 1)`.
 - Do not paste raw API responses or request IDs into the report. Summarize, don't dump.
 - Keep the HTML self-contained: inline CSS, no external JS dependencies. The report should render correctly when shared as a single file.
 - The date in the title/heading must match the filename date — the hook will reject mismatches.
