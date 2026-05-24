@@ -35,7 +35,7 @@ if [[ "$basename" =~ ^tech-report-([0-9]{4})-([0-9]{2})-([0-9]{2})\.html$ ]]; th
   jp="${year}年${jp_month}月${jp_day}日"
 
   # 3a. ファイル名の日付が実際の今日と一致するか
-  today=$(date +%Y-%m-%d)
+  today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
   if [[ "$iso" != "$today" ]]; then
     errors+="Wrong date in filename: report is dated ${iso} but today is ${today}.\n  Rename the file to tech-report-${today}.html and update the date in the report body.\n\n"
   fi
