@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 25 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Gemini</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/05/19/google-introduces-gemini-spark-a-24-7-agentic-assistant-with-gmail-integration/" target="_blank" rel="noopener">Google、24時間稼働の個人AIエージェント「Gemini Spark」をGoogle AI Ultra加入者向けにベータ提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google I/O 2026（5月19日）で発表された「Gemini Spark」が、Google AI Ultra加入者および信頼できるテスターを対象にベータ提供を開始した。Gemini SparkはデバイスがオフラインでもクラウドでGemini Antigravityの基盤上で24時間稼働し、メールの起草・受信トレイの監視・期限追跡・タスク実行をGmail・Google Docs・Chrome・Instacart・OpenTableなど社内外のサービスをまたいで自律的に処理する長期ホライズン型AIエージェント。GoogleはAlphabet CEOのSundar Pichai氏が「スマートアシスタントの次の進化形」と位置付けており、OpenAIのOperatorやAnthropicのClaudeと競合する文脈で注目度が高い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude Mythos</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank" rel="noopener">Project Glasswing 初期レポート公開——Mythos AIが1ヶ月で重要OSS全体に1万件超の高・緊急脆弱性を自律的に発見</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicが発表した「Project Glasswing」の初期アップデートによると、同社の新セキュリティ特化モデル「Mythos Preview」とパートナー約50組織が協力し、世界の重要インフラを支えるOSSにわたる1万件以上の高・緊急深刻度の脆弱性を1ヶ月で発見した。CloudflareはMythosを使い自社クリティカルシステムで単独2,000件超のバグを検出、一部パートナーはバグ発見速度が10倍以上に向上したと報告している。現在の課題は発見速度ではなく検証・開示・パッチ適用のスループットであり、平均修正リードタイムは2週間となっている。Mythos Previewは FreeBSD の17年間未発見のNFS RCE（CVE-2026-4747）やwolfSSLの証明書偽造バグも完全自律で特定しており、AIによる攻撃的セキュリティ研究の実用化として業界に大きなインパクトを与えている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/9624314-model-release-notes" target="_blank" rel="noopener">GPT-5.5 InstantがChatGPTの新デフォルトモデルに——高速・低レイテンシの最新版が全ユーザーに展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIはGPT-5.5 Instantを新たなChatGPTのデフォルトモデルとして全ユーザーに展開した。GPT-5.5 Instantはレスポンス速度を最優先に設計された最新世代モデルで、5月5日のリリース以来段階的に適用範囲が拡大されていた。Plusや無料プランを含むすべての層でより速い応答が体験できるようになり、API利用者はモデル名指定でこれまでと同様に従来バージョンへのアクセスも引き続き可能。GPT-5.5 TurboやGPT-5.5 Reasoningなどの上位バージョンはPlusおよびPro向けに引き続き提供されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon CloudWatch Logs</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/" target="_blank" rel="noopener">Amazon CloudWatch Logs Insightsに JOIN コマンドとサブクエリが追加——複数ロググループをまたいだクロス分析が可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon CloudWatch Logs Insightsに新たにJOINコマンドとサブクエリが追加され、複数のロググループをまたいだ結合クエリおよびネストされたクエリが実行できるようになった。これによりアプリケーション層・インフラ層・セキュリティログを単一のクエリで関連付けて分析できるようになり、インシデント調査やパフォーマンスのコリレーション分析の効率が大幅に向上する。従来はログストリームごとに個別クエリを実行し手動で突き合わせる必要があったが、SQLライクなJOIN構文でクロス分析が完結するため、運用チームのMTTRの短縮に直結する変更となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Aurora Serverless</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/" target="_blank" rel="noopener">Amazon Aurora Serverlessがスマートスケーリングとゼロスケールダウン継続でパフォーマンスを最大30%向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Aurora Serverlessに新しいスケーリングアルゴリズムが適用され、スループット性能が最大30%向上した。改良されたスマートスケーリングは負荷パターンを予測して先行的に容量を調整し、スケールダウン時にも進行中のクエリを中断せずに継続する「ゼロスケールダウン継続」機能が追加された。従来はスケール操作時にクエリの中断やタイムアウトが発生するケースがあったが、今回の変更でバーストトラフィックに対する応答性と安定性が同時に改善されている。コスト最適化と可用性を両立したいサーバーレスDB利用者にとって、実質的にシームレスなスケーリング体験が実現する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Redshift / Apache Iceberg</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/" target="_blank" rel="noopener">Amazon RedshiftがApache IcebergテーブルへのUPDATE・DELETE・MERGEをネイティブサポート——オープンデータレイクのDML操作が統合</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon RedshiftがApache IcebergテーブルへのUPDATE・DELETE・MERGEのDML操作を正式サポートし、データレイク上のIcebergテーブルに対してRedshiftから直接データ変更が行えるようになった。従来はIcebergへの書き込みにはSparkやFlink等の別エンジンを経由する必要があったが、今回の対応でRedshiftの既存SQLスキルをそのままレイクハウスアーキテクチャへ適用できる。Amazon S3上のIcebergテーブルとRedshiftネイティブテーブルをまたいだMERGE操作が単一クエリで記述でき、CDCやSCD Type 2などのデータエンジニアリングパターンの実装が大幅に簡略化される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">FreeBSD / Project Glasswing</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityaffairs.com/192576/ai/anthropics-glasswing-10000-vulnerabilities-found-in-one-month-and-the-patching-problem-has-never-been-more-obvious.html" target="_blank" rel="noopener">AIが17年間見逃されたFreeBSD NFS RCE（CVE-2026-4747）を自律発見——root権限奪取がNFSを動かす任意マシンで可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのMythos Previewが、FreeBSDで17年間見逃されてきたNFSのリモートコード実行脆弱性CVE-2026-4747を完全自律で発見・実証した。この脆弱性は特別な認証なしにNFSサービスを稼働させているマシンへのroot権限奪取を可能にするもので、データセンターやストレージネットワーク環境への影響が大きい。FreeBSDのセキュリティチームはパッチを公開済みだが、NFS環境をクラウドやオンプレミスで運用している組織は早急なパッチ適用が必要。AIによる大規模脆弱性探索が実用段階に入ったことで、従来の人力でのセキュリティ監査の限界が改めて浮き彫りになっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">wolfSSL / Project Glasswing</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/research/glasswing-initial-update" target="_blank" rel="noopener">wolfSSLに証明書偽造の脆弱性——Glasswing AIが発見、銀行・メールプロバイダーになりすました偽サイト構築が可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic Project GlasswingのMythos Previewが、軽量TLS実装ライブラリwolfSSLに攻撃者が任意のX.509証明書を偽造できる脆弱性を発見した。悪用されると銀行やメールプロバイダーなど任意のドメインに対する偽TLS証明書を正規チェーンとして認証させることが可能になり、中間者攻撃やフィッシングサイトの構築が容易になる。wolfSSLは組み込み機器・IoT・エッジデバイスなど軽量環境で広く利用されているため影響範囲が広い。wolfSSL社はパッチを提供中であり、同ライブラリを組み込んだデバイスやソフトウェアのベンダーも早急なアップデート対応が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Drupal Core / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA、Drupal Core SQLインジェクション（CVE-2026-9082）をKEVカタログに追加——全サポートバージョンが対象、連邦機関への対応期限を設定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米国サイバーセキュリティ・インフラセキュリティ庁（CISA）は、Drupal Coreの全サポートバージョンに影響するSQLインジェクション脆弱性CVE-2026-9082（CVSS 6.5）を既知の悪用済み脆弱性（KEV）カタログに追加し、連邦行政機関に対して期限内のパッチ適用を義務付けた。Drupalは世界中の政府機関・大学・大手メディアなど数百万サイトで採用されているCMSであり、脆弱なバージョンを運用する組織は直ちにDrupalの公式セキュリティアドバイザリに従いアップデートを行う必要がある。KEVカタログへの追加は野外での積極的な悪用が確認されていることを意味しており、Drupalホスティングプロバイダーも顧客への対応を急ぐ必要がある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-25 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
