@@ -34,6 +34,12 @@ if [[ "$basename" =~ ^tech-report-([0-9]{4})-([0-9]{2})-([0-9]{2})\.html$ ]]; th
   jp_day=$((10#$day))
   jp="${year}年${jp_month}月${jp_day}日"
 
+  # 3a. ファイル名の日付が実際の今日と一致するか
+  today=$(date +%Y-%m-%d)
+  if [[ "$iso" != "$today" ]]; then
+    errors+="Wrong date in filename: report is dated ${iso} but today is ${today}.\n  Rename the file to tech-report-${today}.html and update the date in the report body.\n\n"
+  fi
+
   # 3. レポート自身の日付が本文に含まれるか
   if ! grep -qF "$iso" "$file_path" && ! grep -qF "$jp" "$file_path"; then
     errors+="Report body does not contain its own date (${iso} or ${jp}). Possible date mismatch — verify you're writing today's report into today's filename.\n\n"
