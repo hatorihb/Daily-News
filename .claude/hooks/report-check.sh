@@ -47,7 +47,7 @@ if [[ "$basename" =~ ^tech-report-([0-9]{4})-([0-9]{2})-([0-9]{2})\.html$ ]]; th
   done
 
   # 5. card-date の日付が「前日以降」かチェック
-  prev_day=$(date -d "${iso} -1 day" +%Y-%m-%d 2>/dev/null || \
+  prev_day=$(TZ=Asia/Tokyo date -d "${iso} -1 day" +%Y-%m-%d 2>/dev/null || \
              python3 -c "from datetime import date,timedelta; d=date(${year},${jp_month},${jp_day}); print((d-timedelta(1)).isoformat())")
   stale_dates=""
   while IFS= read -r card_date; do
