@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 26 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">国内企業・IT業界</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://uravation.com/media/enterprise-ai-agent-adoption-trends-may-2026/" target="_blank" rel="noopener">AIエージェント法人導入5大変化 — 2026年5月速報</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年5月、国内大企業でのAIエージェント本格導入が急加速しており、5つの主要変化が確認されている。「自律型AIの業務標準化」「人間監視体制の再設計」「セキュリティポリシーの強化」「ROI評価フレームワーク整備」「規制対応の内製化」が企業のDX推進における新たな焦点となった。AIエージェント元年と言われた2025年を経て、2026年は実運用・最適化フェーズへ移行しており、単なる導入から業務変革への深化が求められている。JX通信社・WHI・デジタルアイデンティティなど多様な業種での先行事例が蓄積されつつあり、業界全体へ横展開が始まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">モビルス株式会社 / 国内AI動向</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/yasuhitoo/n/nff5134779fd3" target="_blank" rel="noopener">国内AIエージェント動向 2026年5月22日号 — モビルスMooA新機能など</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">モビルス株式会社が5月21日、コンタクトセンター向けAI「MooA」に暴言・ハラスメント発話のリアルタイム監視機能とナレッジ自動抽出機能を追加した。オペレーター保護と応対品質向上を同時に実現する国内初の機能として注目されている。また、JX通信社ではAIエージェントを活用したニュース配信の優先度最適化、WHIでは人事HR領域での業務自動化を進めており、業種横断的な導入事例が週次で更新されている。製造・金融・医療での実証実験が本格運用フェーズへ移行する事例も増加しており、2026年後半のさらなる拡大が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">製造業・AI業界</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-05-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://amiko.consulting/2026%E5%B9%B45%E6%9C%8818%E6%97%A5%E3%80%9C5%E6%9C%8823%E6%97%A5%E9%80%B1%E3%81%AEai%E4%B8%BB%E8%A6%81%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9%E3%81%A8%E8%A3%BD%E9%80%A0%E6%A5%AD%E3%81%B8%E3%81%AE/" target="_blank" rel="noopener">2026年5月18〜23日週のAI主要ニュースと製造業への示唆</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">製造業向けAIコンサルティング企業Amiko Consultingが週次まとめを公開。Google I/O 2026でGoogleがAIエージェント時代の到来を明確に打ち出したことを受け、製造現場での自律型AI活用に関心が高まっている。NVIDIAが過去最高売上を達成し計算資源需要が依然最大の制約となっていること、マルチモーダルAIの産業活用が加速していることが主要トレンドとして挙げられた。AIエージェントが設備点検・品質管理・サプライチェーン最適化など製造現場でのユースケースへ広がりを見せており、2026年後半の大規模導入に向けた実証フェーズが各社で進行中だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Cloud</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cloud.google.com/blog/products/ai-machine-learning/gemini-3-1-flash-lite-is-now-generally-available" target="_blank" rel="noopener">Gemini 3.1 Flash-Lite が正式リリース（GA） — 最速・最低コストのGemini 3系モデル</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleはGemini 3.1 Flash-Liteを本日（2026-05-26）正式版（GA）としてリリースした。同モデルは高速・低コストを最優先に設計されており、入力トークン100万件あたり$0.25、出力$1.50という業界最安水準の価格設定となっている。Artificial Analysis社のベンチマークでは2.5 Flash比で初回応答時間が2.5倍高速化、出力速度45%向上を達成しつつ品質は同等以上を維持。テキスト・画像のマルチモーダル処理とツール呼び出し・エージェントオーケストレーションに対応しており、大量リクエストを処理するプロダクション用途に最適な選択肢として開発者から注目が集まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Antigravity Agent managed agentがパブリックプレビューで公開 — 自律コーディング・ファイル管理・Web閲覧を一体化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは本日（2026-05-26）、Gemini APIにおいてAntigravity Agentをパブリックプレビューとして公開した。同エージェントはサンドボックスコンテナ内で自律的な計画・推論・コード生成・実行・ファイル管理・Web閲覧を一体化して行うマネージドエージェントで、開発者はインフラ管理不要で高度な自律型AIエージェントをAPIから即利用できる。コード実行環境の分離によるセキュリティ保証と、マルチステップタスクの自動化が特徴。AIエージェントの実用化が本格化する2026年において、マネージドサービスとして提供されることで導入障壁が大幅に下がると期待されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini API Interactions APIの新スキーマが本日よりデフォルト化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google AIは本日（2026-05-26）をもって、Gemini API Interactions APIのリクエスト/レスポンスの新スキーマをデフォルトへ切り替えた。旧スキーマを使用しているアプリケーションは移行が必要となり、特にAPIを直接呼び出しているプロダクション環境では早急な対応が求められる。新スキーマはより構造化された会話フロー管理と拡張されたメタデータ対応を提供し、将来的な機能拡張の基盤となる設計になっている。Googleは移行ガイドとサンプルコードを公式ドキュメントで提供しており、既存の統合を持つ開発者はリリースノートを確認して対応状況を確認することが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/04/amazon-bedrock-agentcore-payments-preview/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Payments プレビュー公開 — AIエージェントが自律的に決済を実行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon Bedrock AgentCore Paymentsをプレビューとして公開した。AIエージェントがAPI・MCPサーバー・Webコンテンツへのアクセス料を自律的に支払えるようになる世界初のマネージド決済機能で、CoinbaseおよびStripeとの共同開発により実現している。ウォレット認証からトランザクション実行、支出ガバナンス・可観測性まで決済ライフサイクル全体をAgentCoreが管理し、エージェントの自律性と企業ガバナンスの両立を図る。利用可能リージョンは米国東部（バージニア北部）・西部（オレゴン）・欧州（フランクフルト）・アジア太平洋（シドニー）の4リージョン。エージェント経済の到来を告げるマイルストーン的リリースとして業界注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-bedrock-agentcore-runtime/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Runtime がS3 Files・EFSの独自ファイルシステムマウントに対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCore Runtimeが独自ファイルシステムのアタッチに対応し、Amazon S3 FilesアクセスポイントおよびAmazon EFSアクセスポイントをエージェントランタイムに直接マウントできるようになった。設定したパスに全セッション共通でファイルシステムがマウントされ、エージェントが標準ファイル操作でデータを読み書き可能になる。これにより大規模なナレッジベースや学習データへのリアルタイムアクセス、エージェント間でのデータ共有が容易になり、複雑なマルチエージェントワークフローの構築が加速する。エンタープライズ向けの永続的データ管理要件に応える機能として、本番環境への適用が進む見通しだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/agentcore-longterm-memory-metadata/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Memory に長期記憶へのメタデータ付与機能が追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCore Memoryの長期記憶（LTM）レコードにメタデータを付与できるようになった。エージェントはタグや構造化属性を記憶に紐付け、セマンティック検索と組み合わせた高精度なフィルタリング・検索が可能になる。ユーザーIDや日時・優先度・トピックなど任意の属性でメモリを分類することで、大規模な記憶プールからの効率的な情報取得が実現し、パーソナライズされた長期的ユーザー体験の構築が容易になる。複数ユーザーや複数タスクを扱うエンタープライズエージェントにおいて特に効果が大きく、AgentCoreを活用したプロダクション事例の拡大に貢献するアップデートだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NGINX / F5</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/05/nginx-cve-2026-42945-exploited-in-wild.html" target="_blank" rel="noopener">【悪用確認】NGINX Rift (CVE-2026-42945) — 18年前から存在するヒープオーバーフローが野生下で攻撃に利用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">5月13日にF5と研究機関depthfirstが共同開示したCVE-2026-42945（NGINX Rift）が野生下での積極的悪用が確認されたとして警告が出た。CVSS v4.0スコア9.2の重大脆弱性で、ngx_http_rewrite_moduleに18年間潜伏していたヒープバッファオーバーフローにより、未認証の遠隔攻撃者がDoSまたはリモートコード実行（RCE）を引き起こせる。影響範囲はNGINX 0.6.27〜1.30.0の全バージョンおよびNGINX Plus R32〜R36と極めて広く、Ingress NGINX経由でKubernetesクラスターへの侵害も報告されている。修正版（安定版1.30.1・メインライン1.31.0）への即時アップデートが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitHub / Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/05/github-investigating-teampcp-claimed.html" target="_blank" rel="noopener">GitHubが内部リポジトリ侵害を確認 — 悪意あるVS Code拡張機能経由で約3,800件が流出</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitHub社は5月19〜20日にかけて、脅威アクター「TeamPCP（UNC6780）」による内部リポジトリへの不正アクセスを公式に認めた。攻撃手口は社員のデバイスへの悪意あるVS Code拡張機能（Nx Console v18.95.0）のインストールを起点とするサプライチェーン攻撃で、約3,800本のGitHub内部リポジトリが複製・窃取された。グループは犯罪フォーラム「Breached」に「約4,000リポジトリの非公開コード」として$50,000超での売却を告知している。GitHubは認証情報のローテーション・感染端末の隔離・継続調査を実施しており、現時点で顧客リポジトリ・エンタープライズアカウント・ユーザーデータへの影響はないとしている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/05/on-prem-microsoft-exchange-server-cve.html" target="_blank" rel="noopener">Microsoft Exchange Server CVE-2026-42897 — 細工メールでOWAにJavaScript実行、スプーフィング脆弱性が悪用中</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">オンプレミスのMicrosoft Exchange Serverに存在するスプーフィング脆弱性（CVE-2026-42897、CVSS 8.1）が積極的に悪用されていることが確認された。攻撃者は細工したメールをターゲットに送信し、受信者がOutlook Web Access（OWA）でメールを開いた際に任意のJavaScriptが実行される。フィッシングや認証情報窃取、さらなる侵害への足がかりとして利用されるリスクが高く、特にオンプレミスExchangeを継続利用している組織は早急なパッチ適用が必要だ。Microsoftは5月のパッチチューズデーで修正プログラムをリリース済みであり、未適用環境は直ちにアップデートすることが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ghost CMS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityboulevard.com/2026/05/three-cves-and-the-may-2026-exploit-chain-nobodys-taking-seriously/" target="_blank" rel="noopener">Ghost CMS SQLインジェクション CVE-2026-26980 — 700超サイトが乗っ取られ「ClickFix」攻撃に悪用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">オープンソースCMS「Ghost」に存在する重大なSQLインジェクション脆弱性（CVE-2026-26980、CVSS 9.4）が悪用され、700件を超えるWebサイトが乗っ取られたと報告されている。攻撃者はデータベースを改ざんしてサイトに悪意あるJavaScriptを注入し、訪問者に「ClickFix」手法を用いたマルウェア感染を誘導している。ClickFix攻撃はユーザーに偽のエラーメッセージを表示し、「修正のためコマンドを実行してください」と誘導してリモートアクセスツールをインストールさせる手口だ。Ghost利用者は最新バージョンへの即時アップグレードとサイトコンテンツの完全性確認が強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-26 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
