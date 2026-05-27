@@ -46,7 +46,14 @@ if [[ "$basename" =~ ^tech-report-([0-9]{4})-([0-9]{2})-([0-9]{2})\.html$ ]]; th
     fi
   done
 
-  # 5. card-date の日付が「前日以降」かチェック
+  # 5. ファイル名の日付がJST当日か確認（UTC使用によるJST/UTCズレを防ぐ）
+  today_jst=$(TZ=Asia/Tokyo date +%Y-%m-%d 2>/dev/null || \
+              python3 -c "from datetime import datetime,timezone,timedelta; print(datetime.now(timezone(timedelta(hours=9))).strftime('%Y-%m-%d'))")
+  if [ -n "$today_jst" ] && [ "$iso" != "$today_jst" ]; then
+    errors+="Report filename date (${iso}) does not match today's JST date (${today_jst}).\n  Likely cause: used plain 'date' (UTC) instead of 'TZ=Asia/Tokyo date +%Y-%m-%d'.\n  Fix: re-run the routine with TZ=Asia/Tokyo date +%Y-%m-%d to get the correct filename date.\n\n"
+  fi
+
+  # 6. card-date の日付が「前日以降」かチェック
   # 許容範囲: レポート日付の前日〜当日のみ
   prev_day=$(date -d "${iso} -1 day" +%Y-%m-%d 2>/dev/null || \
              python3 -c "from datetime import date,timedelta; d=date(${year},${jp_month},${jp_day}); print((d-timedelta(1)).isoformat())")
