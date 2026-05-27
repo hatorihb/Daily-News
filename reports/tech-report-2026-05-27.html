@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026-05-27 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Chan Zuckerberg Biohub</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.axios.com/2026/05/27/zuckerbergs-biohub-unveils-ai-world-model-of-proteins" target="_blank" rel="noopener">Biohub、タンパク質の「AI ワールドモデル」を公開——創薬・医療研究に新たな地平</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Mark ZuckerbergとPriscilla Chanが設立した非営利研究機関Chan Zuckerberg Biohubが、タンパク質を包括的に理解・予測するAI「ワールドモデル」を発表した。従来の個別タンパク質予測モデルとは異なり、タンパク質同士の相互作用や環境依存的な機能変化を一体的に捉えることができる点が画期的だ。生物学的システム全体を統合的にシミュレートすることで、新薬開発や疾患メカニズムの解明が大幅に加速する可能性がある。研究成果はオープンサイエンスの方針に沿って広く共有される予定であり、世界中の研究者が活用できる基盤となることが期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Gemini API</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Gemini API、自律型「Antigravity Agent」パブリックプレビュー公開 ＆ Gemini 3.1-flash-lite が GA に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleはGemini APIの最新アップデートとして、サンドボックス環境内で自律的に計画・推論・コード生成・実行・ファイル管理・Webブラウジングを行える「Antigravity Agent」をパブリックプレビューとして公開した。エージェント型AIの実用展開に向けた重要なマイルストーンであり、開発者は複雑な業務タスクの自動化が一段と容易になる。また、速度・スケーラビリティ・コスト効率を重視して設計された「Gemini 3.1-flash-lite」が一般提供（GA）となり、大量処理ユースケースでの採用加速が見込まれる。AIエージェントが実業務の中で動く存在として定着しつつある潮流を裏付けるアップデートといえる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / GPT</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/9624314-model-release-notes" target="_blank" rel="noopener">GPT-5.5 のエージェント型コーディング・コンピューター操作能力が大幅向上——各社のLLM開発競争は最終局面へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIのGPT-5.5は4月末リリース以降、エージェント型コーディング・コンピューター操作・知識業務の分野で大幅な性能向上が確認され、実業務への適用事例が急増している。Googleが最大コンテキストウィンドウを持つGemini 3.1 Ultraを投入し、xAIがGrok Imagine 1.0（フル機能の動画生成プラットフォーム）をリリースするなど、主要プロバイダー間の競争がマルチモーダル・エージェント・動画生成の各軸で同時進行している。SpaceXによるxAI買収でGrokが大規模コーポレートエコシステムに組み込まれた点も業界再編の象徴的な動きだ。各社の新モデル投入ペースが加速し、ビジネスへの導入判断サイクルが急速に短縮されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-bedrock-request-level-usage-attribution/" target="_blank" rel="noopener">Amazon Bedrock、リクエストレベルの使用量帰属（Usage Attribution）サポートを拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrockが、リクエスト単位で利用コストをプロジェクト・チーム・機能別に追跡・帰属できる「リクエストレベルの使用量帰属」機能のサポートを拡大した。大規模組織での生成AI利用コスト管理（FinOps）が格段に精緻化され、どのチームがどのくらいのコストを消費しているかを詳細に把握できるようになる。マルチテナント構成や複数プロダクトをまたいだAI活用を推進する企業にとって、コスト最適化と透明性向上に直結する重要な機能強化だ。部門別のAI投資対効果（ROI）算出も容易になり、意思決定の質向上が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Transform</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/assessment-capabilities-transform/" target="_blank" rel="noopener">AWS Transform、エージェント型移行アセスメント機能を新たに提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSのモダナイゼーション・マイグレーションツール「AWS Transform」に、AIエージェントが既存システムを自動解析して最適な移行計画を提案するエージェント型アセスメント機能が追加された。オンプレミスやレガシーシステムのクラウド移行を検討している企業にとって、複雑な分析作業を大幅に省力化できる。AIが移行コスト・依存関係・リスクを包括的に評価し、段階的な移行ロードマップを自動生成することで、移行プロジェクトの精度と速度が向上する。クラウドジャーニーの加速を目指す企業への強力な後押しとなる機能追加だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / DynamoDB</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/aws-extenddb-dynamodb/" target="_blank" rel="noopener">AWS、DynamoDB 互換のオープンソースアダプター「ExtendDB」を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはDynamoDB APIと互換性を持つオープンソースのデータベースアダプター「ExtendDB」を発表した。既存のDynamoDB APIを使うアプリケーションが、他のデータベースシステムとシームレスに連携できるようになり、ベンダーロックインへの懸念を持つ企業に新たな柔軟性をもたらす。ハイブリッドクラウドやマルチクラウド戦略を採用している組織にとって、データ層の移植性と相互運用性が大きく向上する。オープンソースとして公開されることで、コミュニティによる拡張・改善が促進される点も注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitHub Enterprise Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/180382" target="_blank" rel="noopener">GitHub Enterprise Server、クリティカル含む複数の脆弱性が判明——速やかなパッチ適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitHub Enterprise Server（GHES）において、重要度「クリティカル」を含む複数の脆弱性が明らかになり、修正パッチがリリースされた。オンプレミスでGHESを自社運用するエンタープライズ組織は速やかなアップデートを適用する必要がある。脆弱性の悪用に成功した攻撃者はサーバー上での権限昇格や機密リポジトリへの不正アクセスが可能になる恐れがある。GitHubの公式セキュリティアドバイザリを参照し、パッチ適用と侵害の痕跡（IoC）確認を並行して実施することが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft Exchange Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/05/on-prem-microsoft-exchange-server-cve.html" target="_blank" rel="noopener">オンプレミス Exchange Server CVE-2026-42897、細工された電子メールで積極的に悪用——即時パッチ適用が急務</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">オンプレミス型Microsoft Exchange Serverにおいて、CVE-2026-42897と追跡される脆弱性が、特別に細工した電子メールを介して野生で悪用されていることが確認された。攻撃者はメールを送信するだけでターゲットのExchangeサーバーで任意コードを実行できる可能性があり、深刻な被害につながりうる。オンプレミスExchangeを運用している組織はMicrosoftが提供するセキュリティアップデートを速やかに適用するとともに、受信メールのフィルタリング強化と異常ログの監視強化を並行して行うことが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco SD-WAN</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/cisco-patches-another-sd-wan-zero-day-the-sixth-exploited-in-2026/" target="_blank" rel="noopener">Cisco、SD-WAN のゼロデイ脆弱性をパッチ修正——2026年に入って6件目の悪用確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CiscoはSD-WAN製品に存在する新たなゼロデイ脆弱性に対するパッチを公開した。これは2026年に入って悪用が確認されたSD-WAN関連のゼロデイとしては6件目であり、同製品が攻撃者の集中的な標的となっていることを示している。SD-WAN機器は企業ネットワークの要所に位置するため、侵害されると広範なラテラルムーブメントやデータ窃取の足がかりになる。Cisco SD-WAN製品を利用している組織は今すぐパッチ適用計画を策定し、インターネット接続面の設定見直しと不審な通信の監視強化を急いでほしい。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / LiteSpeed cPanel Plugin</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA 警告: LiteSpeed cPanel Plugin CVE-2026-48172 が実際の攻撃で悪用中——KEV カタログに追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは、LiteSpeed cPanel Pluginに存在するCVE-2026-48172が実際の攻撃（野生のエクスプロイト）で積極的に悪用されているとして、緊急警告を発した。影響を受けるcPanel環境でLiteSpeedプラグインを使用しているサーバー管理者は直ちにパッチを適用する必要がある。既に侵害されている可能性を念頭に、アクセスログや不審なプロセスの確認を行い、フォレンジック調査を実施することも検討すべきだ。CISAのKnown Exploited Vulnerabilities（KEV）カタログへの追加により、連邦政府機関は期限内の対応が義務付けられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">国内インシデント / 河合楽器・E/SASV Games</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://scan.netsecurity.ne.jp/category/incident/" target="_blank" rel="noopener">河合楽器米国子会社・E/SASV Games 公式サイトへの不正アクセス、誤送信メール情報漏えいが相次いで報告</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">5月26〜27日にかけて、国内外で複数のインシデントが報告された。河合楽器製作所（Kawai）の米国子会社で不正アクセスの可能性が確認されたほか、E/SASV Games実行委員会の公式サイトも不正アクセスを受けた（個人情報の流出は現時点で確認されず）。5月27日には児童関連業務の委託事業者による電子メール誤送信でメールアドレスが漏えいした事案と、学校説明会関連メールの誤送信により500件超のアドレスが漏えいした事案も報告された。誤送信インシデントは技術的対策（BCC送信の強制、送信前確認UI）と運用手順の両面からの見直しが必要だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-27 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
