@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 29 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Business+IT / SB Creative</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.sbbit.jp/eventinfo/dx-ai" target="_blank" rel="noopener">DX&amp;AI Forum 2026 Spring 東京 本日開催 ― AGIで進化する企業と社会、日本型AIエージェント最前線</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">「AGIで進化する企業と社会、日本型AIエージェントとフィジカルAI最前線」をテーマとした大型カンファレンス「DX&amp;AI Forum 2026 Spring 東京」が本日（5月29日）、虎ノ門ヒルズフォーラムにて開催された。厳しい経済環境下での再成長を目指す日本企業向けに、生成AIや最新デジタル技術の実務・組織への落とし込み方と具体的なロードマップが先進企業の事例とともに紹介された。AIエージェントの自律化やフィジカルAIの活用事例に加え、セキュリティ対策・ガバナンス構築についての講演も行われ、経営層・IT担当者を問わず国内DX推進の指針となる内容が集積している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">先端教育オンライン / 帝国データバンク</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.sentankyo.jp/articles/33722e81-fa2c-426c-8dfc-fc6b611fea15" target="_blank" rel="noopener">日本企業の生成AI導入は進むもガバナンス整備に遅れ ― 3割超で正式ルール未整備</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">読売新聞・帝国データバンク共同調査によると、生成AIを業務利用している企業のうち31%が「正式なルールはなく各自の判断に任されている」と回答し、包括的なルールを整備済みの企業は12%にとどまることが明らかになった。AIの導入・活用自体は急速に広まる一方、ガバナンス（利用規程・責任体制・データ管理）の整備が追いつかない実態が浮き彫りになっている。経産省・総務省のAIガイドラインをもとに実装フェーズへ移行する企業が増える中、「AIをどう使うか」から「どう管理するか」への意識転換が急務とされており、未整備企業は漏洩リスクや法的リスクへの早急な対応が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">KPMG / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.buildfastwithai.com/blogs/ai-news-today-may-28-2026" target="_blank" rel="noopener">KPMG、AnthropicのClaude を138カ国・276,000人の従業員に展開 ― 企業向けAI史上最大規模</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">KPMGがAnthropicのClaude（Claude CoworkおよびManaged Agents）を世界138カ国・地域の276,000人超の専門家へ一斉展開することを発表した。KPMGのクライアント向け中核デリバリープラットフォーム「Digital Gateway」（Microsoft Azure上）へClaude が統合され、監査・税務・コンサルティング業務の効率化と高度化に活用される。これは企業向けAIデプロイメントとして史上最大規模の一つとされており、AI業界の競争軸が「モデル性能」から「エンタープライズへの導入実績」へと明確にシフトしたことを示す象徴的な案件だ。OpenAI DeployCo設立と同日に発表されており、企業向けAI市場の覇権争いが加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.buildfastwithai.com/blogs/ai-news-today-may-28-2026" target="_blank" rel="noopener">Google、パーソナルAIエージェント「Gemini Spark」を米国の Google AI Ultra 向けにローンチ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは5月19日のI/O 2026で発表した24時間対応の個人AIエージェント「Gemini Spark」を今週、米国のGoogle AI Ultraサブスクライバー向けに提供開始した。月額$100のプランで利用でき、タスク管理・リサーチ・リマインダー・スケジュール調整などを自律的に実行するGoogle Workspaceとの深い統合が特徴だ。同じくI/O 2026で発表されたAntigravity 2.0（エージェントファースト開発プラットフォーム）のv2.0.0リリースビルドも5月27日に公開されており、Googleのエージェント基盤整備が急速に具体化している。個人向けAIエージェントの商用展開において競合各社との差別化を図る動きとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.buildfastwithai.com/blogs/ai-news-today-may-28-2026" target="_blank" rel="noopener">OpenAI、企業向けAI導入専門の子会社「DeployCo」を40億ドル規模で設立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIが企業向けAI導入支援に特化したコンサルティング子会社「DeployCo」を約40億ドルの資金を投じて設立することを発表した。AI業界の競争軸が「誰が企業向けAIデプロイメントを主導するか」に移行しつつある中、OpenAIはモデル提供だけでなく導入支援・運用保守までを垂直統合する戦略を打ち出した。KPMG×Claude案件と同日の発表となり、Anthropicとの正面対決が鮮明になった。同日にはGPT-5.5 InstantがChatGPTのデフォルトモデルとなるなど、モデル面でも新たな動きがあった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/05/amazon-bedrock-request-level-usage-attribution/" target="_blank" rel="noopener">Amazon Bedrock、リクエストレベルの使用量帰属（コスト配分）をサポート拡張</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrockは本日、InvokeModelおよびInvokeModelWithResponseStream APIに対して、個々のリクエストレベルでモデル推論の使用量をチーム・アプリケーション・環境・実験ごとに帰属させる機能のサポートを拡張した。これにより組織内のBedrock使用量分布をきめ細かく把握でき、コスト最適化と内部コスト配分レポートの精度が大幅に向上する。大規模なマルチチーム・マルチプロジェクト環境でAI活用コストの可視化・管理を求めるエンタープライズ顧客にとって即効性の高いアップデートだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Q Developer</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/devops/amazon-q-developer-end-of-support-announcement/" target="_blank" rel="noopener">Amazon Q Developer Pro、本日より Claude Opus 4.6 の提供終了 ― 最新モデルはKiroへ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">本日（5月29日）より、Amazon Q Developer Proにおいて Claude Opus 4.6 が利用不可となった。Opus 4.5 などの既存モデルは引き続き利用可能だが、最新の高性能コーディングモデル（Opus 4.7以降）はAWSの次世代開発環境「Kiro」でのみ提供される。なお、Amazon Q Developer IDEプラグインおよび有料サブスクリプション全体が2027年4月30日をもってサポート終了予定であり、既存ユーザーはKiroへの移行計画を早期に策定することが推奨されている。AWS Management Consoleおよびドキュメント・モバイルアプリ内のQ Developerは引き続き提供される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcommunity.microsoft.com/blog/exchange/addressing-exchange-server-may-2026-vulnerability-cve-2026-42897/4518498" target="_blank" rel="noopener">【本日期限】Microsoft Exchange Server OWA の XSS 脆弱性（CVE-2026-42897、CVSS 8.1）― CISA 修正期限が本日到来</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAが連邦政府機関に対して修正を義務付けた Microsoft Exchange Server OWA のXSS/なりすまし脆弱性（CVE-2026-42897、CVSS 8.1）の修正期限が本日（5月29日）に到来した。攻撃者が細工したメールをOWAで開くとブラウザ上で任意のJavaScriptが実行される脆弱性で、5月14日の開示時点から野外での悪用が確認されているゼロデイだ。オンプレミスのExchange Server 2016・2019・Subscription Editionが対象（Exchange Onlineは非対象）。EM Serviceを有効化している環境には自動緩和策が配信済みだが、恒久的パッチの早急な適用が強く推奨されており、未対応のまま今日を迎えている組織は即時対応が必要だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">LiteSpeed / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/cisa-urges-immediate-patching-of-exploited-litespeed-cpanel-plugin-zero-day/" target="_blank" rel="noopener">【本日期限】LiteSpeed cPanel Plugin の権限昇格ゼロデイ（CVE-2026-48172、CVSS 10.0）― 30,000超のサーバーに影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは5月26日、LiteSpeed User-End cPanel Pluginの権限昇格脆弱性（CVE-2026-48172、CVSSv4.0 スコア 10.0）をKEV（既知悪用脆弱性カタログ）に追加し、本日（5月29日）を修正期限とした。任意のcPanelユーザーアカウントがlsws.redisAble関数を悪用してルート権限でスクリプトを実行できる重大な欠陥で、30,000超の共有ホスティングサーバーへの影響が推定されている。影響を受けるバージョンは LiteSpeed User-End cPanel Plugin 2.3〜2.4.4であり、修正済みバージョン 2.4.5 以上（推奨: WHM Plugin v5.3.1.0 同梱の 2.4.7）への即時アップデートが必要だ。野外での積極的な悪用が確認されており、ホスティング事業者・サーバー管理者は今日中の対応が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-29 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
