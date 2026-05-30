@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 30 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://americanbazaaronline.com/2026/05/29/anthropic-launches-claude-opus-4-8-with-stronger-coding-481789/" target="_blank" rel="noopener">Anthropic、Claude Opus 4.8をリリース——動的ワークフロー・ファストモード3倍安で大幅強化、650億ドル調達も同時発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはClaude Opus 4.7から41日という短期間でOpus 4.8を発表した。エージェント型コーディングスコアが64.3%から69.2%に向上し、コードの欠陥見落とし率は前モデルの4分の1に改善されるなど正確性・誠実性も強化されている。Claude Codeでは数百の並列サブエージェントを起動できる「動的ワークフロー」（リサーチプレビュー）が新たに加わり、長時間・大規模タスクの自律処理が可能になった。ファストモードは2.5倍速で動作しながら旧モデル比3倍安となり、価格は据え置きのままAPI・Amazon Bedrock・Google Cloud・Microsoft Foundryで即日利用可能。あわせて650億ドルの資金調達を発表し、近日公開予定のMythosクラスモデルへの期待も高まっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.classmethod.jp/en/articles/20260529-amazon-bedrock-claude-opus-4-8/" target="_blank" rel="noopener">Claude Opus 4.8、Amazon Bedrockで即日提供開始——ガードレール・プロンプトキャッシュ等の既存機能と組み合わせ可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicが5月28日に発表したClaude Opus 4.8が翌5月29日、Amazon Bedrockで利用可能となった。Bedrockユーザーは既存のガードレール・プロンプトキャッシュ（最大90%コスト削減）・エージェントフレームワーク・Knowledge Basesとの組み合わせで即座に本番ワークフローを構築できる。価格はOpus 4.7から据え置きで提供されており、エージェント型ワークロードの実運用コストを増やさずに最新モデルへ移行できる点が最大のメリット。Amazon SageMakerやその他AWSサービスとの連携も引き続きサポートされる。AWS What's New公式ページにも同日付で掲載されており、今後はKiro IDEでの対応も予定されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet / FortiClient EMS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/05/29/forticlient-ems-vulnerability-infostealer/" target="_blank" rel="noopener">FortiClient EMS の API認証バイパス（CVE-2026-35616、CVSS 9.1）を悪用——EKZ情報窃取マルウェアを正規パッチに偽装し全管理端末を一括標的化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">FortiClient Endpoint Management Serverに存在するCVSS 9.1の認証バイパス脆弱性CVE-2026-35616を悪用し、「EKZ Infostealer」を正規のFortinетエンドポイントアップデートに偽装して配信する攻撃キャンペーンが活発化している。攻撃者はEMSの管理機能（PowerShellコマンドプッシュ）を通じて管理対象のすべてのエンドポイントに悪意あるコードを一括実行させており、EMSへの単一侵害が組織全体への波及につながる危険な構造をなす。EKZはChromeの暗号化パスワードストレージ回避技術を含む高度な認証情報窃取機能を持ち、ChromeおよびFirefoxの保存資格情報を標的とする。Fortinetは4月初旬にEMS 7.4.5・7.4.6向け緊急ホットフィックスを提供済みのため、未適用環境は直ちに更新が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Gogs（オープンソース Git サービス）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theregister.com/security/2026/05/29/no-fix-yet-for-critical-gogs-rce-bug-exploit-module-is-out/5248691" target="_blank" rel="noopener">セルフホスト型 Git サービス Gogs に未修正の CVSS 9.4 RCE 脆弱性——Metasploit モジュール公開済みで修正提供の見通し立たず</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">オープンソースのセルフホスト型GitサービスGogsの「Rebaseマージ」操作に、CVSSv4スコア9.4の未修正RCE脆弱性が確認された。攻撃者は`--exec`フラグを埋め込んだブランチ名を持つプルリクエストを作成することで、サーバー側の`git rebase`コマンドが任意シェルコードを実行する引数インジェクション（CWE-88）が問題の核心。デフォルト設定ではオープン登録が有効なため攻撃者は無料でアカウントを作成でき、事実上の認証なし悪用が可能。Rapid7が3月17日に開発チームへ報告後2ヶ月以上が経過しているが修正は提供されておらず、Metasploitの悪用モジュールも公開済み。Gogsインスタンスをインターネットに公開している組織は早急にアクセス制限または代替サービス（Gitea、GitLabなど）への移行を検討すべき。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-30 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
