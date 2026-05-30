@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 05 — 31 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">三菱UFJ・三井住友・みずほ / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://letsdatascience.com/news/japan-megabanks-gain-access-to-anthropic-mythos-a678ad86" target="_blank" rel="noopener">日本三大メガバンク、Anthropicの高性能AI「クロード・ミュトス」へのアクセスを取得</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">三菱UFJ銀行、三井住友銀行、みずほ銀行の三大メガバンクが、米Anthropicの高性能AIモデル「クロード・ミュトス（Claude Mythos）」へのアクセスを5月末までに取得した。同モデルは一般公開されていないが、システムの未発見の脆弱性を高精度で自動検出し、「既に数千件の高深刻度の脆弱性を発見済み」とAnthropicは説明している。金融庁は、AIを悪用したサイバー攻撃リスクへの短期対策として金融機関にシステム一時停止を含む措置の検討を求めており、公民連携ワーキンググループも発足した。三行はこのアクセスを活用し、自行のセキュリティ体制強化に役立てる予定だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NHKニュース / 経済産業省</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.web.nhk/newsweb/na/na-k10015135931000" target="_blank" rel="noopener">NHK取材：ミュトス入手企業が「ゲームチェンジを起こす能力」と証言——国内セキュリティ会社に問い合わせ殺到</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NHKはクロード・ミュトスへのアクセスを取得した米企業にインタビューを実施し、「数分でシステムの弱点を発見できる」「ゲームチェンジを起こす能力だ」との証言を公開した。国内のセキュリティ会社には影響範囲や対応策に関する企業からの問い合わせが急増している。経済産業省は電力を中心とした重要インフラ事業者24社に緊急点検を要請済みで、政府は6月の主要国首脳会議（G7サミット）に向けて国際的なAIサイバー攻撃対策の枠組み構築を急いでいる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.engadget.com/2180062/deepseek-permanently-reduces-the-price-of-its-flagship-v4-model-by-75-percent/" target="_blank" rel="noopener">DeepSeek V4-Pro API、75%引きプロモーション価格が本日より正規定価として永久固定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">DeepSeekは2026年5月31日15:59 UTC をもって、DeepSeek V4-Proの75%オフプロモーション価格（当初5月31日終了予定）を撤回せず、この割引価格を正式な定価として永久固定した。新たな正規価格は入力1Mトークンあたり$0.435・出力$0.87（旧定価の4分の1）となり、V4-Proは長文脈推論において圧倒的なコスト優位性を持つ。推論効率化の技術的な進歩をそのまま価格に転嫁した形であり、OpenAIやGoogleなど競合大手への価格競争圧力が一段と高まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.govinfosecurity.com/anthropic-expands-public-access-to-claude-mythos-ai-model-a-31778" target="_blank" rel="noopener">Anthropic、クロード・ミュトスへのアクセスを政府・金融機関向けにさらに拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年4月7日に限定公開した「クロード・ミュトス（Claude Mythos）」のアクセスを、日本を含む各国の政府機関・金融機関向けに順次拡大している。英国AIセキュリティ機関のテストでは約7割の確率でサイバー攻撃ターゲットから機密情報を取得できることが確認されており、「一般公開は危険すぎる」として限定提供にとどまる。AWS・Apple・Google・Microsoft・Ciscoなど約50社が参加するProject Glasswingの枠組みのもとで安全な活用が推進されており、G7では国際的なAIサイバー攻撃対策で合意している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/machine-learning/claude-opus-4-8-is-now-available-on-aws/" target="_blank" rel="noopener">Claude Opus 4.8、Amazon Bedrock で利用開始——1Mトークンコンテキストと強化されたエージェント能力</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのClaude Opus 4.8がAmazon Bedrockで利用可能になった。同モデルは1Mトークンのコンテキストウィンドウと128K最大出力トークン数を備え、長時間の自律的タスク実行・複雑な依存関係を持つマルチステージプロジェクトへの対応が強化されている。エラーからの自己回復能力と長文書を横断した情報合成の精度も向上しており、コーディングと複雑な推論で特に高い性能を発揮する。価格はOpus 4.7と同じく入力1Mトークンあたり$5・出力$25で、Amazon BedrockのbedRock-mantleおよびbedRock-runtimeから利用できる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Kiro</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-local-zones-in-istanbul-open-source-extenddb-kiro-web-and-more-may-25-2026/" target="_blank" rel="noopener">Kiro Web（プレビュー）提供開始——ブラウザからAI駆動の仕様主導型開発環境にアクセス可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSのAI搭載開発環境「Kiro」にWebインターフェースが追加され、デスクトップIDEのインストール不要でブラウザから直接利用できるようになった。Kiro Webはエージェントチャット・仕様主導型開発・自律的なタスク実行をサポートし、プルリクエストの自動作成やGitHub Issues連携にも対応。KiroのPro・Pro+・Powerプランユーザー向けにapp.kiro.devで利用可能で、5月29日までは標準レートの半額でKiroクレジットが消費される優待価格が設定されていた。マルチリポジトリセッションとサンドボックス分離機能も提供される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Palo Alto Networks / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.cybertechworld.co.in/index.php/2026/05/30/pan-os-globalprotect-authentication-bypass-cve-2026-0257-under-active-exploitation/" target="_blank" rel="noopener">PAN-OS GlobalProtect 認証バイパス脆弱性（CVE-2026-0257）が活発に悪用中——CISAがKEVに追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Palo Alto Networks は PAN-OS の GlobalProtect に存在する認証バイパス脆弱性（CVE-2026-0257、CVSS 7.8）が実際に悪用されていることを確認し、5月29日に勧告を更新した。攻撃者は認証オーバーライドCookieを偽造し、未パッチのデバイスに対して不正なVPN接続を確立できる。Rapid7は5月17日と21日の2波にわたる攻撃を観測しており、CISAは同日この脆弱性をKnown Exploited Vulnerabilities（KEV）カタログに追加した。認証オーバーライド機能が有効で証明書設定が特定の条件を満たすシステムが影響を受けるため、早急なパッチ適用が推奨されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NHKニュース / IPA / 政府</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-05-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.web.nhk/newsweb/na/na-k10015133741000" target="_blank" rel="noopener">「数分でシステムの弱点が…」NHK検証：クロード・ミュトスなど最新AIのサイバー攻撃能力が示す新たな脅威</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NHKが最新AI「クロード・ミュトス」を用いたサイバー攻撃能力の検証結果を報じた。同AIはシステムの脆弱性を従来のツールでは発見できなかったレベルで自動検出できるとされ、サイバー攻撃の速度と精度が根本的に変わる可能性がある。英国のAIセキュリティ機関による実験では約7割の確率で攻撃目標からの情報取得に成功しており、サイバー防御の前提となる「発見から修正までのリードタイム」が短縮される恐れが指摘されている。政府はゼロトラスト移行の加速と重要インフラへのAI活用型脆弱性点検義務化を検討中だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-05-31 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
