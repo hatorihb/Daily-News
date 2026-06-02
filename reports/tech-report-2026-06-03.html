@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 03 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Build 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://blogs.microsoft.com/blog/2026/06/02/microsoft-build-2026-be-yourself-at-work/" target="_blank" rel="noopener">Microsoft Build 2026開幕、WindowsをAIエージェントOSへ転換する戦略が明らかに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">6月2日（現地時間）、MicrosoftがサンフランシスコでBuild 2026（〜6月4日）を開幕した。Satya NadellaのキーノートではWindowsをAIエージェントの実行プラットフォームと位置付ける「Aion 1.0 Plan」が発表され、IntelやAMD・Qualcomm製NPUを活用してPC上でローカル推論とツール呼び出しが可能になる。業務知識をAIに供給するコンテキスト層「Microsoft IQ」（Work IQ・Fabric IQ・Web IQ）がGA（一般提供）を開始し、GitHub CopilotやAzure AI Foundryへ広く統合される。国内でWindowsベースのDX推進を行う企業にとっては、エージェント型AIの実装環境が整う転換点となりそうだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">COMPUTEX 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.prnewswire.com/news-releases/computex-2026-opens-amid-surging-global-demand-for-ai-infrastructure-302788497.html" target="_blank" rel="noopener">COMPUTEX 2026が台湾で開幕、日本含む33ヶ国・1,500社がAIインフラを展示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">世界最大級のIT総合展示会COMPUTEX 2026が6月2日〜5日、台北・南港展示センターで開幕した。「AI Together」をテーマに33ヶ国から約1,500社・6,000小間の過去最大規模で開催され、日本を含む各国の国家パビリオンが設置された。AIサーバー・GPUクラスタ・エッジAIデバイスなど次世代AIインフラが主役展示となっており、サプライチェーン上流での日本企業の動向が注目される。国内製造業・半導体・電子部品各社のDX製品展開に直結するイベントであり、今後の国内IT調達・製品ロードマップへの反映が注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft AI Superintelligence</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.thurrott.com/a-i/336960/build-2026-microsoft-launches-first-flagship-reasoning-ai-model-and-more" target="_blank" rel="noopener">Microsoft初の推論AI「MAI-Thinking-1」登場、Claude Opus 4.6相当のコーディング性能をプライベートプレビューで提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Build 2026でMicrosoftのAI Superintelligenceチームが7種類の新AIモデルファミリーを発表した。なかでも注目は同社初の推論特化型モデル「MAI-Thinking-1」で、350億アクティブパラメータ・コンテキスト長256Kトークンを持ち、SWE Bench ProベンチマークでAnthropic Claude Opus 4.6と同等のコーディング性能を示す。現在Microsoft Foundryでプライベートプレビューが開始されており、Fireworks AI・Baseten・Open Routerでも提供予定だ。同時に、画像生成・変換対応の「MAI-Image-2.5」（Flashバリアント付）、43言語の高精度音声認識「MAI-Transcribe-1.5」、15言語以上に拡大した「MAI-Voice-2」、GitHubおよびVS Code向けコーディングモデル「MAI-Code-1」も発表された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / GitHub / Windows</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://windowsforum.com/threads/microsoft-build-2026-ai-agents-copilot-super-app-and-the-next-windows-developer-era.421479/" target="_blank" rel="noopener">GitHub Copilotデスクトップアプリ・Aion 1.0・自律エージェント「Autopilot Scout」をBuild 2026で発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Build 2026でGitHub Copilotのネイティブデスクトップアプリがプレビュー公開され、エージェント型ワークフローをローカル環境から直接操作できるようになった。NPUを活用してPC上でローカル推論・ツール呼び出しを実現する「Aion 1.0 Plan」も発表され、Windows Developer Runtime・Intelligent Terminal・Microsoft Execution Containersなど開発者向けの新機能群も登場した。また、M365シグナルを利用した業務知識レイヤー「Work IQ」・構造化ビジネスデータの「Fabric IQ」・Webグラウンディングの「Web IQ」から構成される「Microsoft IQ」がGA（一般提供）となった。さらに、長時間自律エージェントの第一弾として「Autopilot Scout」が紹介され、エージェントAI時代の幕開けを印象付けた。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/events/summits/toronto/" target="_blank" rel="noopener">AWS Summit Toronto 2026が本日開幕、145以上のセッションでエージェントAI・セキュリティ・DXを特集</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">本日（2026-06-03）、トロントのMetro Toronto Convention Centreで「AWS Summit Toronto 2026」が開幕した。午前11時からのキーノートを含む145以上の専門セッションが設けられ、エージェントAI・サーバーレス・クラウドセキュリティ・デジタルトランスフォーメーションが主要テーマとなっている。注目の展示技術には、AIアプリ向けネイティブベクター索引を持つAmazon S3 Vectors、マネージドApache Iceberg提供のS3 Tables、MCP経由でネットワーク経路分析とVPC設定検証を自然言語で行える「AWS Network MCP Server」などが紹介される。ビルダー向けの新形式セッション「Builder Sessions」も設けられ、ハンズオン形式でAWSのAIエージェント構築を体験できる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/events/summits/india/" target="_blank" rel="noopener">AWS Summit India Online 2026も本日開催、アジア太平洋地域でのクラウドAI採用を加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">本日（2026-06-03）、AWS Summit India Online 2026も同時開催され、インドおよびアジア太平洋地域の開発者・企業向けに無料バーチャルイベントが実施されている。クラウド移行・生成AI・セキュリティ・デジタルトランスフォーメーションを扱うキーノートやハンズオンセッションが提供される。AWS Summit Torontoと合わせ、本日はグローバルで大型のAWSイベントが重なる日程となっており、新機能・ベストプラクティスが集中的に発信される。Amazon Bedrockを活用したRAGアプリ構築、Amazon OpenSearch Serverless次世代版（5月GA）によるエージェントAI向け検索基盤など、直近リリース機能の解説セッションも多数予定されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securebulletin.com/cisa-adds-two-actively-exploited-microsoft-defender-zero-days-to-kev-catalog-patch-by-june-3/" target="_blank" rel="noopener">本日がCISAのMicrosoft Defender 0-dayパッチ期限 — CVE-2026-41091・CVE-2026-45498が実際に悪用中</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは5月20日、Microsoft Defender の2件のゼロデイ脆弱性（CVE-2026-41091・CVE-2026-45498）を既知悪用脆弱性カタログ（KEV）に追加し、本日2026年6月3日を連邦民間機関（FCEB）への修正期限（BOD 22-01）として設定した。CVE-2026-41091（CVSS 7.8）はMicrosoft Malware Protection Engineのリンク解決不備によるローカル権限昇格（SYSTEM取得）の脆弱性で、「RedSun」とも呼ばれる。CVE-2026-45498（CVSS 4.0）はDefenderをサービス不能（DoS）状態にする脆弱性で「UnDefend」と称される。両脆弱性はすでに実際の攻撃で悪用が確認されており、修正版はMicrosoft Defender Antimalware Platform 1.1.26040.8 および 4.18.26040.7 で提供済み。連邦機関以外の組織も即時パッチ適用が推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Windows Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/microsoft/critical-windows-netlogon-remote-code-execution-flaw-now-exploited-in-attacks/" target="_blank" rel="noopener">Windows NetlogonのRCE脆弱性CVE-2026-41089が野生での悪用を確認、ドメインコントローラーに重大なリスク</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WindowsのNetlogonサービスに存在するスタックベースのバッファオーバーフロー脆弱性（CVE-2026-41089）が野生で悪用されていることが確認された。認証なしのリモートコード実行（0-Click RCE）が可能で、サポート中の全Windowsサーバーバージョン（Windows Server 2025含む）に影響する。攻撃者はドメインコントローラーに細工されたネットワークリクエストを送信するだけで任意コードを実行でき、2020年の「ZeroLogon（CVE-2020-1472）」同様にドメイン全体の乗っ取りにつながる危険性が高い。ベルギーのサイバーセキュリティセンター（CCB）は組織に対し即時パッチ適用を強く推奨しており、日本企業のActive Directory/ドメインコントローラー管理者も本脆弱性の修正を最優先で実施する必要がある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-06-03 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
