@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>hatorih_X's DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-domestic .section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 06 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://releasebot.io/updates/openai/chatgpt" target="_blank" rel="noopener">ChatGPT、GPT-5.5 Instant を全ユーザーのデフォルトモデルに切り替え</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは6月5日、ChatGPTのデフォルトモデルをGPT-5.3 InstantからGPT-5.5 Instantへ全ユーザー向けに切り替えた。回答の正確さ・簡潔さ・画像やSTEM領域での理解精度が向上し、ウェブ検索との連携も改善されている。PlusおよびProユーザーには記憶容量が2倍に拡張されたメモリ機能が提供される。旧モデルGPT-5.3 Instantはモデル設定から3か月間引き続き選択可能で、その後廃止される予定だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Alibaba Cloud / MiniMax</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pricepertoken.com/news/model-releases" target="_blank" rel="noopener">Qwen3 Coder Next・MiniMax M2.5/M2.7 Highspeed モデルが一斉リリース</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">6月5日、Alibaba CloudがコードLLM「Qwen3 Coder Next」をリリースし、前世代からコード生成精度と実行速度が向上した。同日MiniMaxも「M2.5 Highspeed」「M2.7 Highspeed」「M2.7」の3モデルを公開し、大規模商用利用を想定した速度最適化とコスト効率を訴求している。オープンソース・クローズドの両陣営でコーディング特化型LLMの競争が激化している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/get-started-with-openai-gpt-5-5-gpt-5-4-models-and-codex-on-amazon-bedrock/" target="_blank" rel="noopener">Amazon Bedrock で OpenAI GPT-5.5・GPT-5.4・Codex の一般提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはOpenAI GPT-5.5・GPT-5.4・コーディングエージェントCodexをAmazon Bedrockで一般提供開始した。Responses API経由での利用に対応しており、既存のAWSインフラを活用してOpenAIの最新モデルへアクセスできる。GovCloud（US-West）リージョンでのGPT-5.4提供も同時に開始され、数百万のAWS顧客が既存プラットフォーム上でOpenAIモデルをシームレスに利用可能になった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">Amazon Quick 発表：デスクトップアプリ対応の AI 業務アシスタント</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは「What's Next with AWS 2026」イベントでAmazon Quickを発表した。デスクトップアプリを備えた職場向けAIアシスタントで、業務ツールとの多数の統合機能を持つ。ドキュメント作成・メール対応・タスク管理など日常業務を横断したサポートにより、企業従業員の生産性向上を目指す製品だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Connect</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">Amazon Connect がサプライチェーン・採用・CX・医療向け Agentic AI 4 製品を拡充</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon ConnectをAgentic（自律型）AIのプラットフォームへ拡張した。サプライチェーン管理・採用支援・カスタマーエクスペリエンス・ヘルスケアの4領域に特化したAI製品群が追加される。LLMを活用した自律的な意思決定とアクション実行が可能で、コンタクトセンターや業務部門の自動化レベルを大幅に引き上げる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/new/" target="_blank" rel="noopener">AWS MCP Server 一般提供：AI エージェントが全 AWS サービスへ安全にアクセス可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはマネージド型リモート MCP サーバー「AWS MCP Server」をGA（一般提供）した。AIエージェントやコーディングアシスタントが全AWSサービスへ認証済みのセキュアなアクセスを行えるようになる。標準化されたMCP（Model Context Protocol）プロトコルを採用しており、Claude Codeなど主要AI開発ツールとの統合がすぐに行える。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/new/" target="_blank" rel="noopener">AWS Interconnect multicloud：他社クラウド VPC へのプライベート接続サービス発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon VPCと他クラウドプロバイダーのVPCをパブリックインターネット非経由で直接接続するマネージドサービス「AWS Interconnect multicloud」を発表した。専用帯域の安定した接続でマルチクラウド環境のセキュリティと性能を確保する。500 Mbpsの無料枠が提供されており、マルチクラウド戦略への移行コストを抑えやすい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Android</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/06/google-june-2026-android-update-patches.html" target="_blank" rel="noopener">Android 6 月セキュリティアップデート：124 件修正・ゼロデイ CVE-2025-48595 の悪用を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年6月のAndroidセキュリティアップデートを公開し、計124件の脆弱性を修正した。特に特権昇格（EoP）の脆弱性CVE-2025-48595（CVSS 8.4）はユーザー操作不要で権限昇格が可能なゼロデイとして標的型攻撃で悪用が確認されている。Android 14・15・16・16 QPR2が影響を受け、パッチレベル2026-06-05での適用が推奨される。CISAは6月2日にKEVカタログへ追加し、連邦機関に対して6月5日までの修正を義務化した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/cisco-patches-another-sd-wan-zero-day-the-sixth-exploited-in-2026/" target="_blank" rel="noopener">Cisco SD-WAN に 2026 年 6 件目のゼロデイ：CVE-2026-20182 を UAT-8616 が悪用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CiscoはSD-WAN製品の新たなゼロデイ脆弱性CVE-2026-20182のパッチを公開した。2026年に発見・悪用されたSD-WANゼロデイとしては6件目となり、UAT-8616と特定された高度な脅威アクターによる実際の悪用が確認されている。関連脆弱性CVE-2026-20127・CVE-2026-20122・CVE-2026-20128も同時に修正されており、SD-WANを展開する組織は早急にアップデートを適用することが強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span>2026-06-06 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
