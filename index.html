@@ -71,6 +71,54 @@ main{flex:1;padding:3rem 0}
   font-size:.9rem;
   letter-spacing:.05em;
 }
+.month-label{
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--black);
+  padding:.6rem 0;
+  margin-top:2rem;
+  border-bottom:2px solid var(--black);
+}
+.month-label:first-child{margin-top:0}
+details.month-accordion{border-bottom:1px solid var(--border)}
+details.month-accordion > summary{
+  list-style:none;
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  cursor:pointer;
+  padding:1.1rem 0;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--mid);
+  transition:color .15s;
+  user-select:none;
+}
+details.month-accordion > summary::-webkit-details-marker{display:none}
+details.month-accordion > summary::before{
+  content:'';
+  display:inline-block;
+  width:.45rem;
+  height:.45rem;
+  border-right:2px solid currentColor;
+  border-bottom:2px solid currentColor;
+  transform:rotate(-45deg);
+  transition:transform .2s;
+  flex-shrink:0;
+}
+details.month-accordion[open] > summary::before{transform:rotate(45deg);margin-top:-.2rem}
+details.month-accordion > summary:hover{color:var(--black)}
+.month-count{
+  font-size:.65rem;
+  font-weight:400;
+  letter-spacing:.05em;
+  color:var(--mid);
+  text-transform:none;
+}
 footer{background:var(--black);color:#555;padding:2rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:.9rem;color:var(--white);letter-spacing:-.01em}
@@ -97,9 +145,9 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 <main>
   <div class="container">
     <p class="section-label">Reports</p>
-    <ul class="report-list" id="list">
-      <li class="loading">読み込み中...</li>
-    </ul>
+    <div id="list">
+      <p class="loading">読み込み中...</p>
+    </div>
   </div>
 </main>
 
@@ -128,7 +176,7 @@ fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
     const list = document.getElementById('list');
 
     if (reports.length === 0) {
-      list.innerHTML = '<li class="empty">レポートはまだありません。</li>';
+      list.innerHTML = '<p class="empty">レポートはまだありません。</p>';
       return;
     }
 
@@ -140,32 +188,70 @@ fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
       document.getElementById('header-date').textContent = `${m}/${d}`;
     }
 
-    list.innerHTML = '';
+    const dayNames = ['日','月','火','水','木','金','土'];
+    const currentYM = reports[0].name.slice(7, 14); // YYYY-MM of latest
+
+    // group by YYYY-MM
+    const groups = new Map();
     reports.forEach((f, i) => {
       const dateStr = (f.name.match(/(\d{4}-\d{2}-\d{2})/) || [])[1];
-      const [y, m, d] = dateStr.split('-');
-      const label = `${y}年${parseInt(m)}月${parseInt(d)}日`;
-      const dayNames = ['日','月','火','水','木','金','土'];
-      const dow = dayNames[new Date(`${dateStr}T00:00:00+09:00`).getDay()];
-      const url = `${BASE}/reports/${f.name}`;
-      const num = String(reports.length - i).padStart(2, '0');
-      const isLatest = i === 0;
+      const ym = dateStr.slice(0, 7);
+      if (!groups.has(ym)) groups.set(ym, []);
+      groups.get(ym).push({ f, i, dateStr });
+    });
 
-      const li = document.createElement('li');
-      li.className = 'report-item' + (isLatest ? ' latest' : '');
-      li.innerHTML = `
-        <div class="report-num">${num}</div>
-        <div class="report-info">
-          <div class="report-date">${label}（${dow}）</div>
-          <div class="report-date-sub">${isLatest ? 'Latest &mdash; ' : ''}${dateStr}</div>
-        </div>
-        <a class="report-btn" href="${url}" target="_blank" rel="noopener">読む &rarr;</a>`;
-      list.appendChild(li);
+    list.innerHTML = '';
+    let globalNum = reports.length;
+
+    groups.forEach((items, ym) => {
+      const [y, m] = ym.split('-');
+      const monthLabel = `${y}年${parseInt(m)}月`;
+      const isCurrent = ym === currentYM;
+
+      // build <ul> of report items
+      const ul = document.createElement('ul');
+      ul.className = 'report-list';
+      items.forEach(({ f, i, dateStr }) => {
+        const [, , d] = dateStr.split('-');
+        const label = `${y}年${parseInt(m)}月${parseInt(d)}日`;
+        const dow = dayNames[new Date(`${dateStr}T00:00:00+09:00`).getDay()];
+        const url = `${BASE}/reports/${f.name}`;
+        const num = String(globalNum--).padStart(2, '0');
+        const isLatest = i === 0;
+        const li = document.createElement('li');
+        li.className = 'report-item' + (isLatest ? ' latest' : '');
+        li.innerHTML = `
+          <div class="report-num">${num}</div>
+          <div class="report-info">
+            <div class="report-date">${label}（${dow}）</div>
+            <div class="report-date-sub">${isLatest ? 'Latest &mdash; ' : ''}${dateStr}</div>
+          </div>
+          <a class="report-btn" href="${url}" target="_blank" rel="noopener">読む &rarr;</a>`;
+        ul.appendChild(li);
+      });
+
+      if (isCurrent) {
+        // current month: flat, no accordion
+        const p = document.createElement('p');
+        p.className = 'month-label';
+        p.textContent = monthLabel;
+        list.appendChild(p);
+        list.appendChild(ul);
+      } else {
+        // previous months: closed accordion
+        const details = document.createElement('details');
+        details.className = 'month-accordion';
+        const summary = document.createElement('summary');
+        summary.innerHTML = `${monthLabel}<span class="month-count">　${items.length}件</span>`;
+        details.appendChild(summary);
+        details.appendChild(ul);
+        list.appendChild(details);
+      }
     });
   })
   .catch(() => {
     document.getElementById('list').innerHTML =
-      '<li class="error">レポートの取得に失敗しました。ページを再読み込みしてください。</li>';
+      '<p class="error">レポートの取得に失敗しました。ページを再読み込みしてください。</p>';
   });
 </script>
 
