@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 08 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTT グループ / ジャパンラグビー リーグワン</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://league-one.jp/news/5963" target="_blank" rel="noopener">NTT IOWN、ラグビーリーグワン決勝でリモートTMO（ビデオ判定）を初本番運用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTとNTTドコモビジネスは6月7日、国立競技場（MUFGスタジアム）で開催されたジャパンラグビー リーグワン2025-26プレーオフ決勝において、IOWN（Innovative Optical and Wireless Network）の「docomo business APN Plus」を用いたリモートTMO（テレビジョンマッチオフィシャル）を初めて本番環境で運用した。TMO担当拠点を大手町に設置し、競技会場と低遅延・大容量回線で接続することで、リモートでのビデオ判定が実現。PoCや実証実験ではなく、プロスポーツの本番審判業務にIOWNが初適用された歴史的事例となった。試合数増加に伴う審判人材の確保コスト削減や、判定精度・審議時間の短縮への貢献が期待されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple / Google</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://developer.apple.com/wwdc26/" target="_blank" rel="noopener">Apple WWDC 2026 開幕：Google Gemini 搭載の新 Siri と iOS 27 を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Apple は6月8日（米国時間）のWWDC 2026基調講演（Tim Cook 氏最後の登壇）でiOS 27 および Gemini 搭載の全面刷新版 Siri を正式発表した。新 Siri は独立アプリ化し、メール・写真・ファイルへの個人コンテキストアクセス、画面認識、アプリをまたいだ深い連携を実現。AppleはGoogleに年間約10億ドルを支払い、約1.2兆パラメータのカスタム Gemini モデルをクラウド処理に採用する。iOS 27 の写真アプリには生成AI機能（Extend／Enhance／Reframe）も追加。iPhone のAI体験が大きく変わる節目のリリースとなる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/institute/recursive-self-improvement" target="_blank" rel="noopener">Anthropic、AI 再帰的自己改善リスクを公開警告――業界横断での開発一時停止メカニズムを提唱</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは先週、AI が自律的にタスクを実行する能力が約4ヶ月ごとに倍増しており、AI 自身が後継モデルを設計・開発する「再帰的自己改善」の段階に近づいていると警告するブログを発表した。同社共同創業者 Jack Clark 氏らは、リスクが高まった際に主要 AI ラボが協調して開発を一時停止できるメカニズムの整備を世界に呼びかけた。これに対し OpenAI は、規制や開発ペースの判断は民主的政府が担うべきと反論。AI 安全性をめぐる業界内の緊張が高まる中、重要な論点を投げかける提言として広く注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon ECS / AWS Fargate</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-ecs-fargate-32vcpu/" target="_blank" rel="noopener">Amazon ECS with AWS Fargate が 32 vCPU インスタンス構成をサポート開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS は Amazon ECS with Fargate において 32 vCPU のコンピューティング構成のサポートを開始した。これまでより大きな CPU リソースを Fargate のサーバーレス環境で利用できるようになり、ビルドパイプライン・大規模データ処理・機械学習推論など CPU 集約型ワークロードでの性能が向上する。EC2インスタンスを自分でプロビジョニング・管理することなく、Fargate のフルマネージドな実行環境のままハイコンピューティング需要に対応できる点が利点。既存の ECS タスク定義を更新するだけで利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EKS / Amazon CloudWatch</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-06-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-eks-capabilities-logging/" target="_blank" rel="noopener">Amazon EKS Capabilities が Amazon CloudWatch Vended Logs に対応――ログコスト削減と一元管理を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS は Amazon EKS の Managed Capabilities（Auto Mode によるノード管理等）を、CloudWatch Vended Logs のログ配信ソースとして設定できるようにした。Vended Logs は AWS サービスが顧客に代わって直接 CloudWatch Logs へ書き込む仕組みで、ボリューム割引が適用されるため大量ログのコスト削減が期待できる。これまで手動設定が必要だったEKSクラスターの各種ログを一元的に CloudWatch で収集・分析できるようになり、トラブルシューティングの効率化に貢献する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CISA / Mandiant</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/06/07/week-in-review-cisco-sd-wan-0-day-exploited-june-2026-patch-tuesday-forecast/" target="_blank" rel="noopener">Cisco SD-WAN 今年7件目のゼロデイ CVE-2026-20245 が悪用確認――パッチ・回避策なしで影響拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Mandiantが報告した Cisco Catalyst SD-WAN Manager の CLIコマンドインジェクション脆弱性 CVE-2026-20245（CVSS 7.8）が悪用確認済みであることが明らかになった。netadmin 権限を持つ攻撃者が細工ファイルをアップロードすることで root 権限でのコマンド実行が可能となり、エッジデバイスへの設定変更も観測されている。現時点でパッチもワークアラウンドも存在せず、Cisco は前回修正版（CVE-2026-20182対応）へのアップグレードとエッジデバイス設定の確認を推奨。2026年に入り Cisco SD-WAN の悪用確認済みゼロデイは計7件となり、SD-WAN インフラを運用する組織は速やかな対応が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Patch Tuesday</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/06/07/week-in-review-cisco-sd-wan-0-day-exploited-june-2026-patch-tuesday-forecast/" target="_blank" rel="noopener">2026年6月 Patch Tuesday（6月9日予定）――Microsoft の月例セキュリティ更新が今週実施</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft は6月第2火曜日にあたる6月9日に2026年6月度の月例セキュリティ更新（Patch Tuesday）を実施する予定。Help Net Security の週次レビュー（6月7日付）は本更新への注目を促しており、Windows・Office・Azure 等の各製品にわたる脆弱性修正が見込まれる。直前まで悪用が確認されていた既知の脆弱性や、6月に発見された新たな CVE への対応が含まれる可能性があるため、組織は6月9日以降すみやかにパッチ適用状況を確認することが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-08 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
