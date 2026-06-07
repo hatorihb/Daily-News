@@ -178,7 +178,7 @@ fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
     }
 
     const dayNames = ['日','月','火','水','木','金','土'];
-    const currentYM = reports[0].name.slice(7, 14); // YYYY-MM of latest
+    const currentYM = (reports[0].name.match(/(\d{4}-\d{2}-\d{2})/) || [])[1].slice(0, 7);
 
     // group by YYYY-MM
     const groups = new Map();
