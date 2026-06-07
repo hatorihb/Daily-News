@@ -71,17 +71,6 @@ main{flex:1;padding:3rem 0}
   font-size:.9rem;
   letter-spacing:.05em;
 }
-.month-label{
-  font-size:.75rem;
-  font-weight:700;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:var(--black);
-  padding:.6rem 0;
-  margin-top:2rem;
-  border-bottom:2px solid var(--black);
-}
-.month-label:first-child{margin-top:0}
 details.month-accordion{border-bottom:1px solid var(--border)}
 details.month-accordion > summary{
   list-style:none;
@@ -230,23 +219,14 @@ fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
         ul.appendChild(li);
       });
 
-      if (isCurrent) {
-        // current month: flat, no accordion
-        const p = document.createElement('p');
-        p.className = 'month-label';
-        p.textContent = monthLabel;
-        list.appendChild(p);
-        list.appendChild(ul);
-      } else {
-        // previous months: closed accordion
-        const details = document.createElement('details');
-        details.className = 'month-accordion';
-        const summary = document.createElement('summary');
-        summary.innerHTML = `${monthLabel}<span class="month-count">　${items.length}件</span>`;
-        details.appendChild(summary);
-        details.appendChild(ul);
-        list.appendChild(details);
-      }
+      const details = document.createElement('details');
+      details.className = 'month-accordion';
+      if (isCurrent) details.open = true;
+      const summary = document.createElement('summary');
+      summary.innerHTML = `${monthLabel}<span class="month-count">　${items.length}件</span>`;
+      details.appendChild(summary);
+      details.appendChild(ul);
+      list.appendChild(details);
     });
   })
   .catch(() => {
