@@ -65,7 +65,7 @@ aws.amazon.com が 403 を返した場合は `https://www.amazonaws.cn/en/new/20
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>hatorih_X's DX・AI・AWS Update</title>
+<title>DX・AI・AWS Update</title>
 <style>
 :root{
   --black:#0a0a0a;
@@ -136,7 +136,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
 <header>
   <div class="container">
-    <h1>hatorih_X's DX・AI・AWS Update</h1>
+    <h1>DX・AI・AWS Update</h1>
     <p class="header-date">{YYYY} — {MM} — {DD} &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
   </div>
 </header>
@@ -239,7 +239,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
 <footer>
   <div class="container">
-    <span class="footer-brand">hatorih_X's DX・AI・AWS Update</span>
+    <span class="footer-brand">DX・AI・AWS Update</span>
     <span>{YYYY-MM-DD} &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
   </div>
 </footer>
@@ -254,7 +254,7 @@ git checkout -b claude/daily-report 2>/dev/null || git checkout claude/daily-rep
 mkdir -p reports
 # 上記HTMLを reports/tech-report-{YYYY-MM-DD}.html として保存
 git add reports/tech-report-{YYYY-MM-DD}.html
-git commit -m "report: hatorih_X AI・AWS daily report {YYYY-MM-DD}"
+git commit -m "report: AI・AWS daily report {YYYY-MM-DD}"
 git push origin claude/daily-report
 ```
 
