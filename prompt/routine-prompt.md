@@ -128,8 +128,6 @@ summary:hover{color:var(--black);border-color:var(--black)}
 footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
 footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
 .footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
-.close-btn{position:fixed;top:1rem;right:1rem;width:2.25rem;height:2.25rem;background:var(--black);color:var(--white);border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1.2rem;z-index:200;transition:background .15s}
-.close-btn:hover{background:var(--red)}
 @media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
 @media print{nav,footer{display:none}.card{break-inside:avoid}}
 </style>
@@ -245,20 +243,6 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     <span>{YYYY-MM-DD} &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
   </div>
 </footer>
-
-<button class="close-btn" id="close-btn" title="閉じる">✕</button>
-<script>
-(function(){
-  var m = location.pathname.match(/tech-report-(\d{4}-\d{2}-\d{2})\.html/);
-  if (!m) return;
-  var today = new Date().toLocaleDateString('sv', {timeZone: 'Asia/Tokyo'});
-  if (m[1] === today) {
-    var btn = document.getElementById('close-btn');
-    btn.style.display = 'flex';
-    btn.addEventListener('click', function(){ window.close(); });
-  }
-})();
-</script>
 
 </body>
 </html>
