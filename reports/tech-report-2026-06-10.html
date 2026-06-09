@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 10 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ソフトバンク / SB Intuitions</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ledge.ai/articles/softbank_sarashina_llm_sovereign_ai_service_launch_2026" target="_blank" rel="noopener">ソフトバンク、Oracle Alloy基盤で国産LLM「Sarashina」活用の法人向けソブリンAIサービス提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ソフトバンクは SB Intuitions 開発の国産大規模言語モデル「Sarashina」を活用した法人向け生成AIサービスを 2026 年 6 月より順次提供開始した。Oracle Alloy を基盤とする「Cloud PF Type A」を自社国内データセンターで運用し、機密データを外部に持ち出さない「ソブリン AI」を実現。文章校正・レポート自動生成・ナレッジ連携プログラミング支援に加え、エージェントやマルチエージェントシステムの構築にも対応する。企業・自治体のデータ主権を確保しながら、幅広い業務効率化を支援するクラウドサービスとして注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">INTLOOP / 国内AIスタートアップ</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-06-10</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000180.000023636.html" target="_blank" rel="noopener">INTLOOP Ventures MIX 2026 開催 — AIスタートアップ・大企業・VCが一堂に会するカンファレンス</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">INTLOOP 株式会社は AI 社会実装をテーマにしたカンファレンス「INTLOOP Ventures MIX 2026」を 2026 年 6 月 10 日（水）に開催した。AI スタートアップ CEO・大企業の DX 責任者・VC/CVC が集結し、産業 AI 活用を多角的に議論。AICX 協会代表理事・日本マクドナルド CTO らが登壇するほか、選抜スタートアップによるピッチコンテストや展示も実施され、事業連携・投資機会の創出を図る場となっている。国内 AI 実装の最前線を知る上で参考になる情報が公開される見込みだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/06/09/wwdc-2026-everything-announced-on-siri-ai-os-27-apple-intelligence-and-more/" target="_blank" rel="noopener">Apple WWDC 2026: 「Siri AI」全面刷新発表 — Google Gemini 搭載・iOS 27・macOS 27「Golden Gate」も同時公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Apple は WWDC 2026 にて Siri をゼロから再設計した「Siri AI」を発表した。Google Gemini を搭載しマルチモーダル対応・クロスアプリ文脈理解・音声表現のカスタマイズが可能となり、単体アプリとしても利用できるようになる。あわせて iOS 27・iPadOS 27・macOS 27「Golden Gate」・watchOS 27 など OS ファミリーを一斉公開し、アプリ起動速度最大 30% 改善・AirDrop 転送最大 80% 高速化を実現。iPhone 11 以降がアップデート対象となり、Siri AI の全機能は iPhone Air / 17 Pro・iPad (M4)・Mac (M3) 以降で利用可能。Tim Cook CEO にとって最後の WWDC となった節目の発表でもある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/index/introducing-lockdown-mode-and-elevated-risk-labels-in-chatgpt/" target="_blank" rel="noopener">OpenAI、ChatGPT「ロックダウンモード」展開 — プロンプトインジェクションによるデータ流出を抑止</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI は ChatGPT にオプションのセキュリティ設定「ロックダウンモード」を全個人アカウントへ展開し始めた。有効化するとライブ Web アクセス・Deep Research・Agent Mode・Canvas ネットワーク・ファイルダウンロードなど外部接続機能が制限され、プロンプトインジェクション攻撃によるデータ流出リスクを低減できる。悪意ある Web ページに埋め込まれた隠し指示を実行させる攻撃手法への対策として設計されており、機密データを扱う組織や個人に特に有効だ。同時に「Elevated Risk ラベル」機能も導入し、高リスクな操作を可視化する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/machine-learning/get-to-your-first-working-agent-in-minutes-announcing-new-features-in-amazon-bedrock-agentcore/" target="_blank" rel="noopener">Amazon Bedrock AgentCore 新機能発表 — AIエージェント初稼働までの時間を大幅短縮（AWS Summit LA）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS は AWS Summit Los Angeles 2026（6 月 9 日）に合わせ、Amazon Bedrock AgentCore の新機能を発表した。開発者が最初の AI エージェントを数分で稼働させるための機能強化が中心で、セキュアなエージェントの任意スケールでのデプロイ・運用を支援する。Step Functions との統合により、ワークフロー内でエージェント推論ステップの追加・並列実行・人間承認フローの組み込みが可能になった。CloudWatch 上でのエージェント入出力・トークン使用量・実行時間の可視化も強化され、本番運用への移行が加速する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/bedrock-openai-models" target="_blank" rel="noopener">Amazon Bedrock で OpenAI GPT-5.5・GPT-5.4・Codex が GA — AWS Summit LA でエンタープライズ AI 戦略を強調</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit Los Angeles に合わせ AWS は、Amazon Bedrock 上で OpenAI の GPT-5.5・GPT-5.4・Codex が一般提供（GA）になったことを改めて強調した。GPT-5.5 は OpenAI 最高性能モデルでエージェント型コーディング・データ分析・マルチステップタスクに優れ、GPT-5.4 は最高のコストパフォーマンスを提供する。Codex は VS Code・JetBrains・Xcode 等の IDE 統合に対応した AI コーディングエージェントとして利用可能。利用料金は OpenAI 直接利用と同一で、既存の AWS コミットメント枠内でカウントされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/microsoft-patch-tuesday-june-2026/" target="_blank" rel="noopener">2026年6月 Microsoft 月例パッチ — 198 件修正、ゼロデイ 3 件（CVE-2026-45586 含む）を含む大規模更新</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft は 2026 年 6 月 9 日の月例パッチ（Patch Tuesday）にて 198 件の脆弱性を修正した。CVE-2026-45586 を含むゼロデイ 3 件はパッチ公開前から悪用・公開済みであり、RCE 脆弱性 54 件の一部が Critical 評価を受けている。特に Remote Desktop Client への 11 件 CVE・Windows Hyper-V の VM ゲスト脱出可能な Critical RCE・Microsoft Office の悪意あるドキュメント経由 RCE は優先対応が求められる。全 CVE で顧客側アクションが必要なため、管理者は速やかなパッチ展開計画の立案が推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/cisco-warns-of-7th-sd-wan-zero-day-exploited-in-2026/" target="_blank" rel="noopener">Cisco SD-WAN に 2026 年 7 件目のゼロデイ CVE-2026-20245 — パッチなし・実攻撃確認、Mandiant が報告</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco は Catalyst SD-WAN Manager の CLI に存在するコマンドインジェクション脆弱性（CVE-2026-20245）を公開した。2026 年に入って 7 件目の SD-WAN ゼロデイであり、netadmin 権限を持つ認証済みリモート攻撃者がルート権限で任意コマンドを実行できる。パッチ・回避策は現時点で提供されておらず、Mandiant が発見し限定的な実攻撃への悪用も確認済み。既存のゼロデイ CVE-2026-20182 等との連鎖攻撃も懸念されており、組織は IoC の確認・ログ保全・被害調査を最優先で実施する必要がある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / CERT</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-june-2026-patch-tuesday-fixes-3-zero-day-200-flaws/" target="_blank" rel="noopener">Patch Tuesday 詳報: Remote Desktop Client に 11 件・Hyper-V に Critical RCE — 管理者向け優先対応リスト</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BleepingComputer の詳細分析によれば、2026 年 6 月 Patch Tuesday は Critical に分類される RCE が Remote Desktop Client（11 件）・Windows Hyper-V（VM 脱出）・Microsoft Office（悪意ドキュメント経由）の 3 領域に集中している。ゼロデイ 3 件は暗号化バイパス・サービス妨害・ブートパス整合性破壊というパターンを踏襲しており、攻撃者の好む攻撃面であることが改めて確認された。管理者は少なくともゼロデイ修正・Critical RCE パッチを週内に適用し、特に VDI・仮想化環境の優先対応を検討されたい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-10 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
