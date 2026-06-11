@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 12 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NEC / Anthropic / 金融機関</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://jpn.nec.com/press/202606/20260611_01.html" target="_blank" rel="noopener">NEC・Anthropicと金融機関8社がAI協業を開始 — 安全・信頼性の高いAIの金融分野実装へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NEC、Anthropicが三井住友フィナンシャルグループ（SMFG）、住友生命保険、大和証券グループ本社、三井住友トラストグループ、三井住友信託銀行、MS&ADインシュアランスグループホールディングス、明治安田生命保険の金融大手8社と連携し、AIを活用した金融分野の新たな価値創出と安全・信頼性に優れたAI技術の社会実装を開始した。2026年4月に発表したNEC・Anthropic戦略提携（国内企業初のグローバルパートナー契約）を拡大した取り組みで、金融サービス品質の向上、業務プロセスの変革、サイバーセキュリティ強化の3軸を推進する。各社はClaudeをはじめとする生成AIの業務実装や安全基準の共同策定を進める予定で、国内金融業界のAI活用加速を示す象徴的な連携となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/claude-fable-5-aws/" target="_blank" rel="noopener">Anthropic、初のMythos級モデル「Claude Fable 5」を一般公開 — Amazon Bedrock でも即日提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicがMythos級モデルの一般向け公開版「Claude Fable 5」をリリースし、Amazon Bedrock（US East・Europe Stockholm）でも即日利用可能となった。ソフトウェアエンジニアリング、知識作業、ビジョン、科学研究など幅広い分野でほぼすべてのベンチマークで最高水準の性能を発揮する。サイバーセキュリティや生物研究等の高リスク質問には自動的にSafeguard版（Claude Opus 4.8）が応答する安全設計を採用しており、入力$10・出力$50（百万トークン単価）で提供される。同時に公開されたClaude Mythos 5は、制約を一部解除した版として米国政府連携プロジェクト「Project Glasswing」等の限定パートナーのみに提供される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/claude-fable-5-aws/" target="_blank" rel="noopener">Claude Fable 5 が Amazon Bedrock で利用可能に — Mythos級能力とSafeguard設計を両立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicの最新フラッグシップモデル「Claude Fable 5」がAmazon Bedrock上でUS East（バージニア北部）およびEurope（ストックホルム）リージョンにて利用可能となった。AWSはClaude Platform on AWSも同時に提供開始し、企業がBedrockを通じてMythos級の高性能AIを安全に活用できる環境を整備した。モデルはAnthropicのAPI・Bedrockともに入力$10/百万トークン・出力$50/百万トークンで提供され、RAG構成やAIエージェントとの組み合わせに最適化されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Container Tools</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/containers/announcing-the-end-of-support-for-the-aws-copilot-cli/" target="_blank" rel="noopener">AWS Copilot CLI が本日サポート終了 — ECS Express Mode または CDK L3 への移行を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSのECSコンテナアプリ構築・デプロイを簡素化してきた「AWS Copilot CLI」が2026年6月12日をもって正式にサポートを終了した。以降、新機能追加・セキュリティアップデートは提供されないが、既存のECSサービスの動作には影響なく、オープンソースとしてGitHubでの公開は継続される。AWSは移行先として「Amazon ECS Express Mode」（マネージドインフラを活用した簡易デプロイ）または「AWS CDK L3コンストラクト」（コードによるインフラ定義）への移行を強く推奨している。利用中のチームは早期移行計画の策定が求められる状況となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Europol / DOJ / 国際共同捜査</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cryptotimes.io/2026/06/11/seized-domains-frozen-crypto-inside-the-389m-audia6-takedown/" target="_blank" rel="noopener">ランサムウェア支援の暗号資産マネロンサービス「AudiA6」を国際捜査が解体 — 3.89億ドルを洗浄</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米司法省・Europol・Eurojust等が主導する国際共同捜査が2026年6月11日、ランサムウェアグループが利用していた暗号資産マネーロンダリングサービス「AudiA6」を解体した。同サービスは2022〜2025年にかけて3億8,900万ドル以上の不正収益を洗浄し、15以上の国際サイバー犯罪捜査と関連していたとされる。サービスの主要メンバーとみられるRuslan Tkachuk（37歳）とAlexander Ledenev（25歳）がジョージア当局に拘束され、最大20年の禁錮刑に直面している。AudiA6は盗難・購入したIDで開設した数千の不正取引所アカウントを駆使し、1時間以内に3〜10%の手数料で資金洗浄を行うビジネスモデルを持っていた。日本を含む多数の国がこの摘発作戦に参加しており、国際的なサイバー犯罪インフラへの打撃として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-12 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
