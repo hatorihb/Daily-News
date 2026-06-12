@@ -152,11 +152,21 @@ const OWNER = 'hatorihb';
 const REPO  = 'Daily-News';
 const BASE  = `https://${OWNER}.github.io/${REPO}`;
 
-fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
+// reports.json（auto-merge ワークフローが静的生成）を優先して読み、
+// 未生成・取得失敗時のみ GitHub API にフォールバックする（未認証 API は 60回/時/IP の制限があるため）
+fetch(`${BASE}/reports.json?t=${Date.now()}`)
   .then(r => {
     if (!r.ok) throw new Error(r.status);
     return r.json();
   })
+  .then(names => names.map(name => ({ name })))
+  .catch(() =>
+    fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/reports`)
+      .then(r => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      })
+  )
   .then(files => {
     const reports = files
       .filter(f => /^tech-report-\d{4}-\d{2}-\d{2}\.html$/.test(f.name))

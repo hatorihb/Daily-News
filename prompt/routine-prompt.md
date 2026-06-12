@@ -249,14 +249,19 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 ```
 
 ### 4. コミット
+
+**現在のセッションブランチ（`claude/**`）にそのままコミット＆プッシュする。**
+新しいブランチを作る必要はない。auto-merge ワークフローが任意の `claude/**` ブランチからレポートを main に同期する。
+
 ```bash
-git checkout -b claude/daily-report 2>/dev/null || git checkout claude/daily-report
 mkdir -p reports
 # 上記HTMLを reports/tech-report-{YYYY-MM-DD}.html として保存
 git add reports/tech-report-{YYYY-MM-DD}.html
 git commit -m "report: AI・AWS daily report {YYYY-MM-DD}"
-git push origin claude/daily-report
+git push -u origin <現在のセッションブランチ名>
 ```
+
+プッシュ後はレポートが main に同期され、ブランチは自動削除される。
 
 リポジトリ: https://github.com/hatorihb/Daily-News
 
