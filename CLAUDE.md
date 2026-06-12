@@ -29,6 +29,9 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 - Push to a `claude/**` branch. The `auto-merge-report.yml` workflow handles syncing to `main`.
 - **Never push directly to `main`**. The tweet workflow fires on merge, so accidental main commits become public.
 - After your push, check the Actions tab to confirm the workflow succeeded. If the auto-merge silently no-ops, the filename probably doesn't match.
+- The auto-merge workflow re-runs the report validations (size / date / sections / secrets) server-side before syncing. If it fails, the report does NOT reach main — fix the report and push again.
+- After a successful sync, the source `claude/**` branch is **auto-deleted** and `reports.json` (used by index.html) is regenerated on main.
+- `report-watchdog.yml` runs at 09:00 JST daily and files an issue if today's report is missing from main.
 - **Non-report changes** (prompt, hooks, CLAUDE.md, index.html) are NOT synced by auto-merge. Open a separate PR to merge them to main.
 
 ## Prompts (`prompt/`)

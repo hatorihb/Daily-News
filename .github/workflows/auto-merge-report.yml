@@ -19,31 +19,118 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GH_PAT }}
 
-      - name: Copy new report files to main
+      - name: Detect changed report files
+        id: detect
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
           SOURCE_BRANCH="${{ github.ref_name }}"
           git fetch origin "$SOURCE_BRANCH"
 
-          # pushed された差分から report ファイルだけ抽出
           CHANGED=$(git diff --name-only \
             "origin/${SOURCE_BRANCH}^" "origin/${SOURCE_BRANCH}" \
             | grep '^reports/tech-report-.*\.html$' || true)
 
           if [ -z "$CHANGED" ]; then
             echo "No report files to sync."
-            exit 0
           fi
+          {
+            echo "changed<<CHANGED_EOF"
+            echo "$CHANGED"
+            echo "CHANGED_EOF"
+          } >> "$GITHUB_OUTPUT"
 
-          for FILE in $CHANGED; do
-            git checkout "origin/${SOURCE_BRANCH}" -- "$FILE"
-            echo "Synced: $FILE"
-          done
+      # .claude/hooks/report-check.sh と同等の検証を main 反映前にも行う（defense in depth）。
+      # hook は Claude セッション内でしか動かないため、ここが公開前の最後の砦になる。
+      - name: Validate report files
+        if: steps.detect.outputs.changed != ''
+        run: |
+          SOURCE_BRANCH="${{ github.ref_name }}"
+          errors=""
 
-          git diff --cached --quiet && exit 0
+          while IFS= read -r FILE; do
+            [ -z "$FILE" ] && continue
+            if ! git show "origin/${SOURCE_BRANCH}:${FILE}" > /tmp/report.html 2>/dev/null; then
+              # push で削除されたファイルはスキップ
+              continue
+            fi
+            base=$(basename "$FILE")
 
-          DATE=$(echo "$CHANGED" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' | head -1)
+            # 1. ファイル名パターン
+            if ! [[ "$base" =~ ^tech-report-([0-9]{4})-([0-9]{2})-([0-9]{2})\.html$ ]]; then
+              errors+="${FILE}: filename does not match tech-report-YYYY-MM-DD.html\n"
+              continue
+            fi
+            iso="${BASH_REMATCH[1]}-${BASH_REMATCH[2]}-${BASH_REMATCH[3]}"
+            jp="${BASH_REMATCH[1]}年$((10#${BASH_REMATCH[2]}))月$((10#${BASH_REMATCH[3]}))日"
+
+            # 2. サイズ
+            size=$(wc -c < /tmp/report.html)
+            if [ "$size" -lt 2048 ]; then
+              errors+="${FILE}: too small (${size} bytes < 2048)\n"
+            fi
+
+            # 3. 本文に自身の日付が含まれるか
+            if ! grep -qF "$iso" /tmp/report.html && ! grep -qF "$jp" /tmp/report.html; then
+              errors+="${FILE}: body does not contain its own date (${iso})\n"
+            fi
+
+            # 4. 日付が許容範囲内か（JST 今日−2日 〜 今日）。古いバックフィルはこのチェックを一時的に外して行う
+            today=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+            min=$(TZ=Asia/Tokyo date -d '2 days ago' +%Y-%m-%d)
+            if [[ "$iso" > "$today" || "$iso" < "$min" ]]; then
+              errors+="${FILE}: report date ${iso} outside allowed range ${min}..${today}\n"
+            fi
+
+            # 5. 4 セクションの存在
+            for sid in domestic ai aws security; do
+              if ! grep -qF "id=\"${sid}\"" /tmp/report.html; then
+                errors+="${FILE}: missing section id=\"${sid}\"\n"
+              fi
+            done
+
+            # 6. シークレットパターン（SECRET-SCAN-OK の行は除外）
+            secrets=$(grep -nE '(sk|rk)_live_[0-9a-zA-Z]{20,}|gh[pousr]_[0-9a-zA-Z]{36,}|github_pat_[0-9a-zA-Z_]{50,}|xox[abprs]-[0-9a-zA-Z-]{10,}|sk-[a-zA-Z0-9]{48}|sk-proj-[a-zA-Z0-9_-]{40,}|sk-ant-api03-[a-zA-Z0-9_-]{40,}|AKIA[0-9A-Z]{16}|AIza[0-9A-Za-z_-]{35}|-----BEGIN ([A-Z]+ )?PRIVATE KEY-----|eyJ[A-Za-z0-9_-]{20,}\.eyJ[A-Za-z0-9_-]{20,}\.' /tmp/report.html | grep -v 'SECRET-SCAN-OK' || true)
+            if [ -n "$secrets" ]; then
+              errors+="${FILE}: secret-like pattern detected:\n${secrets}\n"
+            fi
+          done <<< "${{ steps.detect.outputs.changed }}"
+
+          if [ -n "$errors" ]; then
+            printf 'Validation failed — NOT syncing to main:\n\n%b' "$errors"
+            exit 1
+          fi
+          echo "All report files passed validation."
+
+      - name: Sync to main
+        if: steps.detect.outputs.changed != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          SOURCE_BRANCH="${{ github.ref_name }}"
+
+          while IFS= read -r FILE; do
+            [ -z "$FILE" ] && continue
+            if git cat-file -e "origin/${SOURCE_BRANCH}:${FILE}" 2>/dev/null; then
+              git checkout "origin/${SOURCE_BRANCH}" -- "$FILE"
+              echo "Synced: $FILE"
+            fi
+          done <<< "${{ steps.detect.outputs.changed }}"
+
+          # index.html が実行時に GitHub API を叩かなくて済むよう、レポート一覧を静的生成する
+          ls reports/tech-report-*.html 2>/dev/null \
+            | sed 's|^reports/||' | sort -r \
+            | jq -R -s 'split("\n") | map(select(length > 0))' > reports.json
+          git add reports.json
+
+          git diff --cached --quiet && { echo "Nothing to commit."; exit 0; }
+
+          DATE=$(echo "${{ steps.detect.outputs.changed }}" | grep -o '[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}' | head -1)
           git commit -m "chore: sync daily report ${DATE} from ${SOURCE_BRANCH}"
           git push origin main
+
+      # 同期済みのルーティンブランチは不要なので削除する（蓄積防止）。
+      # セッションがまだ生きていて再 push しても、ブランチは自動的に再作成されるだけなので安全。
+      - name: Delete source branch
+        if: steps.detect.outputs.changed != ''
+        run: |
+          git push origin --delete "${{ github.ref_name }}" || echo "Branch already deleted or protected."

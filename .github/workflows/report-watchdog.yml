@@ -1,0 +1,63 @@
+name: Report Watchdog
+
+# 毎朝 9:00 JST に当日レポートの存在を確認する。
+# ルーティンがファイルを書かずに終了した場合（hook が発火しない欠落パターン）を検知し、
+# Issue を自動起票する。
+on:
+  schedule:
+    - cron: '0 0 * * *' # 00:00 UTC = 09:00 JST
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Check today's report exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          FILE="reports/tech-report-${TODAY}.html"
+
+          if [ -f "$FILE" ]; then
+            echo "OK: ${FILE} exists."
+            exit 0
+          fi
+
+          echo "MISSING: ${FILE} not found on main."
+
+          TITLE="レポート欠落: ${TODAY}"
+          EXISTING=$(gh issue list --state open --search "in:title \"${TITLE}\"" --json number --jq 'length')
+          if [ "$EXISTING" != "0" ]; then
+            echo "Issue already filed. Skipping creation."
+            exit 1
+          fi
+
+          gh issue create \
+            --title "$TITLE" \
+            --body "$(cat <<EOF
+## 当日レポートが見つかりません
+
+\`${FILE}\` が 9:00 JST 時点で main に存在しません。
+
+### 考えられる原因
+1. **Routines が実行されなかった**（スケジューラ側の障害）
+2. **セッションが日付を誤認して早期終了した**（過去事例: 2026-05-28, 2026-05-30）
+3. **レポートは生成されたが auto-merge が失敗した**（ファイル名不一致・バリデーション失敗）
+
+### 確認手順
+- [ ] Claude.ai Routines の実行ログを確認
+- [ ] \`claude/**\` ブランチに今日のコミットがあるか確認
+- [ ] Actions タブで auto-merge ワークフローの失敗がないか確認
+- [ ] 必要なら手動でレポートを作成して \`claude/**\` ブランチにプッシュ
+EOF
+)"
+          exit 1
