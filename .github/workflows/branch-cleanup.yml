@@ -1,0 +1,75 @@
+name: Branch Cleanup
+
+# 同期済み・マージ済みの古いブランチを削除する。
+# - claude/**: 最終コミットから48時間以上経過したものを自動削除
+#   （auto-merge が同期時に削除するため通常は溜まらないが、検証失敗などで残った分の掃除）
+# - extra 入力: 明示的に指定したブランチを削除（PRマージ済みの作業ブランチなど）
+on:
+  schedule:
+    - cron: '0 1 * * 0' # 毎週日曜 10:00 JST
+  workflow_dispatch:
+    inputs:
+      extra:
+        description: 'Comma-separated extra branches to delete'
+        required: false
+        default: ''
+      dry_run:
+        description: 'true = list only, do not delete'
+        required: false
+        default: 'false'
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Delete stale branches
+        run: |
+          NOW=$(date +%s)
+          TO_DELETE=""
+
+          # claude/** で最終コミットが48時間以上前のもの
+          while read -r branch ts; do
+            [ -z "$branch" ] && continue
+            AGE_H=$(( (NOW - ts) / 3600 ))
+            if [ "$AGE_H" -ge 48 ]; then
+              TO_DELETE+="${branch}"$'\n'
+            else
+              echo "Keep (recent, ${AGE_H}h): ${branch}"
+            fi
+          done < <(git for-each-ref --format='%(refname:lstrip=3) %(committerdate:unix)' 'refs/remotes/origin/claude/')
+
+          # 明示指定分
+          EXTRA="${{ github.event.inputs.extra }}"
+          if [ -n "$EXTRA" ]; then
+            TO_DELETE+=$(echo "$EXTRA" | tr ',' '\n')$'\n'
+          fi
+
+          if [ -z "$(echo "$TO_DELETE" | tr -d '[:space:]')" ]; then
+            echo "Nothing to delete."
+            exit 0
+          fi
+
+          echo "--- Branches to delete ---"
+          echo "$TO_DELETE" | grep -v '^$'
+
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            echo "(dry run — nothing deleted)"
+            exit 0
+          fi
+
+          while IFS= read -r b; do
+            b=$(echo "$b" | xargs)
+            [ -z "$b" ] && continue
+            case "$b" in
+              main|master) echo "SKIP protected: $b"; continue ;;
+            esac
+            git push origin --delete "$b" && echo "Deleted: $b" || echo "Failed: $b"
+          done <<< "$TO_DELETE"
