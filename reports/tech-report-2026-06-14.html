@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / 国内AI利用者</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://finance.biggo.jp/news/202606131350_Anthropic-Claude-Fable-5-Mythos-5-Shutdown" target="_blank" rel="noopener">米政府の輸出規制命令でClaude Fable 5・Mythos 5が日本でも即日利用停止 — 国内企業・開発者に直撃</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米商務省が6月12日、国家安全保障を理由にAnthropicに対してClaude Fable 5およびMythos 5の外国人向け提供停止を命令し、日本でも6月13日から即時に効力が及んだ。Claude APIをシステムに組み込んでいた国内企業や、Amazon Bedrockで同モデルを利用していた開発者は当日中に利用不能となり、代替手段の検討を迫られる事態となった。Anthropicは「外国人ユーザーのみを技術的に遮断することが困難」として全ユーザー向けにシャットダウンを実施し、法的義務として命令に従ったと説明。Claude Opus 4.8を含む他のClaudeモデルは引き続き利用可能だが、日本企業のAI活用戦略への影響を懸念する声が広がっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">米政府 / AI規制動向</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/kazu_t/n/n8138e02885b9" target="_blank" rel="noopener">Fable 5・Mythos 5 が突然使えなくなった理由 — 米政府の輸出規制と日本への意味合い</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本の生成AI教育者・谷一徳氏がNote上で公開した解説記事では、米政府による輸出規制（EAR: Export Administration Regulations）がAIモデルに初めて本格適用された今回の事例が詳しく分析されている。AIのジェイルブレイク対策が輸出管理当局の関心事となっており、今後は最先端AIモデルの地域別アクセス制限が常態化する可能性を指摘する。日本は同盟国として例外的扱いを受ける余地もあるが、制度面の整備なしには日本企業が最新AIへのアクセスを安定的に確保することが難しくなるとも警鐘を鳴らす。今回の件はAIモデルを「輸出品」として扱う新たな国際規範の出発点となり得る。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://fortune.com/2026/06/13/anthropic-disables-fable-mythos-export-controls-national-security-threat/" target="_blank" rel="noopener">Anthropic、Claude Fable 5 & Mythos 5 を公開3日で全世界停止 — 米政府の輸出規制命令に対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはClaude Fable 5とMythos 5を6月9日に公開したが、わずか3日後の6月12日に米商務省から輸出規制命令を受け、全世界でのアクセスを停止した。Claude Fable 5は1Mトークンコンテキストウィンドウ・128K出力・常時アダプティブ思考機能を備えた同社史上最高性能モデルとされ、SWE-Bench Verifiedで80.3%を達成していた。米政府はジェイルブレイク手法の発見を命令発動の一因として挙げ、国家安全保障上の懸念を示した。Anthropicはこの決定に反対しながらも「法的義務として従う」とする声明を発表し、「一つの脆弱性が何億人もの利用者に影響するモデル回収の根拠にはならない」と主張した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / US Government</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://time.com/article/2026/06/13/anthropic-fable-mythos-ban-US-security/" target="_blank" rel="noopener">Anthropic Pulls Its Most Powerful AI Models After U.S. Bars Foreign Access — AI輸出規制の新時代へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Time誌の報道によれば、米政府は6月12日午後5時21分（米東部時間）にHoward Lutnick商務長官名でAnthropicへの命令を発出した。命令の対象は「外国籍を持つすべての人物」であり、米国内在住の外国籍Anthropic社員も含まれる。技術的に外国人と米国人のユーザーをリアルタイムに判別することが不可能なため、全ユーザー向けにモデルをシャットダウンするしかなかったと同社は説明した。Claude Mythos 5（非公開プレビュー中だった上位モデル）もFable 5と同時に停止対象となり、6月9日の同時リリースから3日間で史上最短のモデル公開停止という結果になった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.marktechpost.com/2026/06/13/anthropic-disables-claude-fable-5-and-mythos-5-after-us-government-order/" target="_blank" rel="noopener">Amazon Bedrock 上のClaude Fable 5・Mythos 5 が全世界でアクセス停止 — Anthropicが輸出規制命令に対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">6月9日にAmazon Bedrockへの統合を発表したばかりのClaude Fable 5とMythos 5が、Anthropicによる輸出規制対応措置により6月13日時点で全世界のBedrockユーザーから利用不能となった。AWSはAnthropicの要請に基づき両モデルへのアクセスを取り消し、Bedrockのモデルカタログからも一時的に削除された形だ。Bedrock上でFable 5・Mythos 5を組み込んでいた企業は、Claude Opus 4.8や6月1日にBedrockへ一般提供が開始されたOpenAI GPT-5.5・GPT-5.4などへの切り替えが必要になる。AWS側はサービスの継続的な可用性を確保するための代替モデル情報を提供しており、ユーザーへの影響を最小限に抑える対応を進めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-bedrock-openai-models-codex-generally-available/" target="_blank" rel="noopener">Amazon Bedrock: OpenAI GPT-5.5・GPT-5.4・Codex が一般提供開始 — Claude Fable 5 停止後の有力代替候補</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">6月1日に一般提供が開始されたAmazon Bedrock上のOpenAI GPT-5.5・GPT-5.4・Codexが、今回のClaude Fable 5停止を受けて代替候補として注目を集めている。GPT-5.5はエージェント型コーディング・データ分析・マルチステップ自律タスクに優れ、GPT-5.4は本番環境での価格対性能比を重視した選択肢だ。料金はOpenAI直接利用と同水準で、AWS利用額にカウントされるため既存のAWSコミットメントを持つ企業にとって導入しやすい。Codexはreplが自動化・コードレビュー・IDEとの統合（VS Code・JetBrains・Xcode）に対応し、ソフトウェア開発ワークフローの加速が期待できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / AI安全性</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rocket-boys.co.jp/security-measures-lab/anthropic-fable5-mythos5-shutdown-scenarios/" target="_blank" rel="noopener">Claude Fable 5 のジェイルブレイク脆弱性が輸出規制発動の引き金に — 最先端AIのセキュリティ管理が問われる</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米政府によるClaude Fable 5・Mythos 5の提供停止命令は、同モデルのジェイルブレイク手法の発見が引き金の一つとされており、最先端AIモデルの安全性確保の難しさを改めて浮き彫りにした。ジェイルブレイクによって安全フィルターを回避した有害コンテンツ生成が可能となることから、米政府は国家安全保障上のリスクを重大視したとされる。Anthropicは安全分類器（セーフティクラシファイアー）を実装して問題のある入力をClaude Opus 4.8へフォールバックさせる仕組みを備えていたが、今回の命令はそれを超える対応を求めるものだった。このインシデントはAIモデルを「管理対象物資」として扱う輸出規制の新たなフレームワークの現実を示し、AI企業と各国規制当局の関係を再定義する契機となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Cisco</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-june-2026-patch-tuesday-fixes-6-zero-days-200-flaws/" target="_blank" rel="noopener">Microsoft 2026年6月Patch Tuesdayで200件の脆弱性を修正・Cisco SD-WANゼロデイ（未パッチ）の悪用継続</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは6月10日のPatch Tuesdayで史上最大規模の200件（一部報告では198件）の脆弱性を修正し、うち3件が公開済みゼロデイ、33件がCritical評価のRCE脆弱性だった。特に注意すべきはCVE-2026-50507（Windows BitLockerバイパス）とCVE-2026-49160（HTTP.sys経由のDoS）で、インターネット公開Windows Webサーバーを持つ組織は最優先で適用が必要だ。一方、Cisco Catalyst SD-WAN Managerのコマンドインジェクション脆弱性CVE-2026-20245（2026年の7件目のゼロデイ）は依然パッチが存在せず、認証済み攻撃者がrootとして任意コマンドを実行できる状態が継続している。CVE-2026-20245はオンプレ・クラウド・GovCloud含む全Cisco SD-WAN展開形態に影響し、ネットワーク管理者は迅速な影響評価と緩和策の適用が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-14 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
