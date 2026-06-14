@@ -17,7 +17,7 @@ TZ=Asia/Tokyo date +%Y-%m-%d
 `reports/tech-report-{TODAY}.html` が既に存在する場合のみスキップしてよい。
 Bash 実行前にコンテキスト日付から推測した日付でファイルの存在確認をしてはならない。
 
-### 2. Web検索（最大8回）
+### 2. Web検索（最大10回）
 以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
 
 1. `AI new model feature release announcement {YYYY-MM-DD}`
@@ -25,9 +25,11 @@ Bash 実行前にコンテキスト日付から推測した日付でファイル
 3. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
 4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
 5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
-6. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
-7. `セキュリティ 不正アクセス 脆弱性 インシデント {YYYY-MM-DD}`
-8. `情報漏洩 サイバー攻撃 ランサムウェア 標的型攻撃 {YYYY-MM-DD}`
+6. `調査レポート ホワイトペーパー 生成AI DX 公開 発表 {YYYY-MM-DD}`
+7. `経産省 デジタル庁 総務省 IT DX AI 施策 発表 {YYYY-MM-DD}`
+8. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
+9. `セキュリティ 不正アクセス 脆弱性 インシデント {YYYY-MM-DD}`
+10. `情報漏洩 サイバー攻撃 ランサムウェア 標的型攻撃 {YYYY-MM-DD}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
@@ -37,6 +39,16 @@ aws.amazon.com が 403 を返した場合は `https://www.amazonaws.cn/en/new/20
 - 日経クロステック（https://xtech.nikkei.com/）
 - @IT（https://atmarkit.itmedia.co.jp/）
 - ZDNet Japan（https://japan.zdnet.com/）
+調査レポート・ホワイトペーパーは以下のソースも確認する（当日公開分のみ）：
+- PwC Japan（https://www.pwc.com/jp/ja/knowledge/）
+- デロイト トーマツ（https://www2.deloitte.com/jp/ja/pages/technology/topics/）
+- KPMG Japan（https://kpmg.com/jp/ja/home/insights/）
+- McKinsey Japan（https://www.mckinsey.com/jp/）
+政府・公的機関の施策・報告書は以下のソースも確認する（当日公開分のみ）：
+- 経済産業省プレスリリース（https://www.meti.go.jp/press/）
+- デジタル庁ニュース（https://www.digital.go.jp/news/）
+- 総務省報道資料（https://www.soumu.go.jp/menu_news/s-news/）
+- IPA（https://www.ipa.go.jp/pressrelease/）
 セキュリティ情報は以下のソースを優先的にfetchする：
 - ITmedia NEWS（https://www.itmedia.co.jp/news/）
 - Security NEXT（https://www.security-next.com/）
@@ -52,6 +64,8 @@ aws.amazon.com が 403 を返した場合は `https://www.amazonaws.cn/en/new/20
 - 記事の公開日は URL パス（例: `/2026/05/24/`）や記事内の日付で必ず確認する。検索結果のサマリーが示す日付は不正確な場合がある
 - Google I/O などの大型イベント直後は、イベント当日の発表（数日前）と各機能の GA（一般提供開始）日が異なる。掲載するのは GA または新規記事の公開日が24時間以内のものに限る
 - `card-date` には「掲載する記事・ページの公開日」を使う。元の発表が数日前でも、その日付に公開された新規記事を出典とする場合はその記事の公開日で構わない
+- 調査レポート・ホワイトペーパー・政府機関の報告書は、そのページ自体の公開日が24時間以内であれば掲載してよい。公開日が明記されていない場合は掲載しない
+- 政府機関のプレスリリースは公開日が明確なため掲載しやすい。経産省・デジタル庁・総務省・IPA のプレス一覧を確認し、当日付の資料があれば積極的に掲載する
 
 ### 3. HTMLファイルを生成してコミット
 
