@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 16 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">一般社団法人 日本デジタルトランスフォーメーション推進協会</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-06-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000157.000115435.html" target="_blank" rel="noopener">「日本DX大賞2026」ファイナリスト24社が本日より公開プレゼンテーション審査に登壇</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">全国から186件の応募を集めた「日本DX大賞2026」において、書面審査を通過したファイナリスト24社（6部門各4社）が本日6月16日より18日までの3日間にわたり公開プレゼンテーション審査に登壇する。審査はオンライン無料視聴が可能。DXの実際の変革事例が公開審査を通じて広く共有され、実践ノウハウの普及が期待される。最終的な大賞発表は2026年7月22日・23日にTODAホール＆カンファレンス東京で開催される「日本DX大賞2026サミット＆アワード」にて行われる予定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/index/introducing-openai-partner-network/" target="_blank" rel="noopener">OpenAI、1億5000万ドル投資の「OpenAI Partner Network」を発表——2026年末までに30万名の認定コンサルタント育成へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年6月15日、コンサルティング会社・システムインテグレーター・テクノロジー専門家向けの公式エコシステム「OpenAI Partner Network」を発表し、1億5000万ドルの投資を表明した。2026年末までに30万名の認定コンサルタント育成を目標とし、パートナー企業は認定プログラム・トレーニングリソース・OpenAIとの協業機会を提供される。企業向けAI実装において、モデル性能よりも実装・運用体制の整備が競争力の源泉になるという戦略的判断を反映した動き。SIerやコンサル大手との連携強化を通じて、ChatGPT Enterpriseをはじめとする法人向けサービスの普及を加速する狙いがある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://platform.claude.com/docs/en/about-claude/model-deprecations" target="_blank" rel="noopener">Anthropic、Claude Sonnet 4 と Opus 4 を本日廃止——APIユーザーは後継モデルへの即時移行が必要</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年6月15日午前9時（PT）をもって、Claude APIにおける claude-sonnet-4-0 および claude-opus-4-0 のネイティブサポートを終了した。これ以降、当該モデルIDへのAPIリクエストはエラーを返す。推奨後継モデルは claude-sonnet-4-5 および claude-opus-4-5 で、複雑なエージェントタスクには claude-opus-4-7 への移行も推奨されている。多くの場合、移行はモデル文字列1行の変更で完結する。なお、Claude Fable 5（Mythosクラスの一般向けモデル）は6月9日に公開済みだが、米国輸出管理規制への対応から6月12日よりアクセスが一時停止されている状況にある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-finops-agent-in-preview-gemma-4-on-bedrock-kiro-pro-max-and-more-june-15-2026/" target="_blank" rel="noopener">AWS FinOps Agent がパブリックプレビュー開始——クラウドコスト異常をAIが自動調査・Slack通知・Jiraチケット作成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはクラウドコスト管理を自動化するフロンティアエージェント「AWS FinOps Agent」のパブリックプレビューを開始した。コスト異常の自動検知・根本原因調査、Slackチャンネルへの自動通知、JiraチケットのAI自動作成、AWS Cost Optimization HubおよびCompute Optimizerからの最適化推薦（リソースの適正化・アイドルリソース・Savings Plans）など、幅広い機能を備える。AWS Cost Explorer・Cost Anomaly Detection・CloudTrailと統合し、定期FinOpsワークフローのスケジュール実行も可能。現在は米国東（バージニア北部）リージョンで提供され、プレビュー期間中は追加料金不要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services / Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/gemma-4-amazon-bedrock/" target="_blank" rel="noopener">Google DeepMind の Gemma 4 ファミリーが Amazon Bedrock で利用可能に——3バリアント、35言語超のマルチモーダル対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon BedrockにGoogle DeepMindのオープンウェイトモデル「Gemma 4」ファミリーが追加された。提供バリアントは3種類：Gemma 4 31B（256Kトークンコンテキスト、推論・コーディング重視）、Gemma 4 26B-A4B（MoEアーキテクチャ、コスト・レイテンシー最適化）、Gemma 4 E2B（低レイテンシーインタラクション向け最小モデル）。テキスト・画像・動画・音声のマルチモーダル入力と35言語以上に対応し、ネイティブ関数呼び出しをサポート。推論・エージェント・ソフトウェアエンジニアリングなど多様なユースケースに活用できる。AWS Weekly Roundupにて2026年6月15日付で紹介。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Kiro</div>
+          <div class="card-badges">
+            <span class="impact impact-low">情報</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://kiro.dev/blog/kiro-pro-max/" target="_blank" rel="noopener">AI駆動IDE「Kiro」に月額$100の「Pro Max」プランが登場——Pro+とPowerの中間帯を埋める新ティア</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが提供するスペック駆動型AI IDE「Kiro」に新たな「Pro Max」プランが追加された。Pro+（月額$40）とPower（月額$200）の中間に位置する月額$100で、月5,000クレジット（Pro+の2.5倍）と全プレミアムモデルへのアクセスを提供する。スペック生成・カスタムサブエージェント・パワーズ・フックを含む全機能セットを利用可能。Pro+の利用量が継続的に上限に達するがPowerの全機能は不要な高頻度利用開発者層をターゲットにしており、AWS Weekly Roundupにて2026年6月15日付で紹介された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">脆弱性情報 / 国内LMS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.ppln.co/en/post/japan-cyber-threat-weekly-digest-2026-week2-1" target="_blank" rel="noopener">国産LMS「KnowledgeDeliver」に未認証RCEのゼロデイ脆弱性 CVE-2026-5426——Kimsukyによる積極悪用を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本国内で広く利用されている学習管理システム（LMS）「KnowledgeDeliver」において、高深刻度のゼロデイ脆弱性 CVE-2026-5426 が発見され、実際の攻撃への悪用が確認されている。アプリケーションにハードコードされたASP.NETマシンキーを悪用することで、攻撃者は認証なしにリモートコード実行（RCE）が可能となる。北朝鮮系APTグループ「Kimsuky」による悪用事例も報告されており、利用組織は直ちにパッチ適用状況を確認し、侵害調査を実施することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Palo Alto Networks / セキュリティ動向</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://reconshield.in/blog/june-2026-cybersecurity-review" target="_blank" rel="noopener">Palo Alto PAN-OS 認証バイパス CVE-2026-0257 を積極悪用——6月第2週はMS Patch Tuesday 200件超・Chrome5件目のゼロデイも</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Palo Alto NetworksはPAN-OSソフトウェアの認証バイパス脆弱性 CVE-2026-0257 が積極的に悪用されていると公表した。攻撃者は本脆弱性を利用してGlobalProtectポータルへの不正アクセスが可能となる。6月第2週はこれに加え、Microsoft Patch Tuesdayで史上最多クラスとなる200件超の脆弱性修正（うちゼロデイ6件・Critical 33件）、Google Chromeの2026年5件目の積極悪用ゼロデイ修正、npmおよびPyPIを標的とした「Shai-Hulud」サプライチェーン攻撃（100以上のパッケージに影響）など重大なセキュリティインシデントが相次いだ。PAN-OSユーザーは速やかなパッチ適用を推奨。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-16 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
