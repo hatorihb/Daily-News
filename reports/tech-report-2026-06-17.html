@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 17 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://releasebot.io/updates/anthropic/claude" target="_blank" rel="noopener">Claude Fable 5、Pro / Max / Team プランで6月22日まで追加料金なしで提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic は6月16日より、最新フラッグシップモデル「Claude Fable 5」を Pro・Max・Team・Enterprise（シート制）の各プランに期間限定で無償追加提供するキャンペーンを開始した。Fable 5 は従来の Opus 4.8 を上回る性能を持ち、長期・複雑なエージェントタスク向けに設計されており、最大100万トークンのコンテキストウィンドウをサポートする。テキスト・画像・ファイルを入力として受け付け、コーディングや科学的推論で大幅な精度向上を達成しており、サイバーセキュリティ・生物・化学分野などリスクの高い問いには安全のため Opus 4.8 にフォールバックする仕組みも備える。6月23日以降はサブスクリプション枠外となり、追加クレジット購入が必要になるため、期間内の積極利用が推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude Code</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://releasebot.io/updates/anthropic/claude-code" target="_blank" rel="noopener">Claude Code 6月アップデート — ネスト型サブエージェント・/cd コマンド・セーフモードなど多数の新機能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic は Claude Code の6月アップデートで、サブエージェントが独自にさらなるエージェントを生成できるネスト型サブエージェント機能を追加した。新しい /cd コマンドにより、プロンプトキャッシュを壊さずにセッションの作業ディレクトリを切り替えられるようになり、複数プロジェクトをまたぐ開発効率が向上した。不具合のある設定を隔離するためのセーフモードも導入され、フォールバックモデルの拡充やプラグイン検索の改善、管理者コントロールのセキュリティ強化も盛り込まれた。Enterprise プランでは管理者がカスタムロールに請求・プライバシー権限を付与できるようになり、法律事務所向けに20以上の新しい法律 MCP コネクターと12の専門分野プラグインも追加された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Summit New York 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/events/summits/new-york/" target="_blank" rel="noopener">AWS Summit New York 2026 開幕 — Kiro・AgentCore・Amazon Quick・AI Marketplace を一斉発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">6月17日、ニューヨーク市ジャビッツセンターで AWS Summit New York 2026 が開幕した。Agentic AI 担当 VP Swami Sivasubramanian と Security 担当 VP Chet Kapoor による基調講演（米東部時間11時〜）では、開発者ツール・AI インフラ・セキュリティにわたる新機能が発表された。主な発表内容は、仕様書ファーストのエージェント型 IDE「Kiro」の新プラン、企業向け AI アシスタント「Amazon Quick」のデスクトップアプリ公開、Amazon Bedrock AgentCore の最新拡張、そして AI エージェントとツールをワンストップで検索・購入・管理できる「AWS Marketplace AI Agents and Tools」サービスの立ち上げとなっている。AWS は年間換算1,420億ドルの売上規模に達しており、2026年はエージェント型 AI が全サービスを横断する中心テーマとなっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Quick</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/events/summits/new-york/" target="_blank" rel="noopener">Amazon Quick デスクトップアプリ正式公開 — Free・Plus プランが本日より利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS は本日のサミット基調講演で、業務向け AI アシスタント「Amazon Quick」のデスクトップアプリを正式公開し、無料（Free）と有料（Plus）の2プランの受付を開始した。Quick は社内ツール・SaaS サービスとのシームレスな統合を可能にし、ユーザーの作業パターンを学習して自律的に行動する設計となっている。チャット内でのビジュアルアセット生成機能も新たに追加されており、スライドや図表の作成を自然言語で指示できる。Microsoft 365 Copilot に対抗する AWS のポジショニングが明確になり、エンタープライズ市場での競争が加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Kiro</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-aws-finops-agent-in-preview-gemma-4-on-bedrock-kiro-pro-max-and-more-june-15-2026/" target="_blank" rel="noopener">Kiro アジェンティック IDE — Summit で新機能披露、上位プラン「Pro Max」も追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS の エージェント型 IDE「Kiro」は VS Code オープンソースベースで構築されており、コードを書く前に EARS 形式の要件定義書（requirements.md / design.md / tasks.md）を自動生成する「スペック駆動開発」を実現する。今回のサミットでは新プラン「Kiro Pro Max」が追加され、より高い使用量上限と最新フロンティアモデルへのアクセスが提供される。チャットベースの開発がプロダクション規模で破綻する課題に対して、仕様書を事前生成することで保守性・テスタビリティを担保する設計が評価されている。2026年5月に Amazon Q Developer の後継として正式ローンチされて以来、急速に開発者コミュニティへの浸透が進んでいる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CVE-2026-20262</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/06/16/cisco-sd-wan-cve-2026-20262-exploited/" target="_blank" rel="noopener">Cisco Catalyst SD-WAN Manager のゼロデイ CVE-2026-20262 が実環境で悪用確認 — 緊急パッチを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco は6月15〜16日、Catalyst SD-WAN Manager のファイルアップロード処理における入力検証不備に起因するゼロデイ脆弱性 CVE-2026-20262（CVSS 6.5）のパッチを公開した。認証済みのリモート攻撃者が細工した HTTP リクエストをAPIエンドポイントに送信することでシステムファイルを書き換え、root 権限に昇格できる。オンプレミス・Cisco SD-WAN Cloud-Pro・FedRAMP を含む全デプロイ形態が対象であり、Cisco の社内テスト中に発見されたが6月時点で限定的な実環境悪用が確認されている。修正済みバージョン（20.9.9.2 / 20.12.7.2 / 20.15.4.5 / 20.15.5.3 / 20.18.3.1 / 26.1.1.2）への早急なアップグレードが必要である。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / CVE-2026-54420</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/06/cisa-flags-litespeed-cpanel-plugin-flaw.html" target="_blank" rel="noopener">CISA: LiteSpeed cPanel プラグインの権限昇格脆弱性 CVE-2026-54420 を KEV に追加 — 6/18 までに対応必須</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米サイバーセキュリティ・インフラセキュリティ庁（CISA）は6月16日、LiteSpeed cPanel / WHM プラグインに存在する権限昇格の脆弱性 CVE-2026-54420（CVSS 8.5）を「悪用が確認された脆弱性カタログ（KEV）」に追加した。FTP またはウェブシェルアクセスを持つ攻撃者がシンボリックリンクを悪用し、CloudLinux / CageFS 環境の共有ホスティングサーバー上で root 権限に昇格できる。連邦政府機関（FCEB）は6月18日までに LiteSpeed WHM Plugin v5.3.2.1（cPanel Plugin v2.4.8 以上）への更新が義務付けられており、共有ホスティング事業者やレンタルサーバー利用者も早急な確認と対応が求められる。同じ LiteSpeed プラグインには5月末にも別の CVE（CVE-2026-48172）が KEV に追加されており、継続的な脆弱性管理が課題となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-17 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
