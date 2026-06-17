@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 18 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents" target="_blank" rel="noopener">Amazon Bedrock AgentCore が一般提供開始 — 本番対応 AI エージェント基盤が整う</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NYC 2026（6月17日）にて、Amazon Bedrock AgentCore の一般提供（GA）が発表された。AgentCore はプロトタイプから本番環境へ AI エージェントを移行するための AWS マネージド基盤で、Firecracker マイクロ VM による最大8時間のセッション分離と Cedar ベースの認証ゲートウェイを提供する。今回の GA に合わせて、リアルタイム Web グラウンディングを実現する「Web Search on AgentCore」と、エージェントセッションの失敗・意図・軌跡インサイトを可視化する「Optimization」機能が追加された。Amazon Bedrock Guardrails との統合により、プロンプトインジェクションや有害コンテンツの検出もエージェントレベルで適用可能になっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents" target="_blank" rel="noopener">AWS Context 発表 — 組織全体のデータを知識グラフに自動マッピング、AI エージェントに文脈を提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NYC 2026 で発表された新サービス「AWS Context」は、既存データ全体のリレーションシップを自動的に知識グラフへマッピングし、AI エージェントへのエージェンティックサーチを提供する。メールや社内ドキュメント、コードリポジトリなど分散したデータソースを横断的に検索・参照できるため、エージェントが組織固有の文脈を活用した高精度な回答を生成できる。AWS Bedrock エコシステムとネイティブに統合されており、AgentCore や他の Bedrock サービスから透過的に呼び出し可能。組織データのインデックス更新は自動で行われ、常に最新の文脈をエージェントが参照できる設計となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents" target="_blank" rel="noopener">Amazon Bedrock Managed Knowledge Base が GA — フルマネージド RAG パイプラインでエンタープライズ AI が高精度化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NYC 2026 にて、Amazon Bedrock Managed Knowledge Base の一般提供（GA）が発表された。ドキュメント取り込みからベクトル化・検索・回答生成までを AWS がフルマネージドで提供するため、RAG パイプライン構築のインフラオーバーヘッドが大幅に削減できる。チャンキング戦略やランキングアルゴリズムなどのパラメータを調整しながら高精度なエンタープライズ RAG を構築できる設計となっている。AgentCore との統合により、エージェントがリアルタイムで社内知識ベースを参照する本番環境の構築が容易になった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Kiro</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/318546/20260617/aws-summit-new-york-2026-kiro-brings-aerospace-spec-standards-ai-coding.htm" target="_blank" rel="noopener">AWS Kiro が iOS 対応を発表、Pro Max プランも正式リリース — スペック駆動型 AI コーディングがモバイルへ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NYC 2026（6月17日）にて、VSCode OSS 基盤の AI IDE「Kiro」が iOS デバイスに対応したことが発表された。スマートフォンからプロジェクトの開始・進捗モニタリング・エージェント操作が可能になる。また、コーディング・仕様生成・エージェントタスクの使用上限を高めた「Kiro Pro Max」プランも正式リリース。Kiro は Amazon Q Developer の後継として位置づけられ、コード生成前に要件定義（requirements.md）・設計書（design.md）・タスクリスト（tasks.md）の3文書を自動生成する EARS 形式のスペック駆動ワークフローが特徴で、「バイブコーディング」を超えた本番品質のコード生成を目指す設計となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS WAF</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents" target="_blank" rel="noopener">AWS WAF が AI ボット向けコンテンツアクセス収益化機能を追加 — コンテンツ事業者の権利保護を支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NYC 2026 にて、AWS WAF に AI トラフィック収益化機能が追加されることが発表された。コンテンツオーナーは AI クローラーやボットに対してコンテンツアクセスの課金モデルを設定でき、大量コンテンツをクロールする AI 企業への対価を正当に請求できるようになる。メディア・出版社・データプロバイダーなどが生成 AI 時代のコンテンツエコノミーで持続可能なビジネスモデルを構築する一助となる。既存の WAF ルールと組み合わせてアクセス制御と収益化を同時に管理できる設計となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents" target="_blank" rel="noopener">AWS Continuum 発表 — AI ネイティブなクラウドセキュリティサービスで継続的な脅威検出を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NYC 2026 で発表された「AWS Continuum」は、AI をネイティブに活用してクラウド環境のセキュリティを継続的に監視・改善する新サービスである。従来の人手によるポリシー定義に代わり、AI がインフラの構成変化をリアルタイムで分析し脅威を自律的に検出する設計となっている。AWS Transform の継続的コード解析機能（自動プルリクエスト生成）や AgentCore の Guardrails 統合とあわせて、AI エージェント時代のセキュリティスタックを形成する。詳細な料金体系と一般提供開始時期は今後のアナウンスで明らかになる予定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">npm / サプライチェーン</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/06/144-mastra-npm-packages-compromised-via.html" target="_blank" rel="noopener">npm サプライチェーン攻撃「easy-day-js」— AI フレームワーク Mastra の144パッケージが汚染、北朝鮮 APT との関連を示唆</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">6月17日、AI アプリ開発フレームワーク「Mastra」の npm アカウント（ehindero）が乗っ取られ、@mastra スコープの144パッケージに悪意ある依存関係「easy-day-js」が注入された。正規ライブラリ「day.js」（週4,000万 DL 超）のタイポスクワットで、post-install スクリプトを通じてブラウザデータ・暗号資産ウォレット・認証情報を窃取するクロスプラットフォームの RAT がインストールされる。@mastra/core は週91万8千件超のダウンロードがあり影響範囲が広く、影響を受けるパッケージを使用している場合は直ちにアップデートと認証情報のローテーションを実施すること。Snyk と Orca は、ペイロードの手法が北朝鮮 APT「Sapphire Sleet（BlueNoroff）」と一致すると分析している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/3-recently-patched-fortinet-fortisandbox-vulnerabilities-in-hacker-crosshairs/" target="_blank" rel="noopener">Fortinet FortiSandbox の3件の脆弱性（CVE-2026-39813 ほか）が積極的に悪用 — 即時パッチ適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinet FortiSandbox に存在する3件の脆弱性が実際の攻撃で悪用されていることが確認された（CVE-2026-39813：パストラバーサルによる認証バイパス、CVE-2026-39808：OS コマンドインジェクション、CVE-2026-25089：OS コマンドインジェクション・CVSS 9.1）。FortiSandbox は他の Fortinet 製品の脅威判定を担うコンポーネントであり、侵害されるとブロッキング決定が無効化される危険がある。CVE-2026-39813 と CVE-2026-39808 は2026年4月に開示済み、CVE-2026-25089 は6月9日開示と比較的新しい。いずれもパッチが提供済みのため、FortiSandbox を運用中の管理者は直ちに最新バージョンへのアップデートを行うこと。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-18 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
