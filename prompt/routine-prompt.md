@@ -17,19 +17,20 @@ TZ=Asia/Tokyo date +%Y-%m-%d
 `reports/tech-report-{TODAY}.html` が既に存在する場合のみスキップしてよい。
 Bash 実行前にコンテキスト日付から推測した日付でファイルの存在確認をしてはならない。
 
-### 2. Web検索（最大10回）
+### 2. Web検索（最大11回）
 以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
 
 1. `AI new model feature release announcement {YYYY-MM-DD}`
 2. `生成AI LLM アップデート 新機能 今日 {YYYY-MM-DD}`
-3. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
-4. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
-5. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
-6. `調査レポート ホワイトペーパー 生成AI DX 公開 発表 {YYYY-MM-DD}`
-7. `経産省 デジタル庁 総務省 IT DX AI 施策 発表 {YYYY-MM-DD}`
-8. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
-9. `セキュリティ 不正アクセス 脆弱性 インシデント {YYYY-MM-DD}`
-10. `情報漏洩 サイバー攻撃 ランサムウェア 標的型攻撃 {YYYY-MM-DD}`
+3. `AI企業 買収 出資 資金調達 提携 IPO {YYYY-MM-DD}`
+4. `AWS new feature release {YYYY-MM-DD} site:aws.amazon.com`
+5. `AWS アップデート 新機能 今日 {YYYY-MM-DD}`
+6. `日本企業 DX AI活用 新発表 {YYYY-MM-DD}`
+7. `調査レポート ホワイトペーパー 生成AI DX 公開 発表 {YYYY-MM-DD}`
+8. `経産省 デジタル庁 総務省 IT DX AI 施策 発表 {YYYY-MM-DD}`
+9. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
+10. `セキュリティ 不正アクセス 脆弱性 インシデント {YYYY-MM-DD}`
+11. `情報漏洩 サイバー攻撃 ランサムウェア 標的型攻撃 {YYYY-MM-DD}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
@@ -39,6 +40,11 @@ aws.amazon.com が 403 を返した場合は `https://www.amazonaws.cn/en/new/20
 - 日経クロステック（https://xtech.nikkei.com/）
 - @IT（https://atmarkit.itmedia.co.jp/）
 - ZDNet Japan（https://japan.zdnet.com/）
+AI業界・テック動向（新機能だけでなく買収・出資・資金調達・提携・IPO等のビジネスニュースも対象）は以下のソースも確認する：
+- Impress Watch（https://www.watch.impress.co.jp/）
+- ITmedia AI＋（https://www.itmedia.co.jp/aiplus/）
+- TechCrunch（https://techcrunch.com/）
+- Yahoo!ニュース（IT・科学カテゴリ。記事は配信元の一次ソースURLを `card-date`・出典に使う）
 調査レポート・ホワイトペーパーは以下のソースも確認する（当日公開分のみ）：
 - PwC Japan（https://www.pwc.com/jp/ja/knowledge/）
 - デロイト トーマツ（https://www2.deloitte.com/jp/ja/pages/technology/topics/）
@@ -53,6 +59,10 @@ aws.amazon.com が 403 を返した場合は `https://www.amazonaws.cn/en/new/20
 - ITmedia NEWS（https://www.itmedia.co.jp/news/）
 - Security NEXT（https://www.security-next.com/）
 - 日本のCERT/CC（https://jvndb.jvn.jp/）
+
+**掲載対象の補足：**
+- AIセクションは新モデル・新機能のリリースだけでなく、AI業界の大型ビジネス動向（買収・出資・資金調達・大型提携・IPO・幹部交代など、海外企業含む）も対象とする。例: 「SpaceX が AI コーディングの Cursor を買収」のような業界再編ニュース
+- Yahoo!ニュース等のアグリゲーターでヒットした記事は、必ず配信元（Impress Watch・ITmedia 等）の一次ソース記事を `href`・`card-date`・出典に使う。Yahoo の記事URLは時間経過で消えるため使わない
 
 **除外ルール：**
 - 公開日が24時間以上前の記事は掲載しない
