@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 19 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日経BP</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://events.nikkeibp.co.jp/event/2026/nb26061819/" target="_blank" rel="noopener">日経BP「DX &amp; AI Insight 2026 夏」開催——AIエージェント・生成AI活用の最前線を国内企業事例で解説</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日経BPが主催する企業向けカンファレンス「DX &amp; AI Insight 2026 夏」が6月18〜19日に開催中。AIエージェントや生成AI活用、デジタル変革の具体策をテーマに、国内外の先進企業による実践事例が紹介される。2026年のDX推進において課題となる「AIと人の協働」「ROI可視化」「生成AI導入後の品質管理」などを深掘りするセッションが充実。デジタル変革の加速を目指す経営者・IT担当者が最新トレンドを習得し、課題解決の糸口を見つける場として注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">xAI / Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/grok-amazon-bedrock/" target="_blank" rel="noopener">xAI「Grok 4.3」が Amazon Bedrock で一般提供開始——100万トークンウィンドウと業界最低水準のハルシネーション率</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">xAIが開発したLLM「Grok 4.3」がAmazon Bedrockで一般提供（GA）を開始。最大100万トークンのコンテキストウィンドウ、フロンティアモデル中最低水準のハルシネーション率、可変推論レベル設定（none/low/medium/high）が特徴で、法律・金融・契約書レビューなどの長文書エンタープライズ用途向けに設計されている。新推論エンジン「Mantle」上で動作し、ツール呼び出し・構造化出力・レスポンスストリーミングに対応。On-Demand料金は入力100万トークンあたり$1.25、出力$2.50（キャッシュ入力$0.20）と競争力ある価格設定となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/announcing-web-search-on-amazon-bedrock-agentcore-ground-your-ai-agents-in-current-accurate-web-knowledge/" target="_blank" rel="noopener">Amazon Bedrock AgentCore にウェブ検索ツールが追加——AIエージェントがリアルタイムWeb情報をゼロデータ流出で参照可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit New York 2026（6月17日）でAmazon Bedrock AgentCoreへのWeb Searchツール一般提供が発表された。エージェントがModel Context Protocol（MCP）経由でリアルタイムのウェブ情報にアクセスし、引用元URL・タイトル・公開日付きで回答できるようになる。Amazon・Alexa+・Amazon Quick・Kiroで培われた検索インフラを活用しており、顧客のAWS環境外にデータが一切出ない設計が企業セキュリティ要件を満たす。RAGパイプラインなしでエージェントに最新情報グラウンディングを実現でき、企業向けAIエージェント開発の工数が大幅に削減される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.computerweekly.com/blog/CW-Developer-Network/AWS-launches-Kiro-IDE-for-real-agentic-development-at-scale" target="_blank" rel="noopener">AWS「Kiro IDE」正式発表——スペック駆動のエージェント型開発環境が Amazon Q Developer を置き換え</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSがVS Codeベースのエージェント型IDE「Kiro」をAWS Summit New York 2026で正式発表。コード記述前に航空宇宙産業由来のEARS（Easy Approach to Requirements Syntax）形式で仕様書（requirements.md・design.md・tasks.md）を自動生成するSpec-Driven開発アプローチが核心。Amazon Q Developerの後継として位置づけられ、Q Developerは2027年4月にサポート終了予定。各エージェントセッションはFirecracker microVMで独立実行されるエンタープライズセキュリティ設計で、iOSモバイルアプリも同時公開されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services — Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://devops.com/aws-continuum-service-employs-ai-to-secure-software-supply-chains/" target="_blank" rel="noopener">AWS Continuum 発表——AIがコード脆弱性を継続的に発見・優先順位付け・修正するネイティブセキュリティサービス</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NY 2026でAWS Continuumが発表。AIがアプリケーションコードの脆弱性を継続的に発見・優先順位付け・実証・修正提案する新しいセキュリティサービス。ビジネスインパクトベースの優先順位付けにより、実際に悪用可能な脆弱性のみを開発チームにエスカレーションし、誤検知によるノイズを排除する。IDEやCLIからMCPプロトコルでコードレビュー・脅威モデル生成・修正が実行でき、既存DevSecOpsワークフローへのシームレスな統合を実現。ソフトウェアサプライチェーンのセキュリティ強化を狙うAWSの戦略的な新サービス。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services — DevOps</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-nyc-2026-ai-agents" target="_blank" rel="noopener">AWS DevOps Agent にリリース管理機能を追加——本番デプロイ前のコード変更を自律的にテスト・検証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit NY 2026でAWS DevOps Agentへのリリース管理（Release Management）機能追加が発表された。エージェントがコード変更のリリース前準備状況を評価し、自律的なリリーステストを実施して問題を本番環境到達前に検出する。既存の根本原因分析機能を拡張したもので、コードレビュー・ロールバック判断・テスト自動化をAIが担うことで、開発チームのデプロイリスクを大幅に低減する。アジャイル・CI/CDパイプラインに組み込むことで「シフトレフト」をさらに進め、安全なリリースサイクルの実現を支援する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EKS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-eks-distro-kubernetes-version-1-36/" target="_blank" rel="noopener">Amazon EKS・EKS Distro が Kubernetes 1.36 をサポート開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Elastic Kubernetes Service（EKS）およびオープンソース版EKS Distroが最新のKubernetes 1.36のサポートを開始した。Kubernetes 1.36では複数の新機能とバグ修正が含まれており、クラスター管理の安定性と機能性が向上している。EKSユーザーは既存ワークロードへの影響を段階的に確認しながらアップグレードが可能で、EKS Distroによりオンプレミス・エッジ環境でも同バージョンを利用できる。最新Kubernetesに追随することで、コンテナオーケストレーションの最新機能や改善されたセキュリティパッチを本番環境で活用できるようになる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon RDS</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/postgresql-19-beta-1-amazon-rds-database-preview-environment/" target="_blank" rel="noopener">Amazon RDS データベースプレビュー環境に PostgreSQL 19 Beta 1 が追加——本番前の早期評価が可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon RDS Database Preview EnvironmentにPostgreSQL 19 Beta 1が追加され、正式リリース前の評価が可能になった。次世代バージョンPostgreSQL 19は新機能やパフォーマンス改善を含んでおり、RDSのマネージド環境で早期テストができる。プレビュー環境のインスタンスは60日後に自動削除されるため、継続利用には本番RDS環境へのデータ移行が必要。データベース管理者や開発者がPostgreSQL 19の新機能を事前評価し、アップグレード計画を立てるための環境として活用でき、GA後の迅速な移行準備が期待できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-working-on-defender-patch-for-rogueplanet-zero-day/" target="_blank" rel="noopener">Microsoft Defender「RoguePlanet」ゼロデイ（CVE-2026-50656、CVSS 7.8）——パッチ未提供のまま公開中、SYSTEM権限昇格に悪用可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftが Microsoft Defender のゼロデイ脆弱性「RoguePlanet」（CVE-2026-50656、CVSS 7.8）を公式確認し、パッチ開発中と発表。Microsoft Malware Protection Engine の TOCTOU（Time-of-Check Time-of-Use）競合状態を悪用し、攻撃者がSYSTEM権限でコードを実行できる権限昇格脆弱性。研究者Nightmare Eclipseが6月10日にGitHubでPoCを公開しており、パッチがまだ存在しないため緩和策の適用が推奨されている。Defenderが標準搭載されたWindows全般が対象で、パッチ公開まで攻撃リスクが継続する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / Joomla</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/06/cisa-warns-of-actively-exploited-joomla.html" target="_blank" rel="noopener">CISA、Joomla JCE プラグインの CVE-2026-48907（CVSS 10.0）を KEV カタログに追加——6月19日がパッチ期限</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAが Joomla Content Editor（JCE）の最大深刻度脆弱性 CVE-2026-48907（CVSS 10.0）を既知悪用脆弱性カタログ（KEV）に追加。認証なしでユーザーが新しいエディタープロフィールを作成してPHPコードをアップロード・実行できる不正アクセス制御の欠陥で、サイト完全乗っ取りが可能。連邦機関に対してはパッチ適用期限を本日6月19日と設定しており、緊急対応が求められる。Joomlaを採用する組織はJCEプラグインを最新バージョンへ即時更新するとともに、既に侵害されていないかログ調査を実施することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/3-recently-patched-fortinet-fortisandbox-vulnerabilities-in-hacker-crosshairs/" target="_blank" rel="noopener">Fortinet FortiSandbox の重大脆弱性3件が積極的に悪用中——CVE-2026-39813（CVSS 9.1）含む認証バイパス系</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinet FortiSandboxの重大脆弱性3件（CVE-2026-39813、CVE-2026-39808、CVE-2026-25089）が野放し状態で積極的に悪用されていることが確認された。最も深刻なCVE-2026-39813（CVSS 9.1）はJRPC APIのパストラバーサルによる認証バイパス脆弱性で、細工されたHTTPリクエストで未認証の攻撃者が権限昇格できる。4月にパッチが公開済みにもかかわらず未適用組織が攻撃対象となっており、443ポート経由のJSONRPCリクエストを使った攻撃がハニーポットで検出されている。FortiSandboxを利用する組織は4月パッチを至急適用し、ファイアウォールルールで管理ポートへのアクセスを制限することが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / LiteSpeed</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/06/cisa-flags-litespeed-cpanel-plugin-flaw.html" target="_blank" rel="noopener">CISA、LiteSpeed cPanel プラグインの CVE-2026-54420 を KEV 追加——共有ホスティング環境でroot権限昇格の恐れ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAがLiteSpeed cPanelユーザーエンドプラグインのシンボリックリンク追跡脆弱性 CVE-2026-54420（CVSS 8.5）をKEVカタログに追加した。FTPまたはウェブシェルアクセス権を持つユーザーが CloudLinux/CageFS 環境の共有ホスティングサーバーでroot権限へ昇格できる欠陥で、5月から悪用が確認されている。影響を受けるのはバージョン2.4.8未満のcPanelプラグインで、6月1日リリースの2.4.8で修正済み。共有ホスティングプロバイダおよびcPanelにLiteSpeedプラグインを導入しているユーザーは速やかに2.4.8以降へ更新することが必要。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-19 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
