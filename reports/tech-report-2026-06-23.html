@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 23 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meituan / LongCat AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-06-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aitoolly.com/ai-news/2026-06-22" target="_blank" rel="noopener">メイトゥアン、生成AI複数モデルを一斉オープンソース公開 ―― デジタルヒューマン・音声合成・定理証明・Physical AI 対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国フードデリバリー大手メイトゥアン（美団）のLongCatチームが2026年6月22日、複数のAIモデルを一斉にオープンソース公開した。デジタルヒューマン動画生成の商用グレード化を図る「LongCat-Video-Avatar 1.5」（リップシンク精度・物理的一貫性・長尺安定性を強化）、数学的定理証明に特化した「LongCat-Flash-Prover」、拡散モデルベースのゼロショット音声合成・音声クローニングモデル「LongCat-AudioDiT」、視覚と音声をネイティブに統合した Physical AI 向けマルチモーダルモデル「LongCat-Next」の4種を同日公開。また、インタラクティブ動画世界モデルの能力を月面から都市環境まで多様なシナリオで系統評価する新ベンチマーク「WBench」も合わせて公開された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Snowflake</div>
+          <div class="card-badges">
+            <span class="impact impact-low">情報</span>
+            <span class="card-date">2026-06-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.snowflake.com/en/ai-pulse/june-2026/" target="_blank" rel="noopener">Snowflake AI Pulse 6月号を本日ライブ配信 ―― CoWork・CoCo の最新機能と ML 強化を紹介</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">データクラウドプラットフォームのSnowflakeが2026年6月23日、月次製品アップデートイベント「AI Pulse June 2026」をライブ配信で実施した。今月号では企業向けパーソナルAIエージェント「Snowflake CoWork」の新機能、データエンジニアリング・分析業務を自然言語操作で完結させる AIコーディングエージェント「Snowflake CoCo」の最新アップデート、そしてデータサイエンス・MLチームの生産性を向上させる Snowflake ML の機能拡張が紹介された。今月からはヨーロッパタイム向けセッションも追加され、リージョン別の機能提供状況の詳細ウォークスルーも提供されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-06-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/machine-learning/amazon-bedrock-agentcore-harness-is-now-generally-available-go-from-idea-to-production-grade-agent-in-minutes/" target="_blank" rel="noopener">Amazon Bedrock AgentCore ハーネスが一般提供（GA）開始 ―― 本番品質 AI エージェントをコード不要で数分構築</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Summit New York 2026（6月17〜20日）での発表を受け、Amazon Bedrock AgentCoreのハーネスが一般提供（GA）となった。モデル・ツール・スキル・指示の設定だけで本番品質のAIエージェントをオーケストレーションループのコーディングなしに数分で構築・運用可能になる。ウェブ検索・マネージドナレッジベース・Guardrailsポリシー統合に加え、組織内の既存データ間の関係を自動的に知識グラフ化してエージェント向けに提供する新サービス「AWS Context」も同時発表。6月22日付の AWS Weekly Roundup でも主要ハイライトとして取り上げられた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-06-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-ny-summit-recap-local-zone-in-hanoi-grok-4-3-in-bedrock-price-reductions-and-more-june-22-2026/" target="_blank" rel="noopener">xAI の Grok 4.3 が Amazon Bedrock で正式提供 ―― コンテキスト 100 万トークン・Mantle 推論エンジン搭載</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">xAI社の最新モデルGrok 4.3がAmazon Bedrockで正式提供を開始（6月15日より）。最大100万トークンのコンテキストウィンドウ、設定可能な推論レベル、ネイティブ動画入力、AIエージェント向けツール呼び出しをサポートし、エンタープライズ向けに設計された新Mantle推論エンジンを採用している。価格は入力100万トークンあたり1.25ドルと、フロンティア推論モデルとして競争力ある設定。AWSの週次ラウンドアップ（6月22日付）でもニューヨーク・サミット総括とともに主要ハイライトの一つとして紹介された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Local Zone</div>
+          <div class="card-badges">
+            <span class="impact impact-low">情報</span>
+            <span class="card-date">2026-06-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/aws-local-zones-hanoi-vietnam/" target="_blank" rel="noopener">AWS、ベトナム・ハノイに新規ローカルゾーンを開設 ―― 東南アジア初の S3/EBS ローカルスナップショット対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが2026年6月18日、ベトナム・ハノイに初のAWS Local Zoneを一般提供開始した（6月22日週次ラウンドアップで紹介）。東南アジア初のAmazon S3 Local SnapshotsおよびEBS Local Snapshotsサポートにより、ハノイ拠点でのデータ保存・バックアップが可能となりデータレジデンシー要件への対応が容易になる。Amazon EC2（C7i・M7i・R7i インスタンス）、Amazon ECS、Amazon EKS、AWS Direct Connect、Application Load Balancerなどをサポートし、一桁ミリ秒の低レイテンシーを現地ユーザーに提供する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Klue / Salesforce</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-06-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/06/22/klue-hack-results-in-data-breach-at-several-cybersecurity-firms/" target="_blank" rel="noopener">Klue OAuth 侵害でサイバーセキュリティ企業 9 社以上のデータ漏洩 ―― HackerOne・Huntress・Snyk らが被害</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">競合情報プラットフォーム「Klue Battlecards」のOAuth認証基盤が侵害され、HackerOne・Huntress・Jamf・Recorded Future・Tanium・Snyk・OneTrust・Sprout Social・Insuriことなど少なくとも9社のSalesforce連携データが外部に流出した（TechCrunch 2026年6月22日報道）。攻撃者はレガシー認証情報でOAuthトークンを窃取し、被害企業のSalesforce環境に不正接続してデータを窃取。「Icarus」と名乗るサイバー恐喝グループが6月19日に犯行声明を発表し、6月22日を回答期限と設定したと報じられた。セキュリティ企業自身がサプライチェーン経由で侵害された点が業界全体に衝撃を与えており、OAuth統合経由のサードパーティリスク管理の見直しが急務となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-06-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybernews.com/security/hackers-database-30000-working-fortinet-logins/" target="_blank" rel="noopener">FortiBleed：攻撃者が 3 万件超の有効 Fortinet ログイン DB を構築、CISA が緊急対応を要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cybernews が2026年6月22日に報じたところによると、ロシア語圏の脅威アクターとみられる攻撃グループが「FortiBleed」と命名された大規模キャンペーンで、194カ国の企業・政府機関の FortiGate ファイアウォール約3万件以上の有効ログイン情報を収録したデータベースを構築していることが判明した。攻撃者はインターネット公開された FortiGate 機器から設定ファイルを収集してパスワードハッシュをクラックし、侵害した機器を利用してさらに認証情報を収集する自己増殖型の手法を採用している。CISAは全 Fortinet ユーザーにアクティブセッションの強制終了・資格情報リセット・PBKDF2 アルゴリズムへの移行・フィッシング耐性 MFA の有効化・管理アクセスの最小化を緊急対応として求めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-23 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
