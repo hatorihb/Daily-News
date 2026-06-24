@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 25 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">KDDI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.jbc-ltd.com/column/2026/06/24/kddi/" target="_blank" rel="noopener">KDDIのISP向けメールシステムへの不正アクセス発覚——最大1,422万件のメール認証情報が漏洩の可能性</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">KDDIは2026年6月23日、同社が提供するISP向けメールシステムが不正アクセスを受け、メールアドレスおよびパスワード最大1,422万件が外部に漏洩した可能性があると公表した。原因はシステムで利用していた第三者製ソフトウェアの脆弱性を悪用されたもので、不正アクセスは6月17日に発覚し当日中に技術的な防御措置が施された。@nifty・BIGLOBE・J:COM・中部テレコミュニケーションなど6社のISPメールサービスが影響を受けており、解約済みや休眠アカウントも対象に含まれる。パスワードはハッシュ化・暗号化されたものも含まれるが、解読リスクがあるため、該当サービスのパスワードを他のサービスで使い回している場合は早急な変更が推奨される。KDDIは利用者への個別通知と共にパスワード変更を強く呼びかけている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Sakana AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.newsbytesapp.com/news/science/japanese-startup-sakana-launches-fugu-multi-model-api-beating-rivals/tldr" target="_blank" rel="noopener">日本発Sakana AI、「Fugu Ultra」を正式公開——複数フロンティアLLMを統合するマルチエージェント基盤がGA</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東京拠点のAIスタートアップSakana AIは、複数のフロンティアLLM（GPT・Claude・Gemini等）を動的に使い分けるマルチエージェント基盤「Sakana Fugu」および高性能版「Fugu Ultra」の一般公開（GA）を発表した。単一LLMに依存せず「思考担当（Thinker）・実行担当（Worker）・検証担当（Verifier）」という役割を動的にAIエージェントへ割り当てて複雑タスクを処理するアーキテクチャで、ICLR 2026採択論文を基盤としている。Fugu UltraはClaude Mythos PreviewやFable 5と同等のフロンティアレベル性能を標榜し、一部ベンチマークでこれらを上回るとされる。OpenAI互換APIで提供され、料金は入力$5/100万トークン・出力$30/100万トークンの従量制と月額$20〜$200のサブスクプランが用意されている。エクスポート規制を回避しながら最高性能を実現できる点が、日本企業のAI導入において特に注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.neowin.net/news/anthropic-introduces-claude-tag-a-new-ai-teammate-for-slack/" target="_blank" rel="noopener">Anthropic、Slack向け「Claude Tag」をベータ公開——チームが共同でAIと協業できる新形態</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年6月24日、Slackチャンネル内でチームの共有AIメンバーとして動作する「Claude Tag」のベータ版をEnterpriseおよびTeamプランの顧客向けに公開した。@Claudeとメンションするだけで承認ツールや接続済みデータソースを通じてタスクを実行し、結果を同一スレッドに返す仕組みで、従来の1対1チャットボットと異なりチャンネル全員が進行中の作業を閲覧・引き継ぎできるマルチプレイヤー型のAI協業を実現する。最新フラッグシップモデルClaude Opus 4.8を基盤とし、ワークスペース管理者がアクセス可能なチャンネルやツール・データソースを細かく制御できるセキュリティ設計を備える。既存のClaude for Slack利用者は30日間の移行ウィンドウが設けられ、ベータ期間中は導入クレジットも提供される。エンタープライズAIをチームの「同僚」として組み込む方向性を示す注目のアップデートとなっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SpaceX / Anysphere</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.digitalapplied.com/blog/spacex-acquires-cursor-anysphere-60b-ai-coding-2026" target="_blank" rel="noopener">SpaceX、AIコーディングスタートアップ「Cursor」を600億ドルで買収——VC史上最大規模の買収が進行中</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SpaceXは2026年6月16日、AIコーディングエディタ「Cursor」の開発元Anysphereを600億ドルの全株式取引で買収することを発表した。Cursorは年間売上約40億ドル（うちエンタープライズ向け26億ドル）に達し、Fortune 500の67%が利用するAIコーディングツールである。SpaceXのAI部門（2026年初にxAIと合併）がCursorとColossusスーパーコンピュータを活用した共同モデルをトレーニング中で、近くCursorおよびGrok Buildに搭載予定とされる。買収はQ3 2026中の完了を見込み、Cursorがクラウドで支払っていたAnthropic APIのコスト構造の垂直統合も狙いの一つとみられる。規模の大きさから米欧の独占禁止当局による審査が確実視されており、AI業界の再編を象徴するメガディールとして注目が集まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aifriends.jp/anthropic-confidential-s1-sec-ipo-filing-2026/" target="_blank" rel="noopener">Anthropic、IPO向けS-1草案をSECへ非公開提出——評価額9,650億ドルで2026年秋上場を目指す</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI開発の米Anthropicは2026年6月初頭、米証券取引委員会（SEC）に対してIPOに向けた登録届出書（Form S-1）の草案を非公開で提出したと発表した。最近の資金調達後の評価額は9,650億ドル（約154兆円）に達し、2026年5月時点のARR（年次経常収益）は約470億ドルと著しい成長を遂げている。Fortune 10のうち8社、年間100万ドル以上支出の企業1,000社超がClaudeを顧客として持ち、企業AIとしての実績が評価されている。2026年秋の上場を目指しているとされ、予測市場のデータではAnthropicがOpenAIより先に上場する確率は75%とも推計されている。AI企業IPOラッシュが本格化する中、SpaceX（6月上場）に続く超大型IPOとして市場の注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/amazon-bedrock-agentcore-new-optimization-capabilities/" target="_blank" rel="noopener">Amazon Bedrock AgentCore、本番エージェントを継続改善する新最適化機能を追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは、Amazon Bedrock AgentCoreに本番環境で稼働するAIエージェントのパフォーマンスを継続的に計測・改善する最適化機能を新たに追加した。新機能ではエージェントの本番動作をモニタリングし、問題点を自動検出・分析して改善アクションを提案できる。AWS Summit New York 2026（6月17日）で発表されたAgentCore大型アップデートの一環として、組織ナレッジへのアクセス強化・本番管理の高度化・スケールするガバナンス統制の三本柱が整備された。AgentCoreはAIエージェントをセキュアかつスケーラブルに展開・運用するためのマネージドインフラで、アイデアから本番グレードのエージェントまで数分で到達できる開発効率を提供する。AI Summit NYで同時発表されたAgentCore Web Search（最新Web情報を参照できるマネージドツール）も同週にGA（一般提供開始）となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.hawkdive.com/key-highlights-from-the-2026-aws-summit-in-new-york/" target="_blank" rel="noopener">AWS Summit New York 2026 主要発表まとめ——EC2 G7（Blackwell GPU）・WAF AIトラフィック課金・DevOps Agent強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年6月17日、ニューヨーク・ジャビッツセンターでAWS Summit New York 2026を開催し、AIエージェント関連を中心に多数の新機能を発表した。Amazon EC2 G7インスタンスはNVIDIA RTX PRO 4500 Blackwell Server Edition GPU搭載でG6比AI推論性能4.6倍・グラフィックス性能2.1倍を実現し、AIワークロード向け最新インスタンスとして登場した。AWS WAFにはAIボットのコンテンツアクセスを有料化する「AI traffic monetization」機能が追加され、Coinbaseのx402プロトコルを介してコンテンツプロバイダーがAIクローラーへ従量課金できる仕組みが実装された。AWS DevOps AgentはAIによるリリース準備チェックと自律テスト機能を追加し、コード変更を自然言語で定義した基準に照らして自動検証するCI/CDの完全自動化を推進する。Kiro（AIコーディングIDE）のiOSアプリも発表され、モバイルからのエージェント管理・進捗確認が可能になった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/06/24/cisco-unified-cm-flaw-exploited-to-drop-webshells-cve-2026-20230/" target="_blank" rel="noopener">Cisco Unified CM の重大脆弱性CVE-2026-20230が攻撃者に悪用中——Webシェル展開を確認、即時パッチ適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco Unified Communications Manager（Unified CM）およびUnified CM SMEに存在するSSRF脆弱性CVE-2026-20230（CVSSスコア8.6）が、攻撃者によって実際に悪用されていることが2026年6月24日に確認された。認証不要のリモート攻撃者がWebDialer SSRF経由でApache Axisサービスに不正アクセスし、JSPファイルライターを経由してコマンド実行Webシェルを展開するチェーン攻撃が観測されている。Ciscoは6月3日にパッチ（14SU6 / 15SU5）を公開しており、脅威インテリジェンス企業はTor経由での自動化スキャンとWebシェル設置を検出している。影響を受けるバージョンは14.x（14SU6未満）および15.x（15SU5未満）で、パッチ適用が困難な場合はWebDialerサービスの無効化による緩和措置が推奨される。影響を受けるシステムは世界中に多数存在するとみられ、早急な対応が求められている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Novee Security / GitHub</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/06/cordyceps-cicd-flaws-expose-300-github.html" target="_blank" rel="noopener">「Cordyceps」CI/CDワークフロー欠陥——Microsoft・Google・Apache含む300以上のリポジトリがサプライチェーン攻撃に脆弱</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ企業Novee Securityは、GitHub Actionsワークフローの設定ミスに起因するサプライチェーン攻撃ベクター「Cordyceps」を公開した。約3万件の高影響リポジトリをスキャンした結果、300件以上がコード実行・認証情報窃取・アーティファクト汚染などへの完全悪用が可能な状態であることが判明した。Microsoft・Google・Apache・Cloudflareを含む世界有数の組織のリポジトリが影響を受けており、無料アカウントを持つ認証されていないユーザーでも悪用可能な点が深刻だ。脆弱性の根本はプルリクエストに過剰なCI/CD権限を付与するワークフロー設定にあり、コマンドインジェクション・認証ロジックの欠陥・権限昇格などのパターンが確認されている。GitHubは6月18日に「actions/checkout」を更新してpwnリクエストパターンをデフォルトでブロックする対応を実施しており、CI/CDワークフローの設定見直しを推奨している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-25 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
