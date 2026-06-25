@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 26 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">総務省 / KDDI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.soumu.go.jp/menu_news/s-news/01kiban18_01000281.html" target="_blank" rel="noopener">総務省がKDDIに報告徴収—ISPメールシステム不正アクセスで1422万件漏洩疑い</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">総務省は2026年6月25日、KDDIのISP向けメールシステムへの不正アクセスにより最大1,422万件のメールアドレスやパスワードが流出した可能性がある問題について、電気通信事業法に基づく報告徴収を実施した。影響を受けたのは@nifty・BIGLOBE・J:COM NET・コミュファ光・ピカラ・CPIレンタルサーバーの6社のISPサービスで、ハッシュ化・暗号化されたパスワードを含め、一部はメール本文の流出も懸念される。KDDIは6月17日に不正アクセスを検知し、同日中に被害拡大防止措置を実施、第三者製ソフトウェアの脆弱性が悪用されたと説明している。総務省はKDDIに対し、発生原因・利用者への対応状況・再発防止策などを7月6日までに報告するよう求めた。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.google.dev/gemini-api/docs/changelog" target="_blank" rel="noopener">Google、Gemini 3.1 Flash Image・Gemini 3 Pro Image をGA版として正式リリース</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google DeepMindはGemini APIにおいて、ネイティブビジュアルモデル「Gemini 3.1 Flash Image（コードネーム Nano Banana 2）」と「Gemini 3 Pro Image（Nano Banana Pro）」を正式版（GA）としてリリースした。あわせてプレビュー版の gemini-3.1-flash-image-preview・gemini-3-pro-image-preview は2026年6月25日をもって非推奨となり、開発者はGAモデルへの移行が必要。新GAモデルはテキストプロンプトに加えて動画ファイルを入力として受け付け、サムネイルや映画ポスター・要約インフォグラフィックなど高品質な画像を生成できる。マルチモーダルな文脈理解に基づく画像生成機能がAPI経由で本番環境に公式対応したことで、プレビュー制約なしでのアプリケーション組み込みが可能になる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/news/" target="_blank" rel="noopener">OpenAI、Broadcom共同開発の独自AI推論チップ「Jalapeño」を発表—初のIntelligence Processor</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIはBroadcomと共同開発した独自のLLM推論アクセラレータ「Jalapeño（ハラペーニョ）」を発表した。「Intelligence Processor」と位置づけられるこのカスタムシリコンは、AI推論処理の高速化・低コスト化・信頼性向上を目的として設計されており、ChatGPTサービスの安定的なスケール拡大を支える基盤となる。従来はNVIDIAのGPUに大きく依存していた推論処理を自社チップで補完することで、調達コスト削減とレイテンシ改善が期待される。Google（TPU）・Amazon（Trainium/Inferentia）・Microsoft（Maia）に続き、OpenAIも垂直統合型のAIシリコン戦略を本格展開する格好となり、AI業界における半導体自社開発競争がさらに激化する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/confidential-draft-s1-sec" target="_blank" rel="noopener">Anthropic、IPO向け機密S-1をSECへ提出—評価額9,650億ドルで10月Nasdaq上場目指す</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI企業Anthropicは2026年6月1日、米証券取引委員会（SEC）に対してIPO（新規株式公開）の機密S-1登録草案を提出したと発表した。直前の65億ドルシリーズH資金調達で評価額は9,650億ドルに達しており、Goldman Sachs・JPMorgan・Morgan Stanleyが主幹事となって600億ドル超の調達を目指す。上場先はNasdaqで、市場環境次第で2026年10月頃の上場が見込まれる。Anthropicが先行してIPO申請を行うことで、同様の計画を進めるOpenAIとの上場競争が加速している。今後SEC審査通過後に公開S-1が提出される予定で、AIユニコーン大型上場として市場の注目を集める。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Lambda</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/run-isolated-sandboxes-with-full-lifecycle-control-aws-lambda-introduces-microvms/" target="_blank" rel="noopener">AWS Lambda MicroVMs 一般提供開始—VMレベル分離でAI生成コードを最大8時間安全実行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは新しいサーバーレスコンピュートプリミティブ「AWS Lambda MicroVMs」を一般提供開始した。Firecrackerをベースとした専用マイクロVMで、ユーザーやAIが生成したコードをカーネル共有なしで分離実行し、最大8時間のステートフルな実行環境を提供する（通常Lambda関数の15分制限とは異なる）。プロンプトインジェクションや悪意あるコード出力に対するガードとして、AIエージェントや悪意あるパッケージ検査のサンドボックスに最適化されている。米国東部（バージニア北部・オハイオ）、米国西部（オレゴン）、アジア太平洋（東京）、欧州（アイルランド）の各リージョンで利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon RDS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/" target="_blank" rel="noopener">Amazon RDS、Graviton5ベースの M9g インスタンスをPostgreSQL・MySQL・MariaDBでサポート開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon RDSがAWS最新世代ARMプロセッサであるGraviton5ベースの新インスタンスタイプ「M9g」を、PostgreSQL・MySQL・MariaDBで正式サポートした。Graviton5は前世代比で大幅な演算性能とコスト効率の向上を実現しており、I/O集約型のデータベースワークロードで特に効果が期待される。価格モデルはベースラインコストと追加リソース利用に応じた従量課金を採用し、ユーザーごとの分離コンピュートが必要なSaaSアーキテクチャにも適している。AWSのマネージドDBサービスで最新シリコンを活用することで、既存のGraviton4ベース環境からの移行によるコスト削減効果が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon ECS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/" target="_blank" rel="noopener">Amazon ECS サービスオートスケーリングを強化—予測スケーリング・スケジュールスケーリングを統合</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Elastic Container Service（ECS）のサービスオートスケーリングが機能強化され、予測スケーリング（定期的トラフィックパターンへの事前対応）・スケジュールスケーリング（計画済みイベント対応）・ターゲット追跡スケーリング（リアルタイムメトリクスへの動的対応）の3方式が統合的に利用できるようになった。従来は手動設定が必要だったスケール準備を自動化することで、急激なトラフィック増加時のコールドスタート遅延を抑制できる。コンテナベースのワークロードが多様化するなかで、スケーリング戦略の組み合わせによる柔軟なキャパシティ管理が可能になる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / BleepingComputer</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisco-unified-cm-sme-flaw-cve-2026-20230-now-exploited-in-attacks/" target="_blank" rel="noopener">Cisco Unified CM の CVE-2026-20230 悪用が本格化—ウェブシェル配置まで確認、パッチ適用済みでも根絶要</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco Unified Communications Manager（CUCM）のSSRF脆弱性CVE-2026-20230（CVSS 8.6）の悪用が深刻化し、2026年6月24日以降にはTorを経由した自動スキャンによる3段階ウェブシェルの配置が確認された。Ciscoは6月3日にパッチをリリース済みだが、パッチ適用前に侵害されたシステムではウェブシェルが残存するため、パッチ適用後も別途の侵害調査と根絶作業が必要となる。WebDialer Webサービスが有効な環境が攻撃対象で、認証なしのSSRF攻撃によりOSへの任意ファイル書き込みが可能。未適用のCisco UCMシステムは直ちにパッチ適用と侵害状況の調査を実施することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">KDDI / NHKニュース</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.web.nhk/newsweb/na/na-k10015158671000" target="_blank" rel="noopener">KDDI ISPメールシステムに不正アクセス—最大1,422万件のメールアドレス・パスワードが漏洩か</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">KDDIのISP事業者向けメールシステムへの不正アクセスにより、最大1,422万件のメールアドレスとパスワード（ハッシュ化・暗号化含む）が外部に漏洩した可能性がある。6月17日に不正アクセスを検知し、第三者製ソフトウェアの脆弱性が悪用されたとしており、一部のサービスではメール本文の流出も懸念される。影響を受けたのは@nifty・BIGLOBE・J:COM NET・コミュファ光・ピカラ・CPIレンタルサーバーの6社で、現在ニフティを含む各社がユーザーへパスワード変更を呼びかけている。総務省は2026年6月25日に電気通信事業法に基づく報告徴収を行い、KDDIに対して7月6日までに発生原因・利用者対応状況・再発防止策の提出を求めた。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-26 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
