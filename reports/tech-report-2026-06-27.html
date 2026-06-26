@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 06 — 27 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ソフトバンクグループ</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bloomberg.com/news/articles/2026-06-26/softbank-s-shares-tumble-after-report-of-openai-s-ipo-delay" target="_blank" rel="noopener">ソフトバンクG株が一時14%超急落 — OpenAI IPO延期の可能性報道で約5.6兆円の時価総額消失</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米ニューヨーク・タイムズが「OpenAI は IPO を 2027 年まで延期する方向で検討している」と報じたことを受け、ソフトバンクグループ株が東京市場で一時 14%超急落し、終値は 12%安となった。1日で約 5 兆 6,000 億円の時価総額が失われ、2024 年 8 月以来最大の下げ幅を記録した。同社はOpenAIへの出資総額が 10 月時点で約 65 億ドル相当（約 9.4 兆円）に達する見込みで、上場遅延は含み益の実現時期の大幅先送りを意味する。孫正義氏は代替策として AI・ロボティクス企業「Roze」を米国で設立し、2026 年後半に 1,000 億ドル評価額での IPO を目指す戦略を推進中だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/index/retiring-gpt-4o-and-older-models/" target="_blank" rel="noopener">OpenAI、ChatGPT から GPT-4.5 を本日正式廃止 — GPT-5 世代への完全移行が完了</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI は本日 2026 年 6 月 27 日、ChatGPT から GPT-4.5 モデルを正式廃止した。30 日間の廃止予告期間を経た実施で、GPT-5 および GPT-5.3-Codex があらゆるベンチマークで GPT-4.5 を性能・速度・コストの全面で上回ったことが主な理由とされる。この変更は ChatGPT のみに適用され、API 利用者への影響はない。次のステップとして o3 モデルが 2026 年 8 月 26 日に廃止予定となっており、旧世代モデルの整理が加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / IPO動向</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.tradingkey.com/analysis/stocks/us-stocks/261993000-softbank-stock-forecast-openai-ipo-delay-stock-analysis-june-2026-tradingkey" target="_blank" rel="noopener">OpenAI IPO、2027 年まで延期の可能性 — 評価額 1 兆ドルを堅持するアルトマン CEO</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ニューヨーク・タイムズは、OpenAI がテック株市場の高ボラティリティを理由に IPO を 2027 年まで延期する可能性を検討していると報じた。バンカー陣は「1 兆ドル評価額での 2027 年上場」と「評価額を引き下げた早期上場」の二択を提示したが、サム・アルトマン CEO は 1 兆ドル未満の評価額を一切容認しない姿勢を明示した。一方で競合の Anthropic は 9,650 億ドル評価額で SEC に S-1 ドラフトを秘密提出済みであり、AI 業界の IPO レースが注目を集めている。ソフトバンク G が大幅下落するなど、AI 投資家に広く影響が及んでいる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/company-news/amazon-india-investment" target="_blank" rel="noopener">Amazon、インドの AI・クラウドインフラに追加 130 億ドルを投資 — 2026〜2030 年の総額は 480 億ドルへ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon の Andy Jassy CEO がニューデリーでインドのモディ首相と会談し、2026〜2030 年のインドへの追加投資として 130 億ドルを発表した。これにより同期間の総投資額は 480 億ドルに達し、2010 年からの累計は 880 億ドルを超える見込みだ。投資の中心は AWS ムンバイおよびハイデラバードのデータセンター拡張で、カスタム AI チップ・マネージド AI サービス・クラウド基盤の整備が含まれる。インドのスタートアップ・企業・政府機関がグローバル水準の AI/クラウドインフラを活用できる環境整備が目的で、現地の雇用創出や中小企業支援も計画されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / xAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-06-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/06/grok-amazon-bedrock/" target="_blank" rel="noopener">xAI の Grok 4.3 が Amazon Bedrock で利用可能に — 100 万トークンコンテキスト・低コスト推論を提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">xAI の最新モデル Grok 4.3 が Amazon Bedrock で一般提供を開始した。Bedrock 向けに最適化された新推論エンジン上で動作し、ツール呼び出し・構造化出力・レスポンスストリーミングをサポートする。コンテキストウィンドウは最大 100 万トークンで、最大出力は 30,000 トークン。Bedrock オンデマンド料金は入力 100 万トークンあたり 1.25 ドル、出力 2.50 ドル（キャッシュ入力は 0.20 ドル）と競争力のある設定となっている。推論・エージェント・エンタープライズワークフローの構築に活用できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-sets-urgent-deadline-to-fix-cisco-flaw-exploited-in-attacks/" target="_blank" rel="noopener">Cisco Unified CM の SSRF 脆弱性（CVE-2026-20230）が悪用中 — CISA が連邦機関に 6 月 28 日までのパッチ適用を命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco Unified Communications Manager（Unified CM）の WebDialer コンポーネントに存在する SSRF 脆弱性（CVE-2026-20230、CVSS 8.6）が実際の攻撃で悪用されていることが確認され、CISA が 2026 年 6 月 25 日に KEV カタログへ追加した。攻撃者は Tor 経由で細工した HTTP リクエストを送信し、ファイル書き込み→ウェブシェル設置→root 権限昇格の一連の攻撃チェーンを実行している。Cisco は 2026 年 6 月 3 日にパッチを公開済みだが適用率が低く、CISA は連邦民間機関（FCEB）に対して 6 月 28 日（明日）までの修正を義務付けた。WebDialer サービスを有効にしている環境は早急なアップデートが必要だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ubiquiti / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-06-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/cisa-ubiquiti-unifi-os-vulnerability/" target="_blank" rel="noopener">Ubiquiti UniFi OS に最大深刻度（CVSS 10.0）の脆弱性 3 件 — CISA が悪用を確認、即時アップグレードを勧告</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は Ubiquiti UniFi OS デバイスに最大深刻度（CVSS 10.0）の脆弱性 3 件が実際の攻撃に悪用されていると警告した。CVE-2026-34908（不正アクセス制御）、CVE-2026-34909（パストラバーサル）、CVE-2026-34910（コマンドインジェクション）は連鎖させることで設定変更・セキュリティ制御の無効化・システムの完全乗っ取りが可能となる。CISA は 2026 年 6 月 23 日に KEV カタログへ追加し、連邦機関への対応期限は昨日（6 月 26 日）だった。UniFi OS 搭載全デバイスの早急なアップグレードが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-06-27 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
