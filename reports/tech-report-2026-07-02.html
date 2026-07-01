@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 02 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/index/introducing-gpt-5-4-mini-and-nano/" target="_blank" rel="noopener">OpenAI、GPT-5.4 mini を ChatGPT Free / Go ユーザー向けに順次展開開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI は最新の小型モデル GPT-5.4 mini および nano を ChatGPT の Free・Go ユーザー向けに「Thinking」機能経由で順次展開を開始した。GPT-5.4 mini は 400k のコンテキストウィンドウを持ち、前世代 GPT-5 mini と比べ 2 倍以上の速度で動作する。コーディング・推論・マルチモーダル理解・ツール活用の各能力が大幅に向上しており、高ボリュームワークロード向けの高速・低コストモデルとして設計されている。API でも利用可能で、入力 100 万トークンあたり 0.75 ドル、出力 4.50 ドルという競争力ある価格設定となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/6825453-chatgpt-release-notes" target="_blank" rel="noopener">ChatGPT Codex Remote が全プランで一般提供（GA）開始 ― スマートフォンからPCに接続してAIコーディング</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI は ChatGPT 向け Codex Remote を Free・Plus・Pro・Business・Enterprise・Edu のすべてのプランで一般提供（GA）開始した。iOS または Android の ChatGPT アプリから接続済みの Mac または Windows ホストにアクセスし、コーディング作業を開始・継続・確認・承認できる。認証はモバイルデバイスとホスト間の QR ペアリングによる 1 対 1 認証を採用。新たに DigitalOcean Droplet Workspace プラグインも追加され、クラウド上の Droplet をコーディングリモートワークスペースとして即時設定・接続できるようになった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SpaceX / Anysphere（Cursor）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-07-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.tradingkey.com/jp/analysis/stocks/us-stocks/261923201-spacex-ipo-cursor-60-billion-bet-tradingkey" target="_blank" rel="noopener">SpaceX、AIコードエディタ「Cursor」を約600億ドルで買収する権利を取得 ― IPO後30日以内に行使可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">イーロン・マスク率いる SpaceX が、AI 支援コードエディタ「Cursor」を開発する Anysphere を約 600 億ドル（約 9 兆円）で買収する優先権を確保したと報じられた。この権利は SpaceX の IPO 後 30 日以内に行使できる条件が付いており、本格的な IPO 準備が進む中で注目を集めている。Cursor は AI 支援コーディングツール市場で急成長を遂げており、同時に 20 億ドルの評価額でシリーズ E 資金調達も進行中。NvidiaやA16zなど著名投資家も出資候補に挙がり、AI 開発ツール業界の大規模再編を示唆する動向として業界全体が注視している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">AWS、AI業務アシスタント「Amazon Quick」を発表 ― 4分野向けエージェントAIソリューションも同時展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS が新しい AI 業務アシスタント「Amazon Quick」を発表した。デスクトップアプリとして提供され、カスタム統合による高い拡張性を持つ。Amazon Connect との連携により、サプライチェーン・採用・顧客体験・ヘルスケアの 4 分野向けにエージェント AI ソリューションを同時展開する。業務フローの自動化や問い合わせ処理の効率化を実現し、従来のコンタクトセンター AI を超えたエンタープライズ AI エージェント基盤として機能する。AWS のエージェント AI インフラ整備の一環として、企業向け AI 活用の新標準を目指すと位置付けられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">Amazon Bedrock AgentCore に Web Search 機能を追加 ― エージェントがリアルタイム Web 情報を根拠付き引用で参照可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS は Amazon Bedrock AgentCore にマネージド Web Search 機能を追加した。AI エージェントがリアルタイムの Web 情報を取得し、根拠となる URL を引用した回答を生成できるようになる。データは AWS の顧客セキュリティ環境外に出ることなく処理される「ゼロデータエグレス」設計を採用し、インフラ管理が不要なため開発者はエージェント構築に集中できる。法令確認・市場調査・競合分析など、最新情報の取得と根拠付き応答が求められるユースケースへの活用が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS WAF</div>
+          <div class="card-badges">
+            <span class="impact impact-low">参考</span>
+            <span class="card-date">2026-07-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">AWS WAF、AIボット・エージェントへのアクセスを収益化できる「AI traffic monetization」機能を提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS WAF の Bot Control に新機能「AI traffic monetization」が追加された。コンテンツ提供事業者やパブリッシャーが、コンテンツや API にアクセスする AI ボット・エージェントに対して価格を設定し、計量・課金・アクセス許可をエッジで直接行えるようになる。API 経由でのアクセス管理にも対応しており、AI クローラーによるコンテンツ無断利用への対策として注目される。メディア企業や出版社が AI 学習用データへのアクセスを収益化する手段として、コンテンツ業界での活用が見込まれる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Progress Software / Kemp</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急</span>
+            <span class="card-date">2026-07-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/latest-progress-kemp-loadmaster-pre.html" target="_blank" rel="noopener">【緊急】Progress Kemp LoadMaster に認証不要のRCE脆弱性（CVE-2026-8037、CVSS 9.8）― 7月1日より積極的な悪用を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Progress Software のロードバランサ製品 Kemp LoadMaster に、認証不要でリモートコード実行（RCE）が可能な深刻な脆弱性 CVE-2026-8037（CVSS 9.8）が発見された。攻撃者は認証情報なしに対象システムの root 権限でコマンドを実行できるため、即時対応が必要とされる。影響を受けるバージョンは GA 版 7.2.63.1 以前および LTSF 版 7.2.54.17 以前で、API フィーチャーを有効化している環境が対象。eSentire の調査によると 2026 年 6 月 29 日から積極的な悪用が確認されており、Progress はパッチ済みファームウェアを公開済みのため、管理者は早急なアップデートが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anysphere（Cursor）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/critical-cursor-flaws-could-let-prompt.html" target="_blank" rel="noopener">AIコードエディタ「Cursor」に深刻なRCE脆弱性（CVE-2026-50548 / CVE-2026-50549）― プロンプトインジェクションでサンドボックス脱出</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI コードエディタ「Cursor」（Anysphere 社）にプロンプトインジェクション経由でサンドボックスを脱出し、任意コマンドを実行できる重大な脆弱性 2 件（CVE-2026-50548・CVE-2026-50549、各 CVSS 9.8）が Cato AI Labs により発見された（コードネーム「DuneSlide」）。ユーザーが無害なプロンプトを発行するだけで攻撃が成立し、MCP サーバーの応答や汚染された Web 検索結果を経由した攻撃も可能なため、被害が広がりやすい構造となっている。Cursor 3.0 以前のすべてのバージョンが影響を受け、2026 年 4 月 2 日リリースの Cursor 3.0 でパッチ済み。AI コードエディタを利用している開発者は直ちに Cursor 3.0 以降へのアップデートが求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-02 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
