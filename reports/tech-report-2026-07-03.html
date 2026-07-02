@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 03 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">G7 / 財務省</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japantimes.co.jp/news/2026/07/02/japan/katayama-g7-ai/" target="_blank" rel="noopener">G7財務大臣会合でAI安全基準・防衛活用を議論、片山大臣が言及</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本の片山財務大臣は7月2日、G7財務大臣会合において人工知能のセキュリティ基準と防衛分野への活用について議論すると表明した。先進7か国が共同でAIガバナンスの国際枠組みを策定する方向で協議が加速しており、金融システムへの影響や安全保障分野でのAI利用が主な議題となる見通しだ。日本の金融庁もAIを活用したサイバー攻撃対応訓練の検討を進めており、金融機関のデジタルレジリエンス向上に向けた官民連携が加速している。「積極的サイバー防衛法」の2026年施行とあわせ、AIと安全保障を融合させる政策的取り組みが政府レベルで本格化している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aljazeera.com/economy/2026/7/1/us-lifts-restrictions-on-powerful-ai-models-fable-mythos-anthropic-says" target="_blank" rel="noopener">米輸出規制解除でAnthropicのClaude Fable 5・Mythos 5が世界展開を再開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米商務省がAnthropicの最上位AIモデル「Claude Fable 5」および「Mythos 5」への輸出規制を解除し、Anthropicが世界全体でのアクセスを順次再開した。Pro・Max・Teamプランでは7月7日まで週間使用制限の50%の範囲でFable 5が提供され、以降はクレジット方式へ移行する。AI大国間の技術競争が激化する中での規制緩和であり、同盟国とのAI技術共有を促進する米国の戦略的判断が反映されている。Mythos 5については一部の米国組織を対象に限定的に再開されており、海外展開については引き続き個別審査が続けられる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-science-ai-workbench" target="_blank" rel="noopener">Anthropic、研究者・製薬業界向けAIワークベンチ「Claude Science」をベータ公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは科学研究・製薬業界向けの新製品「Claude Science」を発表し、有料プランユーザー向けにmacOSおよびLinux上でベータ提供を開始した。ゲノミクス・単細胞解析・プロテオミクス・構造生物学・ケミインフォマティクスに対応した60以上のスキルとコネクタをあらかじめ搭載し、ツール切り替えなしにデータ分析・アクセスが実行できる。Claude CodeがソフトウェアエンジニアリングをAIで支援するのと同位置づけで、Claude Scienceは研究プロセスの自律的な推進を目指した製品だ。Anthropicは最大3万ドルのクレジットを提供する「AI for Science」支援プログラム（50件規模、7月15日まで申請受付）を実施し、希少・顧みられない疾患への自社創薬プログラムも開始する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news" target="_blank" rel="noopener">Claude Sonnet 5が全プランのデフォルトモデルに、Claude Codeでは1Mトークンコンテキストで提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはClaude Sonnet 5をFree・Pro・Max・Team・EnterpriseのすべてのClaudeプランにおけるデフォルトモデルとして提供開始した。Opus 4.8に迫る性能を持ちながら入力100万トークンあたり2ドルという導入特別価格（8月31日まで）で高いコストパフォーマンスを実現している。Claude Codeではデフォルトモデルとして採用され、ネイティブで100万トークンのコンテキストウィンドウをサポートするため大規模コードベースへの一括対応が可能となった。推論・エージェント機能・ツール活用能力が大幅に強化されており、自律的な多段階タスクの実行精度も向上している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Amazon OpenSearch Service</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-opensearch-service-optimized-log-analytics/" target="_blank" rel="noopener">Amazon OpenSearch Serviceにログ分析専用エンジンを追加、ストレージ最大70%削減・4倍のコストパフォーマンスを実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon OpenSearch Serviceにログ分析ワークロード向けに最適化された新専用エンジンを追加した。集計処理向けカラム型ストレージにより最大70%のストレージ削減を実現し、同一ハードウェアで2倍のインジェスト処理量と2倍高速な分析クエリを達成、内部ベンチマークでは従来比4倍のコストパフォーマンスを示している。東京リージョンを含む世界12リージョンで提供され、OpenSearch 3.5以上の新規ドメインを作成してオブザーバビリティのユースケースでエンジンモードを「最適化」に設定することで利用開始できる。ログ管理・セキュリティ分析・APMなど観測性ユースケースで大幅なコスト削減が期待できる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/machine-learning/new-in-amazon-bedrock-agentcore-build-agents-with-broader-knowledge-and-continuous-learning/" target="_blank" rel="noopener">Amazon Bedrock AgentCore、Web検索とGuardrails統合をGA——4リージョン追加で東南アジア・欧州展開も強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon Bedrock AgentCoreに「Web Search on AgentCore」を一般提供開始し、AIエージェントが最新のWeb情報を引用付きで応答に活用できるようになった。データがAWS環境外に流出しない完全マネージド型で、セキュアな環境のままグラウンディングを実現する。Bedrock Guardrailsとの統合もGAとなり、プロンプトインジェクション・有害コンテンツ・機密データ露出をエージェントコードの外側にあるゲートウェイ層でリアルタイム評価できる体制が整った。さらにアジアパシフィック（バンコク・マレーシア）・欧州（ミラノ・スペイン）の4リージョンでも新たに利用可能となり、グローバル展開が拡大している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / Microsoft SharePoint</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/sharepoint-rce-cve-2026-45659-added-to.html" target="_blank" rel="noopener">CISAがSharePoint Server RCE脆弱性CVE-2026-45659をKEVに追加、7月4日期限でパッチ適用を義務化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAはMicrosoft SharePoint Serverのリモートコード実行（RCE）脆弱性CVE-2026-45659（CVSSスコア8.8）を「既知の悪用された脆弱性カタログ（KEV）」に追加し、米国連邦政府機関に対して7月4日までのパッチ適用を義務付けた。信頼されないデータのデシリアライゼーションに起因しており、攻撃者がリモートから任意コードを実行できる深刻な脆弱性だ。現時点で攻撃者の素性や目的は不明だが、野外での悪用が確認されているため、パッチ未適用のSharePointサーバーは直ちに対処が必要。KEVへの掲載は連邦機関以外の組織にとっても優先的なパッチ適用の強力な指標となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / SimpleHelp RMM</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://arcticwolf.com/resources/blog/cve-2026-48558-critical-authentication-bypass-vulnerability-in-simplehelp-rmm-exploited-for-credential-theft-and-malware-delivery/" target="_blank" rel="noopener">SimpleHelp RMM認証バイパス脆弱性CVE-2026-48558の悪用が継続、TaskWeaver・Djinn StealerでMSPサプライチェーンが標的に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">リモートモニタリング管理（RMM）ツール「SimpleHelp」の認証バイパス脆弱性CVE-2026-48558（CVSS 10.0）に対するCISA KEVのパッチ期限（7月2日）を迎えたが悪用が継続している。OIDC認証フローのトークン署名検証不備により未認証の攻撃者が偽トークンでテクニシャンセッションを完全に奪取できる。攻撃者は「TaskWeaver」ローダーと「Djinn Stealer」マルウェアを展開しており、MSP（マネージドサービスプロバイダー）経由のサプライチェーン攻撃として顧客組織への侵入に悪用されるリスクが高い。SimpleHelp 5.5.15以下および6.0プレリリース版が対象のため、速やかにアップデートを適用することが強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-03 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
