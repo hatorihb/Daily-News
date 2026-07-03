@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 04 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DEEPX / Koshidaka Tech</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://en.sedaily.com/technology/2026/07/03/deepx-partners-with-koshidaka-tech-to-target-japans" target="_blank" rel="noopener">DEEPX、Koshidaka Techと戦略提携——日本の物理AI市場へ本格参入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">韓国の低消費電力オンデバイスAIチップ企業DEEPXは2026年7月3日、日本の技術ディストリビューターKoshidaka Techとの戦略的パートナーシップ契約を東京本社で締結した。DEEPXのNPU（ニューラルプロセッシングユニット）をKoshidaka Techの国内流通網を通じて製造業・スマートシティ・ロボット分野に展開し、日本における「物理AI」（Physical AI）市場の開拓を図る。エッジデバイスへのAI推論処理需要が急拡大する中、省電力・低遅延なオンデバイス処理の実現を日本市場でも加速させる狙いだ。DEEPXは自社のNPUがクラウド依存なしでリアルタイムAI推論を実現できる強みを持ち、製造ラインやロボット・監視カメラなどへの搭載を見込んでいる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本政府 / インド政府</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theweek.in/news/sci-tech/2026/07/03/artificial-intelligence-partnership-india-japan.amp.html" target="_blank" rel="noopener">第16回日印首脳年次会合でAI協力協定を採択——インド人AI人材500名誘致も合意</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年7月2〜3日に開催された第16回日印首脳年次会合で、日本とインドはAIを「変革的・時代定義的技術」と位置づけた人工知能協力に関する共同声明を正式採択した。合意内容にはデータセンター・GPU計算資源・半導体を含む安全なデジタルインフラの共同構築のほか、両国を戦略的なAI研究開発パートナーとして位置づける施策が盛り込まれた。2030年までに高度なインド人AI技術者500名を日本に招へいする計画も含まれており、国内のAI人材不足解消に向けた具体策として注目される。両国は「信頼できるAI」の国際標準策定においても連携を強化し、アジアとしてのAIガバナンス議論への影響力を高める方針だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.artificialintelligence-news.com/news/anthropic-deploys-claude-sonnet-5-fable-and-mythos-restored/" target="_blank" rel="noopener">Anthropic、Claude Sonnet 5をリリース——100万トークン対応のエージェント特化型最新中間モデル</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年6月30日、最新の中間モデル「Claude Sonnet 5」を正式リリースした。最大100万トークンのコンテキストウィンドウと12万8,000トークンの最大出力を備え、ブラウザやターミナルを自律操作する「エージェント型」設計が最大の特徴だ。パフォーマンスはClaude Opus 4.8に匹敵しながら、APIの入力価格は100万トークンあたり2ドル（2026年8月31日まで）と大幅に低コストを実現している。Free・Proプランのデフォルトモデルに設定され、Max・Team・Enterpriseユーザーも利用可能で、APIでは識別子「claude-sonnet-5」で呼び出せる。これまで大規模モデルが必要だったエージェントワークフローをより経済的に実行できる点が業界から高く評価されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/claude-fable-5-anthropic-amazon-bedrock" target="_blank" rel="noopener">Claude Fable 5、米輸出規制解除でAmazon Bedrock上での提供を再開——強化されたガードレールで再登場</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年6月12日、米国の国家安全保障輸出管理指令への対応として、Claude Fable 5（Mythos 5を含む）へのアクセスをAmazon Bedrockなど全プラットフォームで一時停止していた。規制が解除されたことを受け、同年7月1日よりより強固なガードレールを実装した形でAmazon BedrockおよびClaude.aiプラットフォームでの提供を再開した。Claude Fable 5はコーディング・知識ワーク・複数日にわたる自律タスクが可能なMythos級の次世代モデルで、サブエージェントへの委譲や自己検証機能も実装されている。大型フロンティアモデルへの規制・解除が1か月以内に完結した今回のケースは、生成AIの安全保障政策における新たな前例として注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / 公共部門</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-summit-dc-2026-ai-cloud-public-sector" target="_blank" rel="noopener">AWS Summit DC 2026：政府・インテリジェンス向けAI投資を強化——ICAMF・AWS Secret Cloud・FDEを相次ぎ発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年6月30日〜7月1日開催のAWS Summit Washington D.C.で、米国インテリジェンスコミュニティ（IC）向けに最大10億ドルの移行支援クレジット制度「IC Accelerated Modernization Framework（ICAMF）」が発表された。2030年10月まで既存のAWS政府契約を通じた全IC機関のワークロード移行コストを支援する大規模プログラムで、CIA長官も公の場で採用方針を表明した。国防請負業者が機密ワークロードを自社環境でAWSインフラ上で運用できる「AWS Secret Cloud for Industry」（ノースロップ・グラマン初参加、3年間2,000万ドルのクレジット提供）も発表されている。さらに、数千名の専門エンジニアが顧客先に常駐してAIソリューションを共同開発・展開する「AWS Forward Deployed Engineering（FDE）」（10億ドル投資）が新設され、公共・防衛セクターのAI本番環境構築を数か月から数日に短縮する取り組みとして注目されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/anthropic-claude-fable-5-on-aws-mythos-class-capabilities-with-built-in-safeguards-now-available/" target="_blank" rel="noopener">Amazon BedrockでClaude Fable 5が再提供——Mythos級の性能と強化されたセーフガードを両立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrockは2026年7月1日より、Claude Fable 5の提供を再開した。米輸出管理規制への対応で一時利用停止となっていたが、規制解除を受けてより堅牢なガードレールを組み込んだ形でAWSプラットフォーム上に再登場した。Claude Fable 5は複雑なコーディング・知識ワーク・多段階エージェントタスクにおいてほぼすべてのベンチマークでSOTA水準を記録するフロンティアモデルだ。Bedrockの各種エージェント機能（Bedrock Agents、Knowledge Bases、Guardrails）と組み合わせることで、コンプライアンスと高性能を両立した本番グレードのAIエージェント開発が可能になる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / Microsoft SharePoint</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/sharepoint-rce-cve-2026-45659-added-to.html" target="_blank" rel="noopener">Microsoft SharePoint RCE脆弱性CVE-2026-45659がCISA KEVに追加——連邦機関に7月4日までのパッチ義務</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年7月1日、Microsoft SharePoint Serverにおけるデシリアライゼーション脆弱性CVE-2026-45659（CVSS 8.8）を「Known Exploited Vulnerabilities（KEV）」カタログへ追加し、米連邦機関に2026年7月4日までのパッチ適用を命じた。この脆弱性はSiteメンバー権限以上の認証済み攻撃者がネットワーク経由で任意のコードをリモート実行できるもので、5月末に公開されたアウトオブバンドセキュリティ更新で修正済みとなっている。CISAは本脆弱性が実際の攻撃で積極的に悪用されていることを確認しており、パッチ未適用のオンプレミスSharePoint Serverは重大なリスクにさらされている。組織のセキュリティチームはMicrosoft提供の修正プログラムを即時適用し、侵害の痕跡がないかログを精査することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Aflac / KDDI / Sapporo / Nidec</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.s-rminform.com/cyber-intelligence-briefing/japan-ransomware-attacks-3-july-2026" target="_blank" rel="noopener">日本大手企業でサイバー攻撃が相次ぐ——Aflac・KDDI・サッポロ・Nidecが相次ぎ被害を開示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年7月3日のCyber Intelligence Briefingで、日本の複数大手企業への相次ぐサイバー攻撃被害が一週間以内に集中して報告されていることが明らかになった。Aflac Japanは約438万人の保険契約者情報と23万人の支払い情報が流出した可能性を開示し、KDDIは6月17日に検知した不正アクセスにより最大1,422万件のメールアドレスとパスワードが漏洩した恐れがあると報告（STNet・JCOM・Nifty・Biglobeなど6社のISPが提供するメールサービスが対象）。サッポロホールディングスは海外2子会社への攻撃を公表し、日本電産（Nidec）は台湾子会社がサイバー犯罪グループ「BlackField」によるランサムウェア攻撃を受け200万ドルの身代金を要求されたことを明らかにした。分析の結果、本社への直接攻撃ではなく海外子会社・サードパーティインフラ経由での侵入が共通パターンとして確認されており、サプライチェーン全体のセキュリティ強化が急務となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-04 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
