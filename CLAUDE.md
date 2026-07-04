@@ -18,7 +18,9 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 - **One report per day**. Do not overwrite a previous day's file.
 - Reports have **4 sections**: 01 国内IT・DX / 02 AI / 03 AWS / 04 セキュリティ. All 4 must be present in every report.
 - The search query list in `prompt/routine-prompt.md` includes a cybersecurity query — do not skip it.
-- Cite sources with real working URLs. Broken links erode trust. If a URL is critical, sanity-check it before pasting.
+- Cite sources with real working URLs. Broken links erode trust. Before committing, re-verify every card's URL, title, and publication date against the fetched page (see 手順4 in `prompt/routine-prompt.md`).
+- Do not repeat a story already covered in the previous day's report — read the most recent existing report first and skip duplicates unless there are genuinely new developments.
+- Prefer RSS feeds (exact `pubDate`) over search-result summaries when determining publication dates — the feed list is in `prompt/routine-prompt.md`.
 - `card-date` is the **publication date of the source article or announcement page**, not the original product announcement date. If a feature was announced days ago but a new article covering it was published today, use today's article date. The hook enforces `card-date ≥ prev_day (report date − 1)`.
 - Do not paste raw API responses or request IDs into the report. Summarize, don't dump.
 - Keep the HTML self-contained: inline CSS, no external JS dependencies. The report should render correctly when shared as a single file.
@@ -29,7 +31,7 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 - Push to a `claude/**` branch. The `auto-merge-report.yml` workflow handles syncing to `main`.
 - **Never push directly to `main`**. Anything on `main` is published immediately with no review, so accidental main commits go public.
 - After your push, check the Actions tab to confirm the workflow succeeded. If the auto-merge silently no-ops, the filename probably doesn't match.
-- The auto-merge workflow re-runs the report validations (size / date / sections / secrets) server-side before syncing. If it fails, the report does NOT reach main — fix the report and push again.
+- The auto-merge workflow re-runs the report validations (size / date / sections / card-dates / secrets) server-side before syncing. Every `card-date` must be within `report date − 1 .. report date`. If validation fails, the report does NOT reach main — fix the report and push again.
 - After a successful sync, the source `claude/**` branch is **auto-deleted** and `reports.json` (used by index.html) is regenerated on main.
 - `report-watchdog.yml` runs at 09:00 JST daily and files an issue if today's report is missing from main.
 - **Non-report changes** (prompt, hooks, CLAUDE.md, index.html) are NOT synced by auto-merge. Open a separate PR to merge them to main.
