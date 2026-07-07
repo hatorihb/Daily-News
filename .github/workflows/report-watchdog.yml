@@ -41,23 +41,22 @@ jobs:
             exit 1
           fi
 
-          gh issue create \
-            --title "$TITLE" \
-            --body "$(cat <<EOF
-## 当日レポートが見つかりません
+          {
+            echo "## 当日レポートが見つかりません"
+            echo ""
+            echo "\`${FILE}\` が 9:00 JST 時点で main に存在しません。"
+            echo ""
+            echo "### 考えられる原因"
+            echo "1. **Routines が実行されなかった**（スケジューラ側の障害）"
+            echo "2. **セッションが日付を誤認して早期終了した**（過去事例: 2026-05-28, 2026-05-30）"
+            echo "3. **レポートは生成されたが auto-merge が失敗した**（ファイル名不一致・バリデーション失敗）"
+            echo ""
+            echo "### 確認手順"
+            echo "- [ ] Claude.ai Routines の実行ログを確認"
+            echo "- [ ] \`claude/**\` ブランチに今日のコミットがあるか確認"
+            echo "- [ ] Actions タブで auto-merge ワークフローの失敗がないか確認"
+            echo "- [ ] 必要なら手動でレポートを作成して \`claude/**\` ブランチにプッシュ"
+          } > /tmp/issue-body.md
 
-\`${FILE}\` が 9:00 JST 時点で main に存在しません。
-
-### 考えられる原因
-1. **Routines が実行されなかった**（スケジューラ側の障害）
-2. **セッションが日付を誤認して早期終了した**（過去事例: 2026-05-28, 2026-05-30）
-3. **レポートは生成されたが auto-merge が失敗した**（ファイル名不一致・バリデーション失敗）
-
-### 確認手順
-- [ ] Claude.ai Routines の実行ログを確認
-- [ ] \`claude/**\` ブランチに今日のコミットがあるか確認
-- [ ] Actions タブで auto-merge ワークフローの失敗がないか確認
-- [ ] 必要なら手動でレポートを作成して \`claude/**\` ブランチにプッシュ
-EOF
-)"
+          gh issue create --title "$TITLE" --body-file /tmp/issue-body.md
           exit 1
