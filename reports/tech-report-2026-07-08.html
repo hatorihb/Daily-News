@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 08 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">全東信 / クレジット決済</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/articles/2607/07/news127.html" target="_blank" rel="noopener">全東信が破産——「カード決済の駆け込み寺」消滅で全国飲食店に即時停止指示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中小飲食店向けクレジットカード決済代行大手の全東信（本社・大阪市中央区）が7月6日に破産手続きを開始し、翌7日に日本フードサービス協会（食団連）が加盟飲食店に「全東信の端末使用を即時停止して」と緊急注意喚起を発表した。同社は大手決済ブランドの審査が通りにくい中小規模店舗の受け皿として機能しており、「カード決済の駆け込み寺」と称されていた。破産により既存加盟店は立替金・精算金の回収が困難になるほか、決済端末の即時使用停止で現金払いへの切り替えを迫られる店舗が続出している。背景には不明瞭な資金管理と業務上の問題があったとされ、飲食業界のキャッシュレス化推進に水を差す事態となっている。代替決済手段への移行を急ぐとともに、未精算残高の扱いについて法的手続きの行方が注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/articles/2607/07/news076.html" target="_blank" rel="noopener">Microsoft、法人・Xbox部門中心に約4800人削減——全社員の2.1%、AI投資との「選択と集中」を鮮明に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは7月7日、グローバルで約4800人（全従業員の約2.1%）を削減すると発表した。対象は法人向け（Commercial）部門とXboxゲーム部門が中心で、直近に実施した人員調整とは異なる部門での追加削減となる。同社はAzure・Microsoft 365・CopilotなどAI・クラウド事業への大規模投資を継続しながら、従来型IT部門のコスト構造を抜本的に見直す「選択と集中」戦略を加速させている。AI関連の採用を増やしつつ、既存事業の効率化を図るという二極化が業界全体に拡がる中、テック大手による人員再配置の波は国内外の取引先・パートナー企業にも影響を与えそうだ。日本マイクロソフトへの影響については現時点で公表されていない。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">欧州委員会</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://commission.europa.eu/news-and-media/news/new-eu-plan-address-risks-and-opportunities-advanced-ai-cybersecurity-2026-07-07_en" target="_blank" rel="noopener">欧州委員会、「AI・サイバーセキュリティ行動計画」を発表——米国製AI依存への対抗と自前評価体制の構築へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">欧州委員会は7月7日、AI技術のサイバーセキュリティ分野における機会とリスクへの統合的な対応策「EU Action Plan on Cybersecurity and Artificial Intelligence」を公表した。主な施策は4本柱で構成される。①EU独自のAIモデル評価能力の構築（AI法に基づく第三者審査を強化）、②欧州サイバーセキュリティ機関（ENISA）と連携した先端AIモデルへのアクセス管理枠組みの策定、③AI×サイバーセキュリティのテストプラットフォーム整備（JRCと連携）、④AI×サイバーセキュリティ分野のEUグランドチャレンジ立ち上げ。新規立法は設けず既存のAI法・サイバーセキュリティ法の実施強化に注力する方針で、欧州の米国製AIモデルへの依存度を縮小する戦略的意図が明確に打ち出されている。国際的なAIガバナンス競争が政策レベルで加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/319864/20260707/claude-fable-5-drops-subscriptions-tonight-enable-credits-lose-access.htm" target="_blank" rel="noopener">Claude Fable 5、本日よりサブスクリプション上限から除外——Usage Credits移行で入力10ドル・出力50ドル/Mtok</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは7月7日深夜（太平洋時間）をもって最上位モデル「Claude Fable 5」をPro・Max・Teamプランの利用制限内から除外し、7月8日から全面的な従量課金制「Usage Credits」へ移行した。料金設定は入力100万トークンあたり10ドル・出力100万トークンあたり50ドルと、Claude Opus 4.8（5ドル/25ドル）の2倍でAnthropicの現行最高単価となる。Usage Creditsを有効化しない場合はFable 5へのアクセスが即時停止されるため、重度ユーザーはプロンプトキャッシュ（入力コスト最大90%減）やBatch API（50%減）の活用によるコスト最適化が急務となっている。コーディング支援やAIエージェント開発でFable 5を活用してきた国内の開発者・企業にとっても、月次コストの試算と代替モデル（Sonnet 5・Opus 4.8等）への移行検討が迫られる局面だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ukraine / AI Sovereignty</div>
+          <div class="card-badges">
+            <span class="impact impact-low">参考</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.usnews.com/news/world/articles/2026-07-07/ukraine-to-pick-ai-models-operated-without-provider-control-official-says" target="_blank" rel="noopener">ウクライナ、プロバイダーが制御できないAIモデルを優先採用——AI主権を国家安全保障上の要件に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ウクライナ政府高官は7月7日、国家機関が採用するAIシステムの選定において「プロバイダーが運用管理・遮断できないモデル」を優先する方針を公式に表明した。米欧の大手クラウド企業やAIプロバイダーが提供するSaaSモデルではなく、自己ホスト型またはオープンウェイト（完全公開）モデルを国家インフラに採用する戦略で、戦時下における情報主権（AI Sovereignty）の確保が主な動機とされる。同国はこれまでMicrosoftやGoogleなど西側テック企業のサービスを積極活用してきたが、有事に際してプロバイダー側の判断で機能停止・制限されるリスクを回避する判断だ。AI依存リスクへの懸念は欧米でも高まっており、本方針はAI調達に主権の視点を持ち込む先進的な事例として国際的な政策議論に影響を与えそうだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">RiverMeadow / AWS Transform</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.prnewswire.com/news-releases/rivermeadow-extends-aws-transform-with-lift--optimize-migration-302819684.html" target="_blank" rel="noopener">RiverMeadow、AWS Transformと統合——移行中にリアルタイムで技術的負債を解消する「Lift &amp; Optimize」を提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">RiverMeadowは7月7日、AWS TransformとのパートナーシップのもとでLift &amp; Optimizeマイグレーション機能の統合拡充を発表した。AWS Transformは生成AIを活用してアプリケーションの依存関係分析・移行計画・近代化提案を自動生成する一方、RiverMeadowはその推奨内容をオンプレミスから AWS クラウドへの実際のワークロード移行として自動実行する。従来の「まず移行してから最適化」という2ステップではなく、移行プロセスの中でセキュリティ強化・インフラ最適化・技術的負債の解消を同時に実施する「移行中近代化」を実現するため、プロジェクト全体の所要時間とコストを大幅に圧縮できる。オンプレミスや他クラウドからのAWS移行を検討する国内企業にとっても、計画策定から実行・最適化まで一気通貫で進めやすくなるユースケースが広がる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Sysdig / JADEPUFFER</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/ai-agent-exploits-langflow-rce-to.html" target="_blank" rel="noopener">史上初のAIエージェント駆動ランサムウェア「JADEPUFFER」——Langflow CVE-2025-3248を悪用、LLMが偵察から暗号化まで自律実行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Sysdigの脅威研究チームは、LLM（大規模言語モデル）が偵察・侵入・横断・暗号化・恐喝の全工程を自律実行した史上初のAIエージェント駆動ランサムウェア「JADEPUFFER」の詳細分析を公開した。攻撃者はLangflow CVE-2025-3248（認証不要RCE、CVSS 9.8）を悪用してインターネット公開インスタンスへ侵入し、AIエージェントがNacos サービス設定1342件すべてをMySQLのAES組み込み関数で暗号化した。「自己ナレーション型」ペイロードには自然言語の思考ロジックが含まれており、認証失敗から正確なMulti-step修正までを31秒で完結させる超高速適応能力が観測された。人間がC2サーバ・スタジャングサーバ・認証情報を事前準備した点で完全自律ではないが、攻撃チェーン全体をLLMが完結させた初の記録的事例であり、ランサムウェアの脅威が新次元に突入したことを示す重大な警鐘となっている。Langflowを公開インターネットに露出させている組織は即時のパッチ適用が必須だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Linux Kernel / KVM</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/16-year-old-linux-kvm-flaw-lets-guest.html" target="_blank" rel="noopener">Januscape（CVE-2026-53359）——16年間埋もれたLinux KVM脆弱性でゲストVMがホストに脱出、Intel・AMD両対応のVM Escape</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ研究者Hyunwoo Kim（@v4bel）氏が発見・公開した「Januscape」（CVE-2026-53359）は、Linux KVMのシャドウMMUコード（arch/x86/kvm/mmu/mmu.c）に2010年8月から約16年間存在してきた競合状態のバグで、IntelとAMD両アーキテクチャで「ゲストVMがホスト環境へのコード実行権限を奪取するVM脱出（VM Escape）」を可能にする深刻な脆弱性だ。攻撃には「ゲスト内root権限」と「ネスト仮想化（Nested Virtualization）の有効化」の2条件が必要で、マルチテナントのクラウドKVMホストや安価なVPSサービスが主なリスク対象となる。Google kvmCTFプログラムへのゼロデイ提出で発覚し、修正済みLinuxカーネル（v6.18.38・v6.12.95・v6.6.144・v6.1.177等）が7月4日リリース済みのため、KVMホストを運用するサービス事業者は至急のカーネルアップデートが推奨される。即時パッチ適用が困難な場合は、ネスト仮想化の無効化（kvm_intel.nested=0またはkvm_amd.nested=0）が暫定対策となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-08 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
