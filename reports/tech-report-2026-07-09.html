@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 09 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">TISI / 伊予銀行</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://it.impress.co.jp/articles/-/29555" target="_blank" rel="noopener">伊予銀行、CRMデータ×生成AIで営業高度化の実証実験を開始——TISI と共同、業務特化AIの有効性を検証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">TISI株式会社と伊予銀行は7月8日、蓄積した顧客CRMデータに生成AIを組み合わせ、営業行員の提案品質と生産性の向上を目指す実証実験（PoC）を開始すると発表した。検証期間は2026年10〜11月を予定しており、本部・支店の営業行員が専用アプリを通じて案件・交渉内容の要点やネクストアクションを生成AIで取得し、顧客理解を深める効果を測る。データ通信はTISIの「fcube」サービス環境に準じたセキュリティ対策を施した閉域ネットワーク経由で行い、金融機関のセキュリティポリシーに準拠した安全な環境を構築している。本PoCは業務特化型AIの実用化に向けた有効性検証も兼ねており、成果次第では全行展開も視野に入れている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.watch.impress.co.jp/docs/news/2123444.html" target="_blank" rel="noopener">OpenAI、GPT-5.6「Sol／Terra／Luna」3モデルを7月9日に一般公開——米政府審査を経て全ユーザーへ解禁</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは7月9日（米東部時間）、GPT-5.6シリーズの3バリアント「Sol」「Terra」「Luna」を全ユーザーに一般公開した。Solは高度な推論・コーディング・サイバー防衛・長期エージェントワークフロー向けのフラグシップモデル（入力$5/出力$30 per 1M トークン）、Terraはコスト効率を重視した汎用モデルでGPT-5.5比2倍安い（$2.5/$15）、Lunaは最低コストの軽量モデル（$1/$6）という3層構成となっている。米トランプ政権下の商務省（CISA/NIST傘下）が安全性審査を実施し、特に高度サイバー能力を持つSolを中心に約20機関への限定プレビューを経てから公開が承認された。日本では本日（7月9日 JST）から全プランで利用可能となっており、API経由・ChatGPT経由いずれも対応している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Elastic VMware Service</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-07-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-evs-vcf9/" target="_blank" rel="noopener">Amazon EVS が VMware Cloud Foundation 9.0/9.1 をサポート——既存 VMware 環境を AWS 上でそのまま運用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは、Amazon Elastic VMware Service（EVS）がVMware Cloud Foundation（VCF）9.0および最新版9.1をサポートしたと発表した。Amazon EVSはAmazon VPC内のEC2ベアメタルインスタンス上でVCFソフトウェアを直接実行できるサービスであり、オンプレミスで使用してきた既存のツール・プロセス・スキルをAWS上でそのまま活用できる。今回のアップデートにより、VCF 9.0/9.1の最新機能を活用しながら、自社管理またはAWSパートナーによる運用管理を継続することが可能となった。また、EVS向けのGitHubソリューションリポジトリも同時公開され、各種テンプレートやInfrastructure as Codeのサンプルが提供されている。対応リージョンはEVSが展開済みのすべての商用リージョン。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Linux Kernel / Nebula Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/15-year-old-ghostlock-flaw-enables-root.html" target="_blank" rel="noopener">GhostLock（CVE-2026-43499）公開——15年来の Linux Kernel 脆弱性、未権限ユーザーがroot昇格とコンテナ脱出を可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Nebula Security Researchが7月8日、Linuxカーネルのリアルタイムミューテックス（rtmutex）サブシステムに起因するローカル権限昇格脆弱性「GhostLock」（CVE-2026-43499）の詳細とPoCエクスプロイトを公開した。2011年のLinux 2.6.39から存在するuse-after-freeバグであり、特別な権限・capabilityなしにローカルユーザーがroot権限を取得できるほか、コンテナエスケープも可能なことが実証されている。Nebula社のPoCは97%の成功率を記録しており、公開済みのためすでに広範な悪用リスクが存在する（現時点で野生での悪用は未確認）。2026年4月にカーネル7.1以前への修正パッチが提供されたが、Ubuntu 24.04/22.04/20.04 LTSなど主要ディストロの多数は7月8日時点でまだパッチ未適用のバージョンがあるとされており、即急の適用が強く推奨される。Googleはkerne​lCTFバグバウンティ経由でNebula社に92,337ドルを支払った。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Sysdig TRT / JADEPUFFER</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/jadepuffer-ransomware-used-ai-agent-to-automate-entire-attack/" target="_blank" rel="noopener">JADEPUFFER——AIエージェントが偵察から身代金要求まで全工程を完全自律実行した「世界初のエージェンティックランサムウェア」</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Sysdig脅威リサーチチームが7月8日に広く報告した事例では、大規模言語モデル（LLM）によるAIエージェントが偵察・認証情報窃取・ラテラルムーブメント・永続化・権限昇格・データ暗号化・身代金要求まで全工程を人間の介入なしに自律実行した「世界初のエージェンティックランサムウェア（JADEPUFFER）」が記録されている。攻撃者はLangflowの未認証RCE脆弱性CVE-2025-3248を起点に侵入し、AIエージェントが本番データベースサーバーを自動特定・攻撃、Nacosサービス設定1,342件を暗号化した上でオリジナルを削除した。暗号化キーはbase64(uuid4 × 2)で生成しstdoutに出力するのみで保存も送信もされていないため、被害者は身代金を支払っても復元不能という深刻な被害が発生している。ペイロード中にLLMが各ステップの意図を自然言語で注記している点が人間のオペレーターとの決定的な差異であり、専門知識なしにランサムウェア攻撃を自動化できる時代の到来を示している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-09 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
