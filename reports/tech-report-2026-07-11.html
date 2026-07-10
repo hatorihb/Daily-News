@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 11 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Rokid / AV Watch</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新発売</span>
+            <span class="card-date">2026-07-10</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://av.watch.impress.co.jp/docs/news/2123886.html" target="_blank" rel="noopener">Rokid スマートAIグラス、7月10日から全国75店舗・主要ECで一般販売開始——AIOS／Agent Storeで「AIアプリが育つプラットフォーム」へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国発スマートウェアラブルブランドのRokidが「Rokid スマートAIグラス」の日本一般販売を7月10日11時より開始した。ヨドバシカメラ・ビックカメラ・エディオンなど全国75店舗と公式サイト・Amazon・楽天市場などの主要ECで展開し、価格は10万9990円（税込）。89言語リアルタイム翻訳・1200万画素カメラ・重量49gを特徴とし、AIネイティブOS「YodaOS」上で動作する。今回の発売に合わせて独自開発者エコシステム「AIOS」と「Agent Store」を導入し、パートナー企業や開発者がAIエージェントを提供・配布できるプラットフォームとして展開する。Rokidは日本市場への10億円規模の投資方針を表明しており、東京・横浜・大阪・名古屋・福岡の5都市を回る体験型ポップアップ「Rokid Japan Tour」も順次開催する予定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SpaceXAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-10</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dataconomy.com/2026/07/10/spacexai-launches-grok-4-5-as-new-flagship-ai-model/" target="_blank" rel="noopener">SpaceXAI、コーディング・エージェンティックタスク特化の新フラッグシップ「Grok 4.5」を公開——Cursorセッションデータで訓練、Claude Opus比60%超の低コスト</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SpaceXAIは新たなフラッグシップAIモデル「Grok 4.5」を正式公開した。コーディングとエージェンティックタスクに特化して設計されており、実際のCursorの開発者セッションデータを使用して訓練された点が特徴。Artificial Analysis Intelligence Indexで全オープンウェイトモデルおよびGeminiシリーズを上回る4位を記録する。イーロン・マスクは「Claude Opusクラスに匹敵しながら、より高速・トークン効率的・低コスト」と紹介しており、価格は入力100万トークンあたり2ドル・出力6ドルとClaude Opus 4.8比で60%以上安価。現在はAPIとX Premium+加入者向けに提供が開始されており、コーディング支援ツールとの連携が主な活用想定として挙げられている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Config</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">アップデート</span>
+            <span class="card-date">2026-07-10</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://mwpro.co.uk/blog/2026/07/10/aws-config-now-supports-191-additional-managed-rules/" target="_blank" rel="noopener">AWS Config が 191 個の追加マネージドルールを提供開始——Bedrock・SageMaker・ECS・EKS・RDS・Redshift などのコンプライアンス監視を一括強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Configが191個のマネージドルールを新たに追加した。対象サービスはAmazon Bedrock・Amazon SageMaker・Amazon ECS・Amazon EKS・Amazon RDS・Amazon Redshift・Amazon S3・AWS CloudTrailなど多岐にわたり、セキュリティ・可用性・運用上のベストプラクティスへの準拠状況をカスタムルールなしに即時評価できるようになった。AWS Configのマネージドルールは2026年1月の13ルール、2月の75ルールに続く大規模拡充であり、コンプライアンス自動化の幅が大幅に広がる。追加されたルールはすべての商用リージョンで利用可能で、AWS Configを有効化したアカウントから追加料金なしに設定できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AP（オランダ個人データ保護局）/ TechTimes</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-10</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/320084/20260710/ai-phishing-kits-drove-58-breach-surge-dutch-authority-warns-businesses.htm" target="_blank" rel="noopener">AIフィッシングキット普及でサイバー攻撃起因の侵害が58%増——オランダ個人データ保護局が2025年次報告で警告、アカウント乗っ取りは3倍に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">オランダの個人データ保護局（AP）が2025年次報告を公表し、AIを活用したフィッシングキットの急速な普及がデータ侵害の急増を招いていると警告した。APが受理したデータ侵害報告は2025年に約4万件（前年比+4.1%）に達し、うちサイバー攻撃起因の侵害は前年比58%増加した。アカウント乗っ取りは約3倍に拡大しており、精度の高いAIフィッシングキットがサイバー犯罪者の参入障壁を大幅に下げたことが主因と分析されている。APは企業に対して多要素認証の全社導入・フィッシング検知ソリューションの強化・従業員への定期的なセキュリティ教育の実施を強く求めており、生成AI悪用による脅威の高度化に対して早急な対策が必要と強調している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-11 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
