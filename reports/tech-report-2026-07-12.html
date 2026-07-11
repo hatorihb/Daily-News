@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 12 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Nonagon Capital / ホットリンク</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新発表</span>
+            <span class="card-date">2026-07-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/yasuhitoo/n/nba437f259b74" target="_blank" rel="noopener">ホットリンクグループのNonagon Capital、AIエージェント向けデータ流通基盤「Nonagon Link」ベータ版を国内限定公開——企業の有料データをAPIで有償提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ホットリンクグループのNonagon Capitalが、企業の有料データやコンテンツをAIエージェントへAPI経由で有償提供するデータ流通基盤「Nonagon Link」ベータ版を2026年7月10日から国内限定で公開した。調査レポート・金融データ・専門メディアコンテンツなどの有料情報を、AIエージェントが参照する際に正当な対価を支払う仕組みを構築し、データ供給側の新たな収益化モデルを提供する。国内でAIエージェントの商用活用が本格化する中、データ流通インフラの基盤整備として業界から注目を集めている。7月11日の国内AIエージェント動向ニュースレターでは、同時期にSORACOMのMCPサーバー無償提供や複数社のAIエージェント連携サービス開始など関連動向が相次いでいると報告されており、AIエージェント利活用基盤の急速な構築が進んでいる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple / OpenAI / The Japan Times</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japantimes.co.jp/business/2026/07/11/tech/apple-sues-openai-secret-theft/" target="_blank" rel="noopener">Apple、OpenAIを企業秘密窃取で提訴——元Apple VP兼OpenAI最高ハードウェア責任者らが関与、「あらゆる階層での窃取」と主張</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Appleは2026年7月10日、AIスタートアップOpenAIおよびOpenAIのChief Hardware Officer（CHO）Tang Tan氏らをカリフォルニア北部地区連邦地裁に提訴した。Tang Tan氏はかつてApple VP of Product Designとして iPhone・Apple Watch・AirPodsを統括していた人物で、Apple機密のコードネームを採用面接で言及し、入社候補者に機密ハードウェア部品の持参を促し、退職社員へのセキュリティ回避手順を指南したとされる。またAppleを退職してOpenAIに転職した元上級エンジニアのChang Liu氏が、退職後もApple支給のノートPCを返却せず機密技術文書を大量ダウンロードしていたことも訴状で指摘された。Appleは「スタッフレベルからCHOに至るまで、あらゆる階層でOpenAIが秘密情報を窃取している」と主張しており、OpenAI側は「他社の企業秘密に一切関心はない」と否定した。AI業界における人材獲得競争が法廷闘争に発展した初の大型ケースとして注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SK Hynix / Fast Company</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.fastcompany.com/91571722/sk-hynix-stock-price-nasdaq-trading-start-time-skhy-ipo-update" target="_blank" rel="noopener">SK Hynix、米ナスダック上場初日に+13%で終値168ドル——265億ドル調達で外国企業による過去最大の米国上場、HBM独占でAI半導体市場の支配的地位確立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">韓国の半導体大手SK Hynixが2026年7月10日（金）に米ナスダックへ上場し、公開価格149ドルに対して終値168ドル（+13%）で初日の取引を終えた。調達額は265億ドル（約3.8兆円）で、外国企業による米国上場として史上最大、米国IPO全体でも史上第2位の規模。需要は応募株数の7倍に達した。同社はAI向けHBM（高帯域幅メモリ）の世界シェア50%超を握っており、NVIDIAおよびAMDのAI GPUに不可欠な部品を独占的に供給している。一時ティッカー「SKHYV」で取引後、週明け月曜から「SKHY」に移行する。今回のIPOはSpaceXの米国株式市場上場（4週前）に続くもので、AIインフラを担う企業が相次いで巨大な公開市場資本にアクセスするトレンドを示している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EKS / Amazon ECS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">価格改定</span>
+            <span class="card-date">2026-07-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/amazon-eks-auto-mode-gpu-price/" target="_blank" rel="noopener">Amazon EKS Auto Mode・ECS Managed Instances、GPU管理費を最大60%削減——P系・Trainium は60%、G系は35%引き下げで生成AI推論コストを大幅低減</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon EKS Auto ModeおよびAmazon ECS Managed Instancesにおいて、GPUおよびアクセラレーテッドインスタンスタイプに対するマネージドインフラ管理費を大幅に引き下げた。P系インスタンスおよびAWS Trainium系は60%削減、G系インスタンスは35%削減で、2026年7月1日付けで自動適用済みとなっている。EKS Auto Modeは機械学習推論・ファインチューニング・レンダリング・バッチ処理向けのGPUワークロードに対してローカルNVMe上での並列イメージ展開やGPUハードウェア障害の自動検知・置換などの機能も提供する。同様の価格改定はECS Managed Instancesでも実施されており、両サービスとも既存利用者は追加操作不要でコスト削減の恩恵を受けられる。生成AI・LLMの大規模推論コスト削減が進む中、コンテナオーケストレーション層でのGPU管理コスト低減として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Zimbra / The Hacker News</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/critical-zimbra-flaw-could-let-crafted_0483473395.html" target="_blank" rel="noopener">Zimbra Classic Web Clientに深刻なストアド型XSS脆弱性——細工メールの開封でセッション乗っ取り・メールボックス情報窃取のリスク、バージョン10.1.19で修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ZimbraはClassic Web Clientに存在する深刻なストアド型XSS（クロスサイトスクリプティング）脆弱性を修正したバージョン10.1.19を公開し、即時アップデートを呼びかけた。攻撃者が特別に細工したメールを送信し、受信者がClassic Web Client上でそのメールを開くと悪意あるスクリプトが実行され、メールボックス情報・セッションデータ・アカウント設定などへのアクセスが可能になる。CVE番号は現時点で未割り当て。公式声明では野生での悪用は確認されていないとしているが、ZimbraのXSS脆弱性はこれまでも国家支援グループを含む攻撃者に狙われてきた歴史がある。影響を受けるのはClassic Web Clientを使用する組織で、Zimbraコラボレーションスイートを企業内メールサーバーとして運用している環境が対象となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Progress Software / TechTimes</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/320148/20260711/progress-pulls-sharefile-storage-zone-controllers-offline-no-patch-available.htm" target="_blank" rel="noopener">Progress Software、ShareFile Storage Zone Controllerの即時停止を緊急要請——CVE未発番・パッチなしで「信頼できる外部脅威」に対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Progress Softwareは2026年7月10日、ShareFileのオンプレミスStorage Zone Controllerを利用する顧客に対してWindowsサーバーの即時シャットダウンを要請するメールを送付した。「信頼できる外部セキュリティ脅威」を確認したとしているが、脅威の詳細・CVE番号・パッチはいずれも非公開のままで、シャットダウンはパッチがない状況への緊急対応とみられる。影響対象はStorage Zone Controllerを自組織のオンプレミスサーバーで運用している組織のみで、クラウド専用のShareFileアカウントは対象外。Progress Softwareは24時間以内に続報を提供するとした。なお、2026年4月にはwatchTowr Labsが同製品の認証バイパス（CVE-2026-2699：CVSS 9.8）とリモートコード実行（CVE-2026-2701：CVSS 9.1）の連鎖可能な脆弱性を公開しており、オンプレミスのファイル共有環境を狙ったリスクが継続している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-12 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
