@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update — 2026-07-14</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ローソン / KDDI / HashPort</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">実証実験</span>
+            <span class="card-date">2026-07-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/articles/2607/13/news098.html" target="_blank" rel="noopener">ローソン、KDDI・HashPortと連携——日本円ステーブルコインによる実店舗決済を8月に技術実証、高輪ゲートウェイシティ店でノンカストディアル型ウォレット活用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">暗号資産企業ハッシュポートは2026年7月13日、KDDIおよびローソンとの間で日本円ステーブルコインを用いた実店舗決済の技術実証に向けた基本合意書を締結したと発表した。2026年8月に「ローソン高輪ゲートウェイシティ店」にて、3社関係者を対象とした限定的な実証実験が実施される予定。決済手段にはハッシュポートのノンカストディアル型ウォレット「HashPort Wallet」を使用し、店舗側の処理には企業・店舗向けサービス「HashPort Wallet for Biz」を活用する。国内コンビニエンスストアの実店舗における日本円ステーブルコイン決済の技術実証は初の試みであり、政府が推進するデジタル通貨インフラ整備における民間主導の取り組みとして注目される。実証の成果が将来的な一般展開につながるか、業界から高い関心が寄せられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GMOインターネットグループ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">組織変革</span>
+            <span class="card-date">2026-07-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/articles/2607/13/news093.html" target="_blank" rel="noopener">GMOインターネットグループ、熊谷正寿代表が「グループAI変革最高責任者（CAIO）」に就任——エンジニアを含む全組織をAIナイズ、Claude特化支援も11.5億円追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GMOインターネットグループは2026年7月13日、代表取締役グループ代表・熊谷正寿氏が「グループAI変革最高責任者（Group CAIO：Chief AI Transformation Officer）」を兼任すると発表した。グループ全体のAI戦略・導入推進・ガバナンス・人材育成・業務変革を一元統括する役職で、トップ自らが陣頭指揮を執る。熊谷氏は「コーディングはすでにAIの仕事になった。エンジニアを含む組織体制を見直し、AIナイズされた組織へ変革する」と述べた。同グループは2025年5月に従業員1人あたり月1万円のAI活用支援金（年間10億円）を創設し、2026年2月にはClaude活用特化の追加投資11.5億円も実施済み。日本の大手IT企業がCEO自らCAIOを兼任し組織全体の変革を宣言した事例は業界初の部類であり、国内IT各社のAI変革推進体制強化の動きを先導する象徴的な一手として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dataconomy.com/2026/07/13/claude-fable-5-free-access-extended-july-19/" target="_blank" rel="noopener">Anthropic、Claude Fable 5の有料プランへの包含とClaude Code利用上限50%増を7月19日まで再延長——期限後は業界最高水準の従量課金（出力$50/1Mトークン）に移行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年7月13日未明（太平洋時間）、公式X（@claudeai）にてClaude Fable 5の有料プランへの包含とClaude Codeの週次利用上限50%増量を7月19日まで再延長すると発表した。7月7日締切の延長に続く2度目の延長で、7月12日23:59:59 PTの締切を過ぎた直後の発表となった。Pro・Max・Team・一部Enterpriseプランの加入者が対象で、週次利用量の最大50%までFable 5が利用可能。7月19日以降はFable 5が従量課金（インプット$10/Mトークン・アウトプット$50/Mトークン）へ移行する予定であり、同社が公式に公開した一般提供モデルとしては業界最高価格帯の設定となる。繰り返す期限延長はユーザーのワークフロー計画に不透明感をもたらしており、2度の延長を受けて今後のアクセスポリシーの明確化を求める声が高まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AIdeaLab（国産）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル公開</span>
+            <span class="card-date">2026-07-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000026.000084222.html" target="_blank" rel="noopener">国内スタートアップAIdeaLab、アニメ特化動画生成AI「AnimeGen」をApache 2.0ライセンスで無償公開——商用利用可、経産省GENIACプログラム支援で国産初</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">国内AIスタートアップAIdeaLabは2026年7月13日、アニメ表現に特化した動画生成AIモデル「AnimeGen」をApache 2.0ライセンスのもとHugging Faceで無償公開した。商用利用を含む自由な活用が可能で、テキストから動画を生成するモデルと画像から動画を生成するモデルの2種類が提供され、フレーム補間デモページも公開された。アリババの「Wan 2.2」オープン動画生成AIをベースにアニメ表現に特化した追加学習を施しており、経済産業省の生成AI開発加速プロジェクト「GENIAC（Generative AI Accelerator Challenge）」の支援を受けた。日本のアニメ産業における人手不足・長時間労働問題へのAI活用を推進する狙いで、国内企業が国産アニメ特化の動画生成AIモデルを商用利用可の形で一般公開するのは初の事例とされる。クリエイター・制作会社への普及が国内アニメ産業の生産性向上につながるか注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon SageMaker / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル追加</span>
+            <span class="card-date">2026-07-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/qwen3-search-retrieval-on-sagemaker-jumpstart/" target="_blank" rel="noopener">Amazon SageMaker JumpStart、Qwen3マルチモーダル埋め込みモデル（VL-Embedding-2B）とリランキングモデル（Reranker-4B）を提供開始——100言語超対応でRAGパイプラインを強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年7月13日、Amazon SageMaker JumpStartにおいてAlibabaのQwenチームが開発したQwen3-VL-Embedding-2BとQwen3-Reranker-4Bの提供を開始したと発表した。Qwen3-VL-Embedding-2Bはテキスト・画像・スクリーンショット・動画などの複数モダリティを受け付け、テキストと視覚情報を共有ベクトル空間でエンコードするマルチモーダル埋め込みモデル。Qwen3-Reranker-4Bはクエリとドキュメントのペアを受け取り精密な関連度スコアを出力するリランキングモデルで、テキスト検索・コード検索・テキスト分類・クラスタリング・バイテキストマイニングなど100言語以上に対応する。2つのモデルを組み合わせることで、埋め込みモデルによる高速な初期リコールとリランカーによる精度向上という二段階検索パイプラインの構築が可能。エンタープライズRAGおよびエージェント向けナレッジベース構築の精度と速度を大幅に向上させることが期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Windows</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://byteiota.com/patch-tuesday-july-2026-cve-tracking/" target="_blank" rel="noopener">Microsoft Patch Tuesday 2026年7月版——127件のCVEを修正、CVE-2025-47981（CVSS 9.8・wormable RCE）を筆頭に9件がCritical。Windows 11でPoint-in-time Restore機能も展開開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MicrosoftはPatch Tuesday 2026年7月版（7月14日）で14製品ファミリーにわたる127件のCVEを修正した。最優先対応が求められるのはCVE-2025-47981（CVSS 9.8・Critical）で、Windows SPNEGO拡張ネゴシエーション（NEGOEX）のヒープバッファオーバーフロー脆弱性。認証不要・ユーザー操作不要でリモートからの任意コード実行が可能なワーム型脆弱性であり、Windows 10 1607以降のすべてのクライアント・Windows Server 2008R2以降のすべてのサーバーに影響し、Microsoftは今後30日以内に実際の悪用が発生する可能性を高く評価している。今月は9件がCritical深刻度、34件がCVSSスコア8.0以上で、6月の月間最多記録206件から「正常化」とされるも依然として高水準が続いており、AI支援による自動ファジングが脆弱性発見を加速している。同日展開のWindows 11 KB5095093ではPoint-in-time Restore（ポイントインタイム復元）も導入され、VSS（ボリュームシャドウコピー）を活用した迅速なシステム復旧が可能となった。即時のパッチ適用が強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-14 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
