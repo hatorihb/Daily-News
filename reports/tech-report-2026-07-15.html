@@ -2,228 +2,301 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DX・AI・AWS Update — 2026-07-15</title>
 <style>
-:root {
-  --bg: #0f1117;
-  --surface: #1a1d27;
-  --border: #2a2d3a;
-  --accent: #6366f1;
-  --accent2: #22d3ee;
-  --text: #e2e8f0;
-  --muted: #8892a4;
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
-header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); padding: 2.5rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
-header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: .05em; color: #c7d2fe; }
-header .date { font-size: 2.5rem; font-weight: 800; color: var(--accent2); margin-top: .25rem; letter-spacing: .1em; }
-nav { display: flex; gap: .75rem; padding: 1rem 2rem; overflow-x: auto; border-bottom: 1px solid var(--border); }
-nav a { color: var(--muted); text-decoration: none; font-size: .875rem; white-space: nowrap; padding: .375rem .75rem; border-radius: 9999px; border: 1px solid var(--border); transition: all .2s; }
-nav a:hover { color: var(--text); border-color: var(--accent); }
-main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
-section { margin-bottom: 3rem; }
-section h2 { font-size: 1.25rem; font-weight: 700; color: var(--accent); border-left: 3px solid var(--accent); padding-left: .75rem; margin-bottom: 1.25rem; }
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; transition: border-color .2s; }
-.card:hover { border-color: var(--accent); }
-.card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: .5rem; flex-wrap: wrap; }
-.card-service { font-size: .8rem; font-weight: 600; color: var(--accent2); text-transform: uppercase; letter-spacing: .05em; }
-.card-badges { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
-.impact { font-size: .7rem; font-weight: 700; padding: .2rem .5rem; border-radius: 9999px; }
-.impact-high { background: rgba(239,68,68,.15); color: #ef4444; }
-.impact-med { background: rgba(245,158,11,.15); color: #f59e0b; }
-.impact-low { background: rgba(34,197,94,.15); color: #22c55e; }
-.card-date { font-size: .75rem; color: var(--muted); }
-.card-title { font-size: 1rem; font-weight: 600; margin-bottom: .75rem; }
-.card-title a { color: var(--text); text-decoration: none; }
-.card-title a:hover { color: var(--accent2); }
-details { margin-top: .5rem; }
-summary { font-size: .85rem; color: var(--accent); cursor: pointer; list-style: none; display: flex; align-items: center; gap: .25rem; }
-summary::-webkit-details-marker { display: none; }
-summary::before { content: '▶'; font-size: .65rem; transition: transform .2s; }
-details[open] summary::before { transform: rotate(90deg); }
-.card-desc { font-size: .875rem; color: var(--muted); margin-top: .75rem; line-height: 1.7; }
-footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .8rem; }
-footer p + p { margin-top: .5rem; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
 </style>
 </head>
 <body>
+
 <header>
-  <h1>DX・AI・AWS Update</h1>
-  <div class="date">2026 — 07 — 15</div>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 15 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
 </header>
+
 <nav>
-  <a href="#domestic">01 国内IT・DX</a>
-  <a href="#ai">02 AI</a>
-  <a href="#aws">03 AWS</a>
-  <a href="#security">04 セキュリティ</a>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
 </nav>
+
 <main>
 
-  <section id="domestic">
-    <h2>01 国内IT・DX</h2>
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">SoftBank / SB OAI Japan</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
         </div>
       </div>
-      <div class="card-title"><a href="https://www.softbank.jp/sbnews/entry/2026/07/14/110000" target="_blank" rel="noopener">SoftBank、AIを活用した「Patching as a Service」を国内3,000社に本格展開——7月16日にEnterprise AI Cyber Defense Division設立</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">SoftBankとSoftBank/OpenAI合弁会社SB OAI Japanは2026年7月14日、OpenAIの技術を活用したセキュリティパッチ管理サービス「Patching as a Service」の提供対象を国内3,000社規模に拡大し本格展開すると発表した。試験運用の結果、10Mラインあたり平均280件の脆弱性が検出され、そのうち25%が高リスクと判定された実績が明らかになった。本サービスはAIが脆弱性の優先度付けからパッチ選定・適用支援までを自動化するもので、セキュリティ人材不足に悩む企業の運用負荷を大幅に軽減する。さらに7月16日には「Enterprise AI Cyber Defense Division」を社内に設立し、約1,000名体制でAIを核とした企業向けサイバーディフェンスサービスを本格推進するとしている。</p>
-      </details>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SoftBank / SB OAI Japan</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.softbank.jp/sbnews/entry/2026/07/14/110000" target="_blank" rel="noopener">SoftBank、AIを活用した「Patching as a Service」を国内3,000社に本格展開——7月16日にEnterprise AI Cyber Defense Division設立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SoftBankとSoftBank/OpenAI合弁会社SB OAI Japanは2026年7月14日、OpenAIの技術を活用したセキュリティパッチ管理サービス「Patching as a Service」の提供対象を国内3,000社規模に拡大し本格展開すると発表した。試験運用の結果、10Mラインあたり平均280件の脆弱性が検出され、そのうち25%が高リスクと判定された実績が明らかになった。本サービスはAIが脆弱性の優先度付けからパッチ選定・適用支援までを自動化するもので、セキュリティ人材不足に悩む企業の運用負荷を大幅に軽減する。さらに7月16日には「Enterprise AI Cyber Defense Division」を社内に設立し、約1,000名体制でAIを核とした企業向けサイバーディフェンスサービスを本格推進するとしている。</p>
+        </details>
+      </div>
+
     </div>
-
-
   </section>
 
-  <section id="ai">
-    <h2>02 AI</h2>
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">Google DeepMind</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
         </div>
       </div>
-      <div class="card-title"><a href="https://hackernoon.com/google-delays-gemini-35-pro-to-july-17-the-strategic-play-behind-the-scrapped-base-model" target="_blank" rel="noopener">Google、Gemini 3.5 Proを7月17日に延期——ベースモデルを廃止しGemini 3基盤でアーキテクチャを全面刷新</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">Googleは当初予定していたGemini 3.5 Proのリリースを7月17日に延期すると発表した。延期の主な理由は、従来の2.5 Proベースモデルを廃止し、Gemini 3基盤から完全に再学習するアーキテクチャの全面刷新にある。新モデルには200万トークンのコンテキストウィンドウ、Deep Think推論機能、自律ワークフロー対応が搭載される予定で、数学的推論・SVG生成・画像品質での大幅な性能向上を目指している。GPT-5.6（7月9日リリース）やClaude Fable 5との競争が激化する中、Googleが品質を優先した戦略的判断を下した形となる。</p>
-      </details>
-    </div>
 
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">Apple</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
         </div>
+        <div class="card-title"><a href="https://hackernoon.com/google-delays-gemini-35-pro-to-july-17-the-strategic-play-behind-the-scrapped-base-model" target="_blank" rel="noopener">Google、Gemini 3.5 Proを7月17日に延期——ベースモデルを廃止しGemini 3基盤でアーキテクチャを全面刷新</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは当初予定していたGemini 3.5 Proのリリースを7月17日に延期すると発表した。延期の主な理由は、従来の2.5 Proベースモデルを廃止し、Gemini 3基盤から完全に再学習するアーキテクチャの全面刷新にある。新モデルには200万トークンのコンテキストウィンドウ、Deep Think推論機能、自律ワークフロー対応が搭載される予定で、数学的推論・SVG生成・画像品質での大幅な性能向上を目指している。GPT-5.6（7月9日リリース）やClaude Fable 5との競争が激化する中、Googleが品質を優先した戦略的判断を下した形となる。</p>
+        </details>
       </div>
-      <div class="card-title"><a href="https://techcrunch.com/2026/07/14/apple-opens-its-new-siri-ai-to-everyone-with-the-ios-27-public-beta/" target="_blank" rel="noopener">Apple、iOS 27パブリックベータで刷新Siriを一般公開——メール・写真・画面コンテキストを理解する会話型AIエージェントに進化</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">Appleは2026年7月14日、iOS 27パブリックベータの一般提供を開始し、大幅に刷新されたSiriを誰でも試せるようにした。新SiriはiPhone上のメール・写真・メッセージなどオンデバイスデータへのアクセス、画面上のコンテキスト理解、世界的な知識に基づく回答生成が可能となり、単純な音声コマンドツールから本格的な会話型AIエージェントへと進化した。ChatGPTやGeminiとの統合も強化されており、タスクに応じて最適なAIを自動選択する設計が採用されている。正式リリースは今秋を予定しており、iPhone 14以降のモデルで利用可能となる見込みだ。</p>
-      </details>
-    </div>
 
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">xAI / Grok Build</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
         </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/07/14/apple-opens-its-new-siri-ai-to-everyone-with-the-ios-27-public-beta/" target="_blank" rel="noopener">Apple、iOS 27パブリックベータで刷新Siriを一般公開——メール・写真・画面コンテキストを理解する会話型AIエージェントに進化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Appleは2026年7月14日、iOS 27パブリックベータの一般提供を開始し、大幅に刷新されたSiriを誰でも試せるようにした。新SiriはiPhone上のメール・写真・メッセージなどオンデバイスデータへのアクセス、画面上のコンテキスト理解、世界的な知識に基づく回答生成が可能となり、単純な音声コマンドツールから本格的な会話型AIエージェントへと進化した。ChatGPTやGeminiとの統合も強化されており、タスクに応じて最適なAIを自動選択する設計が採用されている。正式リリースは今秋を予定しており、iPhone 14以降のモデルで利用可能となる見込みだ。</p>
+        </details>
       </div>
-      <div class="card-title"><a href="https://www.theregister.com/ai-and-ml/2026/07/14/musk-promises-purge-after-grok-build-caught-sending-entire-repos-to-the-cloud/5271123" target="_blank" rel="noopener">Grok Build CLI、プライバシー設定オンでもリポジトリ全体をクラウドへ送信——必要量の27,800倍のデータ流出、マスク氏「全削除」を約束</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">セキュリティ研究者がワイヤー解析により、xAIのコーディングツール「Grok Build」のCLIがプライバシートグルが有効な状態でも開発者のリポジトリ全体（Git履歴・認証情報を含む）をGoogle Cloud Storageへ転送していた事実を発見した。流出データ量は実際に必要な量の約27,800倍に上るとされ、深刻なプライバシー侵害として注目されている。イーロン・マスク氏はX上でこれまでアップロードされた全ユーザーデータを完全削除すると表明したが、削除のスケジュールや影響を受けるユーザー数の詳細は明らかにされていない。Grok Buildを利用している開発者はリポジトリに含まれる機密情報の棚卸しと対応を検討することが推奨される。</p>
-      </details>
-    </div>
 
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">xAI / Grok Build</div>
+          <div class="card-badges">
+            <span class="impact impact-high">データ流出</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theregister.com/ai-and-ml/2026/07/14/musk-promises-purge-after-grok-build-caught-sending-entire-repos-to-the-cloud/5271123" target="_blank" rel="noopener">Grok Build CLI、プライバシー設定オンでもリポジトリ全体をクラウドへ送信——必要量の27,800倍のデータ流出、マスク氏「全削除」を約束</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ研究者がワイヤー解析により、xAIのコーディングツール「Grok Build」のCLIがプライバシートグルが有効な状態でも開発者のリポジトリ全体（Git履歴・認証情報を含む）をGoogle Cloud Storageへ転送していた事実を発見した。流出データ量は実際に必要な量の約27,800倍に上るとされ、深刻なプライバシー侵害として注目されている。イーロン・マスク氏はX上でこれまでアップロードされた全ユーザーデータを完全削除すると表明したが、削除のスケジュールや影響を受けるユーザー数の詳細は明らかにされていない。Grok Buildを利用している開発者はリポジトリに含まれる機密情報の棚卸しと対応を検討することが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
   </section>
 
-  <section id="aws">
-    <h2>03 AWS</h2>
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">AWS / OpenAI</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
         </div>
       </div>
-      <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/openai-gpt-sol-terra/" target="_blank" rel="noopener">OpenAI GPT-5.6（Sol / Terra / Luna）がAmazon Bedrockで利用可能に——3モデル同時展開、AWS EDPコミットメント対象</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">AWSはOpenAIのGPT-5.6ファミリー3モデル（Sol・Terra・Luna）をAmazon Bedrockで提供開始した。Solは米国東部リージョンのみ、TerraおよびLunaは米国東部・西部（オレゴン）で利用可能。料金はSolが入力$5/出力$30、Terraが$2.50/$15、Lunaが$1/$6（100万トークンあたり）。AWS Responses APIに対応しており、AWS Enterprise Discount Program（EDP）のコミットメント消化対象となる点が大企業導入を後押しする。AWSとOpenAIの協業拡大により、エンタープライズ顧客がBedrockを通じて最新のOpenAIモデルをAWSのセキュリティ・ガバナンス基盤上で安全に活用できる環境が整った。</p>
-      </details>
-    </div>
 
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">AWS SageMaker HyperPod</div>
-        <div class="card-badges">
-          <span class="impact impact-med">重要度 中</span>
-          <span class="card-date">2026-07-14</span>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
         </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/openai-gpt-sol-terra/" target="_blank" rel="noopener">OpenAI GPT-5.6（Sol / Terra / Luna）がAmazon Bedrockで利用可能に——3モデル同時展開、AWS EDPコミットメント対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはOpenAIのGPT-5.6ファミリー3モデル（Sol・Terra・Luna）をAmazon Bedrockで提供開始した。Solは米国東部リージョンのみ、TerraおよびLunaは米国東部・西部（オレゴン）で利用可能。料金はSolが入力$5/出力$30、Terraが$2.50/$15、Lunaが$1/$6（100万トークンあたり）。AWS Responses APIに対応しており、AWS Enterprise Discount Program（EDP）のコミットメント消化対象となる点が大企業導入を後押しする。AWSとOpenAIの協業拡大により、エンタープライズ顧客がBedrockを通じて最新のOpenAIモデルをAWSのセキュリティ・ガバナンス基盤上で安全に活用できる環境が整った。</p>
+        </details>
       </div>
-      <div class="card-title"><a href="https://mwpro.co.uk/blog/2026/07/14/amazon-sagemaker-hyperpod-now-supports-custom-amis-amazon-machine-images-for-slurm-clusters/" target="_blank" rel="noopener">Amazon SageMaker HyperPod、SlurmクラスターでカスタムAMIサポートを開始——独自セキュリティポリシーやドライバー構成を組み込んだML環境を構築可能に</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">Amazon SageMaker HyperPodは2026年7月14日、Slurmクラスター向けにカスタムAMI（Amazon Machine Image）のサポートを正式提供開始した。これにより、組織独自のセキュリティポリシーや専用ソフトウェアスタック、GPUドライバー設定などを事前に組み込んだ機械学習環境の構築が可能になる。CreateCluster APIの`ImageId`フィールドにカスタムAMIを指定するだけで利用でき、環境の標準化と起動時間の短縮が期待される。大規模モデルの学習や推論基盤を構築する企業にとって、コンプライアンス要件への対応やMLOpsの効率化につながる重要なアップデートだ。</p>
-      </details>
-    </div>
 
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon SageMaker / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://mwpro.co.uk/blog/2026/07/14/amazon-sagemaker-hyperpod-now-supports-custom-amis-amazon-machine-images-for-slurm-clusters/" target="_blank" rel="noopener">Amazon SageMaker HyperPod、SlurmクラスターでカスタムAMIサポートを開始——独自セキュリティポリシーやドライバー構成を組み込んだML環境を構築可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon SageMaker HyperPodは2026年7月14日、Slurmクラスター向けにカスタムAMI（Amazon Machine Image）のサポートを正式提供開始した。これにより、組織独自のセキュリティポリシーや専用ソフトウェアスタック、GPUドライバー設定などを事前に組み込んだ機械学習環境の構築が可能になる。CreateCluster APIの`ImageId`フィールドにカスタムAMIを指定するだけで利用でき、環境の標準化と起動時間の短縮が期待される。大規模モデルの学習や推論基盤を構築する企業にとって、コンプライアンス要件への対応やMLOpsの効率化につながる重要なアップデートだ。</p>
+        </details>
+      </div>
+
+    </div>
   </section>
 
-  <section id="security">
-    <h2>04 セキュリティ</h2>
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">Cisco</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-15</span>
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
         </div>
       </div>
-      <div class="card-title"><a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-ILh3ZrP5" target="_blank" rel="noopener">Cisco、ISE・RoomOS向けセキュリティアドバイザリを7月15日付で公開——事前通知に基づく定例脆弱性情報リリース</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">Ciscoは7月8日付の事前通知（cisco-sa-notice-ILh3ZrP5）に基づき、2026年7月15日にCisco Identity Services Engine（ISE）およびCisco RoomOSを対象としたセキュリティアドバイザリを公開した。ISEはエンタープライズのネットワークアクセス制御（NAC）における中核製品であり、過去にはCVSS 9.9のRCE脆弱性が報告された実績を持つ重要システムだ。RoomOSはWebexボードSeries・DeskSeries・Room Seriesなど企業向け会議システムの基盤OSで、多くの組織でビデオ会議インフラとして広く利用されている。対象製品を運用している組織は速やかにアドバイザリを確認し、必要なパッチ適用を検討することが強く推奨される。</p>
-      </details>
-    </div>
 
-
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">CISA / VITEC</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-15</span>
+          </div>
         </div>
+        <div class="card-title"><a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-ILh3ZrP5" target="_blank" rel="noopener">Cisco、ISE・RoomOS向けセキュリティアドバイザリを7月15日付で公開——事前通知に基づく定例脆弱性情報リリース</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Ciscoは7月8日付の事前通知（cisco-sa-notice-ILh3ZrP5）に基づき、2026年7月15日にCisco Identity Services Engine（ISE）およびCisco RoomOSを対象としたセキュリティアドバイザリを公開した。ISEはエンタープライズのネットワークアクセス制御（NAC）における中核製品であり、過去にはCVSS 9.9のRCE脆弱性が報告された実績を持つ重要システムだ。RoomOSはWebexボードSeries・DeskSeries・Room Seriesなど企業向け会議システムの基盤OSで、多くの組織でビデオ会議インフラとして広く利用されている。対象製品を運用している組織は速やかにアドバイザリを確認し、必要なパッチ適用を検討することが強く推奨される。</p>
+        </details>
       </div>
-      <div class="card-title"><a href="https://www.cisa.gov/news-events/ics-advisories" target="_blank" rel="noopener">CISA、ICSアドバイザリ4件を7月14日公開——VITEC FlamingoにCVSS 9.8の未認証RCE（CVE-2026-60121・CVE-2026-61498）、パッチ未提供</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">CISAは2026年7月14日、ICS（産業制御システム）向けセキュリティアドバイザリ4件（ICSA-26-195-01〜04）を公開した。最も深刻なのはVITEC Flamingo 4.12.2に存在する2件のCVSS 9.8脆弱性で、どちらも未認証のリモートコード実行が可能。CVE-2026-60121はadmin/ajax/ping.phpの二重評価欠陥を突いてshell_exec()経由でroot権限によるOS任意コマンドを実行でき、CVE-2026-61498はadmin/ajax/gen_graphs.phpのpassthru()経由でパスワードなしsudoによるroot実行が可能となる。VITECFlamingoはホスピタリティ業界や法人向けIPTV・映像管理プラットフォームで、開示時点でパッチは提供されていない。影響を受けるシステムはネットワーク分離など緩和策の即時適用が推奨される。</p>
-      </details>
-    </div>
 
-    <div class="card">
-      <div class="card-top">
-        <div class="card-service">SAP</div>
-        <div class="card-badges">
-          <span class="impact impact-high">重要度 高</span>
-          <span class="card-date">2026-07-14</span>
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / VITEC</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
         </div>
+        <div class="card-title"><a href="https://www.cisa.gov/news-events/ics-advisories" target="_blank" rel="noopener">CISA、ICSアドバイザリ4件を7月14日公開——VITEC FlamingoにCVSS 9.8の未認証RCE（CVE-2026-60121・CVE-2026-61498）、パッチ未提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年7月14日、ICS（産業制御システム）向けセキュリティアドバイザリ4件（ICSA-26-195-01〜04）を公開した。最も深刻なのはVITEC Flamingo 4.12.2に存在する2件のCVSS 9.8脆弱性で、どちらも未認証のリモートコード実行が可能。CVE-2026-60121はadmin/ajax/ping.phpの二重評価欠陥を突いてshell_exec()経由でroot権限によるOS任意コマンドを実行でき、CVE-2026-61498はadmin/ajax/gen_graphs.phpのpassthru()経由でパスワードなしsudoによるroot実行が可能となる。VITEC Flamingはホスピタリティ業界や法人向けIPTV・映像管理プラットフォームで、開示時点でパッチは提供されていない。影響を受けるシステムはネットワーク分離など緩和策の即時適用が推奨される。</p>
+        </details>
       </div>
-      <div class="card-title"><a href="https://gbhackers.com/sap-july-2026-patch-day-fixes-vulnerabilities/" target="_blank" rel="noopener">SAP 7月パッチデー——NetWeaver AS ABAPにCVSS 9.9のメモリ破壊脆弱性（CVE-2026-44747）、AppRouterにも認証不要のHTTPスマグリング（CVSS 9.1）</a></div>
-      <details>
-        <summary>詳細を表示</summary>
-        <p class="card-desc">SAPは2026年7月14日の月例パッチデー（第2火曜日）で16件の新規セキュリティノートを公開した。最も深刻なCVE-2026-44747（CVSS 9.9）はSAP NetWeaver AS ABAPのカーネル7.22〜9.20に存在するメモリ破壊脆弱性で、低権限の攻撃者がリモートから機密性・完全性・可用性をすべて侵害できる危険性がある。また、SAP AppRouterでは認証不要のHTTPリクエストスマグリング脆弱性CVE-2026-27690（CVSS 9.1）も同日修正された。SAP NetWeaverは世界中の大企業・官公庁のERPシステムの中核を担っており、影響組織には早急なパッチ適用が強く推奨される。</p>
-      </details>
-    </div>
 
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SAP</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gbhackers.com/sap-july-2026-patch-day-fixes-vulnerabilities/" target="_blank" rel="noopener">SAP 7月パッチデー——NetWeaver AS ABAPにCVSS 9.9のメモリ破壊脆弱性（CVE-2026-44747）、AppRouterにも認証不要のHTTPスマグリング（CVSS 9.1）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SAPは2026年7月14日の月例パッチデー（第2火曜日）で16件の新規セキュリティノートを公開した。最も深刻なCVE-2026-44747（CVSS 9.9）はSAP NetWeaver AS ABAPのカーネル7.22〜9.20に存在するメモリ破壊脆弱性で、低権限の攻撃者がリモートから機密性・完全性・可用性をすべて侵害できる危険性がある。また、SAP AppRouterでは認証不要のHTTPリクエストスマグリング脆弱性CVE-2026-27690（CVSS 9.1）も同日修正された。SAP NetWeaverは世界中の大企業・官公庁のERPシステムの中核を担っており、影響組織には早急なパッチ適用が強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
   </section>
 
 </main>
+
 <footer>
-  <p>DX・AI・AWS Update | 2026-07-15 | Automated daily report</p>
-  <p>情報は各社公式発表・報道に基づきます。投資・意思決定の際は一次情報をご確認ください。</p>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-15 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
 </footer>
+
 </body>
 </html>
