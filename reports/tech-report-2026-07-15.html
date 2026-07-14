@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DX・AI・AWS Update — 2026-07-15</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #1a1d27;
+  --border: #2a2d3a;
+  --accent: #6366f1;
+  --accent2: #22d3ee;
+  --text: #e2e8f0;
+  --muted: #8892a4;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+header { background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%); padding: 2.5rem 2rem; text-align: center; border-bottom: 1px solid var(--border); }
+header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: .05em; color: #c7d2fe; }
+header .date { font-size: 2.5rem; font-weight: 800; color: var(--accent2); margin-top: .25rem; letter-spacing: .1em; }
+nav { display: flex; gap: .75rem; padding: 1rem 2rem; overflow-x: auto; border-bottom: 1px solid var(--border); }
+nav a { color: var(--muted); text-decoration: none; font-size: .875rem; white-space: nowrap; padding: .375rem .75rem; border-radius: 9999px; border: 1px solid var(--border); transition: all .2s; }
+nav a:hover { color: var(--text); border-color: var(--accent); }
+main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+section { margin-bottom: 3rem; }
+section h2 { font-size: 1.25rem; font-weight: 700; color: var(--accent); border-left: 3px solid var(--accent); padding-left: .75rem; margin-bottom: 1.25rem; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; transition: border-color .2s; }
+.card:hover { border-color: var(--accent); }
+.card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: .5rem; flex-wrap: wrap; }
+.card-service { font-size: .8rem; font-weight: 600; color: var(--accent2); text-transform: uppercase; letter-spacing: .05em; }
+.card-badges { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+.impact { font-size: .7rem; font-weight: 700; padding: .2rem .5rem; border-radius: 9999px; }
+.impact-high { background: rgba(239,68,68,.15); color: #ef4444; }
+.impact-med { background: rgba(245,158,11,.15); color: #f59e0b; }
+.impact-low { background: rgba(34,197,94,.15); color: #22c55e; }
+.card-date { font-size: .75rem; color: var(--muted); }
+.card-title { font-size: 1rem; font-weight: 600; margin-bottom: .75rem; }
+.card-title a { color: var(--text); text-decoration: none; }
+.card-title a:hover { color: var(--accent2); }
+details { margin-top: .5rem; }
+summary { font-size: .85rem; color: var(--accent); cursor: pointer; list-style: none; display: flex; align-items: center; gap: .25rem; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: '▶'; font-size: .65rem; transition: transform .2s; }
+details[open] summary::before { transform: rotate(90deg); }
+.card-desc { font-size: .875rem; color: var(--muted); margin-top: .75rem; line-height: 1.7; }
+footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border); color: var(--muted); font-size: .8rem; }
+footer p + p { margin-top: .5rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>DX・AI・AWS Update</h1>
+  <div class="date">2026 — 07 — 15</div>
+</header>
+<nav>
+  <a href="#domestic">01 国内IT・DX</a>
+  <a href="#ai">02 AI</a>
+  <a href="#aws">03 AWS</a>
+  <a href="#security">04 セキュリティ</a>
+</nav>
+<main>
+
+  <section id="domestic">
+    <h2>01 国内IT・DX</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">SoftBank / SB OAI Japan</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-07-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.softbank.jp/sbnews/entry/2026/07/14/110000" target="_blank" rel="noopener">SoftBank、AIを活用した「Patching as a Service」を国内3,000社に本格展開——7月16日にEnterprise AI Cyber Defense Division設立</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">SoftBankとSoftBank/OpenAI合弁会社SB OAI Japanは2026年7月14日、OpenAIの技術を活用したセキュリティパッチ管理サービス「Patching as a Service」の提供対象を国内3,000社規模に拡大し本格展開すると発表した。試験運用の結果、10Mラインあたり平均280件の脆弱性が検出され、そのうち25%が高リスクと判定された実績が明らかになった。本サービスはAIが脆弱性の優先度付けからパッチ選定・適用支援までを自動化するもので、セキュリティ人材不足に悩む企業の運用負荷を大幅に軽減する。さらに7月16日には「Enterprise AI Cyber Defense Division」を社内に設立し、約1,000名体制でAIを核とした企業向けサイバーディフェンスサービスを本格推進するとしている。</p>
+      </details>
+    </div>
+
+
+  </section>
+
+  <section id="ai">
+    <h2>02 AI</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Google DeepMind</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-07-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://hackernoon.com/google-delays-gemini-35-pro-to-july-17-the-strategic-play-behind-the-scrapped-base-model" target="_blank" rel="noopener">Google、Gemini 3.5 Proを7月17日に延期——ベースモデルを廃止しGemini 3基盤でアーキテクチャを全面刷新</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Googleは当初予定していたGemini 3.5 Proのリリースを7月17日に延期すると発表した。延期の主な理由は、従来の2.5 Proベースモデルを廃止し、Gemini 3基盤から完全に再学習するアーキテクチャの全面刷新にある。新モデルには200万トークンのコンテキストウィンドウ、Deep Think推論機能、自律ワークフロー対応が搭載される予定で、数学的推論・SVG生成・画像品質での大幅な性能向上を目指している。GPT-5.6（7月9日リリース）やClaude Fable 5との競争が激化する中、Googleが品質を優先した戦略的判断を下した形となる。</p>
+      </details>
+    </div>
+
+
+  </section>
+
+  <section id="aws">
+    <h2>03 AWS</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">AWS / OpenAI</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-07-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/openai-gpt-sol-terra/" target="_blank" rel="noopener">OpenAI GPT-5.6（Sol / Terra / Luna）がAmazon Bedrockで利用可能に——3モデル同時展開、AWS EDPコミットメント対象</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">AWSはOpenAIのGPT-5.6ファミリー3モデル（Sol・Terra・Luna）をAmazon Bedrockで提供開始した。Solは米国東部リージョンのみ、TerraおよびLunaは米国東部・西部（オレゴン）で利用可能。料金はSolが入力$5/出力$30、Terraが$2.50/$15、Lunaが$1/$6（100万トークンあたり）。AWS Responses APIに対応しており、AWS Enterprise Discount Program（EDP）のコミットメント消化対象となる点が大企業導入を後押しする。AWSとOpenAIの協業拡大により、エンタープライズ顧客がBedrockを通じて最新のOpenAIモデルをAWSのセキュリティ・ガバナンス基盤上で安全に活用できる環境が整った。</p>
+      </details>
+    </div>
+
+
+  </section>
+
+  <section id="security">
+    <h2>04 セキュリティ</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Cisco</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-07-15</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://sec.cloudapps.cisco.com/security/center/content/CiscoSecurityAdvisory/cisco-sa-notice-ILh3ZrP5" target="_blank" rel="noopener">Cisco、ISE・RoomOS向けセキュリティアドバイザリを7月15日付で公開——事前通知に基づく定例脆弱性情報リリース</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Ciscoは7月8日付の事前通知（cisco-sa-notice-ILh3ZrP5）に基づき、2026年7月15日にCisco Identity Services Engine（ISE）およびCisco RoomOSを対象としたセキュリティアドバイザリを公開した。ISEはエンタープライズのネットワークアクセス制御（NAC）における中核製品であり、過去にはCVSS 9.9のRCE脆弱性が報告された実績を持つ重要システムだ。RoomOSはWebexボードSeries・DeskSeries・Room Seriesなど企業向け会議システムの基盤OSで、多くの組織でビデオ会議インフラとして広く利用されている。対象製品を運用している組織は速やかにアドバイザリを確認し、必要なパッチ適用を検討することが強く推奨される。</p>
+      </details>
+    </div>
+
+
+  </section>
+
+</main>
+<footer>
+  <p>DX・AI・AWS Update | 2026-07-15 | Automated daily report</p>
+  <p>情報は各社公式発表・報道に基づきます。投資・意思決定の際は一次情報をご確認ください。</p>
+</footer>
+</body>
+</html>
