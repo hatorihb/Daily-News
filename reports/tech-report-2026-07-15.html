@@ -116,6 +116,21 @@ footer p + p { margin-top: .5rem; }
       </details>
     </div>
 
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">xAI / Grok Build</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-07-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.theregister.com/ai-and-ml/2026/07/14/musk-promises-purge-after-grok-build-caught-sending-entire-repos-to-the-cloud/5271123" target="_blank" rel="noopener">Grok Build CLI、プライバシー設定オンでもリポジトリ全体をクラウドへ送信——必要量の27,800倍のデータ流出、マスク氏「全削除」を約束</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">セキュリティ研究者がワイヤー解析により、xAIのコーディングツール「Grok Build」のCLIがプライバシートグルが有効な状態でも開発者のリポジトリ全体（Git履歴・認証情報を含む）をGoogle Cloud Storageへ転送していた事実を発見した。流出データ量は実際に必要な量の約27,800倍に上るとされ、深刻なプライバシー侵害として注目されている。イーロン・マスク氏はX上でこれまでアップロードされた全ユーザーデータを完全削除すると表明したが、削除のスケジュールや影響を受けるユーザー数の詳細は明らかにされていない。Grok Buildを利用している開発者はリポジトリに含まれる機密情報の棚卸しと対応を検討することが推奨される。</p>
+      </details>
+    </div>
+
   </section>
 
   <section id="aws">
@@ -136,6 +151,21 @@ footer p + p { margin-top: .5rem; }
       </details>
     </div>
 
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">AWS SageMaker HyperPod</div>
+        <div class="card-badges">
+          <span class="impact impact-med">重要度 中</span>
+          <span class="card-date">2026-07-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://mwpro.co.uk/blog/2026/07/14/amazon-sagemaker-hyperpod-now-supports-custom-amis-amazon-machine-images-for-slurm-clusters/" target="_blank" rel="noopener">Amazon SageMaker HyperPod、SlurmクラスターでカスタムAMIサポートを開始——独自セキュリティポリシーやドライバー構成を組み込んだML環境を構築可能に</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Amazon SageMaker HyperPodは2026年7月14日、Slurmクラスター向けにカスタムAMI（Amazon Machine Image）のサポートを正式提供開始した。これにより、組織独自のセキュリティポリシーや専用ソフトウェアスタック、GPUドライバー設定などを事前に組み込んだ機械学習環境の構築が可能になる。CreateCluster APIの`ImageId`フィールドにカスタムAMIを指定するだけで利用でき、環境の標準化と起動時間の短縮が期待される。大規模モデルの学習や推論基盤を構築する企業にとって、コンプライアンス要件への対応やMLOpsの効率化につながる重要なアップデートだ。</p>
+      </details>
+    </div>
 
   </section>
 
@@ -170,6 +200,21 @@ footer p + p { margin-top: .5rem; }
       <details>
         <summary>詳細を表示</summary>
         <p class="card-desc">CISAは2026年7月14日、ICS（産業制御システム）向けセキュリティアドバイザリ4件（ICSA-26-195-01〜04）を公開した。最も深刻なのはVITEC Flamingo 4.12.2に存在する2件のCVSS 9.8脆弱性で、どちらも未認証のリモートコード実行が可能。CVE-2026-60121はadmin/ajax/ping.phpの二重評価欠陥を突いてshell_exec()経由でroot権限によるOS任意コマンドを実行でき、CVE-2026-61498はadmin/ajax/gen_graphs.phpのpassthru()経由でパスワードなしsudoによるroot実行が可能となる。VITECFlamingoはホスピタリティ業界や法人向けIPTV・映像管理プラットフォームで、開示時点でパッチは提供されていない。影響を受けるシステムはネットワーク分離など緩和策の即時適用が推奨される。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">SAP</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-07-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://gbhackers.com/sap-july-2026-patch-day-fixes-vulnerabilities/" target="_blank" rel="noopener">SAP 7月パッチデー——NetWeaver AS ABAPにCVSS 9.9のメモリ破壊脆弱性（CVE-2026-44747）、AppRouterにも認証不要のHTTPスマグリング（CVSS 9.1）</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">SAPは2026年7月14日の月例パッチデー（第2火曜日）で16件の新規セキュリティノートを公開した。最も深刻なCVE-2026-44747（CVSS 9.9）はSAP NetWeaver AS ABAPのカーネル7.22〜9.20に存在するメモリ破壊脆弱性で、低権限の攻撃者がリモートから機密性・完全性・可用性をすべて侵害できる危険性がある。また、SAP AppRouterでは認証不要のHTTPリクエストスマグリング脆弱性CVE-2026-27690（CVSS 9.1）も同日修正された。SAP NetWeaverは世界中の大企業・官公庁のERPシステムの中核を担っており、影響組織には早急なパッチ適用が強く推奨される。</p>
       </details>
     </div>
 
