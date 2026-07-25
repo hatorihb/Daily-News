@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 07 — 26 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">モノイスト / ITmedia</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-07-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2607/25/news008.html" target="_blank" rel="noopener">さらばDX、「AX」時代へ――NECやソニーセミコン描くAI自律化最前線：1週間を凝縮！ 今週の製造業ニュース</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">製造業DX専門メディア・モノイストが7月25日版「今週の製造業ニュース」を公開し、国内製造業が「DX（デジタルトランスフォーメーション）」から「AX（AIトランスフォーメーション）」へ主戦場を移しつつある潮流を総括した。NECは製造プロセス全体をAIを前提に再設計する「MX（Manufacturing AX）」戦略を発表し、エージェンティックAIによる基幹業務の自律化で工数を約60%削減したと報告。ソニーセミコンダクタソリューションズも自律AIエージェントを生産ラインに導入し、ルールベース自動化を超えた自己適応型の製造制御を実現しつつある。DXが「人間の業務をデジタル化する」取り組みだったのに対し、AXは「AIが自ら判断して現場設備や経営プロセスを自律的に動かす」パラダイム転換として、2026年後半にかけ国内製造業の次の競争軸として本格浸透が見込まれる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://the-decoder.com/anthropics-claude-opus-5-costs-well-below-fable-5-while-matching-or-beating-it-across-most-benchmarks/" target="_blank" rel="noopener">Anthropic、Claude Opus 5を正式リリース—Fable 5に迫る知性を半額で提供、1Mコンテキスト・新「xhigh」推論モード搭載</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicが2026年7月24日（日本時間25日）にClaude Opus 5を発表。フラッグシップ「Claude Fable 5」に匹敵する知性を半額で提供するという位置づけで、APIの価格は入力$5／出力$25（100万トークン当たり、Opus 4.8と同額）を維持しつつプロンプトキャッシュ活用で最大90%のコスト削減も可能。コンテキストウィンドウは1Mトークン（入出力両対応）で、タスク難易度に応じてコスト・性能をトレードオフできる新しい「xhigh」推論努力レベルを搭載。Frontier-Bench SOTAスコア43.3%・ARC-AGI-3スコア30.2%を記録し、エージェンティックコーディング・長文書処理・知識集約型タスクで新たな最高水準を確立した。Artificial Analysis インテリジェンス指数（7月25日版）ではClaude Opus 5が60.7%で首位に立ち、Claude Fable 5（59.9%）やGPT-5.6 Sol（58.9%）を上回った。Claude MaxのデフォルトモデルとなりClaude Proで利用可能な最高性能モデルとして位置づけられ、APIではモデルID「claude-opus-5」で利用開始。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NVIDIA / Microsoft / Meta 他25社超</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ts2.tech/en/open-weight-ai-alliance-expands-by-40-while-nvidia-nasdaqnvda-microsoft-nasdaqmsft-meta-nasdaqmeta-approach-earnings-results/" target="_blank" rel="noopener">NVIDIAジェンスン・フアン氏がX初投稿で「Open Weights and American AI Leadership」書簡を公開—Microsoft・Meta等25社超が連名しワシントンにオープンモデル規制回避を求める</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NVIDIAのジェンスン・フアンCEOが2026年7月24日、自身初となるX（旧Twitter）投稿に「Open Weights and American AI Leadership」と題する連名書簡を掲げた。署名企業はMeta・Microsoft・IBM・Palantir・CrowdStrike・ServiceNow・Hugging Face・Mistral AI・Mozilla・Linux Foundation・Andreessen Horowitz・Y Combinator・Perplexityを含む25社超。書簡はワシントンに対してオープンウェイトAIモデルへの「時期尚早な規制」を避けるよう求め、1980年代のオープンソースソフトウェアが競争・安全・経済的主権を強化したのと同様に、公開モデルがAIの競争力・サイバーセキュリティ・スタートアップのアクセス機会を促進すると主張。OpenAI・Anthropic・Googleの3社は署名しておらず、閉鎖型と開放型モデルをめぐる政策論争が改めて鮮明になった。トランプ政権が中国製AIモデルの禁止復活を検討しているとの報道を受け、業界側が先手を打つ形となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/321567/20260725/aws-knocks-out-apple-pay-reddit-hulu-80-minutes-third-outage-since-may.htm" target="_blank" rel="noopener">AWS US-WEST-2で80分間の大規模障害—Apple Pay・Reddit・Hulu・PlayStation Networkが一時停止、5月以降3度目のインシデント</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年7月24日（現地時間）午前3時55分〜4時59分PDTにかけて、AWSのオレゴン（US-WEST-2）リージョンで約80分にわたる大規模障害が発生し、Apple Pay・DoorDash・Reddit・Hulu・PlayStation Networkが相次いでダウン。根本原因はAWSオレゴン施設と公衆インターネット間の「ネットワーク境界」における接続障害で、データセンター内部のEC2やEBSは正常稼働していたにもかかわらず外部への経路が切断される形となった。AWSは当初5サービスの影響を報告したが後にGlobal AcceleratorとElastic Container Serviceを追加し計7サービスに拡大して発表した。今年5月の熱イベント、6月のネットワーク障害に続く「3ヶ月で3度目」の重大インシデントであり、クラウドサービスの可用性とシングルリージョン依存リスクに対する議論が再燃している。マルチリージョンフェイルオーバーを構成していないサービスが影響を受けた点も改めて指摘されており、可用性設計の見直しを検討する企業が増えている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">The Hacker News / GitLab / depthfirst</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/researcher-publishes-gitlab-rce-poc.html" target="_blank" rel="noopener">GitLab自己ホスト型サーバーで認証済みユーザーがRCEを実行できるPoC公開—パッチ提供から6週間、CVE番号なしで見過ごされていた重大欠陥</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ研究者Yuhang Wu（depthfirstチーム）が2026年7月24日、未パッチのGitLab自己ホスト型サーバー（バージョン18.11.3）でリモートコード実行（RCE）を可能にする動作実証コード（PoC）をGitHubで公開した。攻撃者はJupyterノートブックをコミットしてそのdiff表示からヒープポインタを漏洩させ、ライブラリのメモリアドレスを特定した後にペイロードを送り込む多段階手法を使用。管理者権限・CI設定・被害者との対話も不要で、プロジェクトへのプッシュ権限があるすべての認証済みユーザーが実行可能。成功すればソースコード・Railsシークレット・サービス認証情報・CI/CDデータ・内部サービスへのアクセスが可能となる。GitLabは6週間前の2026年6月10日にパッチを提供済みだったが、該当修正はリリースノートの「バグ修正」欄にのみ記載されCVE番号もCVSSスコアも付与されておらず、多くの管理者が重要性を認識しないまま放置した状態となっていた。対策は18.10.8・18.11.5・19.0.2以降へのアップグレードで、自己ホスト型GitLab管理者は即時適用が強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-26 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
