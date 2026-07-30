@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 07 &mdash; 31 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTデータ / NTTドコモビジネス</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://it.impress.co.jp/articles/-/29553" target="_blank" rel="noopener">NTTデータ×NTTドコモビジネス、フロンティアAIを活用したサイバーリスク対応サービスを本日提供開始——脅威発見から修復まで一貫支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTデータとNTTドコモビジネスは2026年7月31日、フロンティアAI（国内外の最先端大規模言語モデル）を活用したサイバーリスク対応サービスの提供を開始した。同サービスはNTTデータCERTの脅威インテリジェンスと10,000件超のミッションクリティカルシステム運用実績をAIで融合し、脅威・脆弱性の発見から影響評価・優先度判断・修復方針策定・修復対応・継続運用までをワンストップで支援する。フロンティアAIの分析能力を組み合わせることで、人手では対応が難しい高度なサイバー攻撃の早期検出・迅速な封じ込めを実現する点が特徴。日本企業のサイバーリスク高まりを背景に、金融・製造・公共など多様なセクターへの展開が見込まれる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://openai.com/index/advancing-the-price-performance-frontier-with-gpt-5-6/" target="_blank" rel="noopener">OpenAI、GPT-5.6の大幅値下げを発表——Lunaモデルは最大80%削減、API向け「Fast mode」も導入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年7月30日、GPT-5.6ファミリーの価格引き下げを発表した。軽量・高速向けの「Luna」は入力トークンが100万件あたり$1.00から$0.20へ80%削減、出力トークンが$6.00から$1.20へ同率削減となり、コスト重視の大量処理ユースケースでの採用障壁が大きく下がった。中位モデル「Terra」は入力$2.50→$2.00（20%減）、出力$15.00→$12.00（20%減）。最上位モデル「Sol」の価格は据え置き。API向けには従来の「Priority Processing」を置き換える形で「Fast mode」が新たに導入され、高スループットと低レイテンシを両立する。OpenAIは価格性能比の継続的な向上を通じてAI活用の民主化を推進する姿勢を改めて示した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://blog.google/innovation-and-ai/models-and-research/google-deepmind/gemini-robotics-er-2/" target="_blank" rel="noopener">Google DeepMind、「Gemini Robotics 2」発表——全身ヒューマノイド制御・複数ロボット協調・数時間での新機体適応を3モデルで実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google DeepMindは2026年7月30日、ロボティクス向けAIの次世代シリーズ「Gemini Robotics 2」を発表した。3つのモデルで構成され、VLA（Vision-Language-Action）モデルは全身ヒューマノイドの精密制御を担い、「ER 2（Embodied Reasoning 2）」は多段階の計画立案と複数ロボットの協調動作を可能にする。3つ目のon-deviceモデルは数時間という短時間で新しいロボット機体に適応できる柔軟性が特徴で、製造現場や物流倉庫での迅速な展開を想定している。Geminiの汎用マルチモーダル基盤モデルをロボティクスに応用し、単一タスク特化型の従来アーキテクチャを超える汎化性能を目指している。複数パートナー企業との共同実証も進められており、物理AIの本格普及に向けた重要なマイルストーンとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-07-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://qz.com/meta-q2-2026-earnings-miss-legal-charges-ai-costs-073026" target="_blank" rel="noopener">Meta Q2 FY2026決算：売上高$60.8B（+28%）でガイダンス上回るも、法的費用・AI投資増でEPS未達——FY2026 Capexを$130〜145Bに引き上げ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Metaは2026年7月30日（日本時間31日）にQ2 FY2026決算を発表した。売上高は前年比28%増の$60.8Bとアナリスト予想を上回ったが、純利益は$15.85B（前年$18.34Bから減少）、EPS$6.18は予想$7.22を大きく下回った。主因は$2.4Bの法的費用と、AI・データセンター投資に伴う5月以降のレイオフに関連する$1.18Bの退職費用で、総コストが前年比55%増の$42.03Bに膨らんだ。Q3 2026の売上高ガイダンスは$61〜64B。通年Capexガイダンスは下限を$5B引き上げ$130〜145Bとし、AI基盤への大規模投資継続を改めて示した。DAUは3.6億人を超え、AI搭載製品による利用者エンゲージメントの強化が奏功している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/07/30/aws-earnings-q2-2026.html" target="_blank" rel="noopener">Amazon Q2 FY2026決算：AWS売上高$42.2B（+37%）で過去18四半期最速成長——Amazon全体売上$200.6B超え、AI・チップ事業それぞれ年率$25B超に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazonは2026年7月30日（日本時間31日）にQ2 FY2026決算を発表した。AWS単独の売上高は前年比37%増の$42.2Bとなり、過去18四半期で最速の成長率を記録した。AWS営業利益は$16.6B、営業利益率は39.4%と高水準を維持。Amazon全体の売上高は前年比20%増の$200.6Bと初めて四半期で$200Bを超えた。AI関連ビジネスおよびAWSカスタムチップ（Trainium・Inferentia）事業はそれぞれ年率$25Bを超える規模に成長し、いずれも3桁成長を継続。生成AI需要の急拡大がAWSの成長を下支えしており、データセンター・インフラへの積極投資が引き続き功を奏している。前四半期比でも成長が加速しており、クラウド市場でのシェア拡大が続いている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ruby on Rails / GitHub Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/07/critical-rails-flaw-could-let.html" target="_blank" rel="noopener">CVE-2026-66066 — Ruby on Rails Active Storageに認証不要の任意ファイル読み取り・RCE脆弱性（CVSSv4: 9.5）、Rails 7.2.3.2 / 8.0.5.1 / 8.1.3.1へ即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">RailsセキュリティチームおよびGitHubは2026年7月29〜30日、Active StorageのVariant処理にCVSSv4スコア9.5（Critical）の脆弱性CVE-2026-66066（GitHub Advisory GHSA-xr9x-r78c-5hrm）を公開した。Active Storageが信頼されていないアップロードをlibvipsに渡す際に「unfuzzed」ローダーを無効化せずに処理するため、未認証の攻撃者が細工した画像ファイルをアップロードしてVariant生成を誘発することで、secret_key_baseを含む任意のサーバーファイルを読み取れるほか、リモートコード実行（RCE）も可能となる。影響バージョンはActivestorage 7.2.3.1以下・8.0.0〜8.0.5.0・8.1.0〜8.1.3.0（libvips利用時のデフォルト設定）と6.x系（vipsプロセッサーを手動有効化の場合）。修正版はRails 7.2.3.2・8.0.5.1・8.1.3.1で提供されており、libvips 8.13以降への更新も合わせて必要。パッチ適用後は漏洩したシークレットの即時ローテーションも推奨されている。技術的な詳細は悪用拡大防止のため2026年8月28日まで開示が控えられている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-07-31 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
