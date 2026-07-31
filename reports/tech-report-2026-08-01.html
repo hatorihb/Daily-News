@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 08 &mdash; 01 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JBCCホールディングス</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-07-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://it.impress.co.jp/articles/-/29642" target="_blank" rel="noopener">JBCC、SIサービスの上流を担うAIエージェントを開発——「AI長期記憶技術」で現状分析・要件定義を自動化し、2026年9月末提供へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">JBCCホールディングスは2026年7月31日、アジャイル型システム開発の上流工程（現状分析・要件定義・構想策定）を自律的に担うAIエージェント群の開発を発表した。AIスタートアップのスパイスコードが開発した「AI長期記憶技術」を採用し、現行システムの仕様書やソースコード、業務マニュアル・顧客辞書、過去の仕様変更経緯が分かるドキュメント、ベテラン社員の操作ログ、メール/チャット記録などを長期記憶として蓄積・活用する。AIエージェントが蓄積情報を基に現状業務の流れやシステム構造を人間が理解しやすい形に整理・可視化し、要件定義をほぼ自動で生成。「SIの消滅」をいち早く予見してきたJBCCが、SIerのAIサービスモデル構想として打ち出した取り組みで、2026年9月末を開発目標としてグループのSIサービスへ適用される。開発スピードと品質の向上を目指すとともに、上流工程を担う人材不足の解消にも寄与することが期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" target="_blank" rel="noopener">DeepSeek、V4 Flash 0731をAPIパブリックベータとして正式リリース——AIインテリジェンス指数で50点・Elo 1559と前版から大幅向上、$0.14/1Mトークンの低コスト設計</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">DeepSeekは2026年7月31日、プレビュー段階にあった「DeepSeek V4 Flash」の再ポストトレーニング版「DeepSeek V4 Flash 0731」をAPIパブリックベータとして正式リリースした。総計284Bパラメーター・アクティブ13Bというアーキテクチャは前版と同一のまま、Artificial Analysis Intelligence Indexで50点（前版比+10点）を獲得し、同価格帯のモデル中間値17点を大きく上回る。エージェント型リアルワークタスク評価GDPval-AA v2ではElo 1559（前版1189）と著しく向上。幻覚率低下による知識精度改善（AA-Omniscience Indexが-16、前版比+7）を達成しつつ、出力トークン使用量を前版比12%削減した。コンテキスト窓は100万トークン、APIの価格は入力$0.14・出力$0.28（それぞれ100万トークンあたり）と低コストを維持しており、高性能かつ価格競争力のあるモデルとして開発者・企業の注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.plainenglish.io/aws-just-retired-its-flagship-ai-agent-product-it-launched-in-2023-add395ae3fe8" target="_blank" rel="noopener">Amazon Bedrock Agentsが「Classic」に改名・新規顧客受付終了——AgentCoreへの移行推奨、モデルカタログは2026年7月30日付で凍結</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年7月30日、2023年11月に提供開始した「Amazon Bedrock Agents」を「Amazon Bedrock Agents Classic」に改名し、同日付で新規顧客への提供を終了した。既存ユーザーは引き続き利用可能だが、モデルカタログは2026年7月30日時点で凍結され、それ以降にリリースされる新モデルはAgentCoreでのみ利用できる。終了期日（End of Life）は現時点で未発表。AWSは後継プラットフォームとして「Amazon Bedrock AgentCore」への移行を推奨しており、AgentCoreはモデル・ツール・指示をYAMLで宣言するだけでコンピューティング・メモリ・ID・オブザーバビリティをAWSが完全管理する次世代エージェント基盤として設計されている。Bedrock Agents Classicから移行する際のAPIや設定の互換性に注意が必要で、特にカスタムオーケストレーションや複雑なワークフローを実装しているユーザーは早めの対応計画が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS CodeDeploy</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-07-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/aws-codedeploy-five-additional-regions/" target="_blank" rel="noopener">AWS CodeDeploy、アジア太平洋5拠点・メキシコ中央に展開拡大——商用リージョン34か所に到達し、データレジデンシー要件にも対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年7月31日、継続的デプロイメントサービス「AWS CodeDeploy」をアジア太平洋（ニュージーランド）・アジア太平洋（タイ）・アジア太平洋（台北）・アジア太平洋（マレーシア）・メキシコ（中央）の計5リージョンへ新たに展開すると発表した。これにより、CodeDeployはAWS GovCloud（US）・中国リージョンを除くAWS商用リージョン全34か所でローカル利用が可能となった。各リージョン内でのデプロイメント処理により低レイテンシーを実現し、各国・地域のデータレジデンシー規制への対応が容易になる。東南アジア・オセアニア・中米でのAWSリージョン展開に伴う需要増を受けた対応で、これらの地域でマルチリージョン構成を組む企業にとっては自動デプロイメントパイプラインの構築選択肢が広がる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ShinyHunters / Ernst &amp; Young</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-07-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/ernst-and-young-data-breach-claimed-by-shinyhunters-extortion-gang/" target="_blank" rel="noopener">ShinyHunters、Ernst &amp; Youngの税務関連クライアントデータ窃取を主張——7月31日期限でデータ公開を脅迫、EYは調査中</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ランサムウェア・恐喝グループ「ShinyHunters」は2026年7月27日、大手監査・コンサルティング法人Ernst &amp; Young（EY）が利用するサードパーティITサポートプラットフォームのJira・GitHub・Azure環境への侵入に成功したと主張し、ダークウェブのリークサイトに同社を掲載した。不正アクセスは2026年3月28日〜4月12日の間に行われ、税務申告用のクライアント個人・財務情報（氏名・住所・社会保障番号・銀行口座・支払カード情報等）を含む大量の文書が窃取されたとしている。EYは2026年4月23日に異常を検知・調査を開始し、該当期間に第三者プラットフォームで複数クライアントの文書がダウンロードされた事実を確認・公表済み。ShinyHuntersは7月31日を「最終期限」と設定し、EYが交渉に応じなければデータを全公開すると警告していた。この期限は2026年8月1日時点で経過しており、最新の進展は各セキュリティメディアの続報を確認されたい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-01 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
