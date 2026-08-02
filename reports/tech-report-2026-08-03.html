@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 03 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本経済新聞</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nikkei.com/article/DGKKZO97930510T00C26A8MM8000/" target="_blank" rel="noopener">26年度設備投資計画が過去最高35.7兆円——AI供給網整備でNTT首位、4年ぶり2桁成長を記録（日経調査）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本経済新聞が実施した「2026年度設備投資動向調査」の最終集計によると、全産業合計の設備投資計画額は過去最高の35兆6,734億円（前年度比14.2%増）となり、4年ぶりの2桁成長を記録した。AIデータセンター・半導体・電力送配電設備への投資拡大を背景に、NTTグループが全企業中トップの設備投資額を計上。813社を対象（有効回答715社）とする調査の結果、AI供給網の整備が裾野を広げ、製造・通信・エネルギー各業界にわたってAIインフラへの構造的投資が加速していることが示された。なお記事の閲覧には日経電子版の購読が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">住信SBIネット銀行 / NTTドコモ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dxmagazine.jp/news/trytoda2628-24re-01/" target="_blank" rel="noopener">「ドコモの銀行」が8月3日に誕生——「d NEOBANK」から名称刷新、最大4.5%dポイント還元・8月20日にdアカウント連携も開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">住信SBIネット銀行は2026年8月3日、NTTドコモグループとの共同ブランド「ドコモの銀行」を正式スタートした。これまでの「d NEOBANK」から「ドコモの銀行 ドコモSMTBネット銀行アプリ」へ名称変更し、ユーザーはアプリアイコンデザインを選択可能。dカード・dポイントクラブとの連携による最大4.5%のdポイント還元に加え、8月20日からはdアカウントとの連携機能も追加される予定で、金融・ポイント経済圏を一体化する施策が本格始動する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pondero.ai/news/2026-08-02-openai-astra-math-proofs/" target="_blank" rel="noopener">OpenAI、次世代フラッグシップモデル「Astra」を初公開——10年超未解決の数学問題10件をLean 4による機械検証済み証明とともに解決</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年8月1日、次世代フラッグシップモデルファミリー「Astra」の存在を初公開した。複数のAIエージェントが長時間協調動作することで、群論（非ソフィック群の初の陽的構成）・作用素環（Connes剛性予想の反証）・高次元幾何・量子複雑性・格子暗号・極値組合せ論など6分野にわたる未解決数学問題10件を解決。各解には249ページの論文とLean 4による機械検証済み証明が付属し、GitHubで公開済み。全10件の生成コストはSol APIレートで約2,000ドルとされる。Astraはまだ一般公開されておらず、リリース日も未発表で、米政府のAIレビュープロセスを経て順次展開される予定となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pc.watch.impress.co.jp/docs/news/2129680.html" target="_blank" rel="noopener">DeepSeek「V4 Flash」正式版公開——V4 Pro プレビューをエージェントベンチマーク全9項目で上回り、284B MoEモデルをMITライセンスで無償公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">DeepSeekは2026年7月31日、MoEアーキテクチャを採用した大規模言語モデル「DeepSeek V4 Flash」正式版を公開した。総パラメータ284B・アクティブパラメータ13B、最大100万トークンのコンテキストウィンドウを備え、代替エージェントベンチマーク全9項目でDeepSeek V4 Proプレビュー版を上回る性能を示した。MITライセンスによりウェイト（167GB）をHuggingFaceで無償公開しており、APIコストは入力1Mトークンあたり$0.14・出力$0.28とコスト効率が高い。日本語対応のUnsloth量子化版（最小82GB台）も利用可能で、国内でも注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Defender</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://windowsforum.com/windows-news.4/microsoft-project-perception-enters-public-preview-august-3.440626/" target="_blank" rel="noopener">Microsoft「Project Perception」がパブリックプレビュー開始——自社開発サイバーセキュリティAI「MAI-Cyber-1-Flash」搭載の自律防衛エージェントシステムがDefenderで利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは2026年8月3日、自律型サイバーセキュリティエージェントシステム「Project Perception」のパブリックプレビューをMicrosoft Defenderで開始した。攻撃経路を探索するレッドチームエージェント・リスク優先順位付けを行うブルーチームエージェント・自動修復を担うグリーンチームエージェントの3種が連携動作する。基盤となる自社開発モデル「MAI-Cyber-1-Flash」はCyberGymベンチマークで96%を達成し、汎用大規模モデル比で約50%のコスト削減を実現。タスクの90%を同モデルが処理し、残り10%の複雑なケースはOpenAIのGPT-5.4へルーティングされる設計で、高インパクトな操作には人間の承認が必要。今後はDefender以外のセキュリティポートフォリオ全体への展開が予定されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-03 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
