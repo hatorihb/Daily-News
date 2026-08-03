@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 04 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">経済産業省</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.projectdesign.jp/articles/news/cf53764e-dda0-4b83-a0f8-5edd590b86b1" target="_blank" rel="noopener">経産省が「AI産業課」を8月5日に新設——AIとロボット政策を一元化、商務情報政策局に「情報処理システム開発・ロボット課」設置</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">経済産業省は2026年7月31日に、AIとロボット政策を統合する省令改正を閣議決定し、8月5日（水）に公布・施行する。これまで製造産業局が担っていたロボット関連業務を商務情報政策局へ移管し、新課「情報処理システム開発・ロボット課」（通称「AI産業課」）を設置。AIと産業用ロボットという二大分野を同一部署が一体的に担当することで、AIロボティクス戦略の横断的推進が可能となる。情報処理技術の研究開発業務も情報産業課から移管される。2040年に製造業を含む18分野で1,000万台のAIロボット導入を目指す国家目標の達成に向けた省内体制整備の一環。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Gemini</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://docs.cloud.google.com/gemini/enterprise/docs/release-notes" target="_blank" rel="noopener">Google Gemini Enterpriseが8月4日にGemini 3.5 Flashを廃止——Gemini 3.6 Flashへ移行、トークン効率向上・コスト17%削減</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年8月4日より、Gemini Enterpriseアプリのグローバルリージョンで「Gemini 3.5 Flash」の提供を終了し、「Gemini 3.6 Flash」への移行を実施している。Gemini 3.6 Flashは7月21日にリリースされた最新モデルで、3.5 Flash比でトークン効率が向上しコーディングおよびエージェント計画能力が強化されながら17%のコスト削減を実現。低レイテンシ・高コスト効率な「Gemini 3.5 Flash-Lite」も同時に利用可能となっており、大量自動化ワークフロー向けのサブエージェントオプションとして位置づけられている。Gemini Enterprise管理者は機能トグルをオンにすることでユーザーへのアクセスを有効化でき、AI出力の冗長性に関する開発者フィードバックを反映したモデル刷新となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-price-reduction-of-gpt-models-in-bedrock-cloudwatch-managed-collectors-for-prometheus-metrics-and-more-august-3-2026/" target="_blank" rel="noopener">Amazon BedrockのGPT-5.6モデルを最大80%値下げ——Luna $0.20/1Mトークン、Terra 20%削減、7月30日より自動適用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年8月3日付けの週次まとめで、Amazon BedrockにおけるOpenAI GPT-5.6モデルの大幅な価格引き下げを発表した。7月30日より有効のGPT-5.6 Lunaは80%値下げされ、入力100万トークンあたり$0.20・出力$1.20となり、フロンティア級モデルの中でも最も安価な水準のひとつとなった。GPT-5.6 Terraは20%の値下げ、GPT-5.6 Solの価格は据え置き。価格変更はユーザー側での操作不要で自動適用されるため、Amazon Bedrockを通じてOpenAIモデルを利用している既存ユーザーはそのままコスト削減の恩恵を受けられる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon CloudWatch</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/07/cloudwatch-managed-collectors/" target="_blank" rel="noopener">Amazon CloudWatch、Prometheusマネージドコレクターを提供開始——エージェント不要でEKS・EC2・ECS・MSK・OpenSearchのメトリクスを自動収集</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon CloudWatchは、エージェントのデプロイ・スケーリング・管理が不要なフルマネージド型のPrometheusコレクターを新たに提供開始した。スクレイプ設定とリソースへの接続を指定するだけで、CloudWatchがプロビジョニングからスケーリング・収集まで自動で処理する。Amazon EKS・EC2・ECS・MSK・Amazon OpenSearch Serviceの各ワークロードに対応し、メトリクスはOpenTelemetry形式で配信され、PromQLを使ってAWSネイティブメトリクスと統合クエリが可能。KubernetesサービスディスカバリやAWS Cloud Map経由のDNSベースディスカバリもサポートしており、従来のOpenTelemetry Collector自己管理の手間を大幅に削減できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Acalvio / Black Hat USA 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/black-hat-usa-2026-summary-of-vendor-announcements-part-1/" target="_blank" rel="noopener">Black Hat 2026でAIエージェントを守る「Deception Guardrails」が登場——ハニートークン・デコイツールでプロンプトインジェクションを早期遮断</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティカンファレンス「Black Hat USA 2026」（8月1〜6日・ラスベガス）において、Acalvioが AIエージェントのセキュリティを強化する「Deception Guardrails」をShadowPlexプラットフォームに追加した。ハニートークン・デコイツール・偽インフラを展開し、エージェントを悪用しようとする攻撃者を誘引・暴露する仕組みで、エージェントとのやり取りを監視してプロンプトインジェクションやジェイルブレイク試行をリアルタイムで検知・遮断する。従来のガードレールは入出力フィルタリングに留まっていたが、本機能は侵害後のエージェント行動を可視化し、攻撃者に偽の現実を提示することで実被害の発生前にインシデントを防ぐ。同カンファレンスでは、Zero Networksが「Least Agency Enforcement」を発表するなど、AIエージェントセキュリティ製品の発表が相次いでいる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">サイボウズ / JVN</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://jvn.jp/en/jp/JVN72334274/" target="_blank" rel="noopener">サイボウズ Garoon スケジュール機能にXSS脆弱性（CVE-2026-57279・CVSS 6.8）——バージョン6.17.2 Service Pack 2で修正済み</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">JVNは2026年8月3日、サイボウズ提供のグループウェア「Garoon」のパッケージ版スケジュール機能にクロスサイトスクリプティング（XSS）脆弱性（CVE-2026-57279）が存在すると公表した。製品にログインした利用者のウェブブラウザ上で任意のスクリプトが実行される可能性があり、CVSS 3.0基本値は6.8（MEDIUM）。影響を受けるバージョンはGaroon 6.17.0〜6.17.1で、サイボウズがリリースしたバージョン6.17.2 Service Pack 2で修正済み。サイボウズはJPCERT/CCを通じてJVNにて本脆弱性を公表しており、利用中のユーザーには速やかなアップデートが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-04 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
