@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 05 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">東京商工リサーチ / ITmedia NEWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2608/04/2000000377/" target="_blank" rel="noopener">AI普及でデザイン業の倒産が前年比2.7倍——2026年上半期40件で14年ぶりの高水準、東京商工リサーチ調査</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東京商工リサーチが2026年8月4日に発表した調査によると、2026年上半期（1〜6月）のデザイン業の倒産件数が40件に達し、前年同期比2.7倍（+166.6%）と2012年同期の45件以来14年ぶりの高水準となった。生成AIの普及によりデザイン業務の短時間・低コスト化が進み、クライアント企業が内製化を進めた結果、特に従業員5人未満の小規模事業者（全体の9割）を中心に受注不振が深刻化している。紙媒体からデジタルへのシフトも追い打ちをかけており、現ペースでは年間80件を超え2011年の記録を更新する可能性がある。独自性やブランド価値を持てないデザイン会社の淘汰が加速しており、AI時代におけるクリエイティブ事業者の生存戦略が問われている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Alibaba / Qwen</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://newsbytes.ph/2026/08/04/alibaba-launches-qwen3-8-max-ai-model-with-2-4-trillion-parameters/" target="_blank" rel="noopener">Alibaba、Qwen3.8-Max（2.4兆パラメータMoE）を発表——Anthropicに匹敵とベンチマークで主張、来週OSSとして公開予定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">アリバボは2026年8月4日（日本時間）、同社最大のAIモデル「Qwen3.8-Max」を発表した。総パラメータ数2.4兆を持ちながら、スパースMixture-of-Experts（MoE）アーキテクチャにより推論時は950億パラメータのみを活性化し、同規模のDenseモデルと比較して計算コストとレイテンシを大幅に削減している。コンテキストウィンドウは最大100万トークンで、テキスト・画像・動画の入力に対応。Text Arena第5位・Vision Arena第2位・Frontend Code Arena第4位とベンチマークでAnthropicやOpenAIに匹敵すると主張しており、来週はモデルウェイトのオープンソース公開と小型版「Qwen3.8-27B」の提供も予定されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://therouter.ai/news/anthropic-deprecates-claude-opus-4-1-august-5-migration-guide/" target="_blank" rel="noopener">Anthropic、Claude Opus 4.1のAPIを本日（8月5日）廃止——Opus 4.8への移行が必須に、Sonnet 5値上げも9月に予告</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは本日（2026年8月5日）をもって、Claude APIにおける「claude-opus-4-1-20250805」モデルの提供を正式に終了した。2026年6月5日に発表された廃止予告から60日が経過し、以降このモデルへのAPIリクエストはエラーを返す。移行先として推奨されるのは上位モデル「Claude Opus 4.8」で、APIエンドポイントのモデル名を変更するだけで移行可能。またAnthropicは、Claude Sonnet 5の価格を2026年9月1日以降に入力 $2→$3、出力 $10→$15（/Mトークン）へ値上げすることも同時に予告しており、開発者はコスト計画の見直しが必要となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon SageMaker AI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-sagemaker-fft/" target="_blank" rel="noopener">Amazon SageMaker AI、サーバーレスでフルファインチューニングに対応——25以上のOSSモデルの全パラメータ更新がインフラ管理なしに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon SageMaker AIは、サーバーレスのモデルカスタマイズ機能で「フルファインチューニング（Full Fine-tuning）」のサポートを開始した。これまでLoRA等のパラメータ効率的手法（一部ウェイトのみ更新）に限られていたが、GPT-OSS・Gemma・Llama・Nemotron・Qwen系を含む25種類以上のOSSモデルに対してすべてのパラメータを更新するフルファインチューニングが可能となった。専門的な推論パターン・複雑な出力フォーマット・大規模独自データセットからのドメイン知識内在化など、LoRAでは難しい深いカスタマイズが実現できる。インフラのプロビジョニング・スケーリング・オーケストレーションはSageMakerが自動管理するため、訓練インフラ構築コストなしで利用でき、米国東西・東京・アイルランドリージョンで提供される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon GameLift Streams</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/08/amazon-gamelift-streams/" target="_blank" rel="noopener">Amazon GameLift Streams、ストリームURL機能を追加——AWSアカウント不要でブラウザからゲームへ即時アクセスが可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon GameLift Streamsは、エンドユーザーが一時的・認証不要でゲームのストリームセッションへアクセスできる「ストリームURL」機能の提供を開始した。AWSアカウント・認証情報・専用ソフトのインストールなしにURLを受け取ったユーザーがブラウザからゲームをプレイでき、リンクを開くたびに独立したセッションが開始されて最寄りのストリーミングロケーションへ自動ルーティングされる。コンソールまたはCreateStreamUrl・GetStreamUrl・ListStreamUrls・RevokeStreamUrl APIを通じてURL生成・監視・失効操作が可能で、URLの有効期限や最大セッション数も柔軟に設定できる。追加料金なしで利用可能で、ゲームのデモ配布やベータテストなどの用途に活用できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">中部電力 / ITmedia NEWS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2608/04/2000000380/" target="_blank" rel="noopener">中部電力に不正アクセス——7万4100人分の個人情報漏洩の恐れ、資格情報の不正利用で7月29日に発覚</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中部電力は2026年8月4日、不正アクセスにより最大7万4,100人分の個人情報が漏洩した可能性があると発表した。漏洩対象は取引先・自治体など約2,400人と中部電力グループ役職員約7万1,700人の氏名・メールアドレス等の連絡先情報で、グループ会社の役職員向けメール約2,400件も閲覧された恐れがある。攻撃は認証情報（資格情報）の不正利用によるもので、2026年7月29日に第三者機関からの情報提供により発覚した。電力供給・顧客情報を扱うシステムへの影響は確認されていないものの、取引先・自治体との連絡先情報が広範囲に漏洩したことで、フィッシング詐欺などの二次被害リスクが懸念される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">INC Ransomware / SonicWall / Resecurity</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/08/inc-ransomware-emerges-as-dominant.html" target="_blank" rel="noopener">INC Ransomware、SonicWall SMA 1000のゼロデイ（CVE-2026-15409・15410）を悪用した攻撃を8月に入り急拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ研究機関Resecurityは2026年8月初旬、INC Ransomwareグループが7月14日にパッチ公開済みのSonicWall SMA 1000シリーズVPNアプライアンスの脆弱性（CVE-2026-15409 CVSS 10.0・CVE-2026-15410 CVSS 7.2）を連鎖的に悪用したランサムウェア攻撃を急拡大させていると報告した。CVE-2026-15409は未認証の遠隔攻撃者がWebSocketトンネル経由でroot権限を取得できるSSRF脆弱性、CVE-2026-15410はOS任意コマンド実行を可能にするコードインジェクション脆弱性で、両者ともに6月22日からゼロデイとして悪用されていた。攻撃者は侵害後にMFAシード・セッション情報・認証情報を窃取して長期潜伏し、KNUCKLEBALLスクリプトやORANGETAIL Webシェルを展開して横展開を行うことが確認されており、対象機器の利用組織は最新パッチの即時適用が急務。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-05 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
