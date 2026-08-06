@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 07 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ビットグリット / エスツー / UAE ムバダラ・インベストメント</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bloomberg.com/jp/news/articles/2026-08-06/TJBYHMT96OSN00" target="_blank" rel="noopener">秋田に日本最大級のAIデータセンター建設へ——建設費2兆円規模、UAE政府系ファンド「ムバダラ」が最大1兆円投資を検討</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米国のデータセンター開発会社ビットグリットと秋田市のサーバー管理会社エスツーが、秋田市北部の工業団地に国内最大級のAI向けデータセンターを建設する計画を進めている。総建設費は2兆円規模の見通しで、アラブ首長国連邦（UAE）の政府系ファンド「ムバダラ・インベストメント」が最大1兆円の投資を検討していることが明らかになった。施設の規模は500メガワット程度を想定しており、2030年代前半の運転開始を目指す。秋田県が選ばれた背景には、陸上風力を中心とした再生可能エネルギーの豊富さがあり、AI処理に必要な大電力を安定・安価に調達できる点が評価された。生成AIやLLMの急拡大に伴うGPUクラスター向け大規模電力需要に対応するため、日本国内での計算基盤整備が加速する動きを象徴する事案だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta / Meta Superintelligence Labs</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.forbes.com/sites/jonmarkman/2026/08/06/meta-launches-muse-code-a-new-ai-coding-agent-powered-by-spark-12/" target="_blank" rel="noopener">MetaがAIコーディングエージェント「Muse Code」をベータ公開——新モデルMuse Spark 1.2搭載、Claude CodeとOpenAI Codexに正面対決</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MetaはAIコーディングエージェント「Muse Code」（ベータ版）と、それを支える新モデル「Muse Spark 1.2」を発表した。Muse Codeはターミナルベースで動作し、大規模リポジトリ横断でのコード計画・実装・検証を担うほか、複数の永続的サブエージェントをセッション中に並列管理することで複雑な問題を高速かつ正確に解決する。Muse Spark 1.2はDeepSWE 1.1で59.3%、Terminal-Bench 2.1で82.9%を記録し、コーディング特化ベンチマークでトップクラスの性能を示した。コンテキストウィンドウは100万トークン、API価格は入力$1.25/出力$4.25（百万トークン当たり）で競合比10倍以上安いコントリビュータープランも用意する。macOS・Linux向けcurlコマンドで即時インストール可能で、Meta Model APIの公開プレビューでも利用できる。Anthropicの「Claude Code」やOpenAI「Codex」への直接対抗となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bloomberg.com/news/articles/2026-08-06/google-shifts-ai-power-to-california-in-race-against-anthropic-openai" target="_blank" rel="noopener">Google DeepMind、Demis HassabisがCEO退任して会長兼チーフサイエンティストに——AI組織をマウンテンビューに集約、OpenAI・Anthropic追撃を加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年8月6日、AI研究部門Google DeepMindの組織再編を発表した。共同創業者でCEOを務めてきたDemis HassabisがCEO職を退き、Google DeepMind会長兼AlphabetのチーフサイエンティストとしてAI研究の戦略的方向性を担う。AIリサーチ・運営全体を統括する日々の業務はKoray Kavukcuogluが引き継ぐ。GoogleはAIのリーダーシップをカリフォルニア州マウンテンビューの本社に集約し、AnthropicやOpenAIとの競争に向けた意思決定・開発スピードの加速を図る。年間売上ランレートでAnthropicが$470億（約7兆円）を突破してOpenAIを超えたとされる中、Googleが組織面でも迅速な対応を見せた形だ。HassabisはDeepMindを2010年に創業し、AlphaGo・AlphaFoldなど歴史的AI成果を主導してきた。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Aurora Serverless</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/08/aurora-serverless-instant-12-acu-scaling/" target="_blank" rel="noopener">Amazon Aurora Serverless、スケールアップ時に1秒以内で12 ACUを即時確保——AIエージェントのバースト需要に対応、ゼロへの自動スケールダウンも維持</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Aurora Serverlessが大幅なスケーリング性能向上を発表した。スケールアップ時に1秒以内で12 ACU（Aurora Capacity Units）の初期容量を確保し、その後もワークロードに応じて最大256 ACUまで段階的にスケールする。ワークロード終了時はゼロへの自動スケールダウンも維持されるため、コスト効率に優れる。本強化はAIエージェントアプリケーションを主要ターゲットとしており、バースト的なアクティビティ・長時間のアイドル・予測困難なトラフィックパターンが混在するエージェントワークロードに特に適している。Aurora Serverlessのプラットフォームバージョン3以降のすべてのクラスターでデフォルト有効となり、設定変更不要で恩恵を受けられる。容量計画やオーバープロビジョニングが不要で、使用した分だけの課金モデルを維持する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS IAM Identity Center</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/08/aws-identity-center-accounts-optional/" target="_blank" rel="noopener">AWS IAM Identity Center、新規組織インスタンスでのAWSアカウントアクセス管理が任意化——ID管理の柔軟性を向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS IAM Identity CenterはAWS Organizationsの新規インスタンスにおいて、AWSアカウントへのアクセス管理設定を任意（オプション）とする変更を行った。これまでIAM Identity Centerを導入する場合はAWSアカウントアクセス管理が必須の構成要素だったが、今回の変更により組織の要件に応じた柔軟な設定が可能になる。例えば、SaaSアプリケーションのSSOのみを目的としてIAM Identity Centerを利用する組織は、AWSアカウントアクセス管理を無効化した状態で運用できる。マルチアカウント環境を必要としない用途でのID管理がシンプル化され、初期設定の簡素化や不要な権限管理の排除に貢献する変更だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">IBM Langflow / Apache Tomcat / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/08/cisa-flags-langflow-rce-tomcat-and-n.html" target="_blank" rel="noopener">CISA、Langflow RCE（CVE-2026-9198 CVSS 9.8）ほかをKEVに追加——DeepSeek搭載AIエージェントによる中国語話者グループの攻撃が確認、連邦機関修正期限は本日8月7日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米国CISAは、IBM Langflow（AIエージェント構築ビジュアルフレームワーク）の重大RCE脆弱性CVE-2026-9198（CVSSv4スコア9.8）をKnown Exploited Vulnerabilities（KEV）カタログに追加し、連邦文民機関（FCEB）に対し2026年8月7日（本日）までの修正・遮断を命じた。本脆弱性は未認証の攻撃者がデフォルト設定のLangflow環境で「/api/v1/auto_login」と「/api/v1/validate/code」の2つのAPIエンドポイントを連鎖させることで、スーパーユーザートークンを取得しPythonコードを任意実行できるというもの。Palo Alto Networks Unit 42は、knaitheおよびKnYuanのハンドルネームで活動する中国語話者の脅威アクターが、DeepSeekをHermesエージェントフレームワーク経由で使用した自律型AIオフェンシブエージェントで本脆弱性を悪用していることを確認した。影響を受けるLangflow OSS 1.0.0〜1.10.0を使用する組織は、バージョン1.10.1以降への即時アップグレード、またはLANGFLOW_AUTO_LOGIN=falseの設定変更が急務だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JetBrains TeamCity / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/08/cisa-flags-teamcity-cve-2026-63077-rce.html" target="_blank" rel="noopener">JetBrains TeamCity CVE-2026-63077（CVSS 9.8）が実害悪用開始——CISAがKEV追加・連邦機関修正期限8月8日、CI/CDサプライチェーン全体へのリスク</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは、JetBrains TeamCity On-Premises の未認証リモートコード実行脆弱性CVE-2026-63077（CVSSv4スコア9.8）をKEVカタログに追加し、連邦機関に対し3日以内（2026年8月8日まで）の修正を命じた。本脆弱性はエージェントポーリングプロトコルを悪用した信頼できないデータのデシリアライゼーション問題であり、HTTPSアクセスを持つ未認証の攻撃者がTeamCityサーバープロセスの権限でOSコマンドを任意実行できる。積極的な悪用が確認されており、攻撃者は保存済み認証情報の窃取・サーバー設定の改ざん・ビルド成果物への悪意あるコード注入を実施し、ダウンストリームのソフトウェアサプライチェーン全体に影響を及ぼす可能性がある。修正済みバージョンは2025.11.7および2026.1.3。アップグレードが即時困難な環境向けにはJetBrainsがセキュリティパッチプラグインも公開している（TeamCity 2017.1以降対応）。CI/CDパイプラインを持つすべての組織が影響を受けるため、優先対応が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-07 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
