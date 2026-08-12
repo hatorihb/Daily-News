@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 13 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTドコモビジネス / NTTモビリティ / NTTドコモ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://response.jp/article/2026/08/12/415198.html" target="_blank" rel="noopener">NTTグループ3社、自動運転×オンデマンド配車の実証実験を名古屋市都心部で9月開始──May Mobilityと連携、5拠点を無料で結ぶ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTドコモビジネス・NTTモビリティ・NTTドコモの3社は2026年8月12日、名古屋市都心部で自動運転とオンデマンド配車システムを組み合わせた実証実験を2026年9月11日から2027年3月19日まで実施すると発表した。米May Mobilityの自動運転ソフトウェアとNTTドコモビジネスの配車プラットフォーム「デライド」を連携させ、予約に応じた効率的な車両割り当てを検証する。乗降拠点は名古屋駅前スパイラルタワーズ・STATION Ai・愛知芸術文化センター・IGアリーナ前・FUJIなごや科学館の5カ所で、3台の自動運転車両が無料で運行される。車内には対話型AIキャラクターを搭載し、乗務員不在を想定したサービスモデルも試行する。名鉄タクシーホールディングスが支援に参加しており、国内都市部でのAI活用型モビリティサービスの社会実装に向けた本格的な取り組みとなる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NEC</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2608/12/news035.html" target="_blank" rel="noopener">NEC、「部門長から社員まですべてAI」の自律型社内組織を国内大手初で新設──人間は評価・統制・意思決定を担う</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NECは2026年8月12日、部門長から担当社員まですべての役職をAIが担う自律型社内組織「コーポレートAI・Workforce部門」を8月1日付で正式発足させたと発表した。組織は「AI CxO（経営機能相当）」「AIマネージャー」「AI社員」の4階層で構成され、業務計画・管理・実行の全プロセスをAIエージェントが自律的に担当する。最終的な評価・意思決定・ガバナンス統制は人間の経営陣が担う設計で、7月に約1カ月の社内パイロットを経て正式発足した。NECはこれを「国内大手企業として初めての取り組み」と位置づけており、AIネイティブカンパニーへの変革を加速させる試みと説明している。将来的には外部向けのAI Workforce提供サービスへの展開も視野に入れているとされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2608/12/2000000497/" target="_blank" rel="noopener">Anthropic、「Claude」の生成テキスト全文に不可視ウォーターマークを埋め込み──EU AI法対応で日本を含む全世界に一律適用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはEU AI法（第50条）の透明性規制への対応として、2026年8月2日以降にリリースしたClaudeモデルから、生成したテキストに機械可読な不可視ウォーターマークを埋め込む機能を導入したと発表した。ウォーターマークはメタデータではなくテキスト本体に直接付与されるため、コピー&ペースト後も残存し一部の編集を経ても保持される可能性がある。API・Claude Chat・Claude Code・Claude Cowork・Claude Tagのすべてに適用され、AWS・Google Cloud・Microsoft Foundry経由のアクセスも対象で、日本を含む全世界で一律に実施される。既存モデルへの追加対応も進めており、対応ファイルにはC2PA準拠のデジタル来歴メタデータも付与される。Anthropicは将来的に検出ツールの公開を予定しているが、Claudeで校正・翻訳された第三者の文章にも誤検知が生じうる点を注意事項として明示した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gigazine.net/news/20260812-gpt-5-6-cyber/" target="_blank" rel="noopener">OpenAI、ChromeのV8ゼロデイ2件を独力で発見したサイバー特化型「GPT-5.6-Cyber」を公開──Daybreakを防御・攻撃検証の2階層に再編</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは、サイバーセキュリティ専用に設計した「GPT-5.6-Cyber」を正式発表し、セキュリティ研究者向けプログラム「Daybreak」を防御者向け「Daybreak Blue」と高度な攻撃検証作業向け「Daybreak Red」の2階層に再編した。同モデルはエクスプロイト開発・認証バイパス・権限昇格といった高リスクな安全テスト要求への応答率が95%に達し、標準のGPT-5.6-Sol（1.5%）と比べて飛躍的に向上している。実績として、ChromeのV8 JavaScriptエンジンで未知の脆弱性2件をチェーンして発見し、Googleがすでにパッチを適用済みである。Accenture・IBM・CrowdStrike・Cisco・Sophos・Cloudflareが新たなパートナーとして参画し、承認された企業が攻撃検証・ペネトレーションテスト・インシデント対応に活用できる。なお同社は内部評価で未公開モデル「Astra」がPreparedness Frameworkの「Critical」閾値を超えたとして開発を停止した事実も同時に公表した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Alphabet</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.investing.com/news/stock-market-news/exclusiveinside-the-google-executive-moves-that-led-to-its-big-ai-reshuffle-4855800" target="_blank" rel="noopener">Reuters独占：GoogleのAI大再編の内幕──Gemini2カ月遅延でブリンが発破、ハサビス退任の経緯が明らかに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Reutersが2026年8月12日に公開した独占報道によると、Google DeepMind体制刷新の直接的な引き金はGeminiフラッグシップモデルの2カ月遅延とライバル企業への性能差だった。Alphabet共同創業者サーゲイ・ブリンが4月の全社集会でDeepMind幹部に直接「もっと速く動け」と迫ったことが発端となり、最終的にデミス・ハサビスがCEOを退いてAlphabet最高科学責任者（Chief Scientist）に横滑りし、コレイ・カヴクチュオールが後任CEOに就任した。Googleで27年のキャリアを誇るジェフ・ディーンも8月6日付で退社し、一部チームはDeepMindからコーポレートGoogleへ移管された。株価は発表当日に4%下落し、Anthropicへの技術者流出と合わせてGemini開発体制の構造的な問題が浮き彫りとなった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/08/aws-bedrock-agentcore-runtime-instances-generally-available/" target="_blank" rel="noopener">Amazon Bedrock AgentCore、自社EC2インスタンスでエージェントを稼働できる「Runtime Instances」を正式提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年8月12日、Amazon Bedrock AgentCoreの新機能「Runtime Instances」を正式提供（GA）した。従来のマイクロVM方式に加え、ユーザーが所有するAmazon EC2インスタンス上でAIエージェントを稼働させることが可能になる。インフラのプロビジョニング・パッチ適用・スケーリング・ライフサイクル管理はAgentCoreが自動で担うため、開発チームはAIロジック開発に専念できる。継続的処理・リソース集約型・特殊なGPUを必要とするエージェントを運用するチームが、EC2の幅広いインスタンスタイプから最適な環境を自由に選択できる点が大きな利点となる。既存のマイクロVM方式との併用も可能で、ワークロードの要件に応じて柔軟に使い分けられる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/08/cisco-asa-and-ftd-flaw-exploited-in.html" target="_blank" rel="noopener">Cisco ASA・FTD の SSL VPN に認証不要 DoS 脆弱性（CVE-2026-20349、CVSS 8.6）──野放し悪用確認でCISAがKEVに緊急登録</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Ciscoは2026年8月11日（日本時間8月12日）、Secure Firewall ASAおよびFTDソフトウェアのリモートアクセスSSL VPNサービスに影響するサービス拒否（DoS）脆弱性（CVE-2026-20349、CVSS 8.6）のアドバイザリを公開した。攻撃者は認証なしで細工したHTTPリクエストを送信するだけで対象デバイスを強制リブートさせることができ、VPN接続を広く公開している組織にとって特にリスクが高い。CISAは公開と同日に同脆弱性をKnown Exploited Vulnerabilities（KEV）カタログへ追加し、米連邦行政機関に対して緊急対応を求めた。Ciscoはすでに修正バージョンを提供しており、SSL VPN機能を使用しない場合は当該サービスを無効化する暫定策も推奨している。Cisco ASA・FTDは国内企業のネットワーク境界にも広く導入されており、早急なパッチ適用が必要だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-13 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
