@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / ドコモ・au・SoftBank・楽天モバイル</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://k-tai.watch.impress.co.jp/docs/news/2132459.html" target="_blank" rel="noopener">Google「Pixel 11」シリーズ日本正式発表──Tensor G6搭載・Gemini Intelligence設計、東京・表参道に国内初の直営旗艦店も開業</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年8月13日（日本時間午前7時）、「Made by Google 2026」発表イベントを開催し、Pixel 11・Pixel 11 Pro・Pixel 11 Pro XL・Pixel 11 Pro Foldの4モデルを正式発表した。全機種に新チップ「Tensor G6」とTitan M3セキュリティチップを搭載し、Android 17を「Intelligenceシステム」と位置付けてGemini連携機能を大幅強化した。Pixel 11のメインカメラは48MPに強化され光感度が前世代比56%向上、カメラバーの厚みも40%薄型化された。日本での価格はPixel 11が13万6800円から、Pixel 11 Proが17万4800円から、Pixel 11 Pro XLが20万7800円から。ドコモ・au・SoftBank・楽天モバイルが順次取り扱い、国内販売開始は8月20日。同日、表参道に国内初のGoogle Store直営旗艦店がオープンし、日本でも体験拠点が整備された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/324241/20260813/deepseek-v4-pro-0813-goes-ga-benchmark-claims-await-independent-proof.htm" target="_blank" rel="noopener">DeepSeek、旗艦モデル「V4 Pro-0813」を正式リリース──1.6兆パラメータMoE・100万トークンコンテキスト、エージェント機能に重点</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">DeepSeekは2026年8月13日、約4カ月のプレビュー期間を経て旗艦モデル「DeepSeek-V4-Pro-0813」を正式リリース（GA）した。総パラメータ数1.6兆のMixture-of-Expertsアーキテクチャで1トークンあたりのアクティブパラメータは約490億、コンテキスト長100万トークン・最大出力38万4000トークンを誇る。今回のGA版はコード実行・ツール利用・複数ステップタスクのような「エージェント的用途」での性能向上に注力しており、非思考モード・高思考モード・最大思考モードの3段階を切り替えられる。API・Web・アプリで利用可能で、API料金はキャッシュミス時1Mトークンあたり0.435ドル、キャッシュヒット時0.003625ドル、出力0.87ドル。ブログ投稿や公式アナウンスなしにAPIドキュメントの更新のみで展開されたことも話題となった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://help.openai.com/en/articles/10128477-chatgpt-enterprise-edu-release-notes" target="_blank" rel="noopener">OpenAI、ChatGPT Enterprise/Edu のユーザー個別同期接続を本日無効化──管理者管理型同期・プラグインへの移行を案内</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年8月14日付のリリースノートで、ChatGPT EnterpriseおよびEduにおいて個々のユーザーが自己承認していた同期接続（Google Drive・SharePoint等）を本日をもって無効化し、関連する同期済みデータの削除を開始すると告知した。2026年8月10日以降は新規の個別同期接続が作成できなくなっており、今回はその既存接続の削除フェーズとなる。管理者が一括設定する「管理者管理型同期」は引き続き利用可能で、ワークスペース管理者はコネクタ設定を見直し、必要な場合はプラグイン（Google Drive・SharePoint）または管理者管理型同期を設定するよう案内されている。この変更は、知識の同期をIT部門が集中管理し、セキュリティ・ガバナンス・コンプライアンス要件を満たすための体制整備が目的とされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Lazarus Group（北朝鮮）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2132160.html" target="_blank" rel="noopener">Microsoft 8月例月更新で421件の脆弱性を修正、北朝鮮系Lazarousが悪用するWinSockゼロデイ（CVE-2026-68820）も含む</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは8月11日（Patch Tuesday）に421件の脆弱性を修正するセキュリティ更新プログラムを公開し、窓の杜が8月13日に報じた。最も緊急度が高いのは Windows Ancillary Function Driver for WinSock（afd.sys）のuse-after-free脆弱性 CVE-2026-68820（CVSS 7.0）で、北朝鮮系APT「Lazarus Group」が防衛・航空宇宙分野を標的に少なくとも5週間にわたり悪用していたことが確認されている。同脆弱性を起点にFudModule v3.1カーネルモードルートキットを展開することで94のイベントトレーシング（ETW）プロバイダーを無効化し、セキュリティ監視を大規模に回避していた。攻撃手口はLinkedInの偽求人メッセージを起点にする「ドリームジョブ作戦」の継続とされており、今回は同一のWindowsカーネルドライバーが4件の防衛企業への侵害に連続利用された。421件中62件がクリティカル、ExchangeやHyper-V・NTFSも対象で、早急なパッチ適用が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">REXT Holdings / WonderGOO・WonderREX・新星堂</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tsukuba.goguynet.jp/2026/08/13/unauthorized-access-wonder-goo/" target="_blank" rel="noopener">REXTグループにランサムウェア被害──WonderGOO・WonderREX・新星堂など複数ブランドで店舗閉鎖・現金払い限定・EC停止が継続</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">REXT Holdings株式会社は2026年8月10日、連結子会社REXT株式会社の社内ネットワークでランサムウェアによる不正アクセス被害が発生したことを公表した。8月13日時点でも被害の影響が続いており、WonderGOO・WonderREX・新星堂・HAPiNS・JEANS MATEなど傘下のブランド店舗で一部臨時休業、キャッシュレス決済の停止（現金払いのみ）、中古品買取受付の停止、ポイントサービス休止、ECサイトの発送遅延などが発生している。茨城県つくば市のWonderGOO PLUS＋では8月13日現在も現金払い限定の運営が継続しており、個人情報の外部漏えいの可能性も完全には否定できていない状況だ。REXTグループは2026年6月にも別の連結子会社D&Mがランサムウェア感染を公表しており、短期間に複数の被害が連続する異例の事態となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-14 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
