@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX・AI・AWS Update</title>
+<style>
+  :root {
+    --bg: #f5f5f5;
+    --surface: #ffffff;
+    --primary: #1a1a2e;
+    --accent: #4f46e5;
+    --accent-light: #eef2ff;
+    --text: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --high: #dc2626;
+    --high-bg: #fef2f2;
+    --medium: #d97706;
+    --medium-bg: #fffbeb;
+    --low: #059669;
+    --low-bg: #ecfdf5;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Sans', sans-serif; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { background: var(--primary); color: #fff; padding: 2rem 1.5rem 1.5rem; }
+  header .date-display { font-size: 2rem; font-weight: 700; letter-spacing: 0.05em; opacity: 0.95; }
+  header .subtitle { font-size: 0.875rem; opacity: 0.6; margin-top: 0.25rem; }
+  nav { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 1.5rem; display: flex; gap: 0; overflow-x: auto; }
+  nav a { padding: 0.75rem 1rem; font-size: 0.8125rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; border-bottom: 2px solid transparent; }
+  nav a:hover { color: var(--accent); text-decoration: none; border-bottom-color: var(--accent); }
+  main { max-width: 900px; margin: 0 auto; padding: 1.5rem; }
+  section { margin-bottom: 2rem; }
+  .section-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+  .section-num { background: var(--primary); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; }
+  .section-title { font-size: 1.1rem; font-weight: 700; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1rem 1.25rem; margin-bottom: 0.75rem; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .card-service { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .card-badges { display: flex; gap: 0.5rem; align-items: center; flex-shrink: 0; }
+  .impact { font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 999px; }
+  .impact-high { background: var(--high-bg); color: var(--high); }
+  .impact-medium { background: var(--medium-bg); color: var(--medium); }
+  .impact-low { background: var(--low-bg); color: var(--low); }
+  .card-date { font-size: 0.75rem; color: var(--text-muted); }
+  .card-title { font-size: 0.9375rem; font-weight: 600; line-height: 1.4; margin-bottom: 0.5rem; }
+  details summary { font-size: 0.8125rem; color: var(--accent); cursor: pointer; list-style: none; padding: 0.25rem 0; }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::before { content: '▶ '; font-size: 0.65rem; }
+  details[open] summary::before { content: '▼ '; }
+  .card-desc { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.6; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border); }
+  .empty-note { font-size: 0.875rem; color: var(--text-muted); font-style: italic; padding: 1rem; background: var(--surface); border: 1px dashed var(--border); border-radius: var(--radius); }
+  footer { text-align: center; padding: 2rem; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border); background: var(--surface); margin-top: 2rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="date-display">2026 &mdash; 08 &mdash; 15</div>
+  <div class="subtitle">Daily Tech Intelligence Report &nbsp;|&nbsp; DX・AI・AWS・セキュリティ</div>
+</header>
+
+<nav>
+  <a href="#section-01">01 国内IT・DX</a>
+  <a href="#section-02">02 AI</a>
+  <a href="#section-03">03 AWS</a>
+  <a href="#section-04">04 セキュリティ</a>
+</nav>
+
+<main>
+
+  <!-- ===== 01 国内IT・DX ===== -->
+  <section id="section-01">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">国内IT・DX</span>
+    </div>
+    <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+  </section>
+
+  <!-- ===== 02 AI ===== -->
+  <section id="section-02">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">AI</span>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Google</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-08-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://northeasttimes.com/2026/08/14/google-launches-gemini-3-7-flash-amid-ai-leadership-shakeup/" target="_blank" rel="noopener">Google、Gemini 3.7 Flash をリリース — 価格を半額に引き下げ、コーディング性能を大幅強化</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Google は Gemini 3.7 Flash を正式リリースし、入力トークン単価を $1.50 から $0.75 へ、出力を $6.00 から $3.75 へと約半額に引き下げた。コーディングベンチマーク DeepSWE では 65.3%、WebDev Elo では 1588 を記録し、いずれも競合フロンティアモデルを上回る水準。AIリーダーシップの交代が取り沙汰される中、コスト競争力と性能向上の両立を強調した発表となった。Gemini API および Google AI Studio から即時利用可能。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Z.ai (Zhipu AI)</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-08-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://siliconangle.com/2026/08/14/z-ai-debuts-glm-5-3-long-horizon-coding-cybersecurity-upgrades/" target="_blank" rel="noopener">Z.ai、GLM-5.3 を発表 — 長期タスクコーディングとサイバーセキュリティ分野でオープンソース首位</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">中国 Zhipu AI の Z.ai が GLM-5.3 をリリースした。GLM-5.2 と同一のベースモデルを使用しながら、ポストトレーニングの強化により Code Bench スコアが前バージョン比 +50%、サイバーセキュリティ特化ベンチマーク CyberGym で 84.5% を達成しオープンソースモデル中 1 位、Terminal Bench 3.0 でもオープンソース首位となった。長期間にわたる自律的なコーディングエージェントタスクへの適性が高く、セキュリティリサーチャーからの注目を集めている。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Anthropic</div>
+        <div class="card-badges">
+          <span class="impact impact-medium">重要度 中</span>
+          <span class="card-date">2026-08-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.infoworld.com/article/4207959/anthropic-makes-claude-codes-auto-mode-default-for-paid-users.html" target="_blank" rel="noopener">Anthropic、Claude Code の Auto モードを有料ユーザーのデフォルトに変更 — 危険コマンド検出率 89% を強調</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Anthropic は 2026-08-14 付けで Claude Code における Auto パーミッションモードを Pro・Max・Team プランのデフォルト設定に変更した。同社によると、Auto モードは危険なコマンドの 89% を自動検出・ブロックするのに対し、従来の人間による手動確認では 13.6% にとどまるという。また実際の利用データでは 97% のプロンプトがそのまま承認されており、摩擦を減らしながらセキュリティを向上させる狙いがある。Enterprise プランは従来どおり管理者がポリシーを設定可能。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">OpenAI</div>
+        <div class="card-badges">
+          <span class="impact impact-low">重要度 低</span>
+          <span class="card-date">2026-08-15</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://help.openai.com/en/articles/10128477-chatgpt-enterprise-edu-release-notes" target="_blank" rel="noopener">ChatGPT Enterprise・Edu、週次利用上限を月次へ自動移行 — 本日より適用</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">OpenAI は ChatGPT Enterprise および Edu プランの利用制限を 2026-08-15 を以って週次から月次ベースへ自動移行した。既存の週次上限値に 4 を乗じた値が月次上限として設定される。管理コンソールでの手動変更は不要だが、この移行は不可逆的で元の週次制限には戻せない。組織によっては利用可能メッセージ数が外見上増加するため、ガバナンス担当者は月内の消費ペースの見直しを推奨する。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <!-- ===== 03 AWS ===== -->
+  <section id="section-03">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">AWS</span>
+    </div>
+    <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+  </section>
+
+  <!-- ===== 04 セキュリティ ===== -->
+  <section id="section-04">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">セキュリティ</span>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">日立ハイテク</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-08-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.hookphish.com/blog/ransomware-group-coinbasecartel-hits-hitachi-high-tech/" target="_blank" rel="noopener">日立ハイテク、ランサムウェアグループ CoinbaseCartel の標的に — データ窃取・脅迫型の新興グループ</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">半導体・分析計測機器を手がける日立製作所子会社の日立ハイテク（東京）が、新興ランサムウェアグループ CoinbaseCartel によるサイバー攻撃を受けたことが 2026-08-13 に判明し、翌 08-14 に報道された。CoinbaseCartel はファイル暗号化を行わず、データ窃取と公開脅迫のみで身代金を要求する「非暗号化型」モデルを採用しており、すでに 17 業種 160 社以上に被害を与えている。同グループの活動が国内大手製造業にまで及んだことで、サプライチェーンへの影響も懸念される。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">大仙（DAISEN）</div>
+        <div class="card-badges">
+          <span class="impact impact-medium">重要度 中</span>
+          <span class="card-date">2026-08-14</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.hookphish.com/blog/ransomware-group-ailock-hits-daisen/" target="_blank" rel="noopener">農業資材メーカー大仙、AiLock ランサムウェアの被害を確認 — 2026 年 8 月 13 日に侵害</a></div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">ビニールハウス・農業用資材を製造する国内メーカー大仙（DAISEN）が、ランサムウェアグループ AiLock による攻撃を 2026-08-13 に受けたことが 08-14 に報告された。AiLock は 2026 年 7 月に日本交通（Nihon Kotsu）を攻撃し 2.9TB のデータを奪取したと主張したグループで、国内企業への攻撃を継続している。今回の大仙への侵害は、農業関連のサプライチェーンにも脅威が及んでいることを示しており、農業分野のセキュリティ対策の遅れが露呈した形となった。</p>
+      </details>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  2026-08-15 &nbsp;|&nbsp; Daily Tech Intelligence Report &nbsp;|&nbsp; Generated by Claude Code
+</footer>
+
+</body>
+</html>
