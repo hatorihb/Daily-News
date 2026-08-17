@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 18 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.forbes.com/sites/jonmarkman/2026/08/17/anthropics-groundbreaking-second-quarter-delivers-115b-in-revenue/" target="_blank" rel="noopener">Anthropic Q2 2026 速報：売上高11.5億ドル超（前年同期比14倍増）、四半期ベースで初の調整後営業黒字を達成 — IPO前に財務健全性を証明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年第2四半期の暫定決算を機関投資家向け資料でBloombergに開示し、売上高が前年同期の7億8700万ドルから11.5億ドル超へと約14倍増加、四半期ベースで初めて調整後営業黒字を達成したことが明らかになった。第1四半期の47.3億ドルからも約2.4倍の急成長で、年率換算460億ドルペースとなる。この爆発的な収益成長はClaude APIの大企業採用加速と、Claude.aiの消費者向けプロサブスクリプション拡大が主因とされる。AnthropicはOpenAIに続く形で2026年6月に機密S-1をSECに提出済みで、今回の開示は同社史上初の公式財務情報となる。9月のIPOを目標とする同社の企業価値は2兆ドル規模での評価も取り沙汰されており、今回の黒字化はIPOロードショーに向けた強力なシグナルとなる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">VMware vCenter / Broadcom</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/08/suspected-china-nexus-actor-exploits.html" target="_blank" rel="noopener">中国系APTがVMware vCenter脆弱性CVE-2026-59310（CVSS 9.8）を悪用 — 47カ国361IPで侵害確認、Babuk派生ランサムウェアを展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ドイツのインシデントレスポンス会社QUIRSOは2026年8月17日、VMware vCenterのSyslogサーバーコンポーネントに存在するディレクトリトラバーサル脆弱性CVE-2026-59310（CVSS 9.8）を悪用した中国語圏APTによるグローバルキャンペーンの調査報告を公開した。Broadcomは7月29日にVMSA-2026-0006として修正パッチを公開したが、開示からわずか5日後の8月3日には悪用が確認されており、現在47カ国361のIPアドレスで侵害が検出されている。攻撃者はvCenter上に管理者アカウントを不正作成し、オープンソースツール「reverse_ssh」で持続的なリモートアクセスを確立した後、Babuk由来のランサムウェアを展開した。攻撃スクリプト内の中国語アーティファクトとUTC+8の活動時間帯から、中程度の確信度で中国語圏の脅威アクターと評価されている。vSphere環境を運用する組織はVMSA-2026-0006パッチを至急適用し、vCenter管理者アカウントの不審な追加を確認することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SAP Commerce Cloud</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/08/sap-commerce-cloud-cve-2026-58231.html" target="_blank" rel="noopener">最大深刻度CVE-2026-58231（CVSS 10.0）がパッチ公開3日後に悪用開始 — SAP Commerce CloudのData Hub Adapterで未認証RCEが可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SAP Commerce CloudのData Hub Adapterに存在するCVSS 10.0の最大深刻度脆弱性CVE-2026-58231が、2026年8月12日のSAP Security Note 3771065（8月セキュリティパッチデー）公開からわずか3日で悪用試行がハニーポットで観測された。脆弱性は不十分な認証チェックと入力検証の欠如に起因しており、未認証の攻撃者が特定APIエンドポイントに細工した入力を送信するだけで任意コードの実行と内部コンポーネントの完全侵害が可能になる。攻撃の複雑度は低く（Low complexity）、認証不要で遠隔から悪用できるため、インターネットに公開されたSAP Commerce Cloud 2211環境は特に高リスクな状態にある。現時点でPoC（実証コード）の公開はないが、脅威インテリジェンス企業Defused Cyberがハニーポットで実際の悪用試行を観測しており、実攻撃は既に発生している。影響を受けるシステムはSecurity Note 3771065を適用して修正済みリリースへ再デプロイするとともに、実行環境のバージョンを確認することが急務。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">うんこミュージアム（体験型施設）</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-08-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2608/17/2000000556/" target="_blank" rel="noopener">「うんこミュージアム」公式サイトが改ざん被害 — サードパーティ製ソフト脆弱性を悪用され4人分の個人情報が流出のおそれ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">体験型アミューズメント施設「うんこミュージアム」を運営する企業は2026年8月17日、公式Webサイトが不正アクセスを受け、一部コンテンツの改ざんと4名分の個人情報（氏名・メールアドレス・電話番号・問い合わせ内容）が外部に流出した可能性があると発表した。攻撃者はサードパーティ製ソフトウェアの脆弱性を悪用してサーバーに不正ファイルを設置し、2026年8月10日17時04分〜11日11時24分の間にコンタクトフォームへの送信情報が第三者に取得された可能性がある。同施設は8月11日中に悪意あるファイルの削除・改ざん箇所の復旧・脆弱性の修正を完了させ、サードパーティソフトウェアの継続的アップデート管理強化と管理者アカウントの多要素認証強化を再発防止策として実施した。被害規模は4名と軽微だが、中小規模の施設がサードパーティ製CMSや問い合わせフォームプラグインのパッチ適用を怠ることによるリスクを改めて示す事例となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-18 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
