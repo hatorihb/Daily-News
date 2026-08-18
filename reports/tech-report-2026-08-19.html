@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 19 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.macrumors.com/2026/08/18/openai-announces-chatgpt-for-teens/" target="_blank" rel="noopener">OpenAI、13〜17歳向け「ChatGPT for Teens」を8月18日よりグローバルロールアウト開始 — 保護者連携・学習モード・年齢推定による自動適用で未成年のAI利用を安全設計</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年8月18日、13〜17歳のユーザー向け安全設計モード「ChatGPT for Teens」の提供を開始した。Free・有料の個人向けプランに契約するティーン層に自動適用され、ロールアウトは2週間以内に完了する見込みだ。同モードは自傷・暴力・摂食障害といったハイリスクトピックや、恋愛的な言動・感情的依存の助長を制限し、ChatGPTがAIであることを常に明示する。教育面では学習用スタータープロンプト・クイズ機能・スタディモードを内蔵し、保護者または本人がスタディ時間帯を設定できる機能も提供される。年齢申告（13〜17歳）に加え、OpenAIの年齢推定システムが18歳未満と判定したアカウントにも自動適用され、保護者向けにはペアレンタルコントロールも同時提供された。子どものAI利用に対する社会的懸念が高まる中、主要AI企業として先手を打った安全対策として注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EC2 Auto Scaling</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cloud-computing-koeln.de/amazon-ec2-auto-scaling-now-supports-batch-instance-termination/" target="_blank" rel="noopener">Amazon EC2 Auto Scaling がバッチインスタンス終了をサポート — 最大100台を一括削除、AI/MLジョブのスケールダウン効率が大幅向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年8月18日、Amazon EC2 Auto ScalingのTerminateInstanceInAutoScalingGroup APIで最大100インスタンスIDを一度に渡せるバッチ終了機能を追加した。従来は1インスタンスずつAPIコールが必要だったが、新機能によりスケールダウン時のAPI呼び出し回数を大幅に削減できる。AI/MLトレーニングジョブ・コンテナオーケストレーター・大規模一時フリートを扱うイベント駆動アーキテクチャでの効果が特に大きく、既存のライフサイクルフックやロードバランサーのコネクションドレイニングはバッチ内の各インスタンスに対して引き続き適用される。全インスタンスは終了前にアトミックに検証されるため安全性も担保されており、全AWSリージョンで追加料金なしで利用可能だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon MSK</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://mwpro.co.uk/blog/2026/08/18/amazon-msk-now-supports-configuring-custom-domain-names-for-msk-provisioned-clusters/" target="_blank" rel="noopener">Amazon MSK Provisionedクラスターでカスタムドメイン名設定をサポート — クラスター移行・DR・スケーリング時もエンドポイントを固定可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年8月18日、Amazon Managed Streaming for Apache Kafka（MSK）のProvisionedクラスターにカスタムドメイン名を設定できる機能を追加した。ZooKeeperモード・KRaftモードの双方に対応し、クラスターレベルで1度設定するだけで全ブローカーに自動適用されるため、ブローカーごとの個別設定が不要になった。クラスターの移行・ディザスタリカバリ時のフェイルオーバー・スケーリング操作を行っても、クライアント接続エンドポイントを変更せずに済み、アプリケーション側の再設定コストを大幅に削減できる。NLB（Network Load Balancer）経由でのトラフィック転送構成や、セキュリティ・コンプライアンス要件に基づく組織内命名規則が必要な環境での利用に特に有効だ。全MSK Provisionedクラスターと全AWSリージョンで追加料金なしで利用可能となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitLab CE/EE</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/324811/20260818/gitlab-emergency-patch-third-graphql-flaw-2026-lets-unauthenticated-attackers-delete-projects.htm" target="_blank" rel="noopener">GitLab が緊急パッチ CVE-2026-19478（CVSS 9.4）を公開 — 未認証でパブリックプロジェクト・ユーザーデータの改ざん・削除が可能なGraphQL脆弱性</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitLabは2026年8月17日、Community Edition（CE）・Enterprise Edition（EE）に影響するCVSS 9.4の深刻な脆弱性CVE-2026-19478を、通常の隔月スケジュール外の緊急リリースとして修正した。GraphQL APIレイヤーの特定ディレクティブ処理の欠陥に起因するコードインジェクション脆弱性で、攻撃者は認証もユーザー操作も不要で、GraphQLエンドポイントに到達できればパブリックプロジェクトやユーザーデータを無制限に改ざん・削除できる。影響バージョンはGitLab 18.2〜18.11.10、19.0〜19.0.7、19.1〜19.1.5、19.2〜19.2.3で、GitLab.comおよびGitLab Dedicatedは既にパッチ済み。自己管理インスタンスの管理者はGitLab 19.2.4・19.1.6・19.0.8・18.11.11のいずれかへ直ちにアップグレードすることが強く推奨される。8月18日時点では野生での悪用は確認されていないが、攻撃の複雑度が低く影響範囲が広いため早急な対応が必要だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / Ray Framework</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theregister.com/security/2026/08/18/cisa-gives-feds-3-days-to-fix-actively-exploited-ray-rce-bug/5289007" target="_blank" rel="noopener">CISA、AI/MLワークロード基盤「Ray」のRCE脆弱性CVE-2025-62593をKEVカタログに追加 — DNSリバインディング経由のブラウザRCEが連邦機関に3日以内の修正を義務付け</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米CISAは2026年8月17日、LLM・強化学習・分散AIワークロードの基盤として広く利用されるオープンソースフレームワーク「Ray」（バージョン2.52.0未満）のコードインジェクション脆弱性CVE-2025-62593をKnown Exploited Vulnerabilities（KEV）カタログに追加した。CVSS 4.0スコア9.4で、DNSリバインディング攻撃を通じてFirefox・SafariなどのWebブラウザ経由でリモートコード実行（RCE）が可能となる。CISAは米連邦民間機関（FCEB）に対し8月20日までの修正適用を義務付けており、The Registerが8月18日に報じた。RayはAIインフラとして多くの企業・研究機関に採用されているため、民間組織もRay 2.52.0以降へのアップグレード、またはインターネットからのRayダッシュボードポート（デフォルト8265）へのアクセス遮断による即時緩和が強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-19 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
