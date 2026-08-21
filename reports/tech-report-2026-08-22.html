@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 22 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NEC / KDDI / NTT / OKI 他7社</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://jpn.nec.com/press/202608/20260821_02.html" target="_blank" rel="noopener">AI時代の低遅延・低消費電力オール光ネットワーク設計指針がITU-Tで国際標準化——国内7社が共同提案</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">KDDI、NTT、1FINITY（富士通グループ）、NEC、楽天モバイル、沖電気工業、住友電気工業の国内7社が共同提案した、AI時代を支える低遅延・低消費電力なオール光ネットワーク（All-Photonic Network）の機能要件・設計指針がITU-T勧告Y.3335として国際標準化された。AI推論・学習で急増するデータトラフィックに対応し、光信号を電気変換せず通じる高効率ネットワーク基盤のグローバル普及を推進する。今後2028年10月を目標に、詳細な機能アーキテクチャ勧告の策定も継続して行われる予定。日本発の標準化主導が次世代通信インフラの国際競争力強化につながる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Nvidia / Poolside</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.newcomer.co/p/sources-poolside-strikes-6-billion" target="_blank" rel="noopener">NvidiaがPoolside AIと60億ドルライセンス契約＋10億ドル出資——「Model Factory」の非独占権取得と109名採用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NvidiaはAIモデル構築スタートアップPoolside AIと、同社のAI開発基盤「Model Factory」に関する非独占ライセンス契約（60億ドル）を締結した。あわせてPoolsideの既存株主向け流動性確保を目的に10億ドルを出資（出資前評価額120億ドル）。109名のモデル開発エンジニアもNvidiaに加わる。Poolsideは引き続き独立企業として運営され、60億ドルの多くは既存投資家に分配される予定。NvidiaはGPU半導体に加えてAIモデル開発能力を内製化することで、AIインフラ支配力をさらに強化する戦略的な一手となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bloomberg.com/news/newsletters/2026-08-21/anthropic-expects-to-match-or-top-spacex-s-record-ipo-size" target="_blank" rel="noopener">AnthropicがSpaceX超えの過去最大規模IPOを準備——評価額約2兆ドル、10〜11月上場が有力</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはIPOにおいてSpaceXが樹立した過去最大の750億ドル調達記録を上回る規模を目指していることが明らかになった。現在の年間収益ランレートは650億ドル超で、2028年には1,900〜2,000億ドルへの成長を見込む。ターゲット評価額は約2兆ドル（SpaceXの報告評価額1.77兆ドルを超える）。CFOのKrishna Rao氏が投資家説明会で8月末〜9月の公式申請を示唆し、10〜11月の上場が有力視されている。競合OpenAIより先の上場となる見通しで、AIブームを背景とした機関投資家の需要が極めて強い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Binance</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://en.cryptonomist.ch/2026/08/21/binance-ai-trading-platform-agent-os/" target="_blank" rel="noopener">Binanceが「Agent OS」を正式リリース——AIエージェントが仮想通貨の取引・決済を自律実行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Binanceは、AIアプリケーションとBinanceの取引・市場データ・ウォレット・決済・オンチェーン機能を標準化された形でつなぐ開発者プラットフォーム「Agent OS」をリリースした。Claude、ChatGPT、Cursor、VS Codeなど主要AIツールとの接続に対応し、ユーザーが許可すればAIエージェントがリアルタイムの価格・板情報確認からスポット・マージン・先物取引まで代行実行できる。3億人超の登録ユーザーを持つBinanceによるこの動きは、Coinbase・Kraken・OKXなどとのAI取引プラットフォーム競争を加速させ、「エージェントエコノミー」の金融インフラ争奪戦を本格化させる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Citrix / Cloud Software Group</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CVSS 9.3</span>
+            <span class="card-date">2026-08-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/08/21/citrix-netscaler-gateway-cve-2026-19490/" target="_blank" rel="noopener">Citrix NetScaler ADC/Gatewayに認証回避の重大脆弱性（CVE-2026-19490、CVSS v4.0:9.3）——即時アップデート推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cloud Software Groupは、NetScaler ADCおよびNetScaler GatewayにCVSS v4.0スコア9.3の認証回避脆弱性CVE-2026-19490が存在することを公開した。未認証のリモート攻撃者がネットワーク越しに、SSL VPN・ICA Proxy・RDP Proxy等のゲートウェイ設定でアクセス制御を迂回できる。影響バージョンは14.1系（v73.32未満）・13.1系（v63.21未満）およびFIPS/NDcPPバリアント。2026年8月19日時点での野生悪用は未確認だが、Citrix製品は高価値ターゲットとして悪用が速いことで知られるため、14.1-73.32以降・13.1-63.21以降への速やかな更新が強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / TrueConf</div>
+          <div class="card-badges">
+            <span class="impact impact-high">KEV登録</span>
+            <span class="card-date">2026-08-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityaffairs.com/197602/security/u-s-cisa-adds-trueconf-server-flaws-to-its-known-exploited-vulnerabilities-catalog.html" target="_blank" rel="noopener">CISA、TrueConf Server脆弱性2件（CVE-2026-72529/72530）をKEVカタログ追加——連邦機関に8月23日までのパッチ適用を命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米CISAはTrueConf Server 5.3〜5.5系に存在する2件の悪用済み脆弱性をKnown Exploited Vulnerabilities（KEV）カタログに追加した。CVE-2026-72529（未認証リモートコード実行）は8月23日まで、CVE-2026-72530（サンドボックス回避・任意コード実行）は9月2日までに連邦機関での修正適用が義務付けられた。Head Mareハクティビストグループがこれらを悪用してPhantomCoreおよびPhantomGraphバックドアをTrueConfクライアントに埋め込む手口が確認されており、ロシア・ベラルーシの重要インフラ組織が主な標的となっている。TrueConf Server 5.3.9・5.4.9・5.5.5以降へのアップデートが必須。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-22 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
