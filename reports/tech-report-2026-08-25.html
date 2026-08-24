@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 25 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ジオテクノロジーズ / 日本IBM</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.mynavi.jp/techplus/article/20260824-4861312/" target="_blank" rel="noopener">ジオテクノロジーズと日本IBM、地図・位置情報領域でDX/AIパートナーシップを締結</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ジオテクノロジーズ（デジタル地図・位置情報）と日本IBMは、DX／AI分野における戦略的パートナーシップを締結した。ジオテクノロジーズが持つ地理空間データ・動的データと、IBMのクラウドネイティブ技術・AI基盤を組み合わせ、地図開発システムのクラウドネイティブ化により開発期間を30%以上短縮することを目指す。さらに、モビリティ・防災分野向けの共同地理空間ソリューションの開発も計画している。自動運転・ADASの需要拡大を背景に、両社が持つ強みを融合して産業DXを推進する狙い。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">XPeng Robotics / Dogotix / Physical AI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.roboticstomorrow.com/news/2026/08/24/xpeng-robotics-business-raises-over-us900-million-at-a-post-money-valuation-of-over-us63-billion-accelerating-physical-ai-deployment/26985/" target="_blank" rel="noopener">XPeng Robotics（Dogotix）、ヒューマノイドロボット事業で約9億ドルを調達——評価額63億ドル超</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">小鵬汽車（XPeng）傘下のロボティクス部門 Dogotix が、IDG Capital 主導でテンセント・アリババも参加するラウンドにて9億ドル超の資金調達を完了した。ポストマネー評価額は63億ドル超となり、中国の体現型AI（Embodied AI）分野で単一案件として最大規模のプライベートエクイティ投資となった。同社のヒューマノイドロボット「IRON」は76自由度、独自開発の3チップ Turing AI（計2,250 TOPS）を搭載し、2026年末までの量産開始を目指している。今回の調達資金はグローバル展開の加速に充てられる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Alibaba / AI動画生成</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://qz.com/alibaba-wan3-ai-video-model-launch-082426" target="_blank" rel="noopener">アリババ、AI動画生成モデル「Wan3.0」を正式ローンチ——文書・スライドから30秒動画を生成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">アリババは AI 動画生成モデル「Wan3.0」を正式にローンチした。文書・スプレッドシート・スライド・Webページなどを入力として、最長30秒の動画を生成できる。前世代モデルと比較して生成可能な動画長が2倍となった。パブリックベータは8月6日から開始されており、今回正式版のリリースとなる。発表は、アリババが香港取引所上場企業として過去最大規模となる100億ドルの株式売却を実施した直後のタイミングとなった。同社が AI への積極投資を続ける中、Wan シリーズは中国発の主要な動画生成モデルとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Nvidia / Perplexity AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-08-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.digitimes.com/news/a20260824VL208/nvidia-investment-chips-software-startup.html" target="_blank" rel="noopener">NvidiaがPerplexity AIへの出資を検討中——評価額300億ドルの新ラウンドへの参加が浮上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Nvidia が AI 検索エンジン Perplexity AI の新規資金調達ラウンドへの出資を検討していると報じられた。同ラウンドの評価額は300億ドルを超える見込みで、1年前の約200億ドルから50%超の上昇となる。Perplexity は年間換算収益が7.5億ドルを突破しており（年初の2.5億ドル未満から急増）、急速な事業拡大が評価を後押ししている。Nvidia にとっては GPU 販売だけでなく AI ソフトウェアスタックへの影響力拡大を狙う投資と位置づけられる。出資条件・規模は未確定で交渉継続中。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Hugging Face / M&amp;A</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/08/24/hugging-face-reportedly-in-talks-to-be-acquired-for-13b/" target="_blank" rel="noopener">Hugging Face、評価額130億ドルでの買収交渉中と報道——AIモデル・データセット最大プラットフォーム</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI モデル共有プラットフォーム最大手の Hugging Face が、130億ドルでの買収を検討していると報じられた。同社は投資銀行と協力して買い手候補の探索を進めており、具体的な交渉は未確定。2023年の Series D（Google・Amazon・Nvidia・Intel が参加）時の評価額45億ドルから約3倍の評価となる。現在、Hugging Face は300万超のモデルと100万超のデータセットをホスティングしており、AI 開発者にとってのインフラ的存在となっている。OpenAI のセキュリティ侵害事件が発覚した直後のタイミングでもあり、業界再編の動きとして注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-25 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
