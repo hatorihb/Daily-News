@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 27 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">BBIX・オーイーシー</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cloud.watch.impress.co.jp/docs/news/2135671.html" target="_blank" rel="noopener">BBIXとオーイーシー、分散型クラウド「OCF（OCX Compute Fabric）」の接続拠点に大分データセンターを追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BBIXとオーイーシーが共同展開する地域分散型クラウド基盤「OCX Compute Fabric（OCF）」に、大分データセンターが新たな接続拠点として加わった。OCFは特定のクラウドに依存せず、データをエッジ側に保持しながら高速処理を実現する分散型アーキテクチャを採用している。九州地方における接続拠点の拡充により、自治体・医療・製造業などのローカルDX推進を後押しする。低遅延・高可用性が求められる重要インフラ分野での採用拡大が見込まれる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NVIDIA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/08/26/nvidia-nvda-earnings-report-q2-2027-live-updates.html" target="_blank" rel="noopener">NVIDIA Q2 FY27決算——売上高$96.22B・データセンター$89B、ともに予想を大幅超え</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NVIDIAが発表したFY2027第2四半期（5〜7月期）決算は、売上高$96.22B（市場予想$92.17B）、EPSは$2.22（予想$2.10）と両指標で予想を上回った。データセンター売上高は$89.0Bと前年同期比+117%、前四半期比+18%を達成し、ハイパースケーラー向け収益は前年比で倍増以上。第3四半期ガイダンスは$105.8〜$110.1Bを提示し、AI投資の継続的な拡大を示した。Blackwell Ultra GPUへの旺盛な需要が引き続き業績を牽引している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/08/26/openai-jalapeno-ai-chip-nvidia.html" target="_blank" rel="noopener">OpenAI、推論専用カスタムASIC「Jalapeño」がNvidia Blackwellを上回る性能——Broadcomと共同開発</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIはBroadcomと共同開発した推論専用カスタムASIC「Jalapeño」を発表した。NVIDIAのBlackwell GPUと比べ、推論スループットが1.5〜1.9倍、レイテンシーは1.7〜3.6倍改善するとしている。量産開始は2027年を予定しており、OpenAIはデータセンター運営コストの大幅削減を見込む。一方でNVIDIAからのGPU調達は継続する方針で、自社チップはあくまで補完的な位置づけ。AI半導体の内製化競争が一段と激化している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techstartups.com/2026/08/26/amazon-is-shutting-down-mechanical-turk-after-21-years-as-ai-reshapes-crowdsourced-work/" target="_blank" rel="noopener">Amazon、クラウドソーシング「Mechanical Turk」を9月30日に終了——21年の歴史に幕、AIが労働を代替</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazonは2005年に開始したクラウドソーシングプラットフォーム「Mechanical Turk（MTurk）」を2026年9月30日をもって終了すると発表した。ピーク時には世界50万人以上のワーカーが利用し、データラベリング・画像分類・文字起こしなどのタスクを担っていた。生成AIの台頭により単純作業の自動化が進み、Scale AIやMercor、Prolificなどのデータラベリング専業スタートアップとの競争激化が閉鎖の背景とされる。AIによるヒューマンワーカー市場の再編を象徴する出来事として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS・NVIDIA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.manilatimes.net/2026/08/27/tmt-newswire/globenewswire/aws-and-nvidia-to-deliver-2-million-additional-gpus-and-next-generation-infrastructure-for-agentic-and-physical-ai/2412952" target="_blank" rel="noopener">AWSとNVIDIA、200万GPU追加調達とVera CPU連携でエージェンティックAI・フィジカルAI基盤を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSとNVIDIAは、2027〜2028年にかけてBlackwell Ultra・Rubin・Rubin UltraシリーズGPUを200万基追加展開することで合意したと発表した。NVIDIAのVera CPUとのインテグレーションにより、エージェンティックAIおよびフィジカルAI（ロボティクス）向けの次世代インフラを構築する。提携範囲はGPU供給にとどまらず、AIファクトリー構成・ネットワーキング・オープンモデル・ロボティクス基盤に及ぶ。AWSグローバルリージョン全体にデプロイされ、クラウドにおける大規模AIワークロード処理能力が大幅に拡充される見通し。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA・Gitea</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/08/26/gitea-cve-2026-60004-exploited-in-the-wild/" target="_blank" rel="noopener">CISA、Gitea RCE脆弱性CVE-2026-60004（CVSS 9.8）をKEVに追加——暗号通貨マイナー等による野生での悪用を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは8月25日、GiteaのRCE（リモートコード実行）脆弱性CVE-2026-60004（CVSSスコア9.8）を既知の悪用された脆弱性（KEV）カタログに追加した。リポジトリの書き込み権限を持つ攻撃者がGitフックに任意のシェルコマンドを埋め込み、Giteaサービスアカウント権限でコードを実行できる。暗号通貨マイニングへの悪用が野生で確認されており、米連邦機関への修正期限は8月28日。修正済みバージョンはGitea 1.27.1で提供されており、早急なアップデートが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JVN・Apache Tomcat</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://jvn.jp/vu/JVNVU96149019/" target="_blank" rel="noopener">JVN、Apache Tomcatの10件の脆弱性を公表——セキュリティ制約バイパス・DoSなど、Tomcat 9.0.121で全件修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">JPCERTコーディネーションセンターおよびIPAは、Apache Tomcatに存在する10件の脆弱性（JVNVU#96149019）を公表した。重要度「Important」に分類される脆弱性4件には、セキュリティ制約バイパス（CVE-2026-65182）、リライトバルブのバイパス（CVE-2026-65927）、認証処理の失敗が開放状態になる問題（CVE-2026-68569）、HTTP/2 DoS（CVE-2026-68763）が含まれる。Tomcat 9・10・11系の複数バージョンが影響を受ける。現時点での積極的な悪用は確認されていないが、Tomcat 9.0.121・10.1.41・11.0.7への早急なアップデートが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ANA・選べるe-GIFT</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/articles/2608/26/news000.html" target="_blank" rel="noopener">ANA子会社「選べるe-GIFT」管理システムに不正アクセス——担当者情報が漏えい、一部ギフトが不正交換される被害も</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ANAグループの子会社が運営する電子ギフトサービス「選べるe-GIFT」の管理システムが、8月11〜12日にかけて不正アクセスを受けた。漏えいした情報は担当者の氏名・会社名・会社ID・ログインID・メールアドレス（一部）。さらに一部のギフトが不正に交換される二次被害も発生しており、影響範囲の特定を進めている。同社は不正アクセスを検知後にシステムを停止し、外部専門機関と連携して調査を実施。利用企業に対する個別通知と再発防止策の強化を進めるとしている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-27 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
