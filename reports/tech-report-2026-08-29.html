@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 08 — 29 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">大学入試センター</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2608/28/2000000890/" target="_blank" rel="noopener">大学入試センター公式サイトで非公開ファイル一覧が誰でも閲覧可能な状態に——設定ミスを公表、情報漏洩はなし</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">独立行政法人大学入試センターは8月27日、公式ウェブサイト上で本来非公開とすべきページが閲覧できる状態になっていたと公表した。「/albums/」以下のパスにアクセスすると、資料を保存したフォルダやファイルの一覧が表示され、過去の試験問題・リスニング音源・委員写真・人件費や予算の内訳などのファイルが閲覧できた。センターは「掲載内容はすでに公表済みのものであり、個人情報等の情報漏洩はない」と説明し、不正アクセスでなくウェブサーバーの設定誤りによる意図せぬ公開状態だったとしている。現在は非公開設定に変更済みで、再発防止策を検討中とのこと。受験生情報への影響はなく実害はないものの、重要な公的機関のウェブ管理体制に改めて注目が集まっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://en.softonic.com/articles/google-releases-gemini-3-5-transcribe-in-preview-speech-to-text-for-85-languages" target="_blank" rel="noopener">Google、「Gemini 3.5 Transcribe」をパブリックプレビューで公開——85言語超対応・単語誤り率2.6%の高精度音声テキスト変換</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは8月28日、音声テキスト変換AIモデル「Gemini 3.5 Transcribe」のパブリックプレビューをGoogle AI StudioおよびGemini APIで開始した。85言語以上に対応し、事前収録音声での単語誤り率（WER）2.6%・リアルタイムストリームで4.0%という業界最高水準の精度を実現。「um」「uh」などのフィラーワード除去や話者の自己修正の整形を自動処理するほか、話者識別・単語レベルのタイムスタンプ・カスタム語彙の登録（最大1,000語）にも対応する。Live APIは1秒未満のレイテンシで双方向ストリーミングを提供し、Interactions APIはミーティング議事録や通話ログ等の音声処理向け。価格はバッチ処理1分あたり0.005ドル、ライブ処理0.009ドル。GboardのRamblerやmacOS版Geminiアプリへの統合も予定されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-08-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cryptobriefing.com/anthropic-preparing-ipo-filing-as-soon-as-the-end-of-august-sources-say/" target="_blank" rel="noopener">Anthropic、月末にも公開S-1申請へ——時価総額2兆ドル・調達1000億ドル超の史上最大規模IPOが視野に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicがSECへの公開S-1書類提出を今月末にも行う準備を進めていることが、複数の関係者情報として報じられた。10月のNasdaq上場を目指し、主幹事はGoldman Sachs・JPMorgan・Morgan Stanleyが担当。投資家はIPO時の時価総額として2兆ドルを目標とし、調達額は1000億ドルを超える見通しで、実現すれば2026年6月に上場したSpaceX（時価総額1.77兆ドル・調達857億ドル）を超える史上最大のIPOとなる。8月17日時点でAnthropicの年率換算売上高が650億ドルを突破し、2025年末比で7倍以上の急成長を示している。2026年5月には時価総額9650億ドルで650億ドルのシリーズH調達を完了しており、Claudeモデルの急速な普及がIPO準備を加速させている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Batch / Amazon ECS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-08-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/08/aws-batch-on-ecs-managed-instances/" target="_blank" rel="noopener">AWS Batch、Amazon ECS Managed Instancesをサポート開始——GPU・コンピューティング集約型バッチジョブをAWS管理インフラで実行可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Batchは新たにAmazon ECS Managed Instances（ECS MI）をコンピュート環境として選択可能になった。これにより、GPUアクセラレーション型・コンピューティング集約型のバッチワークロードをAWSが管理するインフラ上で実行でき、AMIのアップデート・セキュリティパッチ適用・インスタンスライフサイクル管理などの運用負荷が不要となる。G系・P系・AWS Trainium等のGPUインスタンスタイプを含む幅広いEC2インスタンスにアクセスでき、オンデマンド・スポット・リザーブドキャパシティの各調達方法でジョブを投入できる。AWS Batchが利用可能な全AWSリージョンに対応しており、機械学習の推論・トレーニングや画像処理などのワークロードでの活用が期待される。なお、2026年7月より、G系インスタンスのECS管理費は35%、P系およびTrainium系は60%値下げされており、コスト効率も改善されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ServiceNow</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急</span>
+            <span class="card-date">2026-08-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/servicenow-warns-of-three-max-severity-security-vulnerabilities/" target="_blank" rel="noopener">ServiceNow AI Platform に CVSS 10.0 の緊急脆弱性3件——未認証RCE・SQLインジェクション含む計4件をパッチ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ServiceNowは8月27日、AI PlatformおよびNow Platformに存在する計4件の脆弱性に対するパッチを公開した。CVE-2026-18885とCVE-2026-18886はAI PlatformのGraphQL APIにおけるCVSS 10.0のコードインジェクション脆弱性で、未認証の攻撃者が任意コードの実行・データの取得と改ざん・権限昇格を行える。CVE-2026-74820はCVSS 10.0のSQLインジェクション脆弱性で、攻撃者がインスタンスのデータベースに対して任意のSQL文を実行可能。CVE-2026-6876はNow PlatformのサンドボックスエスケープでCVSS高評価。ServiceNowは現時点での悪意ある攻撃は確認していないとしているが、ServiceNow Patching Programに参加していない自己ホスト型インスタンスを使う顧客には即時アップデートを強く推奨している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PaperCut NG/MF</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急</span>
+            <span class="card-date">2026-08-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theregister.com/security/2026/08/28/print-management-outfit-papercut-is-under-0-day-attack-and-its-drawing-customers-blood/5293168" target="_blank" rel="noopener">PaperCut NG/MF に悪用中のゼロデイ脆弱性（CVE-2026-81578/82078）、全バージョン影響——緊急パッチをリリース</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">印刷管理ソリューションのPaperCut Softwareは8月27日、PaperCut NGおよびPaperCut MF全バージョンに影響するゼロデイ脆弱性が積極的に悪用されていることを確認したと緊急セキュリティ勧告で公表した。8月28日早朝（AEST）に緊急パッチ（Release 1）をバージョン24・25・26向けに公開し、Huntress・watchTowrとの協力を経てさらなる強化を含む緊急パッチRelease 2も配布された。CVE番号はCVE-2026-81578およびCVE-2026-82078が割り当てられた。現時点でCVSSスコアや技術的詳細・攻撃経路は非公開だが、顧客での被害事例が確認されており、PaperCutはすべてのユーザーに対してRelease 2を即時適用するよう強く求めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-08-29 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
