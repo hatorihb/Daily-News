@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 01 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SK Hynix / 宮城県</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japantimes.co.jp/business/2026/08/31/companies/sk-hynix-joint-venture-feasibility/" target="_blank" rel="noopener">SK Hynix、AIブーム対応で宮城に半導体合弁工場を検討—日本企業との協力で世界的なHBM不足に対処</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">韓国メモリ大手のSK Hynixが、AI需要の急増によるメモリ不足に対応するため、日本での合弁工場設立の実現可能性を調査していることが明らかになった。宮城県が面積30万平方メートルの候補地を提案しており、SK Inc.のチェ・テウォン会長が仙台で開催された韓日商工会議所の会合で検討を公表した。HBMを中心とする高性能AI向けメモリは2030年まで世界的な供給不足が続くと見られており、同社は日本の顧客・サプライヤーとの協力深化の一環として候補地を模索している。実現すれば、日本の半導体エコシステムにとって韓国最大手との本格的なパートナーシップとなる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/08/31/open-ai-chatgpt-ads-revenue.html" target="_blank" rel="noopener">OpenAI、ChatGPT広告事業が年換算10億ドル突破—サービス開始200日で達成、40か国以上に展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIのChatGPT広告事業が年換算10億ドル（約1,500億円）の収益ラン・レートを達成したと発表した。広告事業の開始から200日以内という急速な成長で、インド・欧州・中東・北アフリカなど40か国以上にセルフサーブ型広告プラットフォームを展開している。OpenAIは2026年通年の広告収益として25億ドルを見込み、2030年には1,000億ドルを目標とする。IPOを控えたタイミングでのマイルストーン達成は、API・サブスクリプション・エンタープライズ契約に加えた第4の収益柱として機関投資家へのアピールになる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / SpaceX / Cursor</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.forbes.com/sites/jonmarkman/2026/08/31/openai-cuts-off-cursor-after-spacexs-60-billion-takeover/" target="_blank" rel="noopener">OpenAI、SpaceXに買収されたCursorへのモデル提供を11月12日に打ち切り—Musk企業の規約違反歴を理由に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは、SpaceXが600億ドルで買収したAIコーディングツール「Cursor」との契約を11月12日に終了すると通知した。OpenAIはイーロン・マスク系企業による過去の利用規約違反（TwitterのX化後の契約破棄、xAIによるOpenAIサービス不正利用）を理由に挙げ、SpaceX傘下でのCursorの利用規約遵守を担保できないと判断した。CursorのCEOはOpenAIとの協議継続を表明しており、同社利用者の約5%がOpenAIモデルを使用している。一方、AnthropicはCursor向けClaudeモデルの計算リソースを増強すると表明した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bloomberg.com/news/articles/2026-08-31/anthropic-s-mega-ipo-plan-looms-over-packed-us-listing-calendar" target="_blank" rel="noopener">Anthropic、IPOロードショーを9月に開始—$965B評価額で10月Nasdaq上場を計画、Goldman・JPMorgan・Morganが主幹事</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicがIPOのロードショーを2026年9月に開始し、10月のNasdaq上場を目指していることをBloombergが報じた。同社は6月1日にSECへの機密S-1提出を発表しており、965億ドル（約143兆円）の評価額で600億ドル以上の調達を見込む。Goldman Sachs・JPMorgan・Morgan Stanleyが主幹事を務め、調達資金はClaude開発の計算インフラ拡張に充てる計画。同社はシリーズHで650億ドルを調達し評価額が965億ドルに達している。米AI企業のIPOラッシュのなかで最大規模となる可能性が高く、クリスプなAI投資の試金石として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Training &amp; Certification</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/training-and-certification/updates-to-aws-certified-machine-learning-engineer-associate-mla-c02/" target="_blank" rel="noopener">AWS認定「機械学習エンジニアアソシエイト(MLA-C02)」ベータ試験の登録が本日開始—生成AI・エージェンティックAI・LLMが新たに出題範囲に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは機械学習エンジニア向け認定試験(MLA-C01)を更新したMLA-C02のベータ版（英語）の登録を2026年9月1日に開始した。ベータ試験の実施は9月29日から始まり、現行のMLA-C01英語版は9月28日が最終受験日となる。新試験では従来のML工学タスクに加え、生成AI・基盤モデル(FM)・LLM・エージェンティックAIワークフローの実装・運用が出題範囲に追加された。日本語・韓国語・中国語版はMLA-C02の一般提供開始（2027年初頭予定）まで現行版で受験可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PaperCut / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-08-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/08/31/papercut-attack-remote-access-tools/" target="_blank" rel="noopener">PaperCut MF/NGに深刻なゼロデイRCE脆弱性—CVE-2026-82078・CVE-2026-81578がCISA KEVに追加、攻撃者がリモートアクセスツールを設置</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">印刷管理ソフト「PaperCut MF/NG」に認証回避とリモートコード実行（RCE）を連鎖させたゼロデイ攻撃が確認された。CVE-2026-82078（CVSS 9.4：DBクラスローダーの任意Javaバイトコード実行）とCVE-2026-81578（CVSS 8.8：Web管理インタフェースの不正アクセス制御）を組み合わせることで、未認証の攻撃者がシステム設定を改変・RCEを実現できる。PaperCutは8月27日に緊急パッチを公開し、8月31日にはCISAがKEV（既知悪用脆弱性カタログ）へ両CVEを追加。Help Net Securityは攻撃者が侵害したサーバにリモートアクセスツールを設置していることを確認した。PaperCutは大学・官公庁・大企業で広く利用されており、早急なパッチ適用が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-01 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
