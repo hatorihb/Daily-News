@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 03 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Nano-opt Media / 東京都立産業貿易センター</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://f2ff.jp/event/dx-ai" target="_blank" rel="noopener">「DXシステム開発 Expo 2026」「ものづくりDX Expo 2026」「AI Innovation Tokyo 2026」が東京・浜松町で同時開幕—自社開発・AI活用・製造DXの最前線を展示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">株式会社ナノオプト・メディア主催の3展同時開催イベントが9月3〜4日、東京都立産業貿易センター浜松町館にて開幕した。「DXシステム開発 Expo 2026」「ものづくりDX Expo 2026」「AI Innovation Tokyo 2026」の3展が一堂に会し、情報基盤・製造現場デジタル化・AIによるデータ活用の3領域を軸に日本のDX実装の最前線を紹介する。AI化・内製化・ノーコード活用を加速させる企業が多数出展し、エージェント型AI・サイバー防衛・製造AI活用の最新動向が集結。事前登録制で入場無料、9月4日まで開催される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/" target="_blank" rel="noopener">Google、「Gemini 3.8 Flash」と「Gemini 3.8 Flash Cyber」を同時リリース—6週間で3モデル連続投入、$0.75/Mトークンでフロンティア級性能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google DeepMindは9月2日、汎用モデル「Gemini 3.8 Flash」とサイバーセキュリティ特化モデル「Gemini 3.8 Flash Cyber」を同時公開した。3.8 Flashは先代3.7 Flashに比べソフトウェアエンジニアリング・エージェント型タスク・複数ステップ推論で大幅な性能向上を果たしつつ、入力$0.75/Mトークン・出力$3.75/Mトークン（2026年12月末まで導入価格）という低コストを実現。6週間で3世代連続投入という異例のリリース速度となる。Flash Cyberは脆弱性検出と自動パッチ適用に特化したバリアントで、信頼された防御者向け限定プログラム「Fairwind Program」経由でのみ提供される。両モデルはGemini API・Google AI Studio・Android Studio・Gemini Enterpriseを通じて利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/02/anthropic-enterprise-frontier-safeguards/" target="_blank" rel="noopener">Anthropic、「Enterprise Frontier Safeguards（EFS）」を発表—顧客のクラウドストレージに活動ログを保管しつつクロスセッション不正検知を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは9月2日、企業向けセキュリティソリューション「Enterprise Frontier Safeguards（EFS）」を発表した。ゼロデータリテンション相当のプライバシー保護と、攻撃的サイバー・生物兵器開発の試みや認証情報の漏洩・不正利用をまたぐセッション横断の自動検知を両立する設計で、活動ログは顧客自身のAmazon S3・Azure Blob・Google Cloud Storageバケットに保存される。金融・医療・通信・法律・公共機関を含む100社以上の企業と共同で開発されており、Goldman Sachs・Morgan Stanley・Citi・Bank of America・Wells FargoのCISOら業界有識者も設計に参加した。EFSは企業向けに無料で提供され、2026年秋以降フェーズ展開でロールアウトが始まる予定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PaperCut / CISA / Huntress</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityboulevard.com/2026/09/papercut-zero-day-exploitation-escalates-to-active-intrusions/" target="_blank" rel="noopener">PaperCut NG/MF ゼロデイ（CVE-2026-81578 + CVE-2026-82078）が本格侵害フェーズへ移行—RAT展開まで確認、第3弾緊急パッチ適用を緊急要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">印刷管理ソフト「PaperCut NG/MF」に存在する認証バイパス（CVE-2026-81578、CVSS 8.8）と安全でない動的クラスロード（CVE-2026-82078、CVSS 9.4）を連鎖させた未認証リモートコード実行（pre-auth RCE）チェーンの悪用が急拡大している。CISAは8月31日に両CVEを「既知悪用済み脆弱性カタログ」へ登録し、連邦機関に9月14日までの修正を命令。攻撃者はすでに偵察段階からハンズオンキーボード活動へ移行し、侵害済みサーバへのリモートアクセスツール（RAT）展開が確認されている。PaperCutは前2回のパッチをバイパスされたため第3弾緊急パッチ（Emergency Patch Release 3）を9月1日に公開しており、インターネット公開中の1,000件超のインスタンスに即時適用を強く推奨している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-03 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
