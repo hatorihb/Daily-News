@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 04 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Jizai（株式会社Jizai）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://robotstart.info/article/2026/09/03/382365.html" target="_blank" rel="noopener">AIエージェントに"身体"を与える卓上型開発キット「Palmimo DevKit」の先行販売を開始——数行のPythonで動かせる汎用AIロボット</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">国内AIロボットスタートアップの株式会社Jizaiが9月3日、AIエージェントに物理的な身体を持たせる卓上型開発キット「Palmimo DevKit（パルミーモ デブキット）」のEarly Builder・Early Partner向け先行販売を開始した。Palmimoはアイコンタクト・音声応答・表情や身振りを通じたコミュニケーションが可能な汎用AIロボットで、「見る・聞く・考える・話す・動く」のループをPythonの数行から呼び出せる設計となっており、ハードウェアの専門知識は不要。ソフトウェアはオープンソースとして順次公開予定。現在、東京・東京ミライパーク内の東京都の展示会「A Day in the Future」にも出展されており、AI業界の注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.fool.com/investing/2026/09/03/anthropic-planning-unveil-ipo-details-labor-day/" target="_blank" rel="noopener">Anthropic、Labor Day明けにIPO目論見書を公開へ—評価額$1.5〜2兆ドル規模でNasdaq史上最大規模上場を目指す</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicが9月初旬（Labor Day連休明け）にIPO目論見書（S-1）を正式公開する計画であることをMotley Foolが9月3日に報じた。Goldman Sachs・JPMorgan・Morgan Stanleyを幹事証券として、評価額$1.5兆〜$2兆ドルでのNasdaq上場を目指しており、実現すれば史上最大のIPOとなる見通し。CFOのKrishna Rao氏は8月中旬から機関投資家向け非公式ブリーフィングを実施しており、9月中旬に投資家向けイベント（Investor Day）の開催も予定されている。Anthropicは5月のシリーズH（$650億調達、評価額$9650億）に続き、Claude Codeを中心とした企業向けAIコーディングツールの急拡大で年率$470億ドルの収益ランレートを達成、OpenAIを初めて私的市場評価額で逆転したことが背景にある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Amazon Linux</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/announcing-amazon-linux-2027/" target="_blank" rel="noopener">Amazon Linux 2027（AL2027）がパブリックプレビューで利用可能に——kernel 7.1+・SELinux有効デフォルト・AWS-LC搭載のクラウドネイティブOS</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月3日、次世代OS「Amazon Linux 2027（AL2027）」のパブリックプレビューを開始した。Linuxカーネル7.1+を採用し、SELinuxをデフォルト有効化（enforcing モード）することでセキュリティ基準を大幅に強化。暗号処理にはAWS独自のライブラリAWS-LCを採用しパフォーマンスを向上させたほか、GCC 16.1・LLVM/Clang 22・最新版のRust/Goを標準ツールチェーンとして搭載。パッケージはLTO（Link Time Optimization）・x86-64-v3（AVX2想定）ビルドとなり、AIワークロード向けにAWS Neuronドライバもサポートする。パッケージマネージャーはDNF5に刷新。一般提供（GA）前にフィードバックを収集する目的のプレビューで、ウェブアプリ・DB・コンテナ・AI/MLワークロードを対象とした本番環境向け設計となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Amazon MWAA</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-mwaa-cloudwatch-monitoring/" target="_blank" rel="noopener">Amazon MWAA、CloudWatchとの統合監視ダッシュボードを追加——推奨アラームの1クリック作成でApache Airflowワークフローの可視性を向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月3日、Apache Airflowのマネージドサービス「Amazon MWAA」にCloudWatchと連携した組み込み監視機能を追加した。AWSマネジメントコンソールの環境詳細ページ上に主要CloudWatchメトリクスを一覧表示する新ダッシュボードが設けられ、各グラフには警告レンジのオーバーレイ表示切り替えも搭載。合わせてアラームテーブルが追加され、環境に紐づくすべてのCloudWatchアラームを1画面で管理できる。AWS管理テンプレートから推奨アラームを一括プロビジョニングできる「Create Recommended Alarms」ボタンにより、手作業でのアラーム設定が不要になった。Amazon MWAA Provisionedが対応し、MWAA提供中のすべてのリージョンで利用可能。CloudWatch標準料金が適用される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SonicWall / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.prsol.cc/2026/09/03/sonicwall-warns-of-actively-exploited-sma1000-zero-day-flaws/" target="_blank" rel="noopener">SonicWall SMA1000の2つのゼロデイ（CVE-2026-83548 CVSS 10.0＋CVE-2026-83549）が実被害確認済み—CISA、9月5日までの修正を連邦機関に命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SonicWallは9月1日、SMA1000アプライアンス（モデル6210・7210・8200v）に存在する2件のゼロデイ脆弱性を開示した。CVE-2026-83548（CVSS 10.0）はWorkPlace インターフェースの未認証SSRF脆弱性で、意図されていない転送プロキシ経路を悪用して認証不要で内部管理エンドポイントへアクセスが可能。CVE-2026-83549（CVSS 7.8）は管理コンソールの認証後OSコマンドインジェクションで、前者と連鎖することで未認証リモートコード実行（pre-auth RCE）が成立する。インターネット公開中のSMA1000は400件超が確認されており、CISAは9月2日に両CVEを既知悪用済み脆弱性カタログ（KEV）へ登録し、連邦政府機関に対し9月5日までの修正を命令した。ホットフィックス12.4.3-03526または12.5.0-02952へのアップグレードと侵害痕跡の確認が急務。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-04 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
