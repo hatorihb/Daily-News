@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 05 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">アイフォーカス</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/04/news045.html" target="_blank" rel="noopener">10月1日「カスハラ対策」義務化に合わせAIが暴言を検知する腕時計型デバイス「カスハラ対策Watch」登場——音声解析で管理者に即時通知</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">株式会社アイフォーカスが、AIによる音声データ解析でカスタマーハラスメント（カスハラ）の兆候を早期検知するスマートウォッチ型デバイス「カスハラ対策Watch」を2026年10月1日から提供開始すると発表した。接客従業員が装着したウォッチの音声をクラウド上でAI解析し、カスハラに該当する発言を検知すると管理者にリアルタイム通知、迅速な組織対応を可能にする。証跡管理機能も搭載し、後日の対応確認や指導にも活用できる。心拍センサーと加速度センサーによる体調モニタリング・転倒検知も装備。2026年10月1日施行の改正労働施策総合推進法によりカスハラ対策が企業義務となる直前の投入で、一人対応が多い小売・外食・医療現場向けに訴求する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ガートナージャパン</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/04/news030.html" target="_blank" rel="noopener">ガートナー「2026年版 日本の未来志向型インフラテクノロジーのハイプ・サイクル」発表——フィジカルAI・エージェント型AIが「過度な期待」のピーク期に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ガートナージャパンが2026年版「日本における未来志向型インフラ・テクノロジのハイプ・サイクル」を発表した。今年は生成AIをインフラの一部として捉え直す方針のもと、「フィジカルAI」「エージェント型AI」「マシンカスタマー」「自動運転トラック」を含む7項目が「過度な期待」のピーク期に到達。前年版でピークにあった「生成AI」は幻滅期への移行が始まっており、企業の現場実装において期待と成果のギャップへの対処が急務となっている。インフラ担当者はAIとの統合を前提としたオペレーション体制の再設計を迫られており、幻滅期の手前にある技術への過剰投資を避けた戦略的な計画立案が求められると指摘された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://9to5mac.com/2026/09/04/openai-releasing-major-upgrade-to-chatgpt-and-codex-with-gpt-6-astra-details-here/" target="_blank" rel="noopener">OpenAI、ChatGPT/Codex を GPT-6 Astra に刷新——Plus・Pro・Business・Enterprise への順次展開を開始、AGI到達の可能性も示唆</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは9月3日に企業向けDaybr​eakプログラムで限定公開したGPT-6 Astraを、9月4〜5日からChatGPT Plus・Pro・Business・EnterpriseおよびAPIに順次展開すると発表した。Greg Brockman社長は「世代を超える飛躍」と表現し、AGIへの到達とみなされる可能性があると言及。主要ベンチマークで前世代GPT-5.6 SolおよびClaude Fable 5を上回り、OpenAIが独自に定義するサイバーセキュリティ準備状況評価で初めて「Critical」水準に達した唯一のモデルでもある。未知の脆弱性を人間の誘導なしに探索・悪用し得る能力を持つとして段階展開が採られており、API料金は100万トークン入力$10・出力$50（標準レート）。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SonicWall / NSM On-Prem</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/sonicwall-nsm-vulnerabilities/" target="_blank" rel="noopener">SonicWall NSM On-Prem に深刻な脆弱性3件（CVE-2026-81939 CVSS 9.1 ほか）——Zip Slip・権限昇格・OSコマンドインジェクションを修正、v4.3.1-R4 への即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SonicWallは9月4日、ネットワーク管理製品「Network Security Manager（NSM）On-Prem」の3件の脆弱性（セキュリティアドバイザリ SNWLID-2026-0015）を公表した。最も深刻なCVE-2026-81939（CVSS 9.1）はZip Slip脆弱性で、細工されたアーカイブのアップロードにより意図しないディレクトリへのファイル書き込みが可能。CVE-2026-78328は権限の低い管理者がSuperAdminへ昇格できる認可不備、CVE-2026-78327はSuperAdmin権限での任意OSコマンド実行。クラウド版NSM SaaSは対象外だが、VMware・Hyper-V・Azure・KVM上のオンプレミス版バージョン4.3.0以前が影響を受ける。現時点で悪用の証拠は確認されていないが、バージョン4.3.1-R4への即時アップグレードが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Chrome</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/04/google-chrome-zero-day-cve-2026-85046/" target="_blank" rel="noopener">Google Chrome ゼロデイ CVE-2026-85046（CVSS 8.8）を緊急パッチ——V8型混乱バグが実攻撃確認、CISAが KEV 登録・連邦機関に9月25日までの修正命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは9月4日、Chrome の JavaScript/WebAssembly エンジン V8 に存在する「型混乱（Type Confusion）」バグ CVE-2026-85046（CVSS 8.8）に対する緊急パッチを公開した。細工された HTML ページを開くだけでブラウザのサンドボックス内での任意コード実行が成立し得る重大な脆弱性で、実際の攻撃への悪用が確認されている。同日 CISA が KnownExploited Vulnerabilities カタログに登録し、連邦政府機関に対して9月25日までの修正を命令。2026年に入って Chrome ゼロデイの修正は6件目となる。Chrome 152.0.7977.82（Windows は .82/.83、Linux は .82）への更新が必要で、自動更新が無効な環境では即時の手動更新が急務。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-05 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
