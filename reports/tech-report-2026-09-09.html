@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 09 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">三井住友銀行 / Impress Watch</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.watch.impress.co.jp/docs/news/2139166.html" target="_blank" rel="noopener">三井住友銀行・VpassアプリにPayPay残高確認機能を追加、SMBC IDとPayPayのID連携を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">三井住友銀行と三井住友カードは9月8日、「三井住友銀行アプリ」および「Vpassアプリ」において「PayPay残高確認」機能の提供を開始した。SMBC IDとPayPayアカウントを連携することで、SMBCの両アプリ上からPayPay残高を確認できるほか、「三井住友銀行アプリ」ではPayPayポイントの残高確認も可能となる。アプリ間のシームレスな遷移によりQRコード決済や残高管理の利便性が向上する。今後は「Olive フレキシブルペイ」の支払いモードとして「PayPay残高」を追加予定であり、銀行系フィンテックと国内最大級のキャッシュレス決済サービスの連携深化として注目される。国内金融DXにおけるID連携・サービス統合の進展を示す動きとして評価できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">中国 工業情報化部（MIIT）/ South China Morning Post</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.scmp.com/tech/policy/article/3366733/china-targets-fourfold-boost-in-ai-computing-capacity-2030-major-tech-push" target="_blank" rel="noopener">中国MIITが第15次5カ年ICT計画を公表：2030年までにAI演算能力を4倍超の9,800エクサフロップスへ拡大、¥3.8兆の投資計画</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国の工業情報化部（MIIT）は9月7日付で第15次5カ年ICT計画（2026〜2030年）を公式サイトに掲載し、同8日に国際メディアで広く報道された。計画では2030年までに知的演算能力（インテリジェントコンピューティング容量）を9,800エクサフロップス（EFlops/FP16精度）に引き上げる目標を掲げており、これは2026年6月末時点の2,185 EFlopsから約4.5倍の増加に相当する。また、情報通信インフラへの累計投資額として3.8兆元（約53兆円・US$5,320億）を明示した。計画には1万枚・10万枚規模のGPUクラスターの「秩序ある展開」も含まれており、大規模AIモデルの学習・推論基盤の整備を政策として後押しする。中国のAIコンピューティング年間成長率が177%（前年比）に達していることも示され、米中AI競争における計算資源確保の重要性が改めて浮き彫りとなっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PyTorch Foundation / PR Newswire</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.prnewswire.com/news-releases/alibaba-cloud-ant-group-cambricon-and-huawei-come-together-in-shanghai-to-advance-the-open-source-ai-stack-at-pytorch-conference-china-302870308.html" target="_blank" rel="noopener">PyTorch Conference China 2026：Alibaba Cloud・Cambriconがプラチナ加盟、Ant GroupがゴールドメンバーとしてPyTorch Foundationに参加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PyTorch Foundationは9月8日、上海で開催中のPyTorch Conference China 2026（9月7〜9日）において、Alibaba CloudおよびCambriconがプラチナメンバーとして、Ant GroupがゴールドメンバーとしてFoundationに加入したことを発表した。プラチナメンバーには理事会（Governing Board）とTechnical Advisory Councilへの議席が付与される。Huaweiも同イベントで存在感を示し、AIオープンソーススタックの拡張に向けた取り組みが進んでいる。同Foundationにはすでに250以上の組織がプロジェクトに貢献しており、今回の参加拡大は世界第2位のAI市場である中国での足場をさらに強固にするものだ。今回の会議はKubeCon・CloudNativeCon・OpenInfra Summit・PyTorch Conference Chinaが一堂に会した初のイベントとしても注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ASML / TSMC / GlobeNewswire</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.globenewswire.com/news-release/2026/09/08/3357321/0/en/asml-and-tsmc-announce-initiative-to-pioneer-industry-transition-to-large-format-photomasks-for-high-na-euv.html" target="_blank" rel="noopener">ASML・TSMCが「High NA EUV向け12インチフォトマスク」移行イニシアチブを発表、Samsung・Intelも参画——2031年パイロットライン稼働目標</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ASMLとTSMCは9月7〜8日、SPIE Bacus Conferenceに先立ち、High NA EUVリソグラフィ向けの業界標準フォトマスクを現行の6インチから12インチへ移行する共同イニシアチブを発表した。12インチマスクへの移行によりスキャナーの生産効率向上・チップ製造コスト削減・スティッチング制約の解消が見込まれ、30%以上のスループット改善効果が期待される。ロードマップとして12インチマスク・パイロットラインを2031年までに立ち上げ、2033年までに完全な量産対応を目指す。TSMCは2030年に先端ノードの量産でHigh NA技術の適用を計画しており、Samsung Electronics・Intel Foundryも同時期に同方向性へのコミットメントを表明。次世代AI向けチップの製造基盤となる半導体リソグラフィの転換点として業界全体への影響は大きい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <p class="empty-note">本日は過去24時間以内の新しいAWSアップデートは確認されませんでした。</p>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SAP / Security Online</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/september-2026-sap-security-patch-day/" target="_blank" rel="noopener">SAP 9月度セキュリティパッチデー：CVSS 10.0を含む4件のCritical脆弱性を修正——NetWeaver・Extended Passport・SAP GUIが対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SAPは9月8日、月次セキュリティパッチデーにおいて19件の新規セキュリティノートと1件の更新を公開した。4件のCritical脆弱性が含まれており、最も深刻なのはSAP Extended Passport Processing（旧称：パスポート管理）のメモリ破壊脆弱性CVE-2026-44756（CVSS 10.0）だ。認証前のSSRFとしてRCEへの連鎖が可能なCVE-2026-58240（CVSS 9.8、NetWeaver Message Server）、SaaSのマルチテナンシーライブラリ@sap/cds-mtxsにおける資格情報漏洩のCVE-2026-76969、SAP GUI for JavaのアクセスコントロールミスのCVE-2026-66768も修正対象。これらに加え、NetWeaverのABAPとABAP Platformでの安全でないデシリアライゼーション、NetWeaver Business Clientの脆弱性、SAP Commerce CloudのCRLFインジェクションなども修正された。SAPシステム管理者は今月のパッチを優先対応として速やかに適用することが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-09 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
