@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 12 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">さくらインターネット / ITmedia</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/enterprise/articles/2609/11/news067.html" target="_blank" rel="noopener">さくらインターネットへの侵入は「3年前」にさかのぼるか——不正アクセス調査完了、初期パスワード平文保存・ログ管理体制不備が判明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">さくらインターネットは2026年9月10日に不正アクセス調査の第三報を公表し、侵入が2023年4月以降2026年3月まで（3年以上）続いていた可能性があることを明らかにした。影響アカウントは当初の583件から951件に拡大し、販売管理システムに保存されていた136万563件の会員情報が第三者に閲覧または取得された可能性がある。調査では初期パスワードを平文で保存していたことや、ログ管理体制の不備が指摘されており、長期間にわたる侵入を検知できなかった背景が浮かび上がった。データの外部持ち出しを裏付ける明確な事実や二次被害は現時点では確認されていないとしているが、国内クラウドサービス企業の重大なセキュリティ管理問題として注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Sakana AI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://sakana.ai/fugu-max-release/" target="_blank" rel="noopener">Sakana AI、マルチエージェントオーケストレーションモデル「Fugu Max」「Fugu Ultra v2」を公開——コスト60%削減・6ベンチマーク最高スコアで業界に挑む</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Sakana AIは9月11日、コスト最優先の「Fugu Max v1.0」と性能最優先の「Fugu Ultra v2.0」の2つのオーケストレーションモデルを同時公開した。Fugu MaxはOpenRouterの公開・専門特化モデル群を動的にルーティングし、入力$2/出力$6（百万トークン当たり）とSonnet 5比で40〜60%安い価格でTerminal Bench 2.1・GPQAD・AA-LCR・GDP.pdf・AutomationBench・SWEFishの6ベンチマーク最高スコアを達成した。Fugu Ultra v2は入力$5/出力$30（百万トークン当たり）でITRINITY（進化的LLMコーディネーター）とConductor（強化学習による協調戦略）の2つのILCR 2026論文を基盤としたアーキテクチャを採用し、DeepSWEで74.3を記録するなど複数モデルを3〜5倍上回る。モノリシックな大型モデルではなく学習済みモデル協調を核に据えた設計で、AI開発の効率化方向性を示す注目リリースとなった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">米国議会 / CNN Politics</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://krdo.com/politics/cnn-us-politics/2026/09/11/house-democrats-urge-speaker-johnson-to-cancel-recess-to-pass-ai-safeguards-citing-catastrophic-risk/" target="_blank" rel="noopener">米下院民主党、「壊滅的リスク」を理由にAI安全保障法制の緊急整備をジョンソン議長に要求——休会中止を求める書簡を送付</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米下院民主党は9月11日、マイク・ジョンソン下院議長宛ての書簡で「AI安全の専門家や国民がリスクへの対処を求める中、議会は無為に過ごしている」として秋の議会休会を中止しAI安全保障対策立法を優先するよう求めた。書簡の背景にはAnthropicが生物兵器開発支援につながるClaudeの使用試みを阻止したとする報告や、ウイグル族標的のサーベイランス工作・イランによる米海軍標的分析にAIが利用されたとする事例が挙げられている。上院ではクルーズ商業委員長らが高度AIリスクへの連邦枠組み設立法案を準備しているが、超党派合意が得られずに7月の採決が見送られていた経緯がある。議会でのAI立法は民主・共和両党の政策優先度のずれが障壁となっており、今回の要求が法制化の加速につながるかが注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Marketplace / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/aws-marketplace-demo-private-offer-requests-qualification/" target="_blank" rel="noopener">AWS Marketplace、AIエージェントワークフローで販売者へのデモ・プライベートオファーリクエストを即時転送——数日かかっていた人手の審査を完全自動化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月11日、AWS Marketplaceのデモリクエストおよびプライベートオファーリクエストの資格確認プロセスをAIエージェントワークフローで自動化したと発表した。これまでAWSの担当者が顧客ごとに手動でリクエストを審査してから販売者に転送していたため数日間の遅延が生じていたが、今後は顧客がユースケースを入力した直後にエージェントが評価・商機を生成し、販売者へリアルタイムで通知される。顧客が送信したリクエストには用途の詳細が添付された「アクティブな見込み顧客」情報が含まれ、販売者はより質の高いリードを即時に受け取れる。AWS Marketplaceで「デモをリクエスト」または「プライベートオファーをリクエスト」ボタンを有効化している製品のすべての出品者が追加費用なしで利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PaperCut / Help Net Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/11/ai-agents-papercut-ng-mf-attack-campaign/" target="_blank" rel="noopener">AIエージェント数百体が48か国395組織のPaperCutサーバーを侵害——CVE-2026-81578・CVE-2026-82078を悪用、7分で高校のドメイン管理者権限を奪取</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GreyNoiseの研究者は9月11日、ロシア語話者とみられる攻撃者がOpenAIのCodexハーネスとDeepSeekモデルを搭載したAIエージェント数百体を使い、PaperCut MF/NGの2件のゼロデイ脆弱性（CVE-2026-81578：Webインタフェースの不適切なアクセス制御、CVE-2026-82078：任意のJavaコード実行）を連鎖させて少なくとも440インスタンス・395組織を侵害したと報告した。攻撃は8月31日に空のワークスペースから開始し、エージェントがパッチ解析・コード実行経路の再現・Go製マルチスレッドスキャナの構築を自律的に行い、4時間以内にRCEを達成した。教育機関が204件と最多被害を受け、米国の高校1件では初期アクセスからドメイン管理者権限奪取まで7分しかかからなかった。PaperCutは8月28日に緊急パッチを提供済みだったが多数の未適用インスタンスが標的となった。AIを使った大規模サイバー攻撃として前例のない速度・規模を示した事例として専門家の注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">IDScan.net / Help Net Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/11/idscan-net-data-breach-153-million-drivers-licenses/" target="_blank" rel="noopener">米IDScan、1億5300万件超の運転免許証スキャンがダークウェブ「Nexus」に流出——身元確認サービス企業が不正アクセスを正式確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米ルイジアナ州の身元確認サービス企業IDScan.netは9月11日、8月31日前後に無権限でのデータアクセスが発生したことを正式に確認した。ロシア語圏サイバー犯罪フォーラム「Exploit」上で販売されているダークウェブサービス「Nexus」では、北米の運転免許証スキャン1億5300万件以上、IDカード1000万件、渡航書類300万件、医療カード57万9000件が販売されており、調査報道記者のBrian Krebsがバージニア州運転免許証の無償サンプルで真正性を確認している。IDScan.netはバーやリテール・フォーチュン500企業向けの年齢・身元確認に利用されており、Fortune 500を含む幅広い顧客の顧客データが漏洩した可能性がある。現在もサードパーティの専門家による調査が進められており、FBIも捜査に着手している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-12 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
