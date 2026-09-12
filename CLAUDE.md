@@ -17,7 +17,11 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 
 - **One report per day**. Do not overwrite a previous day's file.
 - Reports have **4 sections**: 01 国内IT・DX / 02 AI / 03 AWS / 04 セキュリティ. All 4 must be present in every report.
-- The search query list in `prompt/routine-prompt.md` includes a cybersecurity query — do not skip it.
+- The search query list in `prompt/routine-prompt.md` includes cybersecurity queries — do not skip them.
+- **Critical vulnerabilities are mandatory.** Anything with CVSS ≥ 9.0, a CISA KEV listing, an emergency vendor patch, confirmed in-the-wild exploitation, or unauthenticated remote exploitability MUST be included and placed first in the security section — never dropped for space. Include CVE number, CVSS score, affected versions, and the fixed version in the description.
+- Target **3+ security cards** per report (and 2+ per other section). If you fall short, re-check the RSS feeds and remaining search queries before finalizing — but never pad with items older than 24 hours.
+- 窓の杜 (`forest.watch.impress.co.jp`) and Impress Watch (`www.watch.impress.co.jp`) are **different sites**. 窓の杜 is a primary source for software vulnerability and emergency-patch coverage; check it for the security section.
+- Report which RSS feeds succeeded or failed in the session output. If every Japanese security feed fails, backfill with site-scoped searches rather than filling the section with English-only sources.
 - Cite sources with real working URLs. Broken links erode trust. Before committing, re-verify every card's URL, title, and publication date against the fetched page (see 手順4 in `prompt/routine-prompt.md`).
 - Do not repeat a story already covered in the previous day's report — read the most recent existing report first and skip duplicates unless there are genuinely new developments.
 - Prefer RSS feeds (exact `pubDate`) over search-result summaries when determining publication dates — the feed list is in `prompt/routine-prompt.md`.
