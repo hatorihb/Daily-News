@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 13 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">デジタル庁 / Innovatopia</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://innovatopia.jp/cyber-security/cyber-security-news/117770/" target="_blank" rel="noopener">デジタル庁 GSS に不正アクセス——既知VPN脆弱性を悪用し職員ら24.6万件の個人情報が漏えいの可能性、「ゼロトラスト」基盤の死角浮上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">デジタル庁は2026年9月11日、政府共通IT基盤「ガバメントソリューションサービス（GSS）」が外部から不正アクセスを受け、約24万6000件の個人情報が漏えいした可能性があると発表した。攻撃者は2026年5月下旬頃から把握済みのVPN機器の脆弱性を悪用してシステムに侵入し、保守運用アカウントを通じて大量のファイルにアクセスしたことが判明している。漏えいした可能性のある情報は各府省庁の職員や業務従事者の氏名（約23.6万件）・メールアドレス（約23.1万件）・電話番号（約9.4万件）など。GSSはゼロトラストネットワークアーキテクチャを採用した政府の統合業務環境だが、外部保守用VPNの既知脆弱性が長期間放置されていたことが根本原因として指摘されており、「ゼロトラスト」の運用管理における盲点として専門家から厳しい批判を受けている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / CNN Business</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnn.com/2026/09/12/tech/anthropic-ceo-essay-ai" target="_blank" rel="noopener">Anthropic CEO Dario Amodei、「フロンティアの速度を落とせ」——独立安全評価者への常駐アクセス付与・国際協調パッケージを3ステップ提案</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic CEOのDario Amodeiは9月12日、「Pacing the Frontier（フロンティアのペーシング）」と題した約3,800語のエッセイを自身のサイトに投稿し、AI能力向上の速度を意図的に抑制すべきと訴えた。提案の核心は、フロンティアAI企業が独立した外部評価チームに「社員同等のアクセス権」と「評価結果の単独公表権」を永続的に付与するという内部監査制度の導入で、Anthropic自社でも即時実施するとした。加えて、生物兵器・サイバー兵器など最悪の悪用を禁じる企業間の自主合意、モデルリリース前の「急性リスク」テストを義務化する国際条約、再帰的自己改善への「スピード制限」、そして必要に応じた政府間での「完全停止（フルポーズ）」協議までを段階的なパッケージとして提示した。AIが「6〜12か月以内にインターネット全体を掌握し得るスウォームを誘導できる可能性がある」との強い警告も含まれており、業界と政策立案者の双方から大きな注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Positron AI / TechTimes</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/327400/20260912/positron-ai-raises-875m-prove-commodity-memory-can-beat-hbm-inference.htm" target="_blank" rel="noopener">AI推論専用チップ新興「Positron AI」、$875M（約1,260億円）Series Cを調達——HBM不要・LPDDR5X採用「Asimov」チップで推論コストを根本から刷新へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI推論チップ専業スタートアップのPositron AIは2026年9月12日、NEA・Atreides・Valor・Andra Capital・SemiAnalysis CapitalおよびNetscape共同創業者Jim Clarkが率いる連合が主導する$875M（約1,260億円）のSeries Cラウンドを完了し、ポストマネー評価額は$50億（約7,200億円）に達した。注目の技術的賭けは「高帯域幅メモリ（HBM）を使わない」こと——次世代チップ「Asimov」は1チップあたり288GB〜2,304GBのLPDDR5Xを搭載し、HBMと先進パッケージングへの依存を排除することでサプライチェーンリスクと製造コストを大幅に低減する設計だ。AsimovはTSMC N3Pプロセスで年末にテープアウト予定、2027年下半期の量産開始を目指す。調達資金はAsimovテープアウト・2MWのエンジニアリングデータセンター構築・次世代推論システム「Titan」（Asimov 4〜8基搭載）の生産加速に充当される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS HealthOmics / AWS What's New</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/aws-healthomics-realtime-run-metrics/" target="_blank" rel="noopener">AWS HealthOmics、ワークフロー実行メトリクスをAmazon CloudWatchへリアルタイム送信——14種の新メトリクスでゲノム解析パイプラインのボトルネックを即時可視化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月12日、AWS HealthOmicsのワークフロー実行中にリソース使用状況を把握できるリアルタイム実行メトリクスをAmazon CloudWatchへ送信する機能を発表した。新たに追加された14種のメトリクスはCPU・GPU使用率、メモリ使用率、ファイルシステム使用量・I/O、ネットワークスループット、エフェメラルストレージ使用量をカバーし、タスクが失敗する前にメモリ・ストレージ不足を検知したり、割り当てリソースとの比較でコンピューティング設定の最適化（ライトサイジング）が可能になる。対応リージョンは米国東部（バージニア北部・オハイオ）、米国西部（オレゴン）、欧州（フランクフルト・アイルランド・ロンドン）、アジア太平洋（シンガポール・ソウル・東京）の計10リージョン。ゲノミクス・創薬研究など大規模バイオインフォマティクスパイプラインにおける運用コスト最適化を後押しする機能追加となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS DevOps Agent / AWS What's New</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/aws-devops-agent-bidirectional-slack-communication/" target="_blank" rel="noopener">AWS DevOps Agent、Slack プライベートチャンネルでの双方向インシデント調査をサポート——マルチクラウド・オンプレ環境も@メンション一言で調査起動</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月12日（JST）、AWS DevOps AgentがSlackのプライベートチャンネルを通じた双方向コミュニケーションをサポートしたと発表した。エンジニアは接続済みのSlackチャンネルで「@AWS DevOps Agent」とメンションするだけで調査を開始でき、エージェントはAWSリソースの状態・メトリクス・アラーム・デプロイ履歴・インシデントパターンについてチャンネル上で回答する。調査活動（チームが追記したコンテキスト・エージェントの所見・推奨アクション）はすべてスレッド内に集約され、AWSマルチクラウド・オンプレミス環境にわたるインシデントレスポンス全工程をSlackで完結できる。これまでオンコールエンジニアはAWSコンソールとSlackを往復しながら対応していたが、今回のアップデートで単一の場所に統合され認知負荷が大幅に軽減される。すべての商用リージョンで利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitLab / CybersecurityNews</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/cisa-gitlab-path-traversal/" target="_blank" rel="noopener">GitLab CE/EE に CVSS 10.0 のパストラバーサル脆弱性（CVE-2026-85706）——CISA KEV登録・認証不要でサーバー上の任意ファイルを読み取り可能、即時パッチ適用を要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年9月11日、GitLab CE/EEのリポジトリコミットAPIにおける最高深刻度のパストラバーサル脆弱性（CVE-2026-85706、CVSS 10.0）をKnown Exploited Vulnerabilities（KEV）カタログに登録し、連邦政府機関に2026年9月14日までのパッチ適用を義務付けた。不正な認証なしで攻撃者がGitLabサーバー上の任意ファイルを読み取れるため、秘密情報・トークン・設定ファイルの漏洩につながる。影響バージョンはGitLab CE/EE 18.7以降で、修正版は19.3.2・19.2.6・19.1.8。GitLab.comは更新済みだが、セルフマネージドインスタンスは即時アップグレードが必要。9月11日06:00 UTC以降インターネット全体にわたるスキャン活動が観測されており、対応が遅れたインスタンスへの実際の攻撃が継続中。GitLab EE向けの第2の重大脆弱性CVE-2026-87719（GraphQL Duo Chat向けの安全でないデシリアライズ、CVSS 9.9）も同パッチで対処済み。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JFrog Artifactory / TechTimes</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techtimes.com/articles/327383/20260912/jfrog-artifactory-hacked-24-day-campaign-rust-backdoors-survive-patching.htm" target="_blank" rel="noopener">JFrog Artifactory CVE-2026-82329（CVSS 9.8）——認証バイパスで管理者権限奪取、24日間の攻撃でRustバックドアがパッチ適用後も生存継続</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ研究者は9月12日、JFrog Artifactoryの認証バイパス脆弱性（CVE-2026-82329、CVSS 9.8）を悪用した攻撃キャンペーンがパッチ適用後も継続していることを報告した。8月28日に開示・パッチ提供されたにもかかわらず、翌9月1日には早くも悪用が確認され、9月8日までに複数の攻撃者がWiz調査でも観測されている。9月2日にはFastlyが約40.6万回の悪用試行をカウント。攻撃者は認証不要でAPIエンドポイントにアクセスし管理者トークンを生成、ユーザー・グループ・認証情報・フェデレーションアクセス関係を列挙した上でRust製バックドアを埋め込んだ。これらのバックドアはパッチ適用後もビルドパイプライン上に残存し、ソフトウェアサプライチェーン汚染のリスクを継続的にもたらしている。Artifactoryはバイナリ・コンテナ・AIモデル等のソフトウェア成果物を集中管理する重要インフラで、侵害が本番環境への横展開や下流への悪意あるコード注入につながる高リスク事案として警戒が続いている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Qiita セキュリティニュース</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://qiita.com/KaaaaaPeeeee/items/e9be34273b887df10d13" target="_blank" rel="noopener">Microsoft 9月定例パッチで966件を修正——悪用中のゼロデイ2件（CVE-2026-81963: Windows Update Stack権限昇格・CVE-2026-85880: ALPC権限昇格）と無認証Exchange Server RCE（CVE-2026-55007）が特に要注意</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftが9月8日（Patch Tuesday）に公開した定例セキュリティ更新プログラムは過去最多規模の966件（別集計では974件）の脆弱性を修正し、うちCritical 105件・実際に悪用が確認済みのゼロデイ2件を含む。CVE-2026-81963（Windows Update Stack権限昇格、CVSS 7.8）はリンクフォローの不適切処理によりローカル攻撃者がSYSTEM権限を奪取可能で、Windows Update Stackにおいてゼロデイとして悪用された最初の事例となる。CVE-2026-85880（Windows ALPC権限昇格、CVSS 7.8）はヒープベースのバッファオーバーフローによるもので、CISAは両脆弱性を9月8日にKEVカタログに追加し連邦機関に9月22日までのパッチ適用を義務付けた。加えて、ゼロデイ2件よりも危険と専門家が指摘するCVE-2026-55007（Microsoft Exchange Server RCE、CVSS 8.1）は悪意あるVisio添付メールを送信するだけで認証なしにメールサーバー上でコードが実行される重大な欠陥で、オンプレミスExchangeを運用する組織は早急な対応が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-13 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
