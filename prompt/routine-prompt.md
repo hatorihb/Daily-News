@@ -30,11 +30,27 @@ RSSの `pubDate`（公開日時）は正確なので、検索結果のサマリ�
 - ITmedia AI＋（https://rss.itmedia.co.jp/rss/2.0/aiplus.xml）→ 02 AI
 - Security NEXT（https://www.security-next.com/feed）→ 04 セキュリティ
 - JVN iPedia 新着（https://jvndb.jvn.jp/ja/rss/jvndb_new.rdf）→ 04 セキュリティ
+- 窓の杜（https://forest.watch.impress.co.jp/data/rss/1.0/wf/feed.rdf）→ 04 セキュリティ / 01
 - Impress Watch（https://www.watch.impress.co.jp/data/rss/1.0/ipw/feed.rdf）→ 01 / 02
 
-RSSのfetchが403やエラーで失敗した場合は、そのソースの通常ページ（後述の優先fetchソース）の確認にフォールバックする。RSSが取れないこと自体は失敗ではない。
+**窓の杜（forest.watch.impress.co.jp）と Impress Watch（www.watch.impress.co.jp）は別サイトである。**
+窓の杜はソフトウェアの脆弱性・緊急パッチ報道（GitLab・Chrome・Windows Update 等）の主要ソースなので、セキュリティセクションでは必ず確認すること。
 
-#### 2-2. Web検索（最大11回）
+RSSのfetchが403やエラーで失敗した場合は、そのソースの通常ページ（後述の優先fetchソース）の確認にフォールバックする。個々のフィードが取れないこと自体は失敗ではない。
+
+**ただし、取得結果は必ず以下の形式でセッション出力に報告すること**（恒常的に落ちているフィードを検知するため。報告を省略してはならない）：
+
+```
+RSS取得結果:
+- AWS What's New: OK (12件 / うち24h以内 3件)
+- ITmedia NEWS: OK (20件 / うち24h以内 5件)
+- Security NEXT: FAILED (403)
+...
+```
+
+セキュリティ系フィード（Security NEXT / JVN / 窓の杜）が**全て失敗した場合は、Web検索でこれらのサイトを名指しで補完する**こと（例: `site:security-next.com 脆弱性 {YYYY-MM-DD}`）。日本語セキュリティソースが0件のまま英語ソースだけで埋めるのは避ける。
+
+#### 2-2. Web検索（最大12回）
 RSSで拾えない情報（海外AIニュース・政府発表・調査レポート等）を以下のクエリで検索し、過去24時間以内の情報のみを抽出する。
 
 1. `AI new model feature release announcement {YYYY-MM-DD}`
@@ -48,6 +64,7 @@ RSSで拾えない情報（海外AIニュース・政府発表・調査レポー
 9. `cybersecurity vulnerability CVE breach incident {YYYY-MM-DD}`
 10. `セキュリティ 不正アクセス 脆弱性 インシデント {YYYY-MM-DD}`
 11. `情報漏洩 サイバー攻撃 ランサムウェア 標的型攻撃 {YYYY-MM-DD}`
+12. `緊急パッチ 重大な脆弱性 CVSS 悪用確認 {YYYY-MM-DD}`
 
 検索後、重要なページを2〜3件fetchして詳細を確認する。
 AWS What's New（https://aws.amazon.com/jp/about-aws/whats-new/）は必ず1件fetchすること。
@@ -73,13 +90,36 @@ AI業界・テック動向（新機能だけでなく買収・出資・資金調
 - 総務省報道資料（https://www.soumu.go.jp/menu_news/s-news/）
 - IPA（https://www.ipa.go.jp/pressrelease/）
 セキュリティ情報は以下のソースを優先的にfetchする：
+- 窓の杜（https://forest.watch.impress.co.jp/）※脆弱性・緊急パッチ報道の主要ソース
 - ITmedia NEWS（https://www.itmedia.co.jp/news/）
 - Security NEXT（https://www.security-next.com/）
 - 日本のCERT/CC（https://jvndb.jvn.jp/）
+- JPCERT/CC 注意喚起（https://www.jpcert.or.jp/at/）
+- CISA KEV カタログ（https://www.cisa.gov/known-exploited-vulnerabilities-catalog）
 
 **掲載対象の補足：**
 - AIセクションは新モデル・新機能のリリースだけでなく、AI業界の大型ビジネス動向（買収・出資・資金調達・大型提携・IPO・幹部交代など、海外企業含む）も対象とする。例: 「SpaceX が AI コーディングの Cursor を買収」のような業界再編ニュース
 - Yahoo!ニュース等のアグリゲーターでヒットした記事は、必ず配信元（Impress Watch・ITmedia 等）の一次ソース記事を `href`・`card-date`・出典に使う。Yahoo の記事URLは時間経過で消えるため使わない
+
+**セキュリティセクションの優先ルール（重要）：**
+
+以下のいずれかに該当する脆弱性・インシデントは**最優先で必ず掲載する**。他の候補を押しのけてでもセクションの先頭に置くこと。件数制限を理由に落としてはならない。
+
+- CVSS スコア 9.0 以上（Critical）
+- CISA KEV（Known Exploited Vulnerabilities）カタログに登録された
+- ベンダーが緊急パッチ／臨時アップデートを公開した
+- 実際の悪用（in-the-wild exploitation）が確認・報告されている
+- 認証不要（unauthenticated）でリモートから悪用可能
+- 国内で広く使われる製品・サービスの重大な障害／情報漏洩
+
+該当する場合は `impact-high`（重要度 高）を付け、説明文にCVE番号・CVSSスコア・影響バージョン・対処法（更新先バージョン）を必ず含める。
+
+例: 「GitLab に CVSS 10.0 の脆弱性（CVE-2026-85706）、認証なしでサーバーファイル読み取り可能」のような報は、その日のセキュリティ枠の筆頭に置く。
+
+**セクションごとの目標件数：**
+- セキュリティ: **3件以上**（24時間以内に該当する情報がどうしても存在しない場合を除く）
+- 国内IT・DX / AI / AWS: 各2件以上を目安とする
+- 目標に届かない場合は、RSSの取りこぼしがないか・検索クエリを使い切ったかを再確認してから確定する。古い情報での水増しは禁止（下記の除外ルール優先）
 
 **除外ルール：**
 - 公開日が24時間以上前の記事は掲載しない
