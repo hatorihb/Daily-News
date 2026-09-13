@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">国立情報学研究所 (NII)</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techno-edge.net/article/2026/09/13/5492.html" target="_blank" rel="noopener">国立情報学研究所「LLM-jp-4-VL 9B」正式公開——日本語×画像統合の国産マルチモーダル AI が Qwen3-VL-8B と同等性能を達成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">国立情報学研究所（NII）大規模言語モデル研究開発センターが、国産マルチモーダルAIモデル「LLM-jp-4-VL 9B」を正式公開した。ベースモデルを「LLM-jp-4-8b-thinking」に変更し、英語マルチモーダルデータセット「RefinedVision」と日本語データを組み合わせた追加学習を施している。9Bパラメータの視覚言語モデルとして日本語テキストと画像を統合処理でき、日本語ベンチマークではQwen3-VL-8Bと同等水準の性能を達成。2026年4月公開のベータ版（FineVision採用）から大幅に改善されており、国産LLMのマルチモーダル化を加速する重要なリリースとして注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Sakana AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techno-edge.net/article/2026/09/13/5492.html" target="_blank" rel="noopener">東京発 AI スタートアップ Sakana AI、「Fugu Ultra v2.0」リリース——国産LLMシーンで存在感増す自然言語推論モデル</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東京に拠点を置くAIスタートアップ Sakana AI が「Fugu Ultra v2.0」を9月11日にリリース（テクノエッジ生成AIウィークリーが9月13日付で紹介）。同社は David Ha 氏らが設立した国産AI企業で、自然淘汰原理にインスパイアされた独自アーキテクチャを特徴とする。最新版 v2.0 は推論能力と日本語対応の両面で前バージョンから改善されており、国産LLM・マルチモーダルモデルが充実しつつある2026年秋のAIシーンを象徴するリリースとして注目される。NII の LLM-jp-4-VL 9B とともに、日本発の基盤モデル開発が着実に国際競争力を高めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek / 深度求索</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.techno-edge.net/article/2026/09/13/5492.html" target="_blank" rel="noopener">DeepSeek V4.1 Flash、マルチモーダル版を MIT ライセンスでオープン提供——旧 V4-Flash-Vision-Exp を統合後継、ApexBench で 36.5 Pass@1</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国AIスタートアップ DeepSeek が「DeepSeek V4.1 Flash」を MIT ライセンスで正式ローンチ（9月10日リリース、テクノエッジが9月13日付で詳報）。旧「DeepSeek-V4-Flash-Vision-Exp」を正式に後継し、テキスト処理に加えて画像理解（マルチモーダル）に対応した。マルチモーダルエージェントベンチマーク ApexBench では前世代の 26.2 から 36.5 Pass@1 へ大幅向上し、一部のベンチマークで Claude Opus 4.8 に肉薄するスコアを記録。旧モデル名（deepseek-v4-flash、deepseek-v4-flash-vision-exp）での API 呼び出しも自動的に V4.1 Flash へルーティングされ、既存ユーザーへの下位互換性も確保されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://seekingalpha.com/news/4544675-openai-plans-q4-ipo-ai-race-anthropic" target="_blank" rel="noopener">OpenAI、Q4 2026 IPO を視野に——Anthropic との上場競争が本格化、企業評価額 8,520 億ドルで資金調達完了済み</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI が2026年第4四半期のIPOを目標とした動きを見せているとSeekingAlphaが報道し、競合 Anthropic との AI 企業上場競争が加速している。CFO サラ・フライヤー氏は8月19日の社員説明会で「2027年に上場企業になる」と明言していたが、Q4内への前倒し可能性も取り沙汰される。2026年3月に評価額8,520億ドルで1,220億ドルの資金調達を完了し、ゴールドマン・サックスとモルガン・スタンレーを幹事証券に据えた SEC への S-1 秘密提出（6月）も済んでいる。2025年収益は200億ドルを超える一方で、2026年には140億ドルの損失を見込む財務状況が上場タイミングの判断を複雑にしている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/jp/blogs/news/aws-weekly-20260831/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Identity にマネージドコンセントポータルが追加——OAuth 2.0 コールバック基盤の自前構築が不要に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCore Identity が、AIエージェントと GitHub・Salesforce・Slack などの外部サービスを接続する際に必要な OAuth 2.0 三段階認可（3LO）フローのコールバック基盤をマネージドサービスとして提供開始（9月4日発表、週刊AWSで紹介）。従来は開発者が独自のコールバックサーバーを構築・ホスト・運用する必要があったが、各 AgentCore Gateway に専用のマネージドコンセントポータルが自動的に付与され、管理者はポータル URL をチームに共有するだけで OAuth 同意を完了できる。エンドユーザーも自分の接続状況をセルフサービスで確認・管理可能で、AIエージェント開発における外部ツール連携の摩擦を大幅に削減する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / SageMaker AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/jp/blogs/news/aws-weekly-20260831/" target="_blank" rel="noopener">AWS、Amazon Bedrock RFT と SageMaker サーバーレスツールで AI モデルカスタマイズを簡素化——強化学習ファインチューニングも提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS が Amazon Bedrock Reinforcement Fine-Tuning（RFT）と Amazon SageMaker AI の新サーバーレスカスタマイズツールを発表し、LLM のモデルカスタマイズプロセスを大幅に簡素化した（週刊AWSで紹介）。Bedrock RFT はモデルの出力品質を人間フィードバックなしに強化学習で継続的に改善できる仕組みを提供する。SageMaker AI のサーバーレスツールはインフラ管理を不要にし、モデルのトレーニング・評価・デプロイまでのライフサイクルを統合環境で管理可能にする。AI エージェント開発に向けた AWS の継続的な機能拡充を示すアップデートとなっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / V8 エンジン</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/weekly-recap-chrome-0-day-router.html" target="_blank" rel="noopener">Google Chrome 153、V8 の OOB 書き込みゼロデイ（CVE-2026-87491）を含む 230 件を修正——2026 年 7 本目の悪用確認済みゼロデイ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google が Chrome 153（バージョン 153.0.8010.36/37）をリリースし、V8 JavaScript エンジンの OOB（範囲外）書き込みバグ CVE-2026-87491 を含む 230 件の脆弱性を修正した。CVE-2026-87491 は Medium 評価ながらすでに実際の攻撃での悪用が確認されており、2026 年に入って 7 本目の Chrome 悪用済みゼロデイとなった。また WebGL・Cast に起因する use-after-free およびバッファオーバーフローの Critical 脆弱性 5 件も含まれる。今回の修正はわずか 5 日以内に2件のゼロデイを修正した形となり、緊急度が高い。Chrome の設定 → 「Google Chrome について」から即時アップデートを推奨。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">MikroTik RouterOS</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/weekly-recap-chrome-0-day-router.html" target="_blank" rel="noopener">MikroTik RouterOS の SSH 認証バイパスゼロデイ 2 件（CVE-2026-67277・CVE-2026-86060）が CISA KEV 登録——「MikroTrick」攻撃チェーンで無認証乗っ取り、FCEB 機関は 9/13 までに対応必須</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA が MikroTik RouterOS のゼロデイ脆弱性 CVE-2026-67277（CVSS 8.8、認証なし帯域幅テストサービス悪用）と CVE-2026-86060（SSH 認証バイパス）を既知悪用脆弱性カタログ（KEV）に登録した（9月10日）。この 2 件を連鎖させた攻撃チェーン「MikroTrick」で脅威アクターがデバイスの完全制御を奪取できると確認されており、FCEB 機関への対応期限は 9 月 13 日。CVE-2026-67277 の修正済みバージョンは RouterOS 6.49.21（Long-term）・7.23.4（Long-term）・7.24.2（Stable）。世界中で広く使われるルーター機器に対する攻撃であり、企業・ISP は即時パッチ適用とインターネット向け管理画面の露出確認が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ConnectWise ScreenConnect</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/weekly-recap-chrome-0-day-router.html" target="_blank" rel="noopener">ConnectWise ScreenConnect CVE-2026-84869（CVSS 9.9）が CISA KEV 登録——不正 VBScript ペイロード配布に悪用、ScreenConnect 26.6.5 へ即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA が ConnectWise ScreenConnect の不正権限管理・認可欠如バグ CVE-2026-84869（CVSS 9.9）を KEV に登録した（9月11日）。脆弱なバージョンでは攻撃者がアクティブなリモートセッション経由で認可なしにファイル転送・コード実行が可能で、Huntress が3件の独立したインシデントを報告。いずれも ScreenConnect を悪用して新規接続システムへ悪意ある VBScript ペイロードを配布していた。ConnectWise は9月8日に CVE を公開すると同時に ScreenConnect 26.6.5 を緊急リリース。JFrog Artifactory（CVE-2026-42016）と MikroTik RouterOS（CVE-2026-67277/CVE-2026-86060）の5件が同週に一括 KEV 登録されており、リモート管理ツールへの攻撃が集中している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-14 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
