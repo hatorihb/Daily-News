@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 15 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ソニー銀行 / 富士通</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://enterprisezine.jp/news/detail/25073" target="_blank" rel="noopener">ソニー銀行×富士通、勘定系システム実開発で生成AI本格活用——工数40%削減・開発期間30%短縮を達成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ソニー銀行と富士通は、勘定系システムの実開発フェーズに生成AIを本格適用し、工数40%削減・開発期間30%短縮という成果を公表した。同取り組みでは Amazon Bedrock 上の Claude を活用し、要件定義・設計・コーディング・テスト各フェーズにわたって生成AIを組み込んでいる。銀行のコア系システムへの生成AI活用は国内では先進的な取り組みであり、今後の金融DXのモデルケースとして注目される。富士通は同成果を2026年9月14日付のプレスリリースで正式発表した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">富士通</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://it.impress.co.jp/articles/-/29791" target="_blank" rel="noopener">富士通、世界初の商用2nm 3D積層CPU「FUJITSU-MONAKA」と専用サーバーを発表——2026年11月より販売開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">富士通は9月14日、世界初となる商用2nmプロセス3D積層CPU「FUJITSU-MONAKA」および専用サーバー「MONAKA Server」を発表した。TSMCの最先端2nmプロセスを採用し、HBMメモリを3D積層することで従来比2倍以上のメモリ帯域幅を実現するという。スーパーコンピュータ「富岳」で培ったプロセッサ技術を商用分野へ展開するもので、AIワークロードや科学技術計算向けに特化した設計となっている。2026年11月からの販売を予定しており、国産ハイエンドCPUとして国際競争力が注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / OpenAI / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.pymnts.com/news/artificial-intelligence/2026/google-openai-and-anthropic-float-idea-of-ai-standards-body/" target="_blank" rel="noopener">Google・OpenAI・Anthropicの3社、任意参加の業界横断AI安全基準機関の設立を協議中と報道</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PYMNTS が9月14日に報じたところによると、Google・OpenAI・Anthropicの主要3社が、AI安全性に関する自主的な業界横断標準を策定する機関の設立について協議していることが明らかになった。政府主導の規制とは別に、業界主導で安全基準を定めることを目的としており、参加は任意の見込み。正式な設立・発表には至っておらず現段階では協議・検討の段階だが、EU AI法やバイデン大統領のAI行政命令を契機とした業界の自主規制機運が高まる中での動きとして注目を集めている。3社の規制アプローチへの姿勢が一段と明確になりつつある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.watch.impress.co.jp/docs/news/2140314.html" target="_blank" rel="noopener">Anthropic、脅威インテリジェンスレポートを公開——生成AIが悪用されるサイバー攻撃の手口と対策を解説</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは生成AIが関与するサイバー攻撃の最新動向をまとめた脅威インテリジェンスレポートを公開し、AI Watch が9月14日に詳細を伝えた。フィッシングメール生成・コード作成補助・社会工学攻撃の自動化など、攻撃者がAIを活用するケースが増加していることを示すとともに、Claudeを含むLLMのセーフガードが実際にどの程度防御機能を発揮しているかを事例とともに解説している。企業のセキュリティ担当者がAI時代の脅威を理解するうえで有用なレポートとなっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-astra-on-amazon-bedrock/" target="_blank" rel="noopener">OpenAI の GPT-6 Astra が Amazon Bedrock で GA——最大100万トークンコンテキスト、推論・長文作成を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月14日、OpenAIの最新フラッグシップモデル「GPT-6 Astra」をAmazon Bedrockで一般提供（GA）開始したと発表した。最大100万トークンのコンテキストウィンドウを持ち、高度な推論タスクや長文文書の要約・作成において従来モデルを大きく上回る性能を発揮する。Amazon BedrockのAPI経由でアクセス可能で、既存のBedrockワークフローに容易に組み込める設計となっている。Claude・Llama・Mistralと並んでマルチモデル環境での選択肢が広がり、ユースケースに応じたモデル選定が一層重要になる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Q Developer</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-september-14-2026/" target="_blank" rel="noopener">Amazon Q Developerデスクトップアプリが macOS / Windows で GA——ローカルファイル・カレンダー連携とバックグラウンドエージェントに対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月14日公開の週次アップデートで、Amazon Q Developer のデスクトップアプリが macOS および Windows で一般提供（GA）になったと案内した。ローカルファイルへのアクセス・カレンダー・メール連携機能を備え、IDE を離れた作業でもAIアシスタントを活用できる。バックグラウンドエージェント機能により長時間タスクをバックグラウンドで実行しながら別の作業を進めることも可能になった。開発者の日常的なワークフローにAI支援をより深く統合する動きとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Kiro</div>
+          <div class="card-badges">
+            <span class="impact impact-low">情報</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-september-14-2026/" target="_blank" rel="noopener">AWS Kiro for Students が18カ国132大学へ拡大——AI IDE の教育機関向け無償プログラムが大幅拡充</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月14日、AI IDE「Kiro」の学生向け無償利用プログラム「Kiro for Students」の提供範囲を18カ国・132大学へ拡大したと発表した。Kiro は仕様駆動開発（Spec-driven development）を標準搭載したAIネイティブIDEで、設計ドキュメントからコードを自動生成する機能が特徴。教育機関への広がりにより次世代エンジニアがAIネイティブな開発スタイルに慣れ親しむ機会が増え、エコシステムの育成を狙う。国内大学での採用拡大にも期待が集まっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitLab / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-hackers-now-exploit-max-severity-gitlab-flaw-in-attacks/" target="_blank" rel="noopener">【緊急・CISA期限9/15】GitLab に CVSS 10.0 の脆弱性（CVE-2026-85706）——認証なしでサーバー上の機密ファイルを読み取り可能、野外悪用確認済み</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitLabのCommits APIにパストラバーサル脆弱性（CVE-2026-85706、CVSS 10.0）が発見され、認証なしのリモート攻撃者がサーバー上のリポジトリ外ファイル（設定ファイル・認証情報・秘密鍵など）を任意に読み取れることが確認された。CISAは同脆弱性の野外悪用（in-the-wild exploitation）を確認し、KEVカタログに登録のうえ本日9月15日を連邦機関の対応期限と定めた。影響バージョンはGitLab CE/EE 19.1.7以前・19.2.5以前・19.3.1以前で、修正済みバージョン19.1.8・19.2.6・19.3.2へのアップデートを直ちに実施すること。自己ホスト型GitLabを運用する組織は最優先で対応されたい。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/news-events/alerts/2026/09/14/cisa-adds-one-known-exploited-vulnerability-catalog" target="_blank" rel="noopener">Cisco Secure Email GatewayにCVSS 9.8のSQLインジェクション脆弱性（CVE-2026-76461）——認証不要でroot権限リモートコード実行、CISA KEV登録</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは9月14日付でCisco Secure Email Gateway（旧ESA）のSQLインジェクション脆弱性（CVE-2026-76461、CVSS 9.8）をKEVカタログに追加した。認証なしのリモート攻撃者がHTTPリクエストを通じてSQL文を挿入し、最終的にroot権限でのリモートコード実行（RCE）が可能となる。メールセキュリティアプライアンスを直接インターネットに公開している環境では特に危険度が高い。Ciscoは2026年9月のセキュリティ強化アップデートで修正済みのため、対象製品を利用中の組織は速やかに適用すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / 窓の杜</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2140475.html" target="_blank" rel="noopener">2026年9月WindowsサーバーアップデートがRDSを破壊——Server 2019/2022/2025でリモートデスクトップ接続不能、ロールバックすると CVE-2026-69525 (RCE) のパッチが外れる板挟みに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftが9月のパッチチューズデー（Patch Tuesday）で配布した累積更新プログラムを適用後、Windows Server 2019・2022・2025においてリモートデスクトップサービス（RDS）が起動できなくなる問題が確認された（窓の杜、9月14日報道）。RDPサービスのデッドロックおよびLocal Session Managerの障害が原因とMicrosoftが認めており、影響は社内リモートワーク環境から仮想デスクトップ基盤（VDI）まで広範に及ぶ。問題を回避するためにアップデートをロールバックすると、CVSS 9.8のRCE脆弱性（CVE-2026-69525）の修正も取り消されるという板挟みの状態になる。Microsoftは修正プログラムの緊急リリースを準備中とされており、公式ガイダンスを監視のうえ対応を判断されたい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-15 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
