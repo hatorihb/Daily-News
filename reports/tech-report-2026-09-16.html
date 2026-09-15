@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 16 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AnyMind Group</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000678.000018392.html" target="_blank" rel="noopener">AnyMind Group「AnyLive」にAIアバター生成機能とライブコマース分析機能を強化——ボディーモーション・表情・口の動き精度が大幅向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnyMind GroupはライブコマースプラットフォームAnyLiveのAIアバター生成機能を強化し、ボディーモーション・顔の表情・口の動き（リップシンク）の精度を大幅に改善したと発表した。あわせてライブ配信データのリアルタイム分析機能も追加し、配信者が視聴者の反応を即時に把握できる環境を整備。EC事業者向けに配信品質と分析の両面でバリューアップを図る。同社は東南アジアを中心にライブコマース市場での事業拡大を加速しており、今回の機能強化でAIアバターを活用した無人配信の実用性を高める狙い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">インプレスグループ / 複数メディア主催</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://it.impress.co.jp/articles/-/29777" target="_blank" rel="noopener">「Impress AI Days 2026」開幕——ANA・パナソニック コネクト・東京海上日動システムズなどがAIエージェント業務活用事例を披露（9/15〜16）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">インプレスグループが主幹するオンラインイベント「Impress AI Days 2026」が9月15日〜16日の2日間にわたり開催された。ビジネスITメディア4誌が共催し、ANA・パナソニック コネクト・東京海上日動システムズ・イトーキ・三菱電機など国内主要企業がAIエージェントの業務実装事例を発表する。生成AIの戦略的導入から現場レベルの運用ノウハウまで幅広いセッションが予定されており、企業DXを加速する取り組みが多数紹介された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Charles Schwab</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pressroom.aboutschwab.com/press-releases/press-release/2026/Charles-Schwab-and-Anthropic-to-Bring-Claude-to-Independent-Registered-Investment-Advisors/default.aspx" target="_blank" rel="noopener">Anthropic「Claude for Financial Advisors」正式提供開始——BlackRock・Vanguard・Addepar等と連携し米国RIA 1.6万社超が対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicとCharles Schwabは、独立系投資顧問（RIA）向けにClaude AIを提供する「Claude for Financial Advisors」の正式提供を開始した。BlackRock・Vanguard・Addepar・iCapitalとの連携により、Schwabのプラットフォームを利用する1.6万社超のRIAが対象となる。Claudeは調査・ポートフォリオレビュー・コンプライアンス審査などの業務を支援し、顧客データはカストディアンサーバー上で保持される設計となっており、プライバシーとセキュリティに配慮した実装が行われている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cloudflare</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://blog.cloudflare.com/content-independence-day-ai-options/" target="_blank" rel="noopener">Cloudflare、検索インデックス兼エージェント取得兼学習を行う「混合型AIクローラー」のデフォルトブロックを9月15日より施行——出版社向け「Pay Per Use」モデルも導入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cloudflareは9月15日より、検索インデックス収集・AIエージェントのデータ取得・モデル学習データ収集を同時に行う「混合型AIクローラー」をデフォルトでブロックする新ポリシーを施行した。広告収入に依存するサイトが無断でコンテンツをAI学習に利用されることを防ぐ目的で、新規顧客および無料プランの全顧客に即日適用される。パブリッシャー向けには「Pay Per Use」モデルも用意され、AIクローラーへのアクセス許可と収益化を選択できる仕組みも同時に導入された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / OpenAI</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.reuters.com/technology/artificial-intelligence/ai-stocks-slide-amid-calls-slow-development-2026-09-15/" target="_blank" rel="noopener">AnthropicのDario AmodeiがAI開発の急減速を呼びかけ——Sam AltmanもOpenAI 2026年IPO見送りを示唆、世界でAI株が急落</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic CEOのDario Amodeiは9月15日、AI開発の急激な加速に懸念を示し、安全性確保のための自発的な減速を業界に呼びかけた。同日、OpenAIのSam Altmanも安全上の懸念からOpenAIの2026年IPOを見送ることを示唆した発言を行った。この2つの発言が重なり、NvidiaやMicrosoftなど世界の主要AI・テック関連銘柄が一時急落する展開となった。AI安全性と事業拡大のバランスが改めて問われる中、業界全体での対話が注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいAWSアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / 窓の杜</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2140865.html" target="_blank" rel="noopener">Microsoft、9月Patch Tuesdayが引き起こしたRDS・Hyper-V・USB Audioバグに緊急対処——定例外OOBアップデートを配信、Windows 11 24H2以降はCVE-2026-62721ほか追加脆弱性修正含む必須適用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは9月16日、9月の月例パッチ（Patch Tuesday）が原因で発生したリモートデスクトップサービス（RDS）・Hyper-V・USB Audioドライバーの不具合を修正する定例外更新（OOBアップデート）を緊急配信した。Windows 11 24H2以降のバージョンには、CVE-2026-62721・CVE-2026-85921の追加セキュリティ修正も含まれており、これらのバージョンでは必須適用が推奨される。Windows Updateから自動適用されるほか、Microsoft Updateカタログからも手動取得が可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">CISA KEVにWindowsゼロデイ2件を追加——CVE-2026-81963（Update Stack 権限昇格）・CVE-2026-85880（ALPC ヒープバッファ溢れ）、連邦機関は9/22まで適用義務</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは既知の悪用された脆弱性（KEV）カタログに、9月のPatch Tuesdayで公表されたWindowsの権限昇格ゼロデイ2件を追加した。CVE-2026-81963はWindows Update StackにおけるEoP（権限昇格）で、不正なリンク解決によりSYSTEM権限取得が可能（CVSS 7.8、Windows 11・Server 2025対象）。CVE-2026-85880はWindows ALPCのヒープベースバッファオーバーフローによるEoPで、Windows 10・複数のServerバージョンが影響を受ける（CVSS 7.8）。両脆弱性とも実際の悪用（in-the-wild exploitation）が確認されており、米連邦政府機関には2026年9月22日までの適用が義務付けられた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / Security NEXT</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/190149" target="_blank" rel="noopener">Cisco、BroadWorks CommPilotおよびIdentity Services Engine（ISE）向けセキュリティアドバイザリを本日公開——修正済みソフトウェアへの更新を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CiscoのPSIRT（製品セキュリティインシデントレスポンスチーム）は9月16日、BroadWorks CommPilot Application SoftwareおよびIdentity Services Engine（ISE）を対象とするセキュリティアドバイザリを公開した。複数の製品カテゴリにまたがる修正が含まれており、対象バージョンの利用者には修正済みソフトウェアリリースへの更新が推奨されている。詳細な影響範囲・CVSSスコア・回避策については各アドバイザリページで確認できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-16 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
