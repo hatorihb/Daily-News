@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 17 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">デジタル庁 / Innovatopia</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://innovatopia.jp/cyber-security/cyber-security-news/117770/" target="_blank" rel="noopener">デジタル庁 GSSへの不正アクセス — 既知VPN脆弱性でゼロトラストの「死角」を突かれ、職員等24.6万件が漏洩か</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">デジタル庁が運用する政府共通の業務実施環境「ガバメントソリューションサービス（GSS）」が、CVSS評価「中（Medium）」の既知VPN脆弱性を悪用した第三者による不正アクセスを受け、職員・公務員・事業者等約24.6万件の個人情報（氏名・メールアドレス・電話番号など）が漏洩した可能性が公表された。GSSはゼロトラストアーキテクチャを採用していたが、既知脆弱性の修正遅れと保守運用アカウントへの過剰な権限付与が攻撃の突破口となった。6月25日に異常なファイルアクセスを検知し、7月9日にVPN経由の不正侵入が判明。9月11日の公表後も、ゼロトラスト設計の死角・脆弱性管理・アカウント権限統制の在り方を巡る議論が続いており、政府DXの根幹を担うインフラの信頼性回復が急務となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">東京ビッグサイト / Reed Exhibitions Japan</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.office-expo.jp/hub/ja-jp/about/ws.html" target="_blank" rel="noopener">働き方改革EXPO 2026 秋 東京が開幕 — 生成AI・DXによる業務改革ソリューションが集結、全90講演も</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">生成AI・DXなど業務改革のためのソリューションを一堂に集めた「働き方改革EXPO 2026 秋 東京」が9月16日（水）から18日（金）まで東京ビッグサイト・南展示棟で開幕した。人事・総務・経理向けの「総務・人事・経理Week」と同時開催され、全90講演のセミナーも実施される。書類・勤怠・経費管理のAI自動化、在宅勤務・モバイルワーク支援ツール、ワークプレイス改革EXPOおよびHR EXPOも並行して展開。生成AI活用とDXによるバックオフィス業務の効率化ニーズが高まる中、日本のオフィスDXを加速するための最新製品・サービスが集結した。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / Forbes</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.forbes.com/sites/siladityaray/2026/09/16/openai-is-reportedly-weighing-new-funding-round-at-15-trillion-valuation/" target="_blank" rel="noopener">OpenAI、企業評価額1.5兆ドルでの新規資金調達を検討 — IPOは2027年以降に先送り</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIが企業評価額1.5兆ドル（約225兆円）での新たな資金調達ラウンドを検討していると、Forbes・New York Times・Bloombergなど複数メディアが9月16日に報道した（Bloombergの試算は1.2兆ドル）。同社の年間経常収益（ARR）は400億ドル超に達したとされ、株式公開（IPO）は2027年以降に先送りされる見通し。2024年の調達時における評価額（1570億ドル）から約2年で約10倍という急激な伸びで、AGI開発を巡る資金需要の大きさを示している。CEOのサム・アルトマン氏はAI安全性への懸念を挙げつつも、モデル性能向上と大規模インフラ投資を継続する方針を示している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Factory AI / CXO Digital Pulse</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cxodigitalpulse.com/ai-coding-startup-factory-triples-valuation-to-5-billion-after-raising-200-million/" target="_blank" rel="noopener">AIコーディングエージェント「Factory」が2億ドルを調達、評価額50億ドルへ — わずか5か月で3倍以上に急騰</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">エンタープライズ向けAIコーディングエージェントを提供する米Factory AIがシリーズCラウンドで2億ドルの資金調達を完了し、企業評価額が50億ドルに達したと発表。2026年4月時点の評価額（15億ドル）から約5か月で3倍超に急騰した。投資家にはBlackstone、Khosla Ventures、Sequoia Capital、Insight Partners、Sound Venturesが参加。2023年創業のFactory AIはCognitionやCursorと競合する自律型AIエンジニアリングプラットフォームで、企業のソフトウェア開発プロセス全体をAIエージェントで自動化することを目指す。大手テック企業が開発自動化を加速させる中、エンタープライズAIコーディング市場への大型資金流入が続いている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/transatlantic-subsea-cable-us-ireland-fastnet-aws" target="_blank" rel="noopener">AWS Fastnet 大西洋横断海底ケーブル、アイルランド建設許可が最終確定 — 2028年稼働予定、320Tbps超の大容量インフラ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが100%独自所有する大西洋横断海底光ファイバーケーブル「Fastnet」について、アイルランドの国家計画審査委員会（An Coimisiún Pleanála）がコーク州での建設許可に対する地域住民の異議申し立てを棄却し、最終許可が確定した。米メリーランド州とアイルランド・コーク州を結ぶ同ケーブルは320テラビット/秒（Tbps）超の転送能力を持ち、クラウドおよびAIワークロード向けの大容量・低遅延な大西洋横断通信インフラとして2028年の稼働を目指す。AWSの初の単独所有大西洋横断ケーブルとして、既存ケーブルに障害が生じた際のバックアップ経路も担い、グローバルクラウドレジリエンスの強化を図る。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon / AWS Press</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://press.aboutamazon.com/aws-international/2026/9/modern-connectivity-infrastructure-built-responsibly-on-marylands-eastern-shore" target="_blank" rel="noopener">Amazon、メリーランド州イースタンショアで次世代通信インフラを構築 — 環境配慮・地域連携を両立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AmazonがFastnet海底ケーブルの米国側の着地点となるメリーランド州イースタンショアに次世代通信インフラを構築すると発表した。環境影響評価や地域コミュニティとの協調を重視した「責任ある開発」を強調しており、地元雇用の創出や地域インフラへの貢献を約束している。AWSは増大するクラウドおよびAI需要に対応するため、グローバルな通信インフラの大規模拡張を進めており、北米−欧州間の高速・高容量な直結通信経路の確保を急いでいる。Fastnetプロジェクトはデータセンター間の超大容量通信を支え、AIワークロードの実行に不可欠な低遅延インターコネクトを提供する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/news-events/alerts/2026/09/16/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">Cisco ISE の CVSS 10.0 脆弱性（CVE-2026-76460）が CISA KEV に追加 — 認証不要のリモートroot奪取、実際の悪用を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは9月16日、Cisco Identity Services Engine（ISE）の重大な脆弱性CVE-2026-76460（CVSSスコア: 10.0）を既知悪用脆弱性（KEV）カタログに追加した。本脆弱性は特権APIの不適切な使用（Incorrect Use of Privileged APIs）に起因し、認証不要のリモート攻撃者がWebベース管理インターフェースのアクセス制御をバイパスしてroot権限を取得できる。Cisco ISEを利用する組織はベンダーの提供するパッチを直ちに適用する必要がある。実際の悪用が確認されており、特に企業ネットワークのアクセス制御基盤として広く導入されているCisco ISEへの影響は深刻で、優先度の高い対応が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Acronis / CISA / Help Net Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/16/acronis-backup-plugin-vulnerability-exploited-cve-2026-87886/" target="_blank" rel="noopener">Acronis バックアッププラグインの権限昇格脆弱性（CVE-2026-87886）が CISA KEV に追加 — 標的型攻撃での悪用を確認、修正版: cPanel 1.9.3 HF3 / Plesk 1.8.11.638</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは9月16日、Acronis Backup Plugin for cPanel/Pleskの脆弱性CVE-2026-87886（CVSSスコア: 7.8）をKEVカタログに追加した。不適切なデフォルト権限設定（Incorrect Default Permissions）に起因するLinux上のローカル権限昇格の脆弱性で、標的型攻撃での実際の悪用が確認されている。影響を受けるバージョンを使用している場合は、cPanel向けプラグイン1.9.3 HF3またはPlesk向け拡張1.8.11.638への早急なアップデートが必要。Webホスティング環境で広く利用されるcPanel・Pleskとの組み合わせで攻撃が展開されており、ホスティングプロバイダーや中小企業のサーバー管理者は速やかに対応されたい。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Mozilla / Piunika Web</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://piunikaweb.com/2026/09/16/chrome-153-firefox-156-security-updates/" target="_blank" rel="noopener">Chrome 153 と Firefox 156 のセキュリティアップデートが同日公開 — Chrome は Critical 3件を含む42脆弱性を修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleはChrome 153（153.0.8010.47/48）を9月16日に公開し、Critical評価3件（CVE-2026-91726 WebGL 境界外読み取り、CVE-2026-91721 Internals use-after-free、CVE-2026-91749 Workers use-after-free）を含む合計42件の脆弱性を修正した。同日MozillaもFirefox 156をリリースし、うち29件が「高（High）」評価の脆弱性に対処。主要ブラウザの大規模セキュリティアップデートが同日に集中するのは珍しく、エンタープライズ環境での迅速なパッチ適用が推奨される。現時点でChrome・Firefoxいずれも実際の悪用は確認されていないが、Critical評価の脆弱性はメモリ安全性に関わるものが多く、早期アップデートが強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-17 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
