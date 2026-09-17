@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 18 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Salesforce / ITmedia NEWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2609/17/2000001569/" target="_blank" rel="noopener">Salesforce、7時間半の世界規模大規模障害から復旧 — よりによって Dreamforce 2日目に発生、PayPay等国内サービスにも影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Salesforceで日本時間9月16日夕方（16:50頃）から約7時間半にわたる世界規模のサービス障害が発生し、9月17日未明に復旧した。中核サービス「Salesforce Services」の1,000以上のインスタンスで内部ログインサービスが応答待ちとなりリクエストが滞留、ユーザー側で遅延やエラーが多発した。PayPay等の国内サービスを含む多数の企業が問い合わせフォームや業務システムの利用不能に直面した。同社の年次カンファレンス「Dreamforce 2026」（サンフランシスコ・モスコーニセンター、9/15〜17）の2日目に重なるという皮肉な状況となり、信頼性向上に向けた対応が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CESA / 日経クロステック</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://xtech.nikkei.com/atcl/nxt/column/18/03763/091700001/" target="_blank" rel="noopener">東京ゲームショウ2026開幕 — 53カ国・地域から過去最多1138社出展、AI活用ツールが続々登場しビジネスデイを席巻</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">「東京ゲームショウ2026」が9月17日（水）、幕張メッセ（千葉）で開幕した。53の国・地域から過去最多となる1,138社（国内540社・海外598社）が出展し、一般公開日（9/19〜21）を含む史上最長の5日間開催となる。ビジネスデイ初日の来場者数は5万3,630人と昨年の初日を上回った。会場ではAIを活用したゲームアセット3D制作支援ツールや可観測性（Observability）向上ツールなど、ゲーム開発・運営の生産性を高めるAI系ソリューションの展示が目立ち、日本ゲーム産業のDX推進を体現する場として注目を集めた。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Salesforce / Salesforce Ben</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.salesforceben.com/salesforce-launches-aiforce-at-dreamforce-26-ai-replaces-the-ui/" target="_blank" rel="noopener">Salesforce、Dreamforce最終日に「AIforce」と「Koa」を発表 — 「AIがUIを置き換える」と宣言、CRMが Claude や Slack に直接届く</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Salesforceは9月17日のDreamforce 2026（サンフランシスコ）最終日に、新たな企業AIプラットフォーム「AIforce」とCRM専用AIモデル「Koa」を発表した。AIforceはCRMの操作画面を離れることなくAIが仕事を届けるライブインターフェース層で、Claude・Slack・Lightning等どの環境からでも利用可能。Koaは「CRMアクションでリーディングモデルと同等以上の性能をエラー3分の1以下で実現する」と謳うCRM特化モデル。7種類のジョブレディエージェントも同時発表され、企業はITを介さずに設定・展開できる。AWS・Google Cloud・Nvidiaとの新たなパートナーシップ強化も明らかにされた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">LawZero / Canada.ca</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.canada.ca/en/innovation-science-economic-development/news/2026/09/canada-and-germany-invest-in-lawzero-to-build-a-new-approach-to-safe-sovereign-ai.html" target="_blank" rel="noopener">カナダとドイツ、Yoshua Bengio氏のAI安全性非営利組織「LawZero」に最大3億ドルの共同助成を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">カナダとドイツは9月17日、モントリオールで開催されたAIカンファレンス「ALL IN 2026」で、チューリング賞受賞者のYoshua Bengio教授が主導するAI安全性非営利組織「LawZero」にそれぞれ最大1.5億ドル（計最大3億ドル）の助成金を拠出すると発表した。LawZeroは2023年設立で約50名の研究者が在籍し、「Scientist AI」と呼ぶ安全設計型AIの研究開発を進める。Scientist AIは目的を持たず客観的事実のみに基づく「非エージェント型」設計で、高度なAIシステムの監視・ガードレール機能を担う。調達資金は国際研究チームの拡充・カナダ国内のコンピューティングインフラ整備・ベルリンオフィス開設に充てられる予定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/monitor-detected-anomalies-using-dashboards/" target="_blank" rel="noopener">AWS Billing and Cost Management ダッシュボードにコスト異常検知ウィジェット追加 — 予算・Savings Plansカバレッジと一元可視化、追加費用なし</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Billing and Cost Management ダッシュボードに、コスト異常（Detected Anomalies）を既存の予算・支出・コスト効率指標・Savings Plansカバレッジと同一画面で表示できる新ウィジェットが追加された。各異常についてコストへの影響・根本原因・発生期間を確認でき、参照期間は30・60・90日から選択可能。重大度・サービス・アカウント・リージョンでのフィルタリング、CSV/PDFエクスポート、定期レポートメール送信、クロスアカウントダッシュボード共有にも対応する。AWS Cost Anomaly Detection を別タブで開く手間が不要となり、財務管理の効率が向上する。追加費用は発生しない。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/aws-direct-connect-announces-flat-rate-pricing/" target="_blank" rel="noopener">AWS Direct Connect、10Gbps・100Gbps専用接続に固定月額料金を導入 — データ転送アウト従量課金を廃止し料金予測が容易に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Direct Connect が、10Gbps および 100Gbps 専用接続（Dedicated Connection）を対象に固定月額料金制を導入した。従来の接続時間料金＋データ転送アウト（DTO）従量課金の組み合わせから、選択した地理ティアに応じた単一の時間単価に一本化される。10Gbps Tier 1（アシュバーン—us-east-1間）は約$10.96/時（月額換算 約$8,000）。100Gbps Tier 3（サンフランシスコ—us-east-1およびeu-central-1間）は約$219.18/時。専用接続のみが対象で、ホスト型接続（Hosted Connection）は引き続き既存料金体系が適用される。大規模クラウド利用組織にとってコスト予測精度の向上が期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Dell / CyberSecurityNews</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/dell-objectscale-vulnerabilities/" target="_blank" rel="noopener">Dell ObjectScale に CVSS 10.0 の脆弱性（CVE-2026-70416）— 認証不要のリモートコード実行、バージョン 4.4.0.0 未満が対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Dell のエンタープライズ向けオブジェクトストレージ製品「ObjectScale」のバージョン 4.4.0.0 未満に、信頼できないデータのデシリアライゼーション（CWE-502）に起因する重大な脆弱性 CVE-2026-70416（CVSS 10.0）が存在することが報告された。認証不要のリモート攻撃者がこの脆弱性を悪用すると、任意のコードを実行して ObjectScale 環境を完全に掌握できる。攻撃者はデータへのアクセス・設定変更・ストレージ運用の妨害・悪意あるペイロードの展開・永続化を行える。Dell は 9 月 10 日付のセキュリティアドバイザリ DSA-2026-393 で修正版（v4.4.0.0）へのアップグレードを強く推奨しており、バックアップや AI ワークロードを保存する環境では早急な対応が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Helpfeel / DataBreaches.Net</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://databreaches.net/2026/09/17/gyazo-breach-exposes-23-62-million-user-records-and-490-million-image-metadata-records/" target="_blank" rel="noopener">国内画像共有 Gyazo が大規模情報漏洩 — 2362万件のユーザーレコードと4.9億件の画像メタデータが流出</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">京都市のHelpfeel社が運営する画像共有サービス「Gyazo」が、9月11日に画像アップロードサーバーの脆弱性を悪用した不正アクセスを受けたと発表した。漏洩した個人情報は氏名・メールアドレス・パスワードハッシュ・デバイスID・ログインセッション・一部の連携アカウントトークンを含む2,362万件。さらに2019年1月以前の画像を主体とする約4億9,000万件の画像メタデータ（画像リンクを構成するIDを含む）が外部に流出しており、そのIDを悪用した画像の無断閲覧リスクも指摘されている。同社は個人情報保護委員会・警察に報告し、全ユーザーにパスワード変更と他サービスでの使い回し停止を要請している。クレジットカード情報は含まれない。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA / Help Net Security</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/17/cisa-guidance-for-implementing-cyber-decoys/" target="_blank" rel="noopener">CISA、重要インフラ向け「サイバーデコイ展開ガイダンス」を公開 — ハニーポット・トリップワイヤを既存ツールで構築し攻撃者を欺く</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは9月17日、重要インフラの所有者・運用者向けに「Using Cyber Decoys to Strengthen Detection and Response」と題したガイダンス文書を公開した。これはCISAが詳細なサイバーデコイ展開手順を示した初のガイドで、ハニーポット・ハニートークン・トリップワイヤなどを活用して正規の認証情報や正当なツールを使う攻撃者を早期に検知・妨害する手法を解説する。EDR・IAM・DLPといった既存ツールを再利用して追加費用なしに導入でき、準備・実行・理解の3フェーズで展開プロセスが整理されている。大規模なアーキテクチャ変更を伴わず小規模なセキュリティチームでも適用可能な点が特長で、「攻撃者に嘘をつく」防御戦略として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-18 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
