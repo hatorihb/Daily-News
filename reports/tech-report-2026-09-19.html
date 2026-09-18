@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 19 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ローソン / Impress Watch</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.watch.impress.co.jp/docs/news/2141684.html" target="_blank" rel="noopener">ローソン、生成AIが発案した「なんだこりゃ？」シリーズ新商品3品を発売 — レモンタルト（ピクルス風味）など異色コラボが話題</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ローソンは9月18日、生成AIが企画・発案した新商品「なんだこりゃ？」シリーズの第2弾として3品を全国発売した。目玉は「プレミアムロールケーキ レモンタルト（ピクルス風味）」で、甘みとピクルスの酸味・塩味が融合した斬新な味わいを打ち出している。開発にはAnthropicのClaudeをはじめとする複数の生成AIが参加し、「人間の発想では採用しにくいがAIなら提案できる」コンセプトで既存の商品開発プロセスを補完した。同社はAI活用の食品開発を今後も継続する方針で、味の組み合わせ提案・需要予測・パッケージデザインへのAI導入を拡大中。小売DXの観点でも生成AIを商品開発の上流工程に組み込んだ先進事例として注目されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CESA / BCN Retail</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bcnretail.com/news/detail/20260918_661989.html" target="_blank" rel="noopener">東京ゲームショウ2026 一般公開日（9/19〜21）を前に最終準備 — MSIのAI専用チップ搭載モニターなどAI活用製品が出展ラッシュ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東京ゲームショウ2026（幕張メッセ）は9月19日から3日間の一般公開フェーズに突入する。9月18日時点のビジネスデイ2日目では、MSIがAI処理専用チップ「NPU」を搭載した高性能モニターを初披露し、ゲームプレイ中のフレーム補間・ノイズキャンセリング・画質向上をリアルタイムで処理する機能をデモした。また複数の国内・海外パブリッシャーがAI生成コンテンツ（ステージ音声・ダイアログ自動生成・テクスチャ自動最適化）を組み込んだタイトルを展示し、AI＋ゲーム開発の実用化事例が相次いだ。ビジネスデイ2日間の延べ来場者数は昨年比15%増で、一般公開日の入場予約も完売が続出している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / CNBC</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/09/18/anthropic-accenture-ai-safety.html" target="_blank" rel="noopener">Anthropic、AccentureをAIモデルの「組み込み安全評価者」第1号に選定 — 5年・20億ドル規模の提携で社員が常駐しモデルを継続検証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは9月18日、世界最大のITコンサルティング企業Accentureを「Embedded Safety Evaluator（組み込み安全評価者）」プログラムの第1号パートナーに選定したと発表した。5年間・総額20億ドル規模の投資のもと、Accentureのセキュリティ・AI倫理専門家がAnthropicの施設に常駐し、Claudeをはじめとするモデルの安全性評価・レッドチーミング・バイアス検証を継続的に実施する。Anthropicはこのプログラムを通じ、業界全体のAI安全評価の標準化を目指す。評価レポートは匿名化された形で段階的に公開される方針で、政府機関や規制当局からの信頼獲得も視野に入れる。AI安全性への外部監査を商業展開に先立って制度化した初の大型ケースとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AI Safety Community / CNBC</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/09/18/ai-safety-evaluators-anthropic-openai-models-security.html" target="_blank" rel="noopener">100人超のAI専門家がAnthropicとOpenAIに公開書簡 — 「真に独立した安全評価者」の法的保護を求める、Geoffrey Hintonも署名</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Geoffrey Hinton氏（ノーベル物理学賞受賞）を含む100人以上のAI研究者・倫理専門家は9月18日、AnthropicとOpenAIに宛てた公開書簡を発表し、AI安全評価者の独立性を保護する法的・組織的枠組みの整備を求めた。書簡は「現在の評価者は雇用や資金を通じてAI企業に依存しており、不都合な結果を報告しにくい構造的な利益相反がある」と指摘し、評価者の解雇・契約終了から保護するホワイトブロワー制度の導入と、評価結果を恣意的に書き換えさせない独立ガバナンス機構の設置を具体的に要請している。Anthropicが同日発表したAccentureとの「組み込み評価者」契約について、書簡は「前進だが評価者の真の独立性が保証されない」と留保付きで言及した。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-sns-1mib-support/" target="_blank" rel="noopener">Amazon SNS、最大1 MiBのメッセージペイロードをサポート — 従来比4倍、大規模IoT・生成AIワークロードに対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Simple Notification Service（SNS）は9月18日、スタンダードトピックおよびFIFOトピック向けに最大1 MiB（1,048,576バイト）のメッセージペイロードをサポートすると発表した。従来の上限は256 KiBであり、今回の変更で4倍の容量が利用可能になる。センサーデータや画像サムネイルを含む大型IoTペイロード、複数ドキュメントをまとめて渡す生成AIワークフロー、金融決済の詳細データなど、これまでS3への事前アップロードや分割送信が必要だったユースケースで直接送信が可能となる。料金は従来の1リクエスト＝64 KBチャンク課金から変更はなく、1 MiBを送信した場合は16チャンク分として計算される。全商用リージョンで即日利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/9/privatelink-tunnel-endpoint/" target="_blank" rel="noopener">AWS PrivateLink、トンネルエンドポイントをGAリリース — 別VPC・別アカウントのネットワークセグメントへプライベート接続</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS PrivateLinkは9月18日、新機能「Tunnel Endpoints（トンネルエンドポイント）」の一般提供（GA）を開始した。従来のPrivateLinkはVPCエンドポイント経由で単一サービスに接続する設計だったが、トンネルエンドポイントはIPレイヤーのトンネルを作成し、別のVPCや別アカウント配下にある複数サービス・ネットワークセグメント全体に対してプライベート接続を確立できる。マルチアカウント・マルチVPCアーキテクチャを採用する大規模エンタープライズや、SaaSプロバイダーがテナントごとに分離したネットワーク環境を提供するシナリオで特に有用。インターネットゲートウェイ・NATゲートウェイ・VPNを経由せずにトラフィックをAWSネットワーク内に留めるため、セキュリティ・レイテンシの両面でメリットがある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Plugin4Shell / Help Net Security</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/18/plugin4shell-ai-coding-agents-vulnerability/" target="_blank" rel="noopener">「Plugin4Shell」— Claude Code・Codex・GitHub Copilot・Gemini CLI 4製品に影響するゼロクリックRCEが公開、2製品は未修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ研究者が9月18日に「Plugin4Shell」と命名したゼロクリックRCE（リモートコード実行）脆弱性を公開した。対象はClaude Code・OpenAI Codex・GitHub Copilot・Google Gemini CLIの4つの主要AIコーディングエージェント。攻撃者が細工したプロジェクトやパッケージを悪意のあるプラグインリポジトリに登録すると、AIエージェントがバックグラウンドで実行する自動プラグイン更新機構がSHAピン留めの検証をバイパスし、ユーザーの操作なしに任意のコードをローカル環境で実行する。Claude Code 2.1.179 およびCodex 0.146.0 ではパッチが提供済みだが、公開時点でGitHub CopilotとGemini CLIは未修正。CISAは注意喚起を発出し、AIコーディングエージェントのプラグイン自動更新機能を無効化することを一時的な緩和策として推奨している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA KEV / CyberSecurityNews</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/linux-kernel-privilege-escalation-vulnerability-exploited/" target="_blank" rel="noopener">CISA KEV: Linuxカーネルの悪用確認済み脆弱性3件を追加 — CVE-2025-39682（kTLS）・CVE-2025-39964・CVE-2026-53266、9/21まで対応必須</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは9月18日、既知悪用脆弱性カタログ（KEV）にLinuxカーネルの脆弱性3件を新たに追加し、連邦政府機関に対して2026年9月21日までの修正対応を義務付けた。CVE-2025-39682はkTLS（カーネル内TLS処理）の境界外書き込みによる権限昇格で、CVSS 7.8。CVE-2025-39964はメモリ解放後使用（UAF）による権限昇格。CVE-2026-53266はネットワーク処理パスの競合状態を悪用した権限昇格で、いずれもローカル攻撃者が一般ユーザー権限からroot権限への昇格に悪用していることが確認されている。コンテナエスケープやクラウドVMの横断移動と組み合わせた複合攻撃への利用が懸念されており、エンタープライズLinux環境では早急なカーネルアップデートが求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Check Point / The Hacker News</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/critical-check-point-management-server.html" target="_blank" rel="noopener">Check Point Security Management/Log ServerにCVSS 9.8の重大脆弱性（CVE-2026-91843）— 未認証でroot権限のRCEが可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Check Point Software Technologiesは9月18日、Security Management ServerおよびLog Serverに影響するCVSS 9.8の重大な脆弱性CVE-2026-91843を公開した。管理ポートに到達可能な未認証の攻撃者が特別に細工したリクエストを送信するだけで、サーバー上でroot権限のリモートコード実行が可能になる。影響を受けるバージョンはR81.20以前で、修正版はR82.10以降またはホットフィックスHF-2026-09として提供されている。Check Pointの管理サーバーはエンタープライズ環境のファイアウォール・IPS・VPN設定を一元管理しているため、侵害された場合は組織全体のネットワークセキュリティポリシーを攻撃者が書き換え可能になる。インターネット公開された管理ポートを持つ環境は特に緊急度が高く、即時パッチ適用または管理ポートのアクセス制限が推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-19 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
