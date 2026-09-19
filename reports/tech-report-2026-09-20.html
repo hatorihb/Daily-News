@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX・AI・AWS Update</title>
+<style>
+  :root {
+    --black: #0d0d0d;
+    --white: #f5f5f5;
+    --red: #e63946;
+    --gray: #6b7280;
+    --mid: #374151;
+    --border: #d1d5db;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--white); color: var(--black); font-family: 'Helvetica Neue', Arial, 'Hiragino Sans', sans-serif; font-size: 15px; line-height: 1.6; }
+  header { background: var(--black); color: var(--white); padding: 20px 24px; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+  header span { font-size: 22px; font-weight: 700; letter-spacing: 0.04em; text-transform: none; }
+  nav { background: var(--mid); color: var(--white); padding: 10px 24px; font-size: 12px; letter-spacing: 0.08em; display: flex; gap: 24px; flex-wrap: wrap; }
+  nav a { color: var(--white); text-decoration: none; opacity: 0.75; }
+  nav a:hover { opacity: 1; }
+  main { max-width: 900px; margin: 0 auto; padding: 32px 16px; }
+  section { margin-bottom: 48px; }
+  section h2 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray); border-bottom: 2px solid var(--black); padding-bottom: 6px; margin-bottom: 20px; }
+  .card { border: 1px solid var(--border); border-radius: 4px; padding: 16px; margin-bottom: 14px; background: #fff; }
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; flex-wrap: wrap; gap: 6px; }
+  .card-service { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); }
+  .card-badges { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .impact { font-size: 10px; padding: 2px 7px; border-radius: 2px; font-weight: 700; letter-spacing: 0.06em; }
+  .impact-high { background: var(--red); color: #fff; }
+  .impact-mid { background: var(--mid); color: #fff; }
+  .impact-low { background: var(--border); color: var(--gray); }
+  .card-date { font-size: 11px; color: var(--gray); }
+  .card-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+  .card-title a { color: var(--black); text-decoration: none; }
+  .card-title a:hover { text-decoration: underline; color: var(--red); }
+  details summary { font-size: 12px; color: var(--gray); cursor: pointer; user-select: none; }
+  details summary:hover { color: var(--black); }
+  .card-desc { font-size: 13px; color: var(--mid); margin-top: 8px; line-height: 1.7; }
+  footer { text-align: center; padding: 24px; font-size: 11px; color: var(--gray); border-top: 1px solid var(--border); margin-top: 16px; }
+</style>
+</head>
+<body>
+<header>
+  <span>DX・AI・AWS Update</span>
+  <div>2026 — 09 — 20</div>
+</header>
+<nav>
+  <a href="#section-domestic">01 国内 IT・DX</a>
+  <a href="#section-ai">02 AI</a>
+  <a href="#section-aws">03 AWS</a>
+  <a href="#section-security">04 セキュリティ</a>
+</nav>
+<main>
+
+  <section id="section-domestic">
+    <h2>01 国内 IT・DX</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">東京ゲームショウ</div>
+        <div class="card-badges">
+          <span class="impact impact-mid">重要度 中</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2609/19/2000001639/">東京ゲームショウ2026 一般公開初日：生成AI商談が活発化、ゲーム開発者の8割超が既に活用</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">TGS2026一般公開初日（9月19日）、ITmedia NEWSが生成AI活用ゲーム開発ツール・サービスの急増を報告。開発者の約8割がAIを利用しており制作コスト削減とクリエイティブ効率化が主目的。台風25号（デュアン）接近で9月21日中止決定、9月20日は予定通り開催。来場者向けの生成AIデモやB2B商談では次世代ゲームエンジン連携AIが注目を集めた。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Apple</div>
+        <div class="card-badges">
+          <span class="impact impact-mid">重要度 中</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://taisy0.com/2026/09/19/227843.html">iPhone 18 Pro Face ID不具合：Appleが原因特定、一部保護フィルムメーカーが販売停止・回収</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">9月18日発売のiPhone 18 Pro/Pro Maxで保護フィルム装着時にFace IDが動作不良多発。Appleは9月19日にインディスプレイTrueDepthカメラの赤外線センサーへの干渉が原因と案内。プライバシーフィルターや厚化粧も影響する可能性を公表し、Trinity・NIMASO JAPAN等メーカーが対象製品の販売停止・回収を発表。Appleはソフトウェアアップデートによる部分的な改善を検討中と説明している。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <section id="section-ai">
+    <h2>02 AI</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">xAI</div>
+        <div class="card-badges">
+          <span class="impact impact-mid">重要度 中</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://teslanorth.com/2026/09/19/spacexai-grok-voice-transcribe-2/">xAI Grok Voice Transcribe 2.0：32モデル中首位精度、$0.10/hrバッチで提供開始</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">xAI（イーロン・マスク）がGrok Voice Transcribe 2.0を正式リリース。32の競合ストリーミングモデルと比較してトップ精度、v1.0比精度2倍を達成。価格はバッチ$0.10/hr、ストリーミング$0.20/hr、スピーカーダイアリゼーションは無料。コールセンター・医療・メディア字幕など多言語リアルタイム文字起こし用途での採用を想定している。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">AI業界全般</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.usnews.com/news/world/articles/2026-09-19/ten-days-that-changed-the-course-of-ai">AIの安全性転換点：「AIを減速させよ」が主流に——エージェント障害が引き金</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">U.S. NewsがAI業界の急速な方向転換を分析。AIエージェント群による予期せぬ大規模障害を受け、Dario Amodei（Anthropic）・Sam Altman（OpenAI）・Elon MuskらがAI開発減速を公式支持。OpenAIは$1.5兆バリュエーション資金調達を検討中とも報告。AI安全性評価体制強化に向けた業界コンセンサスが形成されつつあり、各国規制当局との協調姿勢が鮮明になっている。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <section id="section-aws">
+    <h2>03 AWS</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">AWS Resilience Hub</div>
+        <div class="card-badges">
+          <span class="impact impact-mid">重要度 中</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/resilience-hub-eks-dependency-policy/">AWS Resilience Hub：EKSラベル対応・依存関係インサイト・組織全体ポリシー共有の3機能追加</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">AWS Resilience Hubが3機能追加。①EKS名前空間内ラベルをサービス入力ソースとして利用可能（既存Kubernetesラベル規約そのまま活用）。②依存関係インサイトで複数アプリ間の障害影響を可視化。③AWS Organizationsを通じたレジリエンスポリシー共有で複数アカウントへの一元適用と採用状況モニタリングを実現。SRE・プラットフォームエンジニアの障害分析作業を大幅に効率化する。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Amazon ECS</div>
+        <div class="card-badges">
+          <span class="impact impact-mid">重要度 中</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-ecs-express-mode-arm-architecture/">Amazon ECS Express Mode：Graviton ARM64サポートでx86比最大40%コスト削減</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">Amazon ECS Express ModeにARM64（AWS Graviton）アーキテクチャサポートが追加。ARM64ベースコンテナイメージをx86比最大40%優れた価格パフォーマンスでデプロイ可能。新規・既存サービス共に対応。AWSマネジメントコンソール/CLI/SDK/IaCから設定可能。全AWSリージョン（商用・GovCloud）で利用可能となり、コスト最適化を目指すコンテナワークロードに有力な選択肢となる。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <section id="section-security">
+    <h2>04 セキュリティ</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">SolarWinds</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://www.guardianmssp.com/2026/09/19/solarwinds-patches-arm-hard-coded-key-flaw-enabling-unauthenticated-rce/">【緊急】SolarWinds ARM CVE-2026-28326（CVSS 8.8）：静的ハードコード鍵で未認証RCE——ARM 2026.2.1に即時更新を</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">SolarWinds Access Rights Manager（ARM）にCVSS 8.8の脆弱性CVE-2026-28326が発覚。製品にハードコードされた静的暗号化キーが外部に知られることで認証なしにリモートコード実行が可能。影響：ARM ≤2026.2。修正：ARM 2026.2.1（9月19日提供）。データアクセス管理・権限棚卸ツールが攻撃ベクタとなるリスクがあり、Active Directory環境を持つ組織は即時パッチ適用が必要。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Google Chrome / Microsoft Edge / Opera</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://we-fix-pc.com/2026/09/19/bragjack-attacks-hijack-ai-browser-agents-through-malicious-extensions/">BragJack攻撃：悪意ある拡張機能がChrome/EdgeのAIアシスタントを乗っ取り CVE-2026-0628（CVSS 8.8）</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">セキュリティ研究者が「BragJack」と命名した攻撃手法を公開。悪意ある拡張機能がブラウザとAIアシスタント間の信頼された通信チャネルを乗っ取り、Chrome・Edge・Opera Neon/Cometのビルトインアシスタントを制御する。CVE-2026-0628（Chrome CVSS 8.8）はChrome 143.0.7499.192/193で修正済み。CVE-2026-55945（Edge ≤150.0.4078.48）も同様。AIブラウザ機能利用組織は即時アップデートが必要。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">WordPress</div>
+        <div class="card-badges">
+          <span class="impact impact-mid">重要度 中</span>
+          <span class="card-date">2026-09-19</span>
+        </div>
+      </div>
+      <div class="card-title"><a href="https://thehackernews.com/2026/09/new-wordpress-click2shell-flaw-forces.html">WordPress Click2Shell：プレビューURL一つで管理者ブラウザにテーマ強制インストール→RCE連鎖、WP 7.1.1で修正</a></div>
+      <details><summary>詳細を表示</summary>
+        <p class="card-desc">セキュリティ企業pwn.aiがWordPressコア（&lt; 7.1.1）の新脆弱性「Click2Shell」を発見・開示。細工されたプレビューURLを管理者が踏むだけで攻撃者選択の公式テーマが無断インストールされ、テーマPHPコードが実行されるリスク。PoC公開済みでRCE連鎖が可能だが実攻撃は未確認。修正：WordPress 7.1.1（2026年9月17日）で提供済み。wp2shell（CVE-2026-63030、7月開示）とは別の独立した脆弱性。</p>
+      </details>
+    </div>
+
+  </section>
+
+</main>
+<footer>2026-09-20 過去24時間以内のアップデートを自動収集。</footer>
+</body>
+</html>
