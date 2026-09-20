@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 21 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CESA / 東京ゲームショウ 2026</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://game.watch.impress.co.jp/docs/news/2142460.html" target="_blank" rel="noopener">東京ゲームショウ2026、台風25号で最終日（9月21日）中止 ― TGS30周年・史上初の5日間開催が4日間で閉幕、累計来場者257,642人</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">TGS30周年記念として史上初の5日間開催（9月17〜21日）を予定していた「東京ゲームショウ2026」は、台風25号（ドゥージュアン）の急接近により最終日9月21日（月・祝）の一般公開を中止した。9月20日（日）は予定通り開催されたが、午後以降の天候悪化と交通機関への影響を踏まえCESAが判断。TGS史上初の開催期間中の日程中止となり、4日間の累計来場者数は257,642人を記録。9月21日来場分のチケットは全額払い戻し、コロプラなど一部メーカーのステージイベントは9月20日に前倒し実施またはオンライン配信へ変更された。次回TGS2027は2027年9月16〜20日の開催が予定されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">StepFun</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pandaily.com/stepfun-step-5-preview-600b-moe-1m-context" target="_blank" rel="noopener">StepFun「Step 5 Preview」9月20日API公開 ― 600B スパース MoE・100万トークンコンテキスト、オープンウェイトは10月15日予定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国のAIスタートアップ StepFun は9月20日、フラッグシップモデル「Step 5 Preview」のAPIアクセスを公開した。パラメータ数600B（アクティブ27B/トークン）のスパース MoE アーキテクチャを採用し、コンテキスト長は最大100万トークン。AIコーディング・金融分析・長期エージェントタスク向けに最適化されており、Artificial Analysis の Intelligence Index で44点（Kimi K3 Max と同水準）を記録。入力 $1・出力 $2.70（百万トークン）でキャッシュ割引95%と価格競争力が高く、テキスト・画像入力に対応。フルモデルのオープンウェイトは10月15日公開予定で、すでに Hugging Face リポジトリが作成されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">US Government / Trump Administration</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://townhall.com/news/josephchalfant/2026/09/20/trump-announces-the-launch-of-an-ai-force-n2683260" target="_blank" rel="noopener">トランプ米大統領、連邦機関「AI Force（AIフォース）」創設と「AI統括官（AI Czar）」任命を表明 ― 宇宙軍に倣いAI政策を組織的に強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">トランプ米大統領は9月19〜20日（Truth Social経由）、第1期政権で創設した宇宙軍（Space Force）と同様の連邦機関「AI Force（AIフォース）」を新設し、「AI統括官（AI Czar）」を近く任命すると発表した。AIをGDP比最大25%相当の経済・安全保障上の最優先課題と位置づけ、産業成長を阻害しない方針を示す一方、有害行為には既存法で対処するとした。組織の具体的な権限・構成・既存機関との関係は未公表。規制・研究開発・軍事応用の各面でのAI政策強化は、日本を含む各国の動向にも影響が注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">9月20日（日曜日）・21日（敬老の日・祝日）は週末・祝日のため、AWSのWhat's New新機能リリースは過去24時間以内に確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://this.weekinsecurity.com/this-week-in-security-september-20-2026-edition/" target="_blank" rel="noopener">Cisco ISE CVE-2026-76460（CVSS 10.0）野外悪用継続中 ― 未認証APIバイパスでroot権限RCE、CISA KEV登録・パッチ未適用環境は即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco Identity Services Engine（ISE）および ISE-PIC に存在する認証バイパスゼロデイ CVE-2026-76460（CVSS 10.0）が野外で積極的に悪用されている。ISE の APIエンドポイントが認証制御を適切に施行しないため、未認証のリモート攻撃者が認証をバイパスして最終的にroot権限でのコマンド実行が可能。デバイス設定によらず全バージョンが影響を受ける。CISAは9月16日にKEVカタログへ登録し、連邦機関には9月19日期限でのパッチ適用を指示。修正バージョン（3.1 Patch 12 / 3.2 Patch 11 / 3.3 Patch 12 / 3.4 Patch 7 / 3.5 Patch 4以降）が提供済みで、iACLによるトラフィック制限が暫定的な緩和策として有効。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Windows DNS Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://this.weekinsecurity.com/this-week-in-security-september-20-2026-edition/" target="_blank" rel="noopener">Windows DNS Server CVE-2026-69730（CVSS 9.8）ワーム可能RCE ― 「SigRedの後継」と呼ばれる未認証リモートコード実行脆弱性</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Windows DNS Server に存在するuse-after-free（UAF）脆弱性 CVE-2026-69730（CVSS 9.8）は、未認証でネットワーク越しに悪用可能なリモートコード実行（RCE）でワーム可能（wormable）と評価されており、セキュリティコミュニティでは2020年の「SigRed（CVE-2020-1350）」の後継と見なされている。単一の脆弱サーバーから社内DNS基盤全体への連鎖的侵害が懸念される。Microsoftは2026年9月のPatch Tuesday（9月8日公開、974件修正）で対処済み。WSUSまたはWindows Update経由で配信されており、未適用環境は速やかに更新すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / TheHackerNews 週次まとめ</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/weekly-recap-chrome-0-day-router.html" target="_blank" rel="noopener">Chrome V8ゼロデイ CVE-2026-87491 悪用継続・CISA期限9/23 ― ルーターハイジャックとサプライチェーン攻撃も週次まとめで警告</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">TheHackerNewsが9月21日に公開した週次セキュリティまとめでは、Chrome V8のOut-of-Bounds Writeゼロデイ CVE-2026-87491（サンドボックス内でのコード実行が可能）の野外悪用続報が取り上げられ、CISAは9月23日を期限に更新を要求。Googleが Chrome 153（153.0.8010.36/.37以降）で修正済みで即時アップデートが推奨される。同週報ではSOHOルーターを狙ったファームウェア改ざんによる中間者攻撃キャンペーンと、開発ツールを標的にしたサプライチェーン攻撃事例も報告されており、パスワード変更・ファームウェア更新・依存パッケージの定期監査が防御策として挙げられている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-21 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
