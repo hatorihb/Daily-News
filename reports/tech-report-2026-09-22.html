@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a; --white:#ffffff; --red:#E60012;
+  --gray:#f2f2f2; --mid:#888; --border:#e0e0e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN','Hiragino Sans',Meiryo,sans-serif;background:var(--white);color:var(--black);line-height:1.6}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Header */
+header{background:var(--black);color:var(--white);padding:2rem 0}
+header .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+header h1{font-size:1.75rem;font-weight:700;letter-spacing:0.04em}
+.header-date{font-size:0.85rem;color:#aaa;margin-top:0.35rem;letter-spacing:0.08em}
+
+/* Nav */
+nav{background:var(--red);position:sticky;top:0;z-index:100}
+nav .container{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;gap:0;overflow-x:auto}
+nav a{display:block;color:var(--white);padding:0.65rem 1.1rem;font-size:0.82rem;font-weight:600;white-space:nowrap;letter-spacing:0.03em;opacity:0.85;transition:opacity .15s}
+nav a:hover{opacity:1;text-decoration:none;background:rgba(255,255,255,0.12)}
+
+/* Main */
+main{max-width:1100px;margin:0 auto;padding:2rem 1.5rem}
+
+/* Section */
+.section{margin-bottom:3rem}
+.section-header{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:1.25rem;padding-bottom:0.6rem;border-bottom:2px solid var(--black)}
+.section-number{font-size:0.75rem;font-weight:700;letter-spacing:0.1em;color:var(--mid);text-transform:uppercase}
+.section-title{font-size:1.2rem;font-weight:700}
+
+/* Cards grid */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+
+/* Card */
+.card{border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.25rem;background:var(--white);transition:box-shadow .15s}
+.card:hover{box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;margin-bottom:0.5rem}
+.card-service{font-size:0.75rem;font-weight:700;letter-spacing:0.05em;color:var(--mid);text-transform:uppercase;flex-shrink:0}
+.card-badges{display:flex;align-items:center;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end}
+.impact{display:inline-block;font-size:0.68rem;font-weight:700;padding:0.15em 0.5em;border-radius:3px;letter-spacing:0.03em}
+.impact-high{background:#fde8e8;color:#c0001a}
+.impact-medium{background:#fff4e0;color:#a05000}
+.impact-low{background:#e8f5e9;color:#2e7d32}
+.card-date{font-size:0.72rem;color:var(--mid)}
+.card-title{font-size:0.97rem;font-weight:600;margin-bottom:0.6rem;line-height:1.45}
+.card-title a{color:var(--black)}
+.card-title a:hover{color:var(--red)}
+details{font-size:0.85rem}
+summary{cursor:pointer;color:var(--mid);font-size:0.8rem;padding:0.2rem 0;list-style:none;display:flex;align-items:center;gap:0.3rem}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶';font-size:0.65rem;transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+.card-desc{color:#444;line-height:1.65;margin-top:0.5rem;padding-top:0.4rem;border-top:1px solid var(--border)}
+
+/* Empty note */
+.empty-note{color:var(--mid);font-size:0.9rem;padding:1rem 0}
+
+/* Footer */
+footer{background:var(--gray);border-top:1px solid var(--border);padding:1.5rem;text-align:center;font-size:0.78rem;color:var(--mid);display:flex;flex-direction:column;gap:0.3rem}
+.footer-brand{font-weight:700;color:var(--black)}
+
+@media(max-width:640px){
+  header h1{font-size:1.35rem}
+  main{padding:1.25rem 1rem}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 22 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a href="#domestic">01 国内IT・DX</a>
+    <a href="#ai">02 AI</a>
+    <a href="#aws">03 AWS</a>
+    <a href="#security">04 セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <span class="section-title">国内IT・DX</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Helpfeel / Gyazo</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/21/helpfeel-gyazo-data-breach/" target="_blank" rel="noopener">Gyazo（Helpfeel）でデータ侵害 — 2,360万ユーザーレコードと4億9,000万件の画像メタデータが漏洩</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">9月11〜12日に画像アップロードサーバの脆弱性を悪用した不正アクセスが発生。2,360万件のユーザーレコード（メールアドレス・パスワードハッシュ・デバイスID・セッション情報・OCRテキスト・位置情報を含む）と約4億9,000万件の画像メタデータが外部に露出した。同社は9月15日に個人情報保護委員会へ報告済みで、影響を受けたユーザーへの通知を進めている。国内でスクリーンショット共有サービスとして広く利用されており、特にOCRテキストに機密情報が含まれるケースも懸念される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本政府 / デジタル庁</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/" target="_blank" rel="noopener">マイナンバーカード活用DX推進 — 保険証・運転免許証の完全デジタル化へ移行状況を点検</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">デジタル庁は2026年度下半期に向けてマイナンバーカードを活用した行政手続きのデジタル化進捗を点検。健康保険証廃止後のマイナ保険証の普及率と、2026年中に予定する運転免許証のデジタル統合に向けた課題を整理している。自治体窓口での対面手続きが依然として多く残る分野の洗い出しを行い、オンライン完結率の向上を目指す方針が示された。行政DXのバックログ解消に向けた優先施策として、民間ITベンダーとの連携強化も検討されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <span class="section-title">AI</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/09/21/open-ai-alignment-rsi.html" target="_blank" rel="noopener">OpenAIが国連安保理ブリーフィング前にRSI国際標準と監視枠組みを提案 — Altman、9/23に公開証言へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは9月21日に公開した安全性文書の中で、RSI（再帰的自己改善）に関する国際標準の策定、AIインシデントの報告プロトコル、そして国際的なAI監視体制における米国主導を求める方針を示した。Sam Altman CEOは9月23日に国連安全保障理事会で公開ブリーフィングを行う予定。中国・EU・英国との標準化競争が激化するなか、先手を打った多国間ガバナンス提案として注目される。同社は提案の実効性を高めるため、主要国政府との二国間協議も並行して進めているとされる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">セキュリティ研究</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/plugin4shell-zero-click-rce/" target="_blank" rel="noopener">Plugin4Shell：Claude Code・Codex・CopilotなどのプラグインにゼロクリックRCE — 一部未修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">プラグインのSHAピン検証をバイパスすることで、ユーザーの操作なしに悪意あるプラグインを実行できるゼロクリックRCEが複数のAI CLIツールで発見された（研究者命名：Plugin4Shell）。Claude Code 2.1.179とCodex 0.146.0はパッチ済み。Copilot CLIは未修正のまま、Gemini CLIはEOL決定により修正予定なし。CVEはまだ割り当てられておらず、9月21日時点で実際の悪用は未確認。AI開発者向けツールのサプライチェーンリスクとして業界内での対応が急がれている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">セキュリティ研究 / BragJack</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/weekly-cybersecurity-newsletter-sept-21/" target="_blank" rel="noopener">BragJack：悪意ある拡張機能がClaude・Gemini・Perplexity等のAIブラウザエージェントをハイジャック</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">研究者が「BragJack」と名付けた攻撃手法により、Claude in Chrome・Gemini Live・Perplexity Comet・Microsoft Edge・Opera Neonなど主要AIブラウザエージェントが乗っ取り可能であることが明らかになった。悪意ある拡張機能を通じてファイルの読み取り・スクリーンショット取得・カメラやマイクへのアクセスが可能となる。2件のCVEが割り当てられ、$20,000超のバグバウンティが支払われた。現在各社が修正対応中で、ブラウザ拡張機能の権限管理の見直しが求められている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <span class="section-title">AWS</span>
+    </div>
+    <div class="cards">
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <span class="section-title">セキュリティ</span>
+    </div>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Pixel</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CISA KEV</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/weekly-cybersecurity-newsletter-sept-21/" target="_blank" rel="noopener">【CISA KEV】Google Pixel モデム CVE-2026-58704（CVSS 8.0）— 野外での悪用確認、9月更新で修正済み</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CVE-2026-58704は、Google Pixelのモデムコンポーネントに存在する特権昇格の脆弱性（CVSS 8.0）。認証不要で隣接無線経由から攻撃可能であり、「限定的・標的型」の悪用が実際に確認されている。CISAは9月16日にKEV（既知の悪用された脆弱性）カタログに登録し、連邦機関に対して9月19日までの対処を義務付けた。2026年9月のPixelセキュリティアップデートで修正済み。Pixelデバイス利用者は速やかにアップデートの適用が推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CrowdSec</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/weekly-cybersecurity-newsletter-sept-21/" target="_blank" rel="noopener">CrowdSec：元従業員の無効化されていないOAuthトークンで非公開リポジトリ170件が漏洩</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ企業CrowdSecが、元従業員が無効化されていなかったOAuthトークンを使用し、5月22日に非公開GitHubリポジトリ170件をクローンしていたと開示した。9月16日にサイバー犯罪フォーラムにソースコードが出回り発覚。退職者のアクセス権限の即時失効管理が不十分だったことが直接原因。OAuthトークンのライフサイクル管理とオフボーディング手順の厳格化の重要性を改めて示す事例となった。同社は現在影響範囲の調査と顧客への通知を進めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">セキュリティ / AI CLIツール</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/plugin4shell-zero-click-rce/" target="_blank" rel="noopener">Plugin4Shell：Claude Code 2.1.179・Codex 0.146.0はパッチ済み — Copilot CLIは未修正のまま</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI CLIツールのプラグイン検証不備を突いたゼロクリックRCE「Plugin4Shell」の詳細。攻撃者はプラグインのSHA整合性チェックをバイパスし、任意コードを実行できる。Claude Code（Anthropic）とCodex（OpenAI）はそれぞれバージョン2.1.179・0.146.0でパッチを適用済み。GitHub Copilot CLIは9月21日時点で未修正。Gemini CLIはEOL（サポート終了）が決定されており修正なし。開発者は使用中のAI CLIツールを最新バージョンに更新することが強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-brand">DX・AI・AWS Update</span>
+  <span>2026-09-22 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  <span style="font-size:0.72rem">RSS取得結果 — AWS What's New: FAILED / ITmedia NEWS: FAILED / Security NEXT: FAILED / JVN iPedia: FAILED / 窓の杜: FAILED / Impress Watch: FAILED（すべてEGRESS_BLOCKED）。本レポートはWebSearch結果のみから生成。</span>
+</footer>
+
+</body>
+</html>
