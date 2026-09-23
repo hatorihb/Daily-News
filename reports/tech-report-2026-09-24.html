@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 24 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">モノづくり / 製造DX</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2609/24/news044.html" target="_blank" rel="noopener">「Japan Mobility Show Bizweek 2026」は217社が出展、日本の底力を高める起点に — CEATEC 2026と同時開催</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年10月13〜16日に幕張メッセで開催される「Japan Mobility Show Bizweek 2026」の出展概要が発表された。モビリティ産業とITの融合を目指す同イベントには217社が出展し、EV・自動運転・スマートインフラなどの最新DXソリューションを展示する。CEATEC 2026との同時開催により来場者のシナジーが期待されており、会期中はスタートアップや大手メーカーが競演するセッションも予定されている。モビリティDXの加速が国内製造業のデジタル変革を後押しする場として注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">@IT / AIエージェント動向</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">要注目</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/23/news006.html" target="_blank" rel="noopener">「ヒューマン・イン・ザ・ループ万能説」崩壊 — AIエージェント時代に企業が迫られる"防御の再設計"</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">生成AIエージェントが社内システムへ自律的にアクセスする環境が拡大するにつれ、従来の「人間が最終承認する」HITL（Human-in-the-Loop）モデルでは対応が追いつかなくなっているとの警告が相次いでいる。@ITが9月23日に公開した本稿では、エージェントの行動ログ取得・権限最小化・ゼロトラスト適用の三つを柱とした「エージェントセキュリティ再設計」フレームワークを解説。国内でもAIエージェント導入を進める企業が急増しており、セキュリティ設計の見直しが急務とされている。エージェントの誤動作や悪意ある外部操作（プロンプトインジェクション）に備えたガバナンス整備の必要性が改めて強調されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / 生命科学AI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system" target="_blank" rel="noopener">Claude が細菌ウイルスの新酵素系を自律的に発見 — CRISPR類似構造「ART」を同定、21時間・950エージェントで20万件超のデータ解析</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは9月23日、Claude が生物学的な新発見を自律的に達成したと発表した。Claude が細菌に感染するウイルス（バクテリオファージ）のDNAから、CRISPR遺伝子編集に類似した繰り返し配列を持つ未知の酵素系「ART（array-associated reverse transcriptases）」を同定した。21時間稼働した約950エージェントが20万件超の逆転写酵素データを解析し、3,500件の新規候補を抽出して最終的に20件の有力候補に絞り込んだ。機能はまだ不明だが、その構造的特徴はDNAの切断・複製・貼り付けを行うプログラム可能なシステムとの共通点を持つ。Anthropicは今後AIを活用した生命科学研究を加速させる方針を示しており、業界に広いインパクトを与えている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon / Anthropic Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/innovation-at-amazon/seller-assistant-plugin-amazon-quick-claude" target="_blank" rel="noopener">Amazon Seller AssistantがClaudeとAmazon Quickに対応 — 持続的メモリとバックグラウンドワークフローで24時間自律運営を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Accelerate 2026（9月22〜24日、シアトル）で発表されたSeller Assistantの次世代アップデートにより、セラーの価格パターン・在庫サイクル・成長目標を記憶する「持続的メモリ」機能が追加された。この記憶はSeller Central、Amazon Quick、Anthropic Claudeをまたいで継続され、セッションごとにリセットされなくなった。新しいSelling Partnerプラグインにより、ClaudeやAmazon Quickからセラーの出品情報・在庫・販売分析データへのアクセスとアクションが可能になった。また、セラー定義のガードレールと完全な監査証跡のもとで在庫補充・価格調整などを24時間バックグラウンドで自動実行するワークフロー機能も導入された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon CloudWatch</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/amazon-cloudwatch-omni-ai/" target="_blank" rel="noopener">Amazon CloudWatch Omni が一般提供開始 — AIエージェント・アプリ・インフラのオブザーバビリティをマルチクラウドで統合</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月23日、AIファーストなオブザーバビリティプラットフォーム「Amazon CloudWatch Omni」の一般提供（GA）を発表した。OpenTelemetry互換で複数AWSアカウント・リージョンおよびAzureなど外部クラウドのテレメトリを統合管理できる。LangGraph・CrewAI・OpenAI Agents SDK・Vercel AI SDK・AWS Strandsで構築されたAIエージェントをネイティブサポートし、エージェントの挙動をアプリケーション・インフラ情報と同一画面でトレース・デバッグできる。コンソール外の独立したWebUIとIDEエクステンションの2つのアクセス方法を提供しており、チームがどこで作業していてもオブザーバビリティを確保できる設計となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/openai-gpt-6-sol-luna-on-amazon-bedrock/" target="_blank" rel="noopener">OpenAI GPT-6 Sol・Luna が Amazon Bedrock で一般提供開始 — 最大100万トークンコンテキスト、SolはGPT-5.6比でエラー率半減</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは9月23日、OpenAIのGPT-6 SolとGPT-6 LunaをAmazon Bedrockで一般提供（GA）開始したと発表した。両モデルともに最大100万トークンのコンテキストをサポートする。Solは複雑なタスク・ソフトウェア開発向けの日常業務モデルで、内部評価では事実誤認率がGPT-5.6 Sol比で約半分に低下した。Lunaは要約・抽出・分類・ルーティングなど高スループットが求められるタスク向けで、コスト効率に優れる。両モデルはBedrockコンソールおよびAPI経由で利用可能で、AWSのデータプライバシーポリシーのもとで安全に利用できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">D-Link / ルータ脆弱性</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/d-link-warns-of-max-severity-zero-day-bug-in-dir-822a-routers/" target="_blank" rel="noopener">【パッチなし・PoC公開】D-Link DIR-822A ゼロデイ CVE-2026-86296 CVSS 10.0 — 認証不要でリモートRCE、製品調査中で修正未定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">D-Linkは、デュアルバンドWi-Fiルータ「DIR-822A」のDHCPコンポーネント（udhcpcd/serverpacket.c）においてスタックベースのバッファオーバーフロー脆弱性（CVE-2026-86296、CVSS v3.1/v4.0 ともに 10.0）が存在すると発表した。認証なしでリモートからコードを実行可能で、PoC（概念実証コード）が既に公開されている。D-Linkは影響を受けるハードウェアリビジョン・地域範囲・修正版ファームウェアを調査中であり、現時点でパッチは存在しない。同じルータには別途 CVSS 9.9 の L2TP パーサー脆弱性（CVE-2026-86510）も確認されており、対象デバイスの使用停止または外部ネットワークからの隔離を推奨。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress / CMS脆弱性</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/09/23/cve-2026-87902-wordpress-7-1-2-security-release/" target="_blank" rel="noopener">WordPress 7.1.2 緊急リリース — CVE-2026-87902（CVSS 9.2）認証不要パストラバーサル、パッチ公開後数時間で悪用試行を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WordPressは9月22日にバージョン7.1.2の緊急セキュリティリリースを公開し、認証不要のローカルファイルインクルージョン（LFI）脆弱性 CVE-2026-87902（CVSS 4.0スコア 9.2）を修正した。WordPress 4.7.0〜7.1.1のすべてのバージョンが影響を受け、攻撃者はアカウントなしでページテンプレート解決の処理を悪用してPHPファイルを読み込み、サーバ設定によってはリモートコード実行（RCE）につながる。Patchstackは9月22日17:44 UTCにパッチ公開直後から攻撃試みを観測したと報告している。自動更新が有効なサイトは既に適用済みのほか、WordPressダッシュボードのアップデート画面から手動更新が可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">cPanel / 共有ホスティング</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/new-cpanel-flaw-lets-hosting-account_0272795595.html" target="_blank" rel="noopener">cPanel CalDAV/CardDAV に root権限昇格の脆弱性 CVE-2026-87899 — アカウント保持者がサーバ全体を掌握可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">cPanelは9月22日、CalDAVおよびCardDAVサービスに権限昇格の脆弱性CVE-2026-87899が存在することを公表した。cPanelアカウントを持つ任意のユーザーがコードをroot権限で実行でき、サーバ全体を掌握できるという重大な問題で、The Hacker Newsが9月24日に詳報を公開した。同時にWP Toolkitプラグインで他アカウントのデータベースを変更できる脆弱性CVE-2026-87900も修正された。6週間で3件目のroot権限昇格バグが発見されたことで、cPanelのセキュリティ品質が問われている。cPanelは修正版を既にリリースしており、すべての共有ホスティングプロバイダーおよびサーバ管理者に即時アップデートを推奨する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-24 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
