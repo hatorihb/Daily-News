@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 25 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">旭川信用金庫 / SPIRAL</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/24/news027.html" target="_blank" rel="noopener">「DBがアプリごとにバラバラ」を解消、年100万円以上を削減 — 旭川信用金庫がSPIRALで業務を完全内製化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">旭川信用金庫は、アプリごとに分散していたデータベースをSPIRALプラットフォームへ統合することで、開発未経験のスタッフでも業務システムを完全内製化できる体制を構築した。年間120万円超のコスト削減に加え、雇用サービス管理や地元イベント「駅マルシェ」の出展者管理など複数業務を内製で効率化。地方金融機関によるローコード活用の成功事例として注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenSSF / Linux Foundation</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/24/news032.html" target="_blank" rel="noopener">「OSSレジストリのただ乗りは限界」— Google・Microsoft等12社が企業の費用負担を求める共同声明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Open Source Security Foundation（OpenSSF）は、現行の「OSSレジストリ無償モデル」の持続不可能性を宣言。GoogleとMicrosoftを含む12社が、企業利用側が費用を負担すべきという共同声明に署名した。生成AIによる脆弱性発見の速度・規模の急拡大がメンテナーへの負荷を激増させており、OSS基盤に依存する国内エンタープライズITチームも注視すべき方向転換だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / @IT</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://atmarkit.itmedia.co.jp/ait/articles/2609/25/news015.html" target="_blank" rel="noopener">Gmailコネクタ登場 — Claude AIでGmailを操作するAIエージェント連携の設定手順と安全な活用法</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのGmailコネクタを使うと、ClaudeがGmailの送受信・検索・ラベル管理をAIエージェントとして代行できるようになる。@ITが設定手順と権限スコープの絞り方、誤操作リスクへの対処法を解説。AIエージェントによるメール処理の劇的効率化が期待される一方、OAuth同意画面での権限管理と操作ログの確認が安全活用の鍵となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / OpenAI / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.newsbytesapp.com/news/science/google-openai-and-anthropic-launch-frontier-ai-standard-agency/tldr" target="_blank" rel="noopener">Google・OpenAI・Anthropic が AI安全基準の自主規制団体「SAFA」設立へ — 2026年末〜2027年ローンチ目標</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">3大AIラボが共同で「Frontier AI Standards Agency（SAFA）」の設立を計画していることが判明した。モデルデプロイ前の第三者安全テストやインシデント報告ルールの策定が柱で、政府規制の空白を埋める業界自主規制組織を目指す。CEOにはSriram Krishnan氏が打診されており、2026年末から2027年のローンチを目標としている。AI安全性をめぐる国際的な規制整備の動きと並行する自主規制の試みとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://about.fb.com/ja/news/2026/09/meta-connect-2026-everything-we-announced/" target="_blank" rel="noopener">Meta Connect 2026 — Ray-Ban Meta Gen 3（$449）・カメラレス「Luna」・VR Glasses「Project Phoenix」（$1,299.99）を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Meta Connect 2026基調講演（JST 9月24日）でMetaは次世代AIウェアラブル3製品を発表した。Ray-Ban Meta Gen 3は$449で既存世代から大幅進化。カメラレスの「Ray-Ban Meta Audio（Luna）」は6方向マイク・12時間バッテリー・Muse AIアシスタントを搭載し処方レンズ対応も実現、秋出荷予定。VR Glasses「Project Phoenix」は100g（フレーム）+300g（ベルトパック）でmicro-OLED 5K Infinite Displayを採用、価格$1,299.99・2027年春発売予定。Zuckerberg CEOがVRよりAIスマートグラス戦略への軸足移動を明確にした。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Network Security Manager</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/network-security-manager-us-east-va/" target="_blank" rel="noopener">AWS Network Security Manager が US East (N. Virginia) でGA — WAF・Shield Advanced を組織全体で一元管理</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Network Security Managerがバージニア北部リージョン（US East）で一般提供（GA）を開始した。セキュリティチームがAWS WAFとAWS Shield Advancedのファイアウォール・DDoS防御設定をAWS Organizations全体に一貫して適用・強制できるようになる。AWS Network Firewallのサポートは近日追加予定。複数アカウントにまたがる大規模組織のネットワークセキュリティガバナンスを大幅に簡素化する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EMR on EKS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/emr-eks-spark-connect-interactive/" target="_blank" rel="noopener">Amazon EMR on EKS が Spark Connect によるインタラクティブセッションをサポート — Jupyter・VS Codeから直接Spark開発が可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon EMR on EKSが、クライアント・サーバー分離アーキテクチャのSpark Connectに対応し、SageMaker Unified StudioのノートブックやJupyter・VS Codeなどの手元IDEからインタラクティブなSpark開発・デバッグが可能になった。セル間でSparkコンテキストが永続化されるためアドホックなデータ探索や段階的な開発フローに最適。EMR 7.14（Spark 3.5）およびemr-spark-8.1.0（Spark 4.1）以降、全商用リージョンで利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">F5 / BIG-IP APM</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/09/f5-patches-critical-big-ip-apm-zero-day.html" target="_blank" rel="noopener">F5 BIG-IP APM に CVSS 9.8 のゼロデイ CVE-2026-94127 — OAuth RCE が野外で悪用、CISA KEV 連邦機関対応期限は本日 9/25</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">F5 BIG-IP APMにヒープバッファオーバーフローによる未認証RCE脆弱性（CVE-2026-94127、CVSS 9.8）が発見・悪用確認済み。APMアクセスポリシーとOAuthプロファイルを同時設定したバーチャルサーバーが対象（デフォルト設定では発現しない）。影響バージョン：BIG-IP APM 21.1.0、17.5.0〜17.5.1、17.1.0〜17.1.3。緊急エンジニアリングホットフィックスおよびiRuleワークアラウンドが提供済み。CISA KEVカタログ登録（2026-09-22）、連邦機関の修正期限は本日2026-09-25。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Check Point / Security Gateway</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/check-point-warns-of-hackers-exploiting-security-gateway-vpn-rce-flaw/" target="_blank" rel="noopener">Check Point に CVSS 9.8 の VPN 事前認証 RCE（CVE-2026-85102）と管理サーバゼロデイ（CVE-2026-93616）— CISA KEV 期限本日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Check Point Security GatewayのVPN証明書処理に事前認証RCE（CVE-2026-85102、CVSS 9.8）が確認され、攻撃は9月12日から継続していた。管理サーバには7月23日から悪用されていたゼロデイ（CVE-2026-93616：事前認証パストラバーサル）も同日にCISA KEV登録。両脆弱性ともCISA KEVカタログ登録（2026-09-22）、連邦機関の修正期限は本日2026-09-25。Check Pointの最新パッチを即時適用すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Arista Networks / VeloCloud</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/arista-urges-immediate-patching-of-exploited-vco-zero-day/" target="_blank" rel="noopener">Arista VeloCloud Orchestrator に CVSS 10.0 のゼロデイ CVE-2026-93952 — 認証不要の特権内部アクセス、CISA KEV 期限本日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Arista VeloCloud Orchestrator（VCO）オンプレミス版に不適切入力検証（CVE-2026-93952、CVSS 10.0）が発見・積極悪用中。未認証の遠隔攻撃者がオーケストレーターの特権内部機能へアクセス可能で、管理対象のSD-WANエッジデバイス全体の機密性・完全性・可用性が危険にさらされる。修正バージョン：5.2.3.16以上（5.2.3系）/ 6.4.2.8以上（6.4.2系）。CISA KEVカタログ登録（2026-09-22）、連邦機関の修正期限は本日2026-09-25。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-25 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
