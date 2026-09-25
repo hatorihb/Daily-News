@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 26 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">あいち銀行 / LayerX</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">DX</span>
+            <span class="card-date">2026-09-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://kn.itmedia.co.jp/kn/article/2609/26/2000001731/" target="_blank" rel="noopener">あいち銀行が経理DXを本格化、LayerXと「請求書受領から振込まで」をつなぐ法人決済プラットフォームを10月提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">あいち銀行がLayerXと協業し、地域企業の請求書処理業務を効率化する法人決済プラットフォーム「Arch Bridge」を2026年10月1日から提供開始する。LayerXの「バクラク請求書受取」を組み込み、請求書受領・申請・承認・支払スケジュール管理・振込データ連携をデジタルでつなぎ、手作業・二重入力・目視確認といった経理業務の課題を解消する。東海エリアの中堅・中小企業の経理DX推進と内部統制強化を支援することを目的としている。銀行と請求書処理SaaSの連携による地域金融機関発DXの先進事例として注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">金融庁（FSA）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">規制・政策</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japantimes.co.jp/business/2026/09/25/fsa-japan-ai-data-center/" target="_blank" rel="noopener">金融庁、大手銀行・生保のAIデータセンター向け融資リスク管理を審査強化へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">金融庁（FSA）が大手銀行・生命保険会社を対象に、AIデータセンター向けプロジェクトファイナンスのリスク管理体制の審査を強化する方針を示した。米国の大規模データセンター向け融資が急増しており、不動産向け融資と並ぶ重点監視領域として指定された。AIインフラへの資金供給が国内金融機関のバランスシートに与える影響を把握し、過熱感がある場合には早期に是正を促す狙いがある。データセンター融資は高利回りの反面、施設稼働率の変動や電力コストなどのリスクが集中しやすい点も懸念材料として挙げられている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Nscale / Third Point</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">資金調達・IPO</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/09/25/ahead-of-u-s-ipo-british-ai-neocloud-nscale-secures-3-36b-in-convertible-finacing/" target="_blank" rel="noopener">英AIクラウドNscale、NYSE上場直前に33.6億ドルの転換社債調達——評価額350億ドル、総契約金額1,030億ドル</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">英国のAIネオクラウドNscaleがNYSE上場（ティッカー予定: NSCL）を控え、ヘッジファンドThird Point主導で33.6億ドルの転換社債調達を完了した。即時利用可能な23.6億ドルに加え、NvidiaからのGPU調達分10億ドルを11月中旬に追加受領予定で、評価額は350億ドルに達する。顧客との総契約金額は1,030億ドルを超えており、AIインフラ需要の強さを反映している。Nscaleはヨーロッパ最大規模のAI専用データセンターを運営しており、IPO後はNvidiaとの大型調達契約を活用した急速な拡張投資が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">AI研究</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/09/25/astra-and-opus-just-passed-turings-other-test/" target="_blank" rel="noopener">GPT-6 AstraとClaude Opus 5、数十年間未解読だったエニグマ暗号メッセージの解読に成功</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIのGPT-6 AstraとAnthropicのClaude Opus 5が、長年にわたり人間の暗号解析者も解読できなかったエニグマ暗号の未解読メッセージ群を解読したことが報告された。GPT-6 Astraはアーカイブ調査・コーディング・多段推論を組み合わせた自律的アプローチで、Claude Opus 5は専門家の段階的誘導を受けながら解読に成功した。人間の専門家なら数週間を要する作業をAIは2日で完了しており、AIの高度な問題解決能力を示すベンチマークとして広く注目されている。チューリングが考案した「もう一つのテスト」ともいえるこの成果は、AIの認知的限界をめぐる議論を再燃させている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EventBridge</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">GA</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/eventbridge-relaunches-custom-event-buses/" target="_blank" rel="noopener">Amazon EventBridge、エンタープライズ向けに拡張カスタムイベントバスを提供開始——厳密な順序保証・組み込みリテンション・データ転送量課金</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon EventBridgeがエンタープライズ規模のイベント駆動アーキテクチャ向けに拡張カスタムイベントバスを一般提供（GA）した。EventGroupIdによる厳密な順序保証、CloudEventsなどのオープンイベントフォーマット対応、組み込みリテンション、AWS Organizations横断の複数アカウントが一つの集中イベントバスに直接パブリッシュ可能な構成をサポートする。料金体系もイベント数課金からデータ転送量課金に刷新され、大規模運用ほどコスト効率が向上する。東京を含む14リージョンで提供開始されており、既存の基本カスタムバスからの移行パスも提供される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Billing and Cost Management</div>
+          <div class="card-badges">
+            <span class="impact impact-low">新API</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/09/aws-billing-and-cost-management-billing-context-api/" target="_blank" rel="noopener">AWS Billing and Cost Management、アカウントの請求コンテキストを返す新API「ListBillingViewSegments」を提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Billing and Cost ManagementにListBillingViewSegments APIが追加され、指定した期間におけるアカウントの請求コンテキスト（請求階層上の位置・管理アカウント・レート設定など）を時系列のセグメントで返却できるようになった。請求コンテキストが期間の途中で変わる場合も、セグメントごとの有効期間として正確に反映される。Cost & Usage Dataではなく請求構造の把握に特化したAPIで、マルチアカウント管理や財務監査の自動化に活用できる。全商用リージョンで追加料金なく利用可能で、プライマリビリングビューをサポートする。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA KEV / MikroTik / Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/news-events/alerts/2026/09/25/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">【CISA KEV登録】MikroTik RouterOS（CVE-2026-67279）とMicrosoft SharePoint（CVE-2026-65660）の悪用を確認——122,500台超のルーターに影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAが2026年9月25日付で、MikroTik RouterOSの脆弱性（CVE-2026-67279）とMicrosoft SharePointの脆弱性（CVE-2026-65660）を既知悪用脆弱性カタログ（KEV）に追加した。CVE-2026-67279は「MikroTrick」攻撃チェーンの一部であり、SSHデーモンの不完全な認証処理を悪用することでパスワード・SSHキー不要でルーター管理コンソールへの完全アクセスが可能となる認証不要リモート悪用可能な重大脆弱性で、122,500台以上のルーターに影響が確認されている。連邦政府機関には9月15日までの修正適用が義務付けられており、企業・ISP環境での早急なファームウェアアップデートが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Kiteworks</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急対応</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/09/25/kiteworks-urges-customers-to-shut-down-their-servers-amid-imminent-threat-of-cyberattack/" target="_blank" rel="noopener">Kiteworks、迫りくるサイバー攻撃の脅威を受け全顧客に6時間のサーバー緊急停止を要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュアファイル転送・コンテンツコラボレーション製品を提供するKiteworksが、連邦当局からの脅威情報に基づき全顧客に対して6時間のサーバー停止を緊急要請した。停止推奨時間帯は9月26日土曜（日本時間：午前11時〜午後5時JST）で、攻撃の実施が差し迫っているとの情報に基づく予防的措置としている。同社はv9.5.1で既知の脆弱性はすべて修正済みであり現時点で侵害は確認されていないと説明しているが、法執行機関と連携して調査を継続中。Kiteworksは金融・医療・政府機関が多く利用する高感度データ転送基盤であり、未パッチ版を使用中の顧客に対して即時アップデートも併せて促している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">脅威インテリジェンス</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/malicious-ai-agents-steal-600k-credit-cards-infect-100-plus-sites-with-skimmers/" target="_blank" rel="noopener">オープンソースAIエージェント3ツールを悪用した自動攻撃で60万件のクレジットカード情報窃取——100社超のECサイトにWebスキマー設置</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">金銭目的の脅威アクターがオープンソースAIエージェントフレームワーク（Strix・Cairn・Hermes）を組み合わせ、オンライン小売業100社以上にWebスキマー（クレジットカード情報窃取コード）を自動設置し、約60万件のカード情報を盗み出した攻撃キャンペーンが報告された。Fortune 500のホスピタリティ企業・大手航空会社・工業用品メーカーを含む27社が侵害を確認されており、1ターゲットあたり平均$25.46という極めて低コストで大規模攻撃を実現していた。AIエージェントが偵察・脆弱性探索・ペイロード注入の全工程を自律的に実行するため、従来の手動攻撃に比べて攻撃速度・規模が飛躍的に向上していることが示された。ECサイト運営者にはコンテンツセキュリティポリシー（CSP）の強化とサードパーティスクリプト監査が推奨されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-26 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
