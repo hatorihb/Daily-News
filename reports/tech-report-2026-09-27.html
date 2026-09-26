@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{ --black:#0a0a0a; --white:#ffffff; --red:#E60012; --gray:#f2f2f2; --mid:#888; --border:#e0e0e0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:var(--white);color:var(--black);font-size:16px;line-height:1.6;}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <p class="header-label">Daily Tech Intelligence</p>
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 09 — 27 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 国内IT・DX</a>
+    <a class="nav-link" href="#ai">02 AI</a>
+    <a class="nav-link" href="#aws">03 AWS</a>
+    <a class="nav-link" href="#security">04 セキュリティ</a>
+  </div>
+</nav>
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title">
+          <span>Japan IT &amp; DX</span>
+          国内IT・DX
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title">
+          <span>Artificial Intelligence</span>
+          AI
+        </div>
+      </div>
+
+      <!-- Card: SAFA -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SAFA / Google / OpenAI / Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rollingout.com/2026/09/26/google-and-openai-join-ai-safety-push/" target="_blank" rel="noopener">Google・OpenAI・Anthropicが共同でフロンティアAI自主規制団体「SAFA」設立へ——元ホワイトハウスAI顧問がCEO候補に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google、OpenAI、Anthropicの3社が協力して、フロンティアAIモデルを対象とした自主規制団体「Standards Authority for Frontier AI（SAFA）」を設立する計画が明らかになった。元ホワイトハウスAI顧問のSriram KrishnanがCEO候補として接触を受けており、元大統領科学顧問のArati Prabhakarも幹部職への就任が打診されている。SAFAは政府規制に先行して業界基準を策定することを目的とし、2026年末から2027年初頭の正式発足を目指している。加盟企業は自社モデルの安全性評価や透明性レポートをSAFAに提出する義務を負う見通し。規制当局の介入を回避するための業界主導のイニシアチブとして、注目が集まっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title">
+          <span>Amazon Web Services</span>
+          AWS
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title">
+          <span>Cybersecurity</span>
+          セキュリティ
+        </div>
+      </div>
+
+      <!-- Card 1: Oracle PeopleSoft CVE-2026-35273 (CVSS 9.8) — highest priority -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Oracle PeopleSoft</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CVSS 9.8 緊急</span>
+            <span class="impact impact-high">実害確認済み</span>
+            <span class="card-date">2026-09-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/shinyhunters-uses-waf-bypass-trick-in-oracle-peoplesoft-attacks/" target="_blank" rel="noopener">【CVE-2026-35273 / CVSS 9.8】ShinyHuntersがWAFバイパスでOracle PeopleSoftに大規模攻撃——Webシェル設置を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">著名な脅威アクターグループShinyHuntersが、Oracle PeopleSoftの認証前RCE脆弱性CVE-2026-35273（CVSS 9.8）を悪用した世界規模の攻撃キャンペーンを実施していることが確認された。攻撃ではWAF（Web Application Firewall）をバイパスする新手法を組み合わせ、標的サーバー上にWebシェルを設置することで永続的なアクセスを確立している。影響を受けるOracle PeopleSoftは広範な企業・政府機関の人事・財務システムで使用されており、パッチ未適用環境は即時の侵害リスクにさらされている。Oracleは緊急パッチをリリース済みであり、影響を受ける全バージョンの早急な適用が強く推奨される。外部からのアクセス制限とWAFルールの見直しを含む多層防御も併せて実施すること。</p>
+        </details>
+      </div>
+
+      <!-- Card 2: CISA KEV — WSO2 + Adobe Commerce -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WSO2 / Adobe Commerce / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CVSS 9.8 / 9.1</span>
+            <span class="impact impact-high">CISA KEV</span>
+            <span class="card-date">2026-09-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-warns-of-sharepoint-wso2-adobe-commerce-flaws-exploited-in-attacks/" target="_blank" rel="noopener">【CISA KEV】WSO2 API Manager認証バイパス（CVE-2026-5430 / CVSS 9.8）・Adobe Commerce権限昇格（CVE-2026-71362 / CVSS 9.1）を悪用確認——連邦機関への対応期限は本日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAはWSO2 API Manager（CVE-2026-5430、CVSS 9.8）のリモート認証バイパス脆弱性と、Adobe Commerce（CVE-2026-71362、CVSS 9.1）の権限昇格脆弱性をKnown Exploited Vulnerabilities（KEV）カタログに追加した。両脆弱性はいずれも実際の攻撃での悪用が確認されており、米連邦政府機関に対する修正期限は2026年9月27日（本日）と設定されている。WSO2の脆弱性は認証不要でAPIエンドポイントへの完全アクセスを可能にし、Adobe Commerceの脆弱性は管理者権限への昇格を通じてECサイト全体の掌握に至るリスクがある。両製品の最新バージョンへのアップデートと、侵害の痕跡（IoC）の確認を最優先で実施されたい。</p>
+        </details>
+      </div>
+
+      <!-- Card 3: Zimbra CVE-2026-93643 (CVSS 9.8) -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Zimbra Collaboration Suite</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CVSS 9.8 緊急</span>
+            <span class="impact impact-medium">未認証 RCE</span>
+            <span class="card-date">2026-09-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.thehackerwire.com/cve-2026-93643-zimbra-onlyoffice-unauthenticated-path-traversal-rce-as-zimbra-user/" target="_blank" rel="noopener">【CVE-2026-93643 / CVSS 9.8】ZimbraのOnlyOffice連携に未認証パストラバーサルRCE——対象バージョン10.1.21未満</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Zimbra Collaboration Suite（ZCS）のOnlyOffice/Document Editing連携機能にCVSSスコア9.8の重大な脆弱性CVE-2026-93643が発見された。認証不要のパストラバーサルにより、unsigned saveフィールドを悪用して任意のコマンドをzimbraユーザー権限で実行できる。影響を受けるバージョンはZCS 10.1.21未満であり、Zimbraはバージョン10.1.21への更新を強く推奨している。公開当初は独立したエクスプロイトは確認されていなかったが、概念実証コードがSploitus上で公開されており、悪用リスクが急速に高まっている。メールサーバーとしてZimbraを運用している組織は早急なパッチ適用と、OnlyOffice連携の一時的な無効化を検討すること。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-09-27 &nbsp; 過去24時間以内のアップデートを自動収集。情報は掲載時点のものです。</span>
+  </div>
+</footer>
+</body>
+</html>
