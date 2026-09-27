@@ -40,10 +40,22 @@ To bypass secret-scan for a legitimate fixture, add the literal string `SECRET-S
 - `report-watchdog.yml` runs at 09:00 JST daily and files an issue if today's report is missing from main.
 - **Non-report changes** (prompt, hooks, CLAUDE.md, index.html) are NOT synced by auto-merge. Open a separate PR to merge them to main.
 
+## API-based generation (`daily-report.yml`)
+
+An alternative to the claude.ai Routine that runs on GitHub Actions with the Anthropic API (pay-as-you-go), so the pipeline does not depend on a claude.ai subscription.
+
+- Runs daily at 06:00 JST (and on manual dispatch). `scripts/fetch_rss.py` pre-fetches the RSS feeds and filters them by publication time into `rss-digest.md`; Claude then runs `prompt/ci-overrides.md` + `prompt/routine-prompt.md` with a restricted tool set (no git, no arbitrary shell).
+- Mode is set by the repository variable `DAILY_REPORT_MODE`: `dry-run` (default) only uploads the report as an artifact; `publish` pushes it to a `claude/daily-report-*` branch so `auto-merge-report.yml` validates and syncs it as usual.
+- Secrets: `ANTHROPIC_API_KEY` (the job skips itself when unset) and `GH_PAT` (required for `publish` — pushes made with `GITHUB_TOKEN` do not trigger other workflows). Optional variable: `DAILY_REPORT_MODEL` (default `claude-sonnet-5`).
+- In `publish` mode the job exits before calling the API if today's report already exists on main, so running it alongside the Routine never produces two reports.
+- The API cost of each run is shown in the job summary and in the uploaded execution log.
+
 ## Prompts (`prompt/`)
 
 - Treat changes here as code changes. Small focused diffs. The commit body explains *why* the prompt is changing — what behavior you're trying to improve or fix.
 - Test prompt changes on a single branch before letting the Routine pick them up.
+- `ci-overrides.md` overrides specific steps of `routine-prompt.md` for the Actions run (RSS digest instead of fetching feeds, a reduced search list, no git). When you change a step it overrides, check that both files still agree.
+- The RSS feed list exists in two places: `routine-prompt.md` (手順2-1) and `FEEDS` in `scripts/fetch_rss.py`. Keep them in sync.
 
 ## What NOT to do
 

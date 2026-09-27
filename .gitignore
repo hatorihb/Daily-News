@@ -1,0 +1,3 @@
+# daily-report.yml が Claude 実行前に生成する RSS 一覧（コミットしない）
+rss-digest.md
+__pycache__/
