@@ -1,0 +1,223 @@
+name: Daily Report (API)
+
+# claude.ai Routines の代替: GitHub Actions + Anthropic API（従量課金）でレポートを生成する。
+#
+# 動作モードはリポジトリ変数 DAILY_REPORT_MODE で切り替える（手動実行時は入力で上書き可）:
+#   dry-run（既定・未設定時）: 生成したレポートを Artifact に保存するだけで push しない。
+#                              Routine と並行運用して品質・コストを比較する段階で使う。
+#   publish                   : claude/** ブランチに push する → auto-merge-report.yml が検証して main に同期。
+#
+# 必要な secrets: ANTHROPIC_API_KEY（未設定なら何もせず終了）、GH_PAT（publish 時の push 用。
+#   GITHUB_TOKEN での push は他のワークフローを起動しないため auto-merge が走らない）
+# 任意の変数: DAILY_REPORT_MODEL（既定 claude-sonnet-5）
+on:
+  schedule:
+    - cron: '0 21 * * *' # 21:00 UTC = 06:00 JST。cron は混雑時に遅れるので watchdog（09:00 JST）より十分前に置く
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'dry-run / publish（空欄ならリポジトリ変数 DAILY_REPORT_MODE、未設定なら dry-run）'
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-report
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Resolve mode and date
+        id: cfg
+        env:
+          INPUT_MODE: ${{ github.event.inputs.mode }}
+          VAR_MODE: ${{ vars.DAILY_REPORT_MODE }}
+          VAR_MODEL: ${{ vars.DAILY_REPORT_MODEL }}
+          HAS_API_KEY: ${{ secrets.ANTHROPIC_API_KEY != '' }}
+          HAS_PAT: ${{ secrets.GH_PAT != '' }}
+        run: |
+          MODE="${INPUT_MODE:-${VAR_MODE:-dry-run}}"
+          case "$MODE" in
+            dry-run|publish) ;;
+            *) echo "::error::Unknown mode '${MODE}' (use dry-run or publish)"; exit 1 ;;
+          esac
+          TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
+          SKIP=false
+          if [ "$HAS_API_KEY" != "true" ]; then
+            echo "::notice::ANTHROPIC_API_KEY が未設定のためスキップします。"
+            SKIP=true
+          fi
+          if [ "$MODE" = "publish" ] && [ "$HAS_PAT" != "true" ]; then
+            echo "::error::publish モードには GH_PAT が必要です。"
+            exit 1
+          fi
+          {
+            echo "mode=${MODE}"
+            echo "today=${TODAY}"
+            echo "model=${VAR_MODEL:-claude-sonnet-5}"
+            echo "skip=${SKIP}"
+          } >> "$GITHUB_OUTPUT"
+          echo "Mode: ${MODE} / Date: ${TODAY} / Model: ${VAR_MODEL:-claude-sonnet-5}"
+
+      - uses: actions/checkout@v4
+        if: steps.cfg.outputs.skip != 'true'
+        with:
+          ref: main
+          token: ${{ secrets.GH_PAT || github.token }}
+
+      - name: Check existing report
+        id: existing
+        if: steps.cfg.outputs.skip != 'true'
+        env:
+          TODAY: ${{ steps.cfg.outputs.today }}
+          MODE: ${{ steps.cfg.outputs.mode }}
+        run: |
+          FILE="reports/tech-report-${TODAY}.html"
+          if [ -f "$FILE" ]; then
+            if [ "$MODE" = "publish" ]; then
+              # 1日1本。既にある（Routine や手動で作成済み）なら API を呼ばずに終了して課金を避ける
+              echo "::notice::${FILE} は既に main にあるため生成をスキップします。"
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            # dry-run は比較用なので、ランナー上のコピーだけ消して新規に生成させる（push はしない）
+            rm -f "$FILE"
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch RSS feeds
+        if: steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        env:
+          TODAY: ${{ steps.cfg.outputs.today }}
+        run: python3 scripts/fetch_rss.py --today "$TODAY" --out rss-digest.md
+
+      - name: Build prompt
+        id: prompt
+        if: steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        env:
+          TODAY: ${{ steps.cfg.outputs.today }}
+        run: |
+          DELIM="PROMPT_$(openssl rand -hex 8)"
+          {
+            echo "text<<${DELIM}"
+            sed "s/{{TODAY}}/${TODAY}/g" prompt/ci-overrides.md
+            echo ""
+            echo "---"
+            echo ""
+            echo "# routine-prompt.md（基本手順）"
+            echo ""
+            cat prompt/routine-prompt.md
+            echo "${DELIM}"
+          } >> "$GITHUB_OUTPUT"
+
+      # RSS・検索結果・記事本文は第三者のデータなので、ツールは生成に必要な最小限に絞る
+      # （git 操作や任意のシェル実行はさせない。コミットとプッシュは後続のステップで行う）
+      - name: Generate report with Claude
+        id: claude
+        if: steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github_token: ${{ github.token }}
+          prompt: ${{ steps.prompt.outputs.text }}
+          claude_args: >-
+            --model ${{ steps.cfg.outputs.model }}
+            --max-turns 80
+            --allowedTools "Read,Write,Edit,Glob,Grep,WebSearch,WebFetch,Bash(ls:*),Bash(head:*),Bash(tail:*),Bash(wc:*),Bash(grep:*)"
+
+      - name: Validate report
+        id: validate
+        if: steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        continue-on-error: true
+        env:
+          TODAY: ${{ steps.cfg.outputs.today }}
+        run: |
+          FILE="${GITHUB_WORKSPACE}/reports/tech-report-${TODAY}.html"
+          if [ ! -f "$FILE" ]; then
+            echo "::error::レポートが生成されませんでした: reports/tech-report-${TODAY}.html"
+            exit 1
+          fi
+          # セッション内 hook と同じスクリプトで最終確認する（hook が発火しなかった場合の保険）
+          INPUT=$(jq -n --arg p "$FILE" '{tool_input: {file_path: $p}}')
+          printf '%s' "$INPUT" | bash .claude/hooks/report-check.sh
+          printf '%s' "$INPUT" | bash .claude/hooks/secret-scan.sh
+          echo "Validation passed."
+
+      - name: Summarize run
+        if: always() && steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        env:
+          TODAY: ${{ steps.cfg.outputs.today }}
+          MODE: ${{ steps.cfg.outputs.mode }}
+          MODEL: ${{ steps.cfg.outputs.model }}
+          EXEC_FILE: ${{ steps.claude.outputs.execution_file }}
+          VALIDATE: ${{ steps.validate.outcome }}
+        run: |
+          EXEC_FILE="${EXEC_FILE:-${RUNNER_TEMP}/claude-execution-output.json}"
+          FILE="reports/tech-report-${TODAY}.html"
+          {
+            echo "## 生成結果（${TODAY} / ${MODE} / ${MODEL}）"
+            echo ""
+            if [ -f "$EXEC_FILE" ]; then
+              jq -r '[.[] | select(.type == "result")] | last
+                | "- API コスト: $\(.total_cost_usd // "不明") / ターン数: \(.num_turns // "不明")"' \
+                "$EXEC_FILE" 2>/dev/null || echo "- API コスト: 取得できず"
+            else
+              echo "- API コスト: 実行ログなし"
+            fi
+            echo "- 検証: ${VALIDATE}"
+            if [ -f "$FILE" ]; then
+              for s in domestic ai aws security; do
+                n=$(awk -v id="id=\"${s}\"" 'index($0, id){f=1} f && /<\/section>/{exit} f' "$FILE" | grep -c '<div class="card">' || true)
+                echo "- ${s}: ${n} 件"
+              done
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+          mkdir -p "${RUNNER_TEMP}/out"
+          cp -f rss-digest.md "${RUNNER_TEMP}/out/" 2>/dev/null || true
+          cp -f "$FILE" "${RUNNER_TEMP}/out/" 2>/dev/null || true
+          cp -f "$EXEC_FILE" "${RUNNER_TEMP}/out/claude-execution-output.json" 2>/dev/null || true
+
+      - name: Upload artifacts
+        if: always() && steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-report-${{ steps.cfg.outputs.today }}-${{ steps.cfg.outputs.mode }}
+          path: ${{ runner.temp }}/out/
+          retention-days: 14
+          if-no-files-found: warn
+
+      - name: Push to claude/** branch
+        if: steps.cfg.outputs.mode == 'publish' && steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true' && steps.validate.outcome == 'success'
+        env:
+          TODAY: ${{ steps.cfg.outputs.today }}
+        run: |
+          BRANCH="claude/daily-report-${TODAY}-${GITHUB_RUN_ID}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          # レポート以外（rss-digest.md 等）はコミットしない
+          git add "reports/tech-report-${TODAY}.html"
+          git commit -m "report: AI・AWS daily report ${TODAY}"
+          git push origin "$BRANCH"
+          echo "::notice::${BRANCH} に push しました。auto-merge-report.yml が検証と main 同期を行います。"
+
+      # 最大ターン到達などで Claude ステップが失敗しても、レポートが完成して検証を通っていれば成功扱い（警告のみ）
+      - name: Report status
+        if: steps.cfg.outputs.skip != 'true' && steps.existing.outputs.skip != 'true'
+        env:
+          CLAUDE_OUTCOME: ${{ steps.claude.outcome }}
+          VALIDATE_OUTCOME: ${{ steps.validate.outcome }}
+        run: |
+          if [ "$VALIDATE_OUTCOME" != "success" ]; then
+            echo "::error::レポートの生成または検証に失敗しました（Claude: ${CLAUDE_OUTCOME} / 検証: ${VALIDATE_OUTCOME}）。Artifact の実行ログを確認してください。"
+            exit 1
+          fi
+          if [ "$CLAUDE_OUTCOME" != "success" ]; then
+            echo "::warning::Claude ステップは ${CLAUDE_OUTCOME} で終了しましたが、レポートは検証を通過しています（最大ターン到達の可能性）。"
+          fi
