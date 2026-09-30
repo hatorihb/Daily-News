@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 01 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JAPAN IT WEEK / 幕張メッセ</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000002137.000026157.html" target="_blank" rel="noopener">IT・DX・AI総合展「JAPAN IT WEEK 秋 2026」10月21日〜23日に幕張メッセで開催——「ひとり情シス」支援からエージェント型AI・サイバー防衛の最前線まで700社超が出展</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IT・DX・AIを網羅する国内最大級の総合展示会「JAPAN IT WEEK 秋 2026」が、2026年10月21日（水）から23日（金）の3日間、千葉・幕張メッセで開催される。出展規模は700社超で、エージェント型AIの活用事例・製品デモ、国内企業のDX推進事例、サイバーセキュリティ防衛技術が中心テーマとなる。中堅・中小企業の「ひとり情シス」を対象とした支援ゾーンや、生成AI／LLMを業務適用するためのハンズオンセッションも設けられる。IT担当者・DX推進責任者が国内外の製品・サービスを比較検討できる場として毎年注目を集めており、今年は特にAIエージェントとゼロトラストセキュリティのゾーンが拡充される見込みだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AI Writer Beans / SaaS</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000002.000188524.html" target="_blank" rel="noopener">SEOとLLMO/GEO両対応のAIライティングサービス「AI Writer Beans」が正式リリース——キーワードから検索エンジンとAI検索に最適化された記事を自動生成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AIライティングサービス「AI Writer Beans」が正式リリースされた。キーワードを入力するだけで、従来の検索エンジン最適化（SEO）と生成AI検索（LLMO/GEO）の両方に対応した記事を自動生成する。大規模言語モデルが参照・引用しやすい文章構造と語彙でコンテンツを生成するため、ChatGPTやPerplexityなどのAIオーバービュー・回答欄への露出向上が期待できる。コンテンツマーケティング担当者やSEO実務者向けのSaaS製品として提供が開始されており、月次サブスクリプション形式で利用可能。従来のSEOツールに加え、LLMによるコンテンツ評価基準への対応が急務となっている企業の需要を取り込む形だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / DevDay 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://venturebeat.com/technology/openai-launches-dots-always-on-ai-agent-coworkers-and-chatgpt-space-where-they-can-collaborate-with-human-teams" target="_blank" rel="noopener">OpenAI DevDay 2026 — 常時稼働AIエージェント「dots」とチーム協業空間「ChatGPT Space」を発表、月額500ドルの新Proプランも</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年9月30日にサンフランシスコで開催した「DevDay 2026」で20以上の新機能を一挙発表した。目玉は常時稼働型パーソナルエージェント「dots」で、GPT-6 Astra搭載・専用クラウドコンピューター保有・4,000超アプリ連携により、ユーザーが再指示しなくても目標に向けて自律的に動き続ける。チームとAIが共同編集できる「ChatGPT Space」（Slack/Teams統合）、AI・人間が協業で作成する「Pages」ドキュメント機能も発表。トークン生成速度を最大8倍に高める有料ティア「Ultrafast」、月額500ドル（約8万4,000円）の最上位Proプランも追加された。dotsはPro/Business Premiumユーザーへ順次展開開始。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Restate / シリーズA</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/09/30/restate-lands-20m-as-the-need-for-durable-infrastructure-increases-with-ai-agents/" target="_blank" rel="noopener">Restate、AIエージェント向け「耐障害性実行基盤」で約2,000万ドル（約30億円）のシリーズAを調達——Apache Flink創設メンバーが設立、ReplitやFortune 500が採用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ベルリン・サンフランシスコに拠点を置くRestate（Apache Flink創設メンバーが設立）が、Singular主導・Redpoint VenturesとCapital One Ventures参加のシリーズAで2,000万ドルを調達し累計2,700万ドルに達した。同社が提供する「durable execution（耐障害性実行）」技術は、AIエージェントが実行中にクラッシュやネットワーク障害が生じても完了済み処理とステートを保持し、正確な地点から再開できるワークフローランタイムだ。長時間・多段階のエージェント処理が増える中で必須インフラとして注目を集め、ReplitのほかFortune 500企業が本番採用済み。調達資金はプロダクト開発強化と北米展開に充当される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / What's Next 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">What's Next with AWS 2026 主要発表 — Amazon CloudWatch Omni GA、Amazon Quick拡張、AWS+OpenAI提携強化を一挙発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは「What's Next with AWS 2026」イベントで複数の重要サービスをGA・拡張・提携発表した。AIファースト可観測性サービス「Amazon CloudWatch Omni」が一般提供開始となり、インフラからAIエージェントまでの統合モニタリングを単一プラットフォームで実現する。AI作業アシスタント「Amazon Quick」はGoogle Workspace・Zoom・Airtable・Dropbox・Microsoft Teamsとの統合を追加し、業務アシスタントとしての網羅性を強化した。さらにAWSはOpenAIとの提携を拡大し、GPT-5.5・Codex・Managed AgentsなどOpenAI最新モデルをAmazon Bedrock上で限定プレビュー提供すると発表した。AWS WAFにAIトラフィック課金機能も追加され、AIボットのコンテンツ利用に価格設定が可能になった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.aboutamazon.com/news/aws/aws-amazon-bedrock-agent-core-ai-agents" target="_blank" rel="noopener">Amazon Bedrock AgentCore Harness が一般提供（GA）開始 — モデル・プロンプト・ツールを指定するだけで本番グレードAIエージェントを数分で起動</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock AgentCoreのマネージドハーネスが一般提供開始となり、開発者はモデル・システムプロンプト・ツールを指定するだけでオーケストレーションコード不要の本番グレードAIエージェントを数分で起動できる。Bedrock Managed Knowledge Base（Smart Parsing・Agentic Retriever付き）とWeb Search（管理された最新情報検索）も同時にGAに移行した。AIエージェント開発の参入障壁が大幅に低下し、企業がAIエージェントを迅速に本番投入できる環境が整った。AgentCore CLIとコーディングアシスタント向けスキルも提供開始となり、開発・デプロイ・運用の一気通貫フローが実現した。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Citrix / NetScaler ADC・Gateway</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/citrix-admins-warned-to-shut-down-netscalers-over-2-exploited-zero-days/" target="_blank" rel="noopener">【CVE-2026-88771・CVE-2026-88772】Citrix NetScaler ADC/Gatewayにゼロデイ2件——認証不要のRCE、政府・金融等5万超のインスタンスで野生悪用確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Citrixは、NetScaler ADC（旧Citrix ADC）およびNetScaler Gateway（旧Citrix Gateway）に対する2件のゼロデイ脆弱性（CVE-2026-88771 CVSS 9.8・CVE-2026-88772 CVSS 9.5）が実際の攻撃で悪用されていると警告した。CVE-2026-88771は入力検証不備による認証不要リモートコード実行（RCE）、CVE-2026-88772はDTLS処理のメモリオーバーフローによりRCEまたはDoSが可能。Mandiant・Google Threat Intelligence Groupが関与を確認した攻撃者は政府・金融・教育・法務分野を標的とし、Webシェルとトンネリングマルウェアを設置している。Palo Alto Networks Cortex Xpanseによれば5万件超の公開インスタンスが脆弱な状態。Citrixは緊急パッチを公開済み（影響バージョン：NetScaler ADC/Gateway 13.0・13.1・14.1系）——即時アップデートが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / セキュリティ更新</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/chrome-154-security-update/" target="_blank" rel="noopener">【CVE-2026-102331】Google Chrome 154 セキュリティアップデート — 重大なANGLEバッファオーバーフロー含む33件修正、V8ゼロデイの悪用も確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年9月30日、Google Chrome安定版154.0.8037.92/.93のセキュリティアップデートをリリースした。33件の脆弱性が修正され、最重要はCVE-2026-102331（ANGLEグラフィックスレイヤーのバッファオーバーフロー、Critical）。また野生での悪用が確認済みのV8 JavaScriptエンジンゼロデイ脆弱性のパッチも含まれており、悪意あるWebページを閲覧するだけで攻撃が成立する可能性がある。Windows/macOS向けは154.0.8037.92または93、Linux向けは154.0.8037.92へのアップデートが推奨される（設定→ヘルプ→Google Chromeについて）。Chromiumベースの他ブラウザ（Microsoft Edge等）も近日中に対応アップデートが提供予定。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Palo Alto Unit 42 / 脅威情報</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">脅威情報</span>
+            <span class="card-date">2026-09-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://unit42.paloaltonetworks.com/netscaler-zero-days-exploited/" target="_blank" rel="noopener">Unit 42 脅威ブリーフィング — Citrix NetScalerゼロデイを悪用する国家支援型攻撃の戦術・被害範囲を詳細分析、パッチ後もバックドア残存の懸念</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Palo Alto Networks Unit 42は、CVE-2026-88771/CVE-2026-88772を悪用する攻撃活動に関する詳細な脅威インテリジェンスを公開した。攻撃者はHTTP管理インターフェース経由でWebシェルを設置後、ラテラルムーブメントとクレデンシャル窃取を実行する戦術（TTP）が確認されている。特に深刻なのは、Citrixが緊急パッチを公開した後も攻撃者が設置したバックドアは自動的に除去されないという点で、侵害インジケータ（IoC）の精査とネットワーク再構成が必要だ。北米・欧州の政府・金融サービス・テクノロジー・教育・法務・専門サービス分野の組織が標的となっており、影響組織はUnit 42が公開したIoCリストに基づく調査が推奨されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-01 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
