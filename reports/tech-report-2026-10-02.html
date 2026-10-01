@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 02 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">キヤノン株式会社 / PIXUS</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000001238.000013980.html" target="_blank" rel="noopener">キヤノン、プリンティング製品向け「クラウド型機能拡張プラットフォーム」始動——PIXUSに生成AIで目的別最適印刷・Webレイアウト解析を提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">キヤノンは2026年10月1日、生成AIとイメージング技術を融合した「クラウド型機能拡張プラットフォーム」を始動し、家庭用インクジェットプリンター「PIXUS」シリーズへの新機能提供を開始した。第一弾として「Webレイアウト印刷」を提供し、生成AIがWebページを解析して広告や余白などの不要要素を除外・自動再レイアウトしたうえで印刷できる。既存のPIXUS対象製品にもクラウド経由で新機能が追加される「継続進化型」のビジネスモデルで、従来の機器販売モデルを拡張する。また同日、見守り機能と生成AIを活用したプリンタートラブル予防・問題解決サポートサービスも同時に開始された。プリンターを単なるハードウェアからソフトウェアプラットフォームへ転換するキヤノンの戦略転換を示す発表だ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GUGA / 生成AIパスポート</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.watch.impress.co.jp/docs/news/2144884.html" target="_blank" rel="noopener">生成AI活用普及協会（GUGA）、「生成AIパスポート」シラバスを大幅改訂——GPT-5・RAG・AIエージェント・EU AI規制を追加、2027年2月試験から適用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">生成AI活用普及協会（GUGA）は10月1日、国内最大規模のAIリテラシー資格「生成AIパスポート試験」のシラバスを大幅改訂し、2027年2月開催の試験から適用すると発表した。改訂版ではGPT-o1・GPT-o3・GPT-o4・GPT-4.1・GPT-5・Codexまでの技術進化を反映し、新たにRAG（検索拡張生成）・AIエージェント・EU AI規制対応の項目が追加された。改訂版公式テキストの予約販売も10月1日より開始（11月24日順次発送）。日本企業のAIリテラシー研修や人材評価に広く活用されている同試験のシラバス改訂は、急速に進化するAI技術・法規制への対応を示し、企業のAI教育カリキュラムにも影響を与える見込みだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Classie / AIエージェント監視</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.globenewswire.com/news-release/2026/10/01/3372800/0/en/classie-launches-supervise-to-track-control-and-account-for-enterprise-ai-agents-in-real-time.html" target="_blank" rel="noopener">Classie、企業向けAIエージェント監視プラットフォーム「Supervise」をGA——誰が・何を・どのデータに・いくらのコストでを一元トレースしCISO・CIOに可視性を提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Classieは10月1日、企業内のAIエージェント行動を統合管理するランタイムセキュリティ基盤「Supervise」の一般提供（GA）を開始した。エンドポイント・ブラウザ・クラウド環境にわたってエージェントの行動を追跡し、「誰が・何を・どのデータに・いくらのコストで」アクセスしたかを実行トランスクリプトとして記録する。Open Policy Agentルールと軽量インラインセンサーを組み合わせ、15分でインストール・5日以内に監視態勢が整う設計。認可済み・未認可（Shadow AI）の両エージェントを対象とし、ポリシー違反を検知次第インラインでアクションを遮断できる。Gartnerが「2026年末までに企業アプリの40%以上にタスク特化AIエージェントが組み込まれる」と予測するなか、エージェントガバナンスの需要は急増しており、CISOにとって見逃せないソリューションだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Brahma AI / 音映像AI</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pulse2.com/brahma-ai-raises-150-million-to-expand-enterprise-ai-platform/" target="_blank" rel="noopener">Brahma AI、企業向け音映像AIプラットフォームで1億5,000万ドル調達・評価額20億ドル——WarnerBros・NBA・Mayo Clinicが採用、DNEG創業者も出資参加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">企業向け音映像AIプラットフォームを提供するBrahma AIがインドのPEファンドMultiples（1億ドル）主導で1億5,000万ドル（約225億円）を調達し、評価額20億ドルに到達した。映画・スポーツ・医療・広告分野向けの「AI-nativeオペレーティングシステム」を提供し、映像コンテンツの自動編集・タグ付け・メタデータ生成・マルチモーダル検索を統合する。Warner Bros.・NBA・Mayo Clinicを主要顧客として採用済みで、DNEGのファウンダーNamit Malhotraも出資参加した。調達資金はR&D強化とシリコンバレー拠点拡充に充当予定。大型資金調達を受けたBrahma AI CoreおよびStudioプラットフォームの機能拡張が加速する見通しで、垂直特化型エンタープライズAIへの大規模投資が続いていることを示す事例だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Lambda / Lambda Web Functions</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://github.com/awslabs/aws-sdk-rust/releases/tag/release-2026-10-01" target="_blank" rel="noopener">AWS Lambda Web Functions が一般提供（GA）開始——サーバーレスでWebアプリ・APIバックエンドを直接ホスト、CloudFront OAC の always-amz-auth 署名も同時対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは10月1日、Lambda Web Functions（aws-sdk-lambdaweb 1.0.0）を一般提供（GA）とした。ウェブアプリケーションとAPIバックエンドをAWS Lambda上でサーバーレスに直接実行できる新サービスで、コンテナや専用サーバーなしにHTTPリクエストを処理するWebオリジンとして機能する。同タイミングでAmazon CloudFrontのOrigin Access Control（OAC）に「always-amz-auth」署名動作が追加され、CloudFront→Lambda Web FunctionsのルートにSigV4認証が一貫して適用できるようになった。これにより、CloudFrontのエッジキャッシュ最適化とIAMロールベースのアクセス制御を組み合わせたサーバーレスWebアーキテクチャが構築可能となる。また同日のSDK更新では、Amazon End User Messaging（aws-sdk-endusermessaging 1.0.0）もGA、ブランドプロファイルとOTPポリシー管理をサポートする。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon SageMaker HyperPod</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://github.com/aws/aws-sdk-go-v2/releases/tag/release-2026-10-01" target="_blank" rel="noopener">Amazon SageMaker HyperPod が c8a.16xlarge・m8a.16xlarge インスタンスをサポート——大規模AIトレーニング用高メモリ帯域インスタンスを追加、AWS Transfer Family も CloudWatch Logs 統合を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは10月1日、Amazon SageMaker HyperPod に新インスタンスタイプ c8a.16xlarge と m8a.16xlarge のサポートを追加した。これらはAMD EPYC第5世代プロセッサを搭載した高メモリ帯域インスタンスで、大規模なAI基盤モデルのファインチューニングや分散トレーニングにおける計算効率の向上が期待される。また、同日の更新ではAWS Transfer Family Workflowsに「structuredLogDestinations」オプションが追加され、管理ワークフロー実行ログをカスタムのAmazon CloudWatch Logsロググループに指定出力できるようになった。さらにAmazon Bedrock Agent Managed Knowledge BaseにtextReadyAtフィールドが追加され、同期ジョブで全ドキュメントのテキストインデックスが完了したタイムスタンプを取得可能となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / Catalyst SD-WAN Manager</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/10/01/new-cisco-sd-wan-zero-day-exploited-in-the-wild-cve-2026-76504/" target="_blank" rel="noopener">【CVE-2026-76504 / CVSS 9.8】Cisco Catalyst SD-WAN Manager に認証不要のAPI管理者権限奪取——野生悪用確認・CISA KEV 収載（連邦機関期限10/3）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CiscoはCatalyst SD-WAN Managerの管理API認証処理にCritical脆弱性（CVE-2026-76504、CVSS 9.8）が野生で悪用されていると発表した。HTTP リクエストの URI エンコーディング処理の不備（CWE-177）に起因し、認証不要のリモート攻撃者が細工したHTTPリクエストを送信するだけで管理者権限でのAPIアクセスが可能。影響バージョンはSD-WAN Manager 26.2・26.1・20.18・20.15・20.12・20.9以前で、ワークアラウンドは存在しない。修正済みバージョンへの即時アップグレードが必須（20.9以前は対象修正版への移行が必要）。CISAは9月30日にKEVカタログへ追加し、米連邦機関の対処期限を10月3日に設定。SD-WANを中心としたネットワークインフラを運用する組織は速やかにパッチ適用を実施すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple / iOS・macOS CoreGraphics</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityaffairs.com/200175/hacking/public-poc-released-for-apple-coregraphics-zero-day-cve-2026-86950.html" target="_blank" rel="noopener">【CVE-2026-86950 / CVSS 8.8】Apple CoreGraphics ゼロデイのPoC公開——CISA KEV 収載済み・WhatsApp PDF経由の配布経路も示唆、連邦機関期限は本日10/2</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Appleが9月28日に緊急パッチを公開したCoreGraphicsのゼロデイ脆弱性（CVE-2026-86950、CVSS 8.8）に対し、10月2日に最初のPoC（概念実証コード）が公開された。本脆弱性は境界外書き込み（Out-of-Bounds Write）に起因し、悪意あるファイルを処理するだけで任意コード実行が可能。影響範囲はiOS 26.7以前・iPadOS 26.7以前・macOS Tahoe 26.7.1未満・macOS Sequoia 15.8.1未満で、Meta Product Securityが「極めて洗練された標的型攻撃」での悪用を確認しAppleに報告した。CISAは9月29日にKEVカタログ収載し、連邦機関の対処期限は本日10月2日。PoC公開に加えWhatsAppを通じた悪意あるPDFが配布経路として示唆されており、未更新デバイスへの攻撃拡大が懸念される。iOS 26.7.1・macOS Tahoe 26.7.1への即時更新が必須。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">タイムズモビリティ / パーク24</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-01</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.watch.impress.co.jp/docs/news/2144279.html" target="_blank" rel="noopener">タイムズカー不正アクセス続報——免許証画像含む本人確認書類160万件の流出を確定、集団訴訟に2,200人超が参加意向</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">カーシェアリング「タイムズカー」を運営するタイムズモビリティ（パーク24）は10月1日、9月28日に公表した不正アクセス被害について詳細を更新し、運転免許証画像など本人確認書類の流出アカウント数が約160万件に確定したと発表した。最大660万件の個人情報（氏名・住所・生年月日・電話番号・メールアドレス）に加え、運転免許証・公共料金請求書・学生証・家族確認書類の画像が流出しており、これらを使ったクレジットカード不正開設への悪用が懸念される。被害者らは発表後1日以内に2,200人超が集団訴訟参加の意向を示し、損害賠償請求に向けた動きが進む。タイムズカー会員は各種金融機関・クレジットカード会社からの不審な通知を注意深く確認し、必要に応じて免許証等の本人確認書類の再発行を検討することが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-02 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
