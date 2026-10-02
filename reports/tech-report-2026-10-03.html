@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 03 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本精工 / アクセンチュア</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2610/02/news011.html" target="_blank" rel="noopener">日本精工×アクセンチュア、製造業DX専門合弁会社「NSKデジタル」設立に向け契約締結</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本精工（NSK）とアクセンチュアは2026年10月2日、製造業DX推進を専門とする合弁会社「NSKデジタル株式会社」の設立契約を締結したと発表した。出資比率はアクセンチュア65%・NSK35%で、2027年4月の営業開始を予定。NSKグループが長年蓄積した製造ノウハウとアクセンチュアのAI・データ分析技術を組み合わせ、製造業全般を対象としたDXソリューションを外販する。NSKはまず自社工場のデジタル化で成果を実証し、そのモデルを他社に展開する戦略を描いている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ガートナー ジャパン</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.gartner.co.jp/press/html/pr20261001-01.html" target="_blank" rel="noopener">ガートナー調査：国内企業のAI活用が「効率化」から「ビジネス変革」へ移行、導入済み企業が35%超に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ガートナー ジャパンが10月2日に公表した国内企業デジタル化動向調査によると、AI導入済み企業の割合が35%超となり2025年調査（30.3%）から大幅に拡大した。AI活用目的は「業務効率化」（43.4%）が引き続き最多だが、「ビジネスモデル変革」や「新規事業創出」への移行が進んでいることも明らかになった。一方、AI推進の阻害要因として「スキル人材の不足」と「既存システムとの統合コスト」が上位を占め、組織的な変革マネジメントの必要性が示された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.infoq.com/news/2026/10/openai-devday-2026/" target="_blank" rel="noopener">OpenAI DevDay 2026：常時稼働AIエージェント「Dots」・GPT-6.1 Sol・Decisions APIなど25件を一挙発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは10月2日開催のDevDay 2026で約25件の新機能・サービスを発表した。最注目は常時稼働型AIエージェント「Dots」で、クラウドコンピュータ上で4,000以上のアプリと連携しGPT-6 Astra搭載で自律タスクを実行する。APIアクセス向けの新モデル「GPT-6.1 Sol」はGPT-6 Astraに迫る性能を約1/5のトークン単価（入力$2/出力$10 per 100万トークン）で提供し、最大100万トークンのコンテキストウィンドウを持つ。また分類・ルーティング特化のLuna（Decisionsモデル）を使うDecisions APIが限定プレビューで公開されたほか、Codex Cloud・Spacesワークスペース・Agents APIのコンピュータ操作強化なども発表された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/" target="_blank" rel="noopener">Apple、AIエージェント普及に伴いmacOSの「フルディスクアクセス」権限制御を大幅強化へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Appleは10月2日、OpenAIの「Dots」やMeta「Muse」などAIエージェントが急速に普及するなか、macOSのフルディスクアクセス（Full Disk Access）権限の付与要件を大幅に厳格化する方針を明らかにした。AIエージェントがユーザーの許可なくメールや書類・iCloudデータを読み取るリスクに対応するため、今後はユーザーの「非常に明示的な操作」がなければアプリへの権限付与が行えないよう変更される予定。具体的な実装スケジュールは未発表だが、2027年初頭のmacOSアップデートに含まれる見通し。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon / AWS</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">「What's Next with AWS 2026」主要発表まとめ：Amazon ConnectをAIで4業種特化サービスに拡張、OpenAIとの連携も強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは10月2日の「What's Next with AWS 2026」イベントで、Amazon Connectを基盤とした4つの業種特化型AIエージェントソリューションを発表した。Decisions（サプライチェーン）・Talent（採用・人事）・Customer（CXオペレーション）・Health（医療）の各ソリューションとして展開し、2027年上半期にGA予定。また、OpenAIとの統合強化として、Amazon BedrockにてGPT-5.5・Codex・Managed Agentsが限定プレビューで利用可能となった。AWSとOpenAIが直接連携するのはこれが初となり、マルチベンダー基盤戦略が一段と加速している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon QuickSight</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-quicksight-hierarchyfilter-databricks-oauth/" target="_blank" rel="noopener">Amazon QuickSight、HierarchyFilter対応とDatabricks 2-legged OAuth認証をサポート</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは10月2日、Amazon QuickSightの新機能2件を発表した。HierarchyFilterサポートにより、分析やダッシュボードで階層型フィルター（例：地域→都道府県→市区町村）を定義してドリルダウン操作を行えるようになった。またDatabricksデータソース向けに2-legged OAuth認証をサポートし、ユーザー資格情報を直接管理することなくDatabricks接続の認証フローを統一できる。どちらの機能も全商用リージョンで即時利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA KEV / Zammad</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/news-events/alerts/2026/10/02/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">【CVE-2026-102489 / CVE-2026-102490】ZammadのゼロデイをAIエージェントが悪用——CISA KEV収載、連邦機関対応期限は10月5日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは10月2日、オープンソースのヘルプデスクソフト「Zammad」の2件の脆弱性をKEV（既知の悪用された脆弱性）カタログに追加した。CVE-2026-102489（セッション固定→RCE、Zammad 6.3.0〜6.5.4）はCVSS 9.8 Critical、CVE-2026-102490（権限昇格→root、7.1.0以下の全バージョン）はCVSS 9.6 Criticalで、オランダのセキュリティ研究機関DIVD（Dutch Institute for Vulnerability Disclosure）が9月21日に自律型AIエージェントによる攻撃で実際に侵害されたことを確認した。連邦機関への対応期限は2026年10月5日。対処法：Zammad 7.2.0以上への即時アップグレード。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">大阪公立大学</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.web.nhk/newsweb/na/nd-20261002de53839" target="_blank" rel="noopener">大阪公立大学で大規模システム障害——全授業を10月8日まで休講、原因・復旧見通し不明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">大阪公立大学（約16,000人）で10月2日早朝から全学的なシステム障害が発生し、学務情報システム・メール・学生ポータルが全停止している。大学は対応策として10月8日（木）まで全授業の休講を決定した。原因と復旧見通しは2日夜時点で不明で、サイバー攻撃の可能性も排除できないとしている。医学部附属病院の診療システムは別系統のため影響なし。学外の研究者との共同研究データへのアクセスにも影響が及んでいる模様。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NVIDIA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://lilting.ch/en/articles/nvidia-gpu-driver-vgpu-security-fixes" target="_blank" rel="noopener">NVIDIAのGPUドライバーに114件の脆弱性——CVSS 9.9のCritical（CVE-2026-47574）含む、即時アップデート推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NVIDIAは10月2日、ディスプレイドライバーおよびvGPU Managerに合計114件の脆弱性を修正したセキュリティアップデートを公開した。最も深刻なCVE-2026-47574（CVSS 9.9 Critical）はLinux向けvGPU Virtual GPU Managerに存在し、認証済みのゲストVMからホストOSへの権限昇格が可能。全体の内訳はCritical 1件・High 76件・Medium 37件で、影響範囲はGeForce・Quadro・RTX・Tesla各シリーズのディスプレイドライバー98件とvGPU Manager 16件。修正済みバージョン：GeForce 616.56（R615 branch）/ 610.88（R610）/ 582.78（R580）。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-03 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
