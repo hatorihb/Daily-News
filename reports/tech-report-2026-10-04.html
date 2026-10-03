@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a; --white:#ffffff; --red:#E60012;
+  --gray:#f2f2f2; --mid:#888; --border:#e0e0e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Sans','Meiryo',sans-serif;background:var(--gray);color:var(--black);font-size:15px;line-height:1.6}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:960px;margin:0 auto;padding:0 16px}
+header{background:var(--black);color:var(--white);padding:28px 0 24px}
+header h1{font-size:1.5rem;font-weight:700;letter-spacing:.04em}
+.header-date{font-size:.85rem;color:#aaa;margin-top:6px;letter-spacing:.08em}
+nav{background:var(--white);border-bottom:2px solid var(--red);position:sticky;top:0;z-index:100}
+nav ul{display:flex;list-style:none;gap:0;overflow-x:auto}
+nav ul li a{display:block;padding:12px 18px;font-size:.8rem;font-weight:600;letter-spacing:.06em;white-space:nowrap;border-bottom:3px solid transparent;transition:border-color .2s}
+nav ul li a:hover,nav ul li a:focus{border-bottom-color:var(--red);text-decoration:none}
+main{padding:32px 0 48px}
+.section{margin-bottom:40px}
+.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:20px}
+.section-num{font-size:.7rem;font-weight:700;letter-spacing:.12em;color:var(--mid)}
+.section-title{font-size:1.15rem;font-weight:700;letter-spacing:.03em}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px;transition:box-shadow .2s}
+.card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.card-service{font-size:.72rem;font-weight:700;letter-spacing:.06em;color:var(--mid);text-transform:uppercase;flex-shrink:0}
+.card-badges{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.04em}
+.impact-high{background:#fde8e8;color:#c0000d}
+.impact-medium{background:#fef3e2;color:#9a6000}
+.impact-low{background:#e8f5e9;color:#2e7d32}
+.card-date{font-size:.7rem;color:var(--mid)}
+.card-title{font-size:.95rem;font-weight:600;line-height:1.45;margin-bottom:10px}
+.card-title a{color:var(--black)}
+.card-title a:hover{color:var(--red)}
+details summary{font-size:.78rem;color:var(--mid);cursor:pointer;user-select:none;list-style:none;padding:4px 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:'▶ '}
+details[open] summary::before{content:'▼ '}
+.card-desc{font-size:.82rem;color:#444;margin-top:8px;line-height:1.6;padding-top:4px}
+footer{background:var(--black);color:#888;padding:24px 0;font-size:.75rem;text-align:center;letter-spacing:.04em}
+.section-domestic .section-num,.section-domestic .section-title{color:#1a56db}
+.section-domestic .card{border-top:3px solid #1a56db}
+.section-ai .section-num,.section-ai .section-title{color:#7c3aed}
+.section-ai .card{border-top:3px solid #7c3aed}
+.section-aws .section-num,.section-aws .section-title{color:#d97706}
+.section-aws .card{border-top:3px solid #d97706}
+.section-security .section-num,.section-security .section-title{color:var(--red)}
+.section-security .card{border-top:3px solid var(--red)}
+@media(max-width:600px){
+  header h1{font-size:1.2rem}
+  .cards{grid-template-columns:1fr}
+  nav ul li a{padding:10px 12px;font-size:.75rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 04 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <ul>
+      <li><a href="#domestic">01 国内IT・DX</a></li>
+      <li><a href="#ai">02 AI</a></li>
+      <li><a href="#aws">03 AWS</a></li>
+      <li><a href="#security">04 セキュリティ</a></li>
+    </ul>
+  </div>
+</nav>
+<main>
+  <div class="container">
+
+    <!-- 01 国内IT・DX -->
+    <section class="section section-domestic" id="domestic">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">国内IT・DX</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">CTC / Exaforce</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">注目</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://cloud.watch.impress.co.jp/docs/news/2144942.html" target="_blank" rel="noopener">伊藤忠テクノソリューションズ、「CTC-MSS AI SOCサービス powered by Exaforce」を国内展開</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">AIエージェントが脅威検出・調査・対応を自動化するMSSサービスを国内向けに提供開始。誤検知を90%削減し、インシデント調査時間を95%短縮するとしている。3年間で15億円の売上を目指す。既存SOCのオーバーレイとして導入可能で、24時間365日の有人監視と組み合わせて利用できる。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">SoftBank</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">注目</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://cloud.watch.impress.co.jp/docs/wdc/2122769.html" target="_blank" rel="noopener">ソフトバンク、Infrinia AI Cloud OS搭載の「AIデータセンター GPUクラウド」を2026年10月より提供開始</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">NVIDIA GB200 NVL72を搭載した国産AIクラウドサービスを2026年10月より本格提供。KaaS（Kubernetes as a Service）およびInf-aaS（Inference as a Service）モデルをサポートし、ソブリンAIクラウドとしてデータを日本国内で完結させる。マルチテナント対応で、ネオクラウドビジネスの基盤として展開する。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 02 AI -->
+    <section class="section section-ai" id="ai">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">AI</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Tavus</div>
+            <div class="card-badges">
+              <span class="impact impact-high">注目度 高</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.businesstoday.in/technology/artificial-intelligence/story/beyond-chatbots-tavuss-griffin-model-passes-video-turing-test-with-48-human-success-rate-559295-2026-10-03" target="_blank" rel="noopener">Tavus「Griffin」— 初の「Human Interaction Model」ビデオAI、48%がチューリングテスト通過</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Tavusが発表したGriffinは、フルデュプレックスのビデオ-to-ビデオAIモデル。1分間の通話で被験者の48%が人間と誤認するというビデオ版チューリングテストを初めて通過した。リアルタイムの音声・映像・感情認識を統合し、従来のチャットボット型AIを超えた「Human Interaction Model（HIM）」カテゴリを新設している。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Google DeepMind</div>
+            <div class="card-badges">
+              <span class="impact impact-high">注目度 高</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://thehackernews.com/2026/10/google-rolls-out-gemini-4-argon-to.html" target="_blank" rel="noopener">Google「Gemini 4 Argon」— サイバーセキュリティ機関限定ロールアウト開始</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">10月1日よりGoogleのFairwindプログラム参加サイバーセキュリティ組織に限定提供開始。入力$2/百万トークン・出力$10/百万トークンで、最大100万トークンの出力に対応。重大な脆弱性の自律的な発見・検証・パッチ適用が可能とされ、一般向けは早ければ12月に提供予定。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Cloudflare</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">注目</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://traictory.com/news/2026-10-03-cloudflare-clef-decision-models" target="_blank" rel="noopener">Cloudflare「Clef / Clef-flash」— オープンウェイトの決定モデルとRL微調整プラットフォームを公開</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Clef（27B）とClef-flash（9B、中央値38.8ms応答）はテキストではなく型付き確率を返す「決定モデル」。Apache 2.0ライセンスで公開され、RLCD（Reinforcement Learning from Claude Demonstrations）による微調整プラットフォームも同時提供。コンテキスト長64K、Cloudflare Workers AIで動作し、推論コストを大幅に削減できる。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 03 AWS -->
+    <section class="section section-aws" id="aws">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">AWS</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Amazon ECS</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">アップデート</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-ecs-vpc-lattice-blue-green-deployments/" target="_blank" rel="noopener">Amazon ECS が VPC Lattice でブルー/グリーン・リニア・カナリアデプロイに対応</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">ECSサービスでVPC Latticeを使ったトラフィックシフトをデプロイ中に制御できるようになった。ブルー/グリーン・リニア・カナリアの3方式をサポートし、VPC内サービスおよびクロスアカウントサービスに対応。CodeDeployとの連携で自動ロールバックにも対応しており、ダウンタイムゼロのリリースが容易になる。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Amazon EKS</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">アップデート</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-distro-kubernetes-version-1-37/" target="_blank" rel="noopener">Amazon EKS・EKS Distro が Kubernetes 1.37「Garhwal」をサポート</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Kubernetes 1.37「Garhwal」のサポートをGA。Metrics API GA、Dynamic Resource Allocationのデバイスtaints/tolerationsがGA、HPA scale-to-zero（beta）がデフォルト有効化。全AWSリージョン（GovCloudを含む）で利用可能。EKS Distroとして自己管理クラスターにも適用できる。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 セキュリティ -->
+    <section class="section section-security" id="security">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <span class="section-title">セキュリティ</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Fortinet / FortiMail</div>
+            <div class="card-badges">
+              <span class="impact impact-high">重要度 高</span>
+              <span class="card-date">2026-10-04</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://shattered.io/fortimail-zero-day-cvss-9-8-cisa-deadline-2026/" target="_blank" rel="noopener">【緊急】CVE-2026-104286 FortiMail CVSS 9.8 — 認証不要RCE、CISA KEV期限本日（10/4）</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">パストラバーサル＋NULLバイトバイパスにより認証なしで任意ファイル書き込み・リモートコード実行が可能。影響バージョン：FortiMail 8.0.0-8.0.1 / 7.6.0-7.6.6 / 7.4.0-7.4.8 / 7.2.0-7.2.9。アドバイザリ番号FG-IR-26-175。CISA KEVに10月1日追加、連邦機関の対応期限は本日10月4日。パッチ（8.0.2/7.6.7/7.4.9）未リリースのためワークアラウンド（管理インターフェースをインターネット非公開に）を即時適用すること。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Cisco / SD-WAN</div>
+            <div class="card-badges">
+              <span class="impact impact-high">重要度 高</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://thehackernews.com/2026/10/cisa-adds-exploited-cisco-catalyst-sd.html" target="_blank" rel="noopener">CVE-2026-76504 Cisco Catalyst SD-WAN CVSS 9.8 — 認証バイパス、CISA KEV期限10/3</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">APIの不適切なURLエンコード（CWE-177）により、認証なし遠隔攻撃者が管理者権限を取得可能。野外での悪用が確認されCISA KEVに掲載。修正済みバージョン：20.9.10.1 / 20.12.8.2 / 20.15.6.1 / 20.18.4.1 / 26.1.2.1 / 26.2.1。vManageのインターネット公開インスタンスは即時アップデートが必要。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">TeamViewer</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">重要度 中</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2145032.html" target="_blank" rel="noopener">TeamViewer 15.82 が5件のCVEを修正 — リモート権限バイパス（CVSS 8.8）含む</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">CVE-2026-92370（CVSS 8.8、リモート権限バイパス）、CVE-2026-19743（CVSS 7.8、ローカル特権昇格）、CVE-2026-92368（CVSS 7.8、ヒープバッファオーバーフロー）を含む計5件のCVEをTeamViewer 15.82で修正。自動更新が有効な場合は自動適用済みだが、エンタープライズ展開では手動確認を推奨。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">アバハウス</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">重要度 中</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2610/03/2000001981/" target="_blank" rel="noopener">アパレル「アバハウス」に不正アクセス — 全顧客の個人情報漏洩の可能性</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">9月27〜28日にシステムへの不正アクセスが発生し、10月3日に不審な払い戻しメールを通じて発覚。会員データベースおよびECサイトのデータベースが影響を受けた可能性があり、氏名・住所・メールアドレス・購入履歴等の漏洩が懸念される。現在調査中で詳細は続報待ち。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">ムーンスター</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">重要度 中</span>
+              <span class="card-date">2026-10-03</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2610/03/2000001982/" target="_blank" rel="noopener">靴メーカー「ムーンスター」で顧客情報漏洩 — 同社を騙るフィッシングメールも確認</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">顧客の氏名・住所・電話番号・メールアドレス・注文履歴が漏洩。漏洩情報を悪用した同社を騙るフィッシングメールの送信が確認されており、顧客への注意喚起が行われている。不正アクセスの経路は調査中で、クレジットカード情報の取り扱いについても確認中。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <p>DX・AI・AWS Update &mdash; 2026-10-04 &nbsp;|&nbsp; 情報は各社公式発表・報道を基に編集しています</p>
+  </div>
+</footer>
+</body>
+</html>
