@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Tech Report 2026-10-05</title>
+<style>
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text-primary: #1a202c;
+  --text-secondary: #4a5568;
+  --text-muted: #718096;
+  --accent-01: #3182ce;
+  --accent-02: #805ad5;
+  --accent-03: #d69e2e;
+  --accent-04: #e53e3e;
+  --tag-bg: #ebf8ff;
+  --tag-color: #2b6cb0;
+  --shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1a202c;
+    --surface: #2d3748;
+    --border: #4a5568;
+    --text-primary: #e2e8f0;
+    --text-secondary: #a0aec0;
+    --text-muted: #718096;
+    --tag-bg: #2a4365;
+    --tag-color: #90cdf4;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1a202c;
+  --surface: #2d3748;
+  --border: #4a5568;
+  --text-primary: #e2e8f0;
+  --text-secondary: #a0aec0;
+  --text-muted: #718096;
+  --tag-bg: #2a4365;
+  --tag-color: #90cdf4;
+  --shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  padding: 0 16px 48px;
+}
+.header {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 32px 0 24px;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 32px;
+}
+.header h1 { font-size: 1.6rem; font-weight: 700; }
+.header .meta { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; }
+.section { max-width: 900px; margin: 0 auto 40px; }
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-left: 4px solid var(--accent-01);
+  background: var(--surface);
+  border-radius: 0 4px 4px 0;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+.section-02 .section-title { border-left-color: var(--accent-02); }
+.section-03 .section-title { border-left-color: var(--accent-03); }
+.section-04 .section-title { border-left-color: var(--accent-04); }
+.cards { display: grid; gap: 16px; }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  box-shadow: var(--shadow);
+}
+.card-header { display: flex; align-items: flex-start; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.card-title { font-size: 1rem; font-weight: 600; flex: 1; min-width: 0; }
+.card-title a { color: var(--text-primary); text-decoration: none; }
+.card-title a:hover { text-decoration: underline; }
+.badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: var(--tag-bg);
+  color: var(--tag-color);
+}
+.badge-critical { background: #fff5f5; color: #c53030; }
+.card-date { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+.card-body { font-size: 0.92rem; color: var(--text-secondary); }
+.critical-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #c53030;
+  background: #fff5f5;
+  border: 1px solid #fc8181;
+  padding: 1px 6px;
+  border-radius: 4px;
+  margin-right: 6px;
+}
+.feed-status {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Daily Tech Report</h1>
+  <div class="meta">2026-10-05 &nbsp;|&nbsp; 国内IT・DX / AI / AWS / セキュリティ</div>
+</div>
+
+<!-- 01 国内IT・DX -->
+<section id="domestic" class="section section-01">
+  <div class="section-title">01 国内IT・DX</div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.itmedia.co.jp/mobile/articles/2610/04/news007.html" target="_blank">
+            NTTドコモ、RCSで同意未取得の不備 約1万6000件に影響・対象ユーザーは利用停止に
+          </a>
+        </div>
+        <span class="badge">通信・プライバシー</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; ITmedia Mobile</div>
+      <div class="card-body">
+        NTTドコモは10月4日、2026年9月17〜25日に店頭でMNP新規契約した一部ユーザーに対し、RCS（+メッセージ）の利用に関する重要事項説明およびGoogle Asia Pacific Pte. Ltd.への第三者提供同意の取得ができていなかったと発表した。店頭手続きシステムの不備が原因で、約1万6000件が対象。225件では実際にRCSの送受信が行われており、通信の秘密に抵触する可能性がある。ドコモは対象ユーザーのRCS利用停止を順次実施し、10月4日10時から個別連絡を開始した。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.itmedia.co.jp/news/article/2610/04/2000001978/" target="_blank">
+            再び浮上した「クレカ表現規制問題」 Clip Studio素材非公開・pixiv FANBOX規制でマンガ家に不安広がる
+          </a>
+        </div>
+        <span class="badge">クリエイター・決済</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; ITmedia NEWS</div>
+      <div class="card-body">
+        CLIP STUDIO ASSETSでの素材大量非公開とpixiv FANBOXでのコンテンツ制限をきっかけに、クレジットカード会社による表現規制問題が再燃。Celsysは事前告知なく素材を非公開化し、pixiv FANBOXは「決済サービスプロバイダーのフィードバック」を理由に作品を制限した。マンガ家や同人作家からは収益・表現の自由をめぐる懸念の声が上がっており、クリエイター向けプラットフォームの持続可能性が問われている。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 02 AI -->
+<section id="ai" class="section section-02">
+  <div class="section-title">02 AI</div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.itmedia.co.jp/news/article/2610/04/2000001987/" target="_blank">
+            Google、個人向けGeminiのモデル選択を厳格化 無料ユーザーが使えるのは「Flash-Lite」のみに
+          </a>
+        </div>
+        <span class="badge">Google / Gemini</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; ITmedia NEWS</div>
+      <div class="card-body">
+        Googleは10月9日から個人向けGeminiの無料プランでのモデル選択を制限すると発表。無料ユーザーが選べるのは「Flash-Lite」のみとなり、「Flash」「Pro」「Ultra」の上位モデルはGemini Advanced（有料プラン）に限定される。コスト最適化とサービス差別化が背景とみられ、有料プランへの移行を促す方針が鮮明になった。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.itmedia.co.jp/news/article/2610/04/2000001986/" target="_blank">
+            OpenAI安全部門トップのDavid Robinson氏が辞任 「カルチャーが壊れている」と公開コメント
+          </a>
+        </div>
+        <span class="badge">OpenAI / ガバナンス</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; ITmedia NEWS</div>
+      <div class="card-body">
+        OpenAIの安全性レポートを統括していたDavid Robinson氏が辞任し、「OpenAIのカルチャーは壊れている」と発言した。Robinson氏は安全調査チームとリーダーシップの間で繰り返し軋轢が生じていたと述べ、安全性よりも製品リリース速度が優先される組織文化への懸念を示した。OpenAIでは2024年以降、主要な安全研究者の退職が続いており、AIガバナンスをめぐる議論が改めて浮上している。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://techcrunch.com/2026/10/04/trump-unveils-his-new-super-intelligence-force/" target="_blank">
+            Trump、AI強化の新組織「スーパーインテリジェンス・フォース」を発表 米国AI覇権を目指す
+          </a>
+        </div>
+        <span class="badge">政策 / 米国</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; TechCrunch</div>
+      <div class="card-body">
+        トランプ大統領は10月4日、AIおよびロボット工学の国家戦略を強化するための新組織「スーパーインテリジェンス・フォース（SIF）」の設立を発表した。SIFは軍・政府機関向けの先端AI開発を集約し、中国との技術競争に対応する役割を担うとされる。民間AIラボとの連携枠組みも検討されており、政府主導のAI開発加速に向けた政策が具体化しつつある。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.marktechpost.com/2026/10/04/aleph-alpha-releases-kolibri-a-78-1b-open-weight-english-german-moe-model-with-only-3-46b-active-parameters/" target="_blank">
+            Aleph Alpha、78.1B MoEオープンモデル「Kolibri」公開 実行時アクティブパラメータは3.46Bのみ
+          </a>
+        </div>
+        <span class="badge">OSS / LLM</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; MarkTechPost</div>
+      <div class="card-body">
+        ドイツのAI企業Aleph Alphaは、78.1Bパラメータの英独二言語対応MoE（Mixture of Experts）モデル「Kolibri」をオープンウェイトで公開した。推論時にアクティブになるのは3.46Bパラメータのみで、高い表現力を保ちながら低コスト・低レイテンシでの運用が可能。欧州産の強力なオープンLLMとして注目を集めており、企業向けプライベートデプロイや規制データ対応ユースケースへの展開が期待される。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 03 AWS -->
+<section id="aws" class="section section-03">
+  <div class="section-title">03 AWS</div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://dev.classmethod.jp/articles/dynamodb-filtered-export-s3/" target="_blank">
+            Amazon DynamoDB、S3エクスポートにフィルタ指定機能を追加 キー条件・フィルタ式・射影式で必要なデータだけを出力
+          </a>
+        </div>
+        <span class="badge">DynamoDB / S3</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; DevelopersIO (classmethod)</div>
+      <div class="card-body">
+        Amazon DynamoDBのS3エクスポート機能にフィルタ指定（FilterSpecification）が追加された。KeyConditionExpression（パーティションキー・ソートキー条件）・FilterExpression（任意属性条件）・ProjectionExpression（出力属性選択）の3つを組み合わせることで、必要なレコードと属性だけを効率的にエクスポートできる。フルエクスポートとインクリメンタルエクスポートの両方に対応し、大規模テーブルのコンプライアンス対応や部分的なデータ移行、分析ワークフローの最適化に貢献する。GovCloud(US)リージョンを除く全リージョンで利用可能。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://dev.classmethod.jp/articles/aws-privatelink-tunnel-endpoint-cross-account/" target="_blank">
+            AWS PrivateLink、新機能「トンネルエンドポイント」でCIDRブロック単位のクロスアカウント接続が可能に
+          </a>
+        </div>
+        <span class="badge">PrivateLink / ネットワーク</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; DevelopersIO (classmethod)</div>
+      <div class="card-body">
+        AWS PrivateLinkに「トンネルエンドポイント」が追加され、VPCエンドポイントをCIDRブロック単位でプロバイダーのネットワークセグメントに接続できるようになった。従来は個別リソースごとにリソース構成を作成する必要があったが、新機能によりCIDR範囲を1つのリソース構成として共有し、GENEVE encapsulationを利用してトンネル接続が可能になる。AWS Resource Access Manager（RAM）経由でのクロスアカウント共有にも対応し、Transit GatewayやVPCピアリングを使わずにプライベートなネットワーク間接続を実現できる。28以上のAWSリージョンで利用可能。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 04 セキュリティ -->
+<section id="security" class="section section-04">
+  <div class="section-title">04 セキュリティ</div>
+  <div class="cards">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.thehackerwire.com/cve-2026-105134-a-flaw-has-been-found-in-ahsay-ahsaycbs-up-to-10/" target="_blank">
+            【緊急】CVE-2026-105134: Ahsay AhsayCBSにCVSS 10.0の認証不要コマンドインジェクション
+          </a>
+        </div>
+        <span class="badge badge-critical">CVSS 10.0</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; TheHackerWire</div>
+      <div class="card-body">
+        <span class="critical-label">CRITICAL</span>バックアップソフトウェア「Ahsay AhsayCBS」バージョン10以前にCVSS v3スコア10.0の深刻なコマンドインジェクション脆弱性（CVE-2026-105134）が発見された。認証不要でリモートから任意コマンドを実行できる未認証RCEであり、インターネット公開されているバックアップサーバーを直接標的とする攻撃が懸念される。影響を受けるバージョンのAhsayCBSを使用している場合は直ちに最新版へのアップグレードおよびアクセス制限の実施が推奨される。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.strix.ai/cve/CVE-2026-105135" target="_blank">
+            【緊急】CVE-2026-105135: InternLM MindSearchにCVSS 10.0のコードインジェクション脆弱性
+          </a>
+        </div>
+        <span class="badge badge-critical">CVSS 10.0</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; Strix AI</div>
+      <div class="card-body">
+        <span class="critical-label">CRITICAL</span>上海AIラボ（Shanghai AI Laboratory）のAIエージェント検索フレームワーク「InternLM MindSearch」にCVSS v3スコア10.0のコードインジェクション脆弱性（CVE-2026-105135）が発見された。攻撃者は悪意あるクエリを通じてサーバーサイドで任意コードを実行できる。MindSearchはマルチエージェントWeb検索・調査自動化フレームワークとして広く利用されており、セルフホストしている環境では直ちにパッチ適用または公開を停止することが強く推奨される。
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <a href="https://www.thenationalnews.com/news/mena/2026/10/04/jordan-us-hacking/" target="_blank">
+            ShinyHuntersメンバー「Rey」がヨルダンで逮捕・FBIに協力 FBI職員全員の個人情報が流出か
+          </a>
+        </div>
+        <span class="badge">ランサムウェア / 逮捕</span>
+      </div>
+      <div class="card-date" data-card-date="2026-10-04">2026-10-04 &nbsp;|&nbsp; The National News</div>
+      <div class="card-body">
+        ヨルダン当局は10月4日、ハッカー集団ShinyHuntersのメンバー「Rey」（本名：Saif Al Din Khader）の逮捕を公式確認した。Reyは現在FBIに協力し、グループの他のメンバーの特定に協力しているとされる。ShinyHuntersはFBIの身分証明・職歴・精神医療情報を含む全FBI職員のデータを窃取したと主張しており、FBIはロイターに対し内部メモで全職員のデータ流出を想定するよう通達したと報告されている。同グループは2025年以降140以上の組織をハッキングし、7,000万ドル以上の身代金を得ていたとされる。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="feed-status">
+  <strong>RSS取得状況：</strong>
+  全フィード（aws.amazon.com, rss.itmedia.co.jp, security-next.com, jvndb.jvn.jp, forest.watch.impress.co.jp, www.watch.impress.co.jp）が
+  ネットワーク egress プロキシによりブロック。WebSearch によるフォールバック収集を実施。
+</div>
+
+</body>
+</html>
