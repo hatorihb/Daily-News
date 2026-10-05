@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 06 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">物語コーポレーション / 焼肉きんぐ</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2145813.html" target="_blank" rel="noopener">「焼肉きんぐ」会員管理システムへの不正アクセスで約1,079万件の個人情報漏えい、登録者のほぼ全員が対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">物語コーポレーションは10月5日、「焼肉きんぐ」公式アプリの会員管理システムに2026年10月2日から3日にかけて第三者による不正アクセスがあり、ユーザー登録数1,080万8,784件のうち1,078万8,963件の個人情報が漏えいしたと発表した。漏えいした情報は会員番号・氏名（アプリ登録名）・メールアドレス・電話番号であり、パスワードや利用履歴、クレジットカード情報は対象外。10月5日時点で漏えい情報が不特定多数に公開された事実や不正利用は確認されていないが、同社は原因の調査を継続している。登録者のほぼ全員に影響する規模であり、対象ユーザーへの個別通知が進められている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">大和証券グループ本社</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2610/05/2000002005/" target="_blank" rel="noopener">大和証券、外部委託先への不正アクセスで約22万件情報漏えいの可能性 うち個人情報含む約11万件に口座番号も</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">大和証券グループ本社は10月5日、業務委託先スカラコミュニケーションズのサーバーが2026年10月2日20時33分から3日8時1分頃にかけて不正アクセスを受け、約22万件の情報が漏えいした可能性があると発表した。そのうち約11万件は氏名・メールアドレス・証券口座番号などの個人情報を含む。大和証券本体のシステムへの侵害は確認されておらず、漏えいした情報のみでオンラインを含む取引はできないと説明している。同社は対象顧客への個別連絡を開始するとともに、委託先の原因究明と再発防止策の策定を進めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Schneider Electric / PTC</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.axios.com/2026/10/05/schneider-electric-ptc" target="_blank" rel="noopener">Schneider Electric、産業ソフト大手PTCを226億ドルで買収合意 AI・DX推進で欧州最大規模の取引</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">仏Schneider Electricは10月5日、ボストン拠点の産業用ソフトウェア大手PTC Inc.を約226億ドル（全株式対価205ドル/株）で買収することで最終合意したと発表した。PTCはCAD・PLM・SLMツールを世界3万社超に提供しており、Schneiderの既存インフラ管理・エネルギー最適化技術との統合でAI駆動の製造DXを加速することを目指す。Schneiderにとって2023年の英Aveva買収（約110億ドル）を超える最大の買収案件であり、欧州のIT・産業AI分野の大型M&Aとして注目される。クロージングは2027年第3四半期を見込んでおり、株主・規制当局の承認を経て正式完了予定。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SpaceXAI（Elon Musk）</div>
+          <div class="card-badges">
+            <span class="impact impact-low">注目</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.euronews.com/2026/10/05/musk-to-follow-trump-and-rebrand-spacexai-as-spacexsi" target="_blank" rel="noopener">SpaceXAI が「SpaceXSI」へ改名へ Musk氏がTrump大統領の「超知能（Super Intelligence）」政策に同調</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Elon Musk氏は10月4日、X上で「No more AI」と投稿し、自身が傘下に持つSpaceXAI（旧xAI、今年2月にSpaceXが統合）を「SpaceXSI」に改名する意向を示した。背景にはTrump大統領が署名した大統領令があり、連邦政府機関に「人工知能（AI）」という用語の使用を廃止し「超知能（Super Intelligence: SI）」に統一することを命じている。Musk氏は具体的なスケジュールや@SpaceXAIハンドルの変更時期等は明示していない。AI業界全体への影響と、GrokなどSpaceXAI製品の表記変更が注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-bedrock-managed-agents-powered-by-openai-q3-service-availability-updates-kiro-workflows-and-more-october-5-2026/" target="_blank" rel="noopener">Amazon Bedrock Managed Agents powered by OpenAI が公開プレビューで提供開始、AWSネイティブ環境でOpenAIエージェントを構築可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは10月5日の週次ラウンドアップで、Amazon Bedrock Managed Agents powered by OpenAIの公開プレビュー提供開始を発表した。本サービスはAWS独自エンジニアリングを施したOpenAI Agents APIをベースに構築されており、エージェントの状態管理・ツール選択・コード実行・マルチステップ連携をAWS環境内で完結できる。IAMロール・CloudTrailログなど既存のAWSガバナンス統制を活用でき、セルフホストまたはAmazon Bedrock AgentCore RuntimeでのマネージドセッションのどちらかでOpenAIモデルエージェントを運用可能。カスタマーデータはAWSクラウドから外部に出ることなく処理され、プレビュー期間中はサービス自体の追加料金なし（消費AWSリソースのみ課金）。米国東部・西部3リージョンで利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / OpenAI Models</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thenextweb.com/news/openai-bedrock-managed-agents-aws-devday" target="_blank" rel="noopener">OpenAI GPT-6.1 Sol・GPT-6 Astra UltraFastモードが Amazon Bedrock に追加、標準価格の1/5のコストで高性能エージェント開発が可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrockに新たにOpenAI GPT-6.1 Solと、GPT-6 Astra UltraFastモードが追加された。GPT-6.1 Solはエージェント型コーディング・コンピュータ使用・プロフェッショナル業務に特化したモデルで、GPT-6 Astra比で約1/5の標準トークン料金を実現しながら多くの評価指標でAstraに匹敵するパフォーマンスを発揮する。UltraFastモードはGPT-6 Astra向けのプレミアム速度ティアで、API上で最大6倍の高速推論（最大300トークン/秒）を提供。コストと性能のバランスを重視する企業向けエージェントアプリケーション開発の選択肢が大幅に広がった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Citrix / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/10/05/cisa-flags-new-exploited-netscaler-flaw-as-attackers-crash-appliances-cve-2026-88779/" target="_blank" rel="noopener">【CISA KEV】CVE-2026-88779：Citrix NetScaler SAMLゼロデイ（CVSS 4.0: 8.7）が稼働中インフラを標的に悪用中、連邦機関の修正期限は10月7日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは10月4日、Citrix NetScaler ADCおよびNetScaler GatewayにCVSS 4.0スコア8.7のゼロデイ脆弱性CVE-2026-88779をKEV（既知悪用済み脆弱性）リストに追加し、連邦政府機関に対し10月7日までの修正を義務付けた。本脆弱性はSAML SP（サービスプロバイダー）またはIdP（アイデンティティプロバイダー）として構成されたNetScalerアプライアンスに影響し、CWE-119（バッファ境界外操作）に分類されるメモリオーバーフロー。公式にはDoSとされているが、研究者・管理者からはRCEとして悪用されている事例が報告されている。CitrixはBishop Foxおよびwatchtowrの協力を受け2026年10月3日にセキュリティ速報を公開済みであり、影響を受けるアプライアンスへの即時パッチ適用を強く推奨している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Perforce / Helix Core</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/perforce-p4-search-vulnerabilities/" target="_blank" rel="noopener">【緊急】CVE-2026-100103：Perforce P4 Search にCVSS 10.0のデフォルトトークン認証バイパス、未認証攻撃者が最高権限を取得可能 バージョン2026.4.2への更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Perforceは2026年10月5日、P4 Search（Helix Core）コンテナイメージ2026.4.2以前にCVSS v3スコア10.0の深刻な認証バイパス脆弱性（CVE-2026-100103）が存在すると公開した。バージョン2026.4.2未満のP4 Searchコンテナがサービス認証トークンを公開済みのデフォルト値にリセットするため、ネットワークアクセス可能な未認証攻撃者が最高アプリケーション権限を取得できる（CWE-1392: デフォルト認証情報の使用）。最終的には接続先P4サーバーへの任意コード実行・完全侵害に至るリスクがある。P4 Searchを利用しているユーザーは直ちに2026.4.2以降へのアップグレードが必要。同セキュリティ勧告ではCVSS 9.5のCVE-2026-100102を含む合計6件の脆弱性が修正されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-05</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://fieldeffect.com/blog/patches-pending-actively-exploited-fortimail-flaw" target="_blank" rel="noopener">CVE-2026-104286：Fortinet FortiMail ゼロデイ（CVSS 9.8）、FortiMail 7.4〜8.0系で修正版未提供のまま実環境への攻撃が継続 回避策の即時適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinet FortiMailに発見されたパストラバーサル＋NULLバイト処理不備のゼロデイ脆弱性（CVE-2026-104286、CVSS 9.8）は、認証不要でHTTP/HTTPSを通じた任意ファイル書き込みを可能にし、永続的バックドア設置・C2通信確立が確認されている。CISAが10月1日にKEVリストへ追加し連邦機関への修正期限を設けたが、10月5日時点でFortiMail 7.4.x・7.6.x・8.0.xの多くのバージョンには修正版が未提供の状態。影響バージョンはFortiMail 7.2.0〜7.2.9（7.4以降で対処可能）・7.4.0〜7.4.8・7.6.0〜7.6.6・8.0.0〜8.0.1であり、Fortinet社はIBE（Identity-Based Encryption）機能の無効化または管理アクセスの遮断を回避策として提示。修正予定バージョン（7.4.9・7.6.7・8.0.2）が提供され次第、即時更新することが強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-06 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
