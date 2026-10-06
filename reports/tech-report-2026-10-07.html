@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 07 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">電通デジタル / Meta</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://webtan.impress.co.jp/n/2026/10/07/53404" target="_blank" rel="noopener">電通デジタル、Facebook Japanと協業しThreadsの企業アカウント運用支援サービスを開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">電通デジタルは2026年10月7日、Meta（Facebook Japan合同会社）と連携し、Threads（テキストベースSNS）の企業アカウント運用を支援する「Threads アカウント運用サービス」の提供を開始した。企業向けにコンテンツ企画・投稿・分析をワンストップで支援するもので、Threadsの急速な利用者拡大を背景に法人向けソーシャルメディアマーケティング市場への参入を強化する。日本国内では先行する広告代理店系デジタルマーケティング企業として初期段階からMeta公認パートナーとして活動するという。サービス開始にあたりFacebook Japan合同会社と正式な業務協力関係を締結した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">HENNGE</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cloud.watch.impress.co.jp/docs/news/2145697.html" target="_blank" rel="noopener">HENNGE、VPN不要のゼロトラストNW「HENNGE Mesh Network」を提供開始——中堅・中小企業の脱VPN化を支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">HENNGEは2026年10月6日、VPNに代わるゼロトラストネットワークアクセス（ZTNA）ソリューション「HENNGE Mesh Network」の提供を開始した。従来のVPN構成に比べて管理コストを削減しながら、ユーザーとシステム・アプリケーション間の通信をゼロトラスト原則に基づいてセキュアに中継する。既存の「HENNGE One」プラットフォームとの統合により、ID・デバイス管理との連携を強化している。クラウドおよびオンプレミス両方の社内リソースへのプライベートアクセスを単一の管理コンソールで制御できる点が特徴で、中堅・中小企業向けに月額制で提供される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">アライドテレシス / ビットブレイン / EPLink</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cloud.watch.impress.co.jp/docs/news/2146177.html" target="_blank" rel="noopener">アライドテレシス・ビットブレイン・EPLink、医療専用閉域網「WCI」活用のリモートSDV環境を協業提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">アライドテレシス株式会社、株式会社ビットブレイン、EPLink株式会社の3社は2026年10月7日、医療機器向けソフトウェア定義車両（SDV）のリモートメンテナンス環境を共同で提供すると発表した。EPLinkが提供する医療専用閉域通信ネットワーク「WCI（Wireless Care Infrastructure）」を活用し、遠隔地から医療機器のソフトウェア更新・監視・診断をセキュアに実施できる環境を構築する。3社が持つSDN（ソフトウェア定義ネットワーク）、IoT監視、医療ネットワーク基盤の各専門領域を組み合わせることで、医療機器メーカーや医療機関のリモートサービス化を推進する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://webtan.impress.co.jp/n/2026/10/07/53405" target="_blank" rel="noopener">OpenAI、ChatGPTに新ビジュアル広告フォーマットを導入——米国の一部広告主に向けテスト開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIは2026年10月7日、ChatGPTに新しいビジュアル広告フォーマットを導入しテストを開始したことを明らかにした。企業ブランドの画像や動画と、ChatGPTの一問一答（Q&amp;A）形式を組み合わせたインタラクティブな広告体験を提供するもので、まず米国の一部広告主を対象に試験運用している。従来のスポンサーリンク型広告とは異なり、ユーザーが広告内でAIと対話しながら商品・サービスへの理解を深められる形式となっている。OpenAIは広告モデルの多様化によるマネタイズ強化を進めており、今後グローバルへの展開も検討中とされる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Musubi AI</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/10/06/how-ai-decision-models-could-change-content-moderation" target="_blank" rel="noopener">Musubi AI、50ms以内でコンテンツポリシーを判定する軽量モデル「PolicyLM-1.7B」をオープンウェイトで公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AIスタートアップのMusubi AIは2026年10月6日、リアルタイムコンテンツモデレーション向けの軽量決定モデル「PolicyLM-1.7B」をオープンウェイトで公開した。英語で記述したコンテンツポリシーを入力するだけで50ミリ秒以内にポリシー適用判断を返せる点が特徴で、パラメータ数は1.7Bと小規模ながら大規模モデルに匹敵するモデレーション精度を達成しているとされる。同モデルはソーシャルプラットフォームや企業内コンプライアンス用途を想定しており、既存のコンテンツモデレーション基盤に組み込みやすいAPIも提供される。生成AIのコンテンツ管理コスト削減への活用が期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock AgentCore</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/agentcore-gateway-private-tls-vpc/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Gateway、VPCエンドポイント向けプライベートTLS証明書をサポート</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年10月、Amazon Bedrock AgentCore GatewayがVPCインターフェースエンドポイント経由のプライベート接続に対してカスタムTLS証明書をサポートするようになったと発表した。エージェントAIアプリケーションからMCPサーバーへのプライベート通信を組織の証明書管理ポリシーに沿ったTLS構成で保護できる。これにより、インターネットを経由せず完全にAWSネットワーク内でエンドポイント間の通信を暗号化・認証できるようになり、金融・医療など厳格なコンプライアンス要件を持つ業界でのエージェントAI活用が促進される。AgentCore GatewayはAmazon VPC Latticeとの統合も引き続きサポートする。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Q Developer</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-q-developer-enhanced-visualizations-aws-management-console/" target="_blank" rel="noopener">Amazon Q Developer、AWSマネジメントコンソールでリソース・コストの強化ビジュアライゼーションを提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年10月、Amazon Q DeveloperのAWSマネジメントコンソール統合において、リソースデータおよびコストデータのビジュアライゼーション機能を強化したと発表した。「本番タグが付いたS3バケットを一覧表示して」のような自然言語の質問でリソースを表形式で表示できるほか、「過去6ヶ月のRDSコストをインスタンスタイプ別に見せて」といった質問でバーグラフや折れ線グラフとして可視化できる。生成AIベースのアーティファクト機能として提供され、コンソール内のどこからでもQ Developer用アイコンからアクセス可能。Amazon Q Developerが提供可能なすべてのAWSリージョンで利用できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cybersecuritydive.com/news/fortinet-critical-flaw-fortimail-exploitation/832017/" target="_blank" rel="noopener">FortiMail CVE-2026-104286（CVSS 9.8）野放し悪用が継続——パッチ未公開、攻撃者によるゼロデイ利用の詳細が判明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinetのメールセキュリティ製品FortiMailに存在するCVE-2026-104286（CVSSスコア 9.8 / Critical）の脆弱性は、パッチ未公開のまま野放しの悪用が継続している。本脆弱性はパストラバーサルとNULLバイト処理の不備を組み合わせたもので、認証不要のリモート攻撃者が任意ファイルをシステムに書き込める。影響バージョン：FortiMail 8.0.0〜8.0.1、7.6.0〜7.6.6、7.4.0〜7.4.8、7.2.0〜7.2.9。修正バージョン（8.0.2、7.6.7、7.4.9）はまだリリースされていない。FortinetはIBE（Identity-Based Encryption）機能の無効化および管理インターフェースへのインターネットアクセス遮断を暫定対処として強く推奨している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisco.com/c/en/us/support/docs/csa/cisco-sa-notice-fBn58ELx.html" target="_blank" rel="noopener">Cisco、APIC・NX-OS（MDS 9000/Nexus 3000・7000・9000）・Meraki向けセキュリティ強化アドバイザリを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco PSIRTは2026年10月7日（第1水曜日）、定期公開スケジュールに沿ってセキュリティ強化（ハードニング）アドバイザリを公開した。対象製品はApplication Policy Infrastructure Controller（APIC）、Finesse、License On-Prem、Meraki、およびNX-OSソフトウェアを搭載したMDS 9000・Nexus 3000/7000/9000・Nexus 9000（ACI モード）・UCS Fabric Interconnect。Ciscoはリスクベース開示プロセスの一環として毎月第1・第3水曜日にアドバイザリを公開しており、今回はセキュリティ強化リリースとして複数のCVEに対応した修正版ソフトウェアが提供される。影響を受けるバージョンを利用している場合は最新の修正済みバージョンへのアップグレードが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Atlassian</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-06</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://asec.ahnlab.com/en/95107/" target="_blank" rel="noopener">Atlassian、Jira Software・Jira Service Management・Crowd Data Centerに認証・セッション管理の脆弱性（CVE-2026-21582）——パッチ適用を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Atlassianは2026年10月、Jira Software Data Center・Jira Service Management Data Center・Crowd Data Centerに認証およびセッション管理に関する脆弱性CVE-2026-21582を公表した。影響バージョン：Jira Software DC 9.12.14〜9.12.37、10.3.0〜10.3.23、11.3.0〜11.3.8 / Jira Service Management DC 10.3.0〜10.3.23、11.3.0〜11.3.8 / Crowd DC 7.2.1。修正バージョン：Jira Software DC 9.12.38/10.3.24/11.3.10以降、Jira Service Management DC 10.3.24/11.3.10以降、Crowd DC 7.2.2以降。Atlassianは速やかな最新バージョンへのアップグレードを推奨している。自己ホスト型Data Center製品を利用している組織は優先的に対応されたい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-07 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
