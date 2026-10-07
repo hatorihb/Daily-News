@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 08 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本HP</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2610/08/news024.html" target="_blank" rel="noopener">日本HP、約1.9kgで3,000億パラメーターLLMをローカル実行できるモバイルAIワークステーション「HP ZBook Ultra G3a 16 inch」を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本HPは「HP Future of Work AI Conference 2026」において、AMD SoC搭載のモバイルAIワークステーション「HP ZBook Ultra G3a 16 inch」を発表した。重量約1.9kgながら最大192GBの統合メモリを搭載し、3,000億パラメーター規模のLLMをローカルで実行できる法人向けハイエンドモデル。従来はデータセンターへのアクセスが必要だった大規模AIモデル推論をオフライン環境でも実現可能にする。エンタープライズセキュリティへの配慮から、機密データをクラウドに送出せずにAI処理できる点が大きな差別化要因となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">インテージ・NTTデータ・NTTデータビジネスシステムズ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">提携</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2610/07/news031.html" target="_blank" rel="noopener">インテージ・NTTデータ・NTTデータビジネスシステムズ、AIで消費財商品開発を一気通貫で支援する戦略的連携を開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">インテージ、NTTデータ、NTTデータビジネスシステムズの3社は、生成AIを活用して消費財メーカーの商品企画から開発・市場投入までのプロセスを一気通貫で支援する戦略的連携を開始した。インテージの市場調査データ・消費者インサイトとNTTデータグループのAI・DXソリューションを組み合わせ、商品開発の意思決定を高速化・効率化することを目指す。食品・日用品・化粧品などの消費財メーカーを主な対象とし、コンセプト立案から発売後のPDCAまでをデータドリブンで連携する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">インテル日本法人</div>
+          <div class="card-badges">
+            <span class="impact impact-low">イベント</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2610/08/news048.html" target="_blank" rel="noopener">インテル日本法人が設立50周年を迎え記念式典を開催——「4004」と「Intel Inside」は日本発祥</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">インテルの日本法人は設立50周年を記念する式典を開催した。世界初のマイクロプロセッサ「Intel 4004」は日本の計算機メーカー・ビジコンとの協業から生まれたことで知られ、「Intel Inside」キャンペーンも日本法人が発祥とされる。50年間にわたる日本のIT産業との共創の歴史を振り返るとともに、AI時代を見据えた今後の戦略についても説明が行われた。半導体設計・製造の国内展開やAIアクセラレーターへの取り組みも紹介された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-haiku-5-5" target="_blank" rel="noopener">Anthropic、「Claude Haiku 5.5」を正式リリース——API価格を最大90%削減、1Mトークンコンテキスト対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはClaudeシリーズ最速・最軽量モデル「Claude Haiku 5.5」を正式公開した。API価格はインプット$0.10・アウトプット$0.50（100Kトークン未満）と前世代比で最大90%の大幅値下げを実現。コンテキストウィンドウは最大100万トークン、出力は最大128Kトークンに対応する。同時に、Claude Sonnet 5.5のキャッシュリードも50%値下げされ、高頻度・低レイテンシが求められる用途に適した選択肢が広がった。Amazon BedrockとGoogle Cloud Vertex AIでも同日から利用可能となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">サイバー防衛</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/anthropic-expands-mythos-access-for-cyber-defenders/" target="_blank" rel="noopener">AnthropicがGlasswingとCyber Verification Programを統合——サイバー防衛専門家向け「Claude Mythos 5.1」を3段階アクセス体制で拡大提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのCEO Dario Amodeiは、Glasswing VenturesとのパートナーシップをCyber Verification Program（CVP）と統合し、サイバーセキュリティ専門家向けに特化した「Claude Mythos 5.1」の提供を拡大すると発表した。認定された防衛側セキュリティ研究者・CIRT・SOCアナリストを対象に、標準・上級・エリートの3段階でアクセスレベルを設定し、脅威インテリジェンスや高度な脆弱性解析にAIを活用できるよう設計されている。攻撃的能力の悪用を防ぐための厳格な審査プロセスを維持しつつ、防御側の分析能力を強化することが目的とされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル追加</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/jp/about-aws/whats-new/2026/10/claude-haiku-5-5-amazon-bedrock/" target="_blank" rel="noopener">Amazon Bedrock、Anthropicの最新軽量モデル「Claude Haiku 5.5」の提供を開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrockは、Anthropicが同日発表した「Claude Haiku 5.5」の提供を開始した。Claudeシリーズ最速・最効率のモデルで、最大100万トークンのコンテキストウィンドウと128Kトークンの出力長を備える。Bedrockのマネージド推論環境で利用でき、高頻度・大量処理が必要な分類・要約・RAGパイプラインなどのユースケースに特に適している。Amazon Bedrock Converse API・Model Invocation APIのいずれからも呼び出し可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Lambda</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">パブリックプレビュー</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/compute/introducing-public-preview-runtimes-on-aws-lambda-starting-with-node-js-26-and-python-3-15/" target="_blank" rel="noopener">AWS Lambda、Node.js 26とPython 3.15のパブリックプレビューランタイムを提供開始——次世代安定版の事前テスト環境を整備</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは、Node.js 26とPython 3.15を対象に、正式リリース前から検証できる「パブリックプレビューランタイム」機能をAWS Lambdaで提供開始した。開発者は新しいランタイムバージョンが一般提供（GA）になる前に本番に近い環境でコードの互換性を確認でき、移行作業を前倒しで進めることができる。Node.js 26はV8エンジンの最新改善によるパフォーマンス向上を、Python 3.15は型システムの強化と標準ライブラリの拡充を含む予定。すべてのLambdaリージョンで利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SonicWall</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.ampcuscyber.com/shadowopsintel/actively-exploited-sonicwall-sma1000-flaws-pre-auth-ssrf-cve-2026-83548-and-rce/" target="_blank" rel="noopener">【悪用確認・CVSS 10.0】SonicWall SMA1000に認証前SSRF（CVE-2026-83548）とRCEチェーン（CVE-2026-83549）——野放し悪用を確認、即時ホットフィックス適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SonicWall SMA1000シリーズ（6210/7210/8200vモデル）において、認証不要のSSRF脆弱性CVE-2026-83548（CVSS 10.0）とそれと連鎖してリモートコード実行を引き起こすCVE-2026-83549が確認された。攻撃者は認証なしにSSRFを悪用して内部ネットワークへのピボットを行い、さらにRCEへと繋げる攻撃チェーンが野放しで観測されている。SonicWallはホットフィックスを公開済みで、影響を受けるバージョンを使用している組織は直ちに適用することが求められる。インターネットに直接公開されているSMA1000デバイスは特に緊急対応が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rocket-boys.co.jp/security-measures-lab/wordpress-cve-2026-87902-71-2/" target="_blank" rel="noopener">【CVSS 9.2・パッチ公開当日から攻撃観測】WordPress 7.1.3、認証不要RCEの可能性あるCVE-2026-87902を修正——即時7.1.3以降への更新を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WordPressは7.1.3においてCVSS 9.2のCritical脆弱性CVE-2026-87902を修正した。認証なしでリモートコード実行の可能性がある深刻な欠陥で、修正版の公開当日から実際の攻撃が観測されている。影響を受けるバージョンは7.1.2以前の全バージョンで、全世界に約8億サイトとされるWordPressの普及率を考えると潜在的な被害規模は極めて大きい。プラグインの自動更新とは別にWordPress本体のバージョンを確認し、7.1.3以降へ即時更新することを強く推奨する。マルチサイトネットワーク管理者も全サブサイトの更新が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Veeam</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.veeam.com/kb4771" target="_blank" rel="noopener">Veeam Backup &amp; Replication 12.3.2.4465公開——CVE-2026-21671（CVSS 9.1）含む重大な脆弱性7件を修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Veeamはバックアップ製品「Veeam Backup &amp; Replication」のバージョン12.3.2.4465を公開し、CVSS 9.1のCVE-2026-21671を含む重大な脆弱性7件を修正した。CVE-2026-21671はリモートコード実行を可能にする欠陥で、認証済みの攻撃者がバックアップサーバー上で任意コードを実行できる。バックアップシステムはランサムウェア攻撃者の主要標的となるため、早急なアップデートが必要だ。対象は12.x系の全バージョンで、12.3.2.4465以降への更新を推奨。更新前のバックアップ取得と動作確認も忘れずに行うこと。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">セキュリティ更新</span>
+            <span class="card-date">2026-10-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://chromereleases.googleblog.com/2026/10/stable-channel-update-for-desktop.html" target="_blank" rel="noopener">Google Chrome 155、Criticalを含む247件の脆弱性を修正したセキュリティアップデートを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleはデスクトップ向けChrome 155安定版を公開し、Critical評価4件を含む計247件の脆弱性を修正した。Criticalの脆弱性はレンダリングエンジンおよびV8 JavaScriptエンジンに起因するもので、悪意あるWebページへのアクセスだけで任意コードが実行される可能性がある。Chrome 154以前を使用しているユーザーはブラウザの設定から手動でアップデートを確認するか、自動更新を有効にして速やかに155へ更新することを推奨する。Chromiumベースのブラウザ（Edge・Brave等）も今後同様の更新が行われる見込み。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-08 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
