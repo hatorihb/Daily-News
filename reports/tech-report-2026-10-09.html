@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 09 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">EnterpriseZine / 国内セキュリティ</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://enterprisezine.jp/news/detail/25188" target="_blank" rel="noopener">国内企業でサイバー攻撃・情報漏洩が多発、10日間で10社超が被害を公表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WebシステムへのSQLインジェクション・プラグイン脆弱性の悪用、VPN脆弱性等を経由した侵入が相次ぎ、10日間で国内有名企業10社超が情報漏洩・障害・サイバー攻撃被害を公表した。被害企業は流通・製造・サービス業と多岐にわたり、顧客個人情報や取引先データの流出が確認されている。専門家は「未適用のパッチが攻撃者に悪用されるまでの時間が著しく短縮されている」と指摘。各社には脆弱性管理の強化と迅速なパッチ適用が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">マクニカ セキュリティ研究センター</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://security.macnica.co.jp/blog/2026/10/web-incidents2026.html" target="_blank" rel="noopener">マクニカが2026年後半の国内Webシステム情報漏洩インシデントを分析——AIを悪用した攻撃も増加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">マクニカ セキュリティ研究センターが2026年後半の国内Webシステム情報漏洩事案を分析・公開した。製品・CMS・プラグイン・分析ツールの未適用脆弱性が侵入口として最多（約11%）で、次いでVPN機器の既知脆弱性悪用が続く。AIを悪用したサイバー攻撃の増加傾向も確認されており、フィッシングメールの高精度化や自動化された脆弱性スキャンの普及が背景にあると指摘。組織には定期的な脆弱性スキャンと外部公開資産の管理強化が推奨されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Mistral AI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://emergent.sh/news/mistral-ai-launches-large-4-preview-model" target="_blank" rel="noopener">Mistral AI、総パラメーター1兆の大規模MoEモデル「Mistral Large 4」パブリックプレビューを開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Mistral AIが総パラメーター数1兆、アクティブパラメーター490億のMixture-of-Experts（MoE）モデル「Mistral Large 4」のパブリックプレビューを開始した。NVIDIA Grace Blackwell GPU 3,800基のクラスターで学習されており、コンテキストウィンドウは最大100万トークン。Mistral Studioのプレビューで利用可能で、オープンウェイトとしての公開は2026年10月末を予定している。長文コンテキスト処理・複雑な推論タスクにおけて既存フロンティアモデルに匹敵するベンチマーク結果が報告されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Manus AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aiweekly.co/alerts/manus-seeks-4b-valuation-in-500m-round-after-meta-split" target="_blank" rel="noopener">Manus AI、Meta買収撤退後に独立路線で企業価値40億ドル・5億ドル調達へ——香港IPOも検討</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国系AIエージェント企業のManusは、Metaによる20億ドル買収計画が中国当局の輸出管理規制違反の懸念により白紙となった後、独立運営に戻り企業価値40億ドルで5億ドルの新規資金調達を進めていることをBloombergが報じた。調達はほぼ完了段階にあるとされ、香港でのIPOも選択肢として検討中。AIエージェント分野での競争激化を背景に、独立資本での事業拡大戦略を選択した形となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-bedrock-managed-agents-powered-by-openai-q3-service-availability-updates-kiro-workflows-and-more-october-5-2026/" target="_blank" rel="noopener">Amazon Bedrock、OpenAIモデルを用いたマネージドエージェント「Managed Agents powered by OpenAI」をパブリックプレビューで提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは「Amazon Bedrock Managed Agents powered by OpenAI」をパブリックプレビューで提供開始した。AWS環境内でOpenAIモデルを活用したエージェントを構築・実行できるサービスで、既存のIAMアイデンティティ・権限・ガバナンスコントロール下で動作する。永続メモリ、スキル定義、詳細なロギング機能を提供。あわせてAmazon Kiroのワークフロー機能アップデートも同週に発表されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Security</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/security/" target="_blank" rel="noopener">AWSが自律的コードセキュリティの新アプローチ「AWS Continuum」を発表——継続的な脆弱性分析・自動修正を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは新しいコードセキュリティアプローチ「AWS Continuum」を発表した。継続的なコードセキュリティ分析と自動修正を実現するサービスで、開発パイプラインに統合してリアルタイムに脆弱性を検出・修正提案を行う。既存のAWS CodePipelineやGitHub Actionsとの連携が可能で、IaCテンプレートのセキュリティチェックにも対応。セキュリティ担当者の負荷を軽減しつつ、シフトレフトアプローチでのセキュリティ強化を支援する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新情報
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Atlassian / CVE-2026-21589</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-critical-atlassian-flaw-after-public-poc-release/" target="_blank" rel="noopener">Atlassian 8製品でCVSS 9.3の認証不要ファイル読み取り脆弱性（CVE-2026-21589）——PoC公開後2時間以内に野外悪用を確認・KEVに登録</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Jira、Confluence、Bitbucket、Bamboo、Crowd、Crucible、Fisheye、Jira Service Managementの8製品に、認証不要のファイル読み取り脆弱性（CVE-2026-21589、CVSS 9.3）が発見された。PoC公開後わずか2時間以内に実際の悪用が観測され、VulnCheckがKEVリストに追加（10月7日）。クラウド版は影響を受けないが、オンプレミス版は即時パッチ適用が必要。修正済みバージョン: Confluence 9.2.26/10.2.19、Crowd 6.3.7/7.0.3/7.1.7/7.2.4。未パッチシステムは直ちにネットワーク分離または更新を実施すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">HPE / CVE-2026-76752</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.thehackerwire.com/vulnerability/CVE-2026-76752/" target="_blank" rel="noopener">HPE ClearPass Policy Managerに認証バイパス・未認証RCEを含むCVSS 9.8のCritical脆弱性5件——即時パッチ適用を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">HPEのネットワークアクセス制御製品「ClearPass Policy Manager」に、CVSS 9.8のCritical脆弱性5件を含む複数の脆弱性が発見された。CVE-2026-76752（認証バイパス）、CVE-2026-76750（未認証リモートコード実行）、CVE-2026-76753（フォーマット文字列インジェクション）等が含まれる。現時点で実際の悪用やPoCは未確認だが、認証不要のRCEが可能な点から企業ネットワークへの高リスクとして優先対応が推奨されている。HPEが提供する最新パッチの即時適用が強く求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Dell / CVE-2026-63688, CVE-2026-63692</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.esecurityplanet.com/threats/news-dell-container-storage-modules-critical-vulnerabilities/" target="_blank" rel="noopener">Dell Container Storage Modules（CSM）にCVSS 10.0の最高深刻度脆弱性2件——Kubernetesルート権限の奪取が可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">DellがContainer Storage Modules（CSM）にCVSS 10.0の脆弱性2件（CVE-2026-63688、CVE-2026-63692）を含む重大なセキュリティアップデートをリリースした。未認証のリモート攻撃者がストレージ管理者の認証情報を窃取、またはKubernetesクラスターのルート権限を取得できる。影響を受けるDell製品はPowerStore、PowerScale、PowerFlex等で、CSM 1.18.0以降へのアップグレードが必要。Kubernetesを利用するデータセンター環境では至急対応すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / CVE-2026-20212</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.secure-iss.com/newsroom/cisco-nx-os-ios-xr-critical-vulnerabilities" target="_blank" rel="noopener">Cisco NX-OSに14件の脆弱性——半数がCritical、CVE-2026-20212はNexus 9000への未認証RCEが可能（CVSS 9.8）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CiscoがNX-OSの脆弱性14件を修正するセキュリティアドバイザリを公開した。うち半数がCriticalに分類される。CVE-2026-20212（CVSS 9.8）はSilicon One ASICを搭載したNexus 9000シリーズに影響し、TCPポート43210/43211がデフォルトのL3 VRFで到達可能なことを悪用した未認証リモートコード実行が可能。データセンターコアスイッチが対象となるため、企業ネットワーク管理者は優先的にパッチ適用とポートアクセス制御の確認を行うことが推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-brand">DX・AI・AWS Update</div>
+    <div>2026-10-09 &nbsp;/&nbsp; Daily Tech Report</div>
+  </div>
+</footer>
+
+</body>
+</html>
