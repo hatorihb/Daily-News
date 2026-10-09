@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 10 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ブックオフグループホールディングス</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2610/09/2000002150/" target="_blank" rel="noopener">ブックオフに不正アクセス、最大約643万件の個人情報流出の恐れ——氏名・住所・ハッシュ化パスワードなど</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ブックオフグループホールディングスは2026年10月9日、子会社の会員管理システムへの第三者による不正アクセスを確認したと発表した。最大約643万件（会員番号件数）の個人情報が外部に流出した可能性があり、対象情報には氏名・生年月日・性別・メールアドレス・電話番号・住所・ハッシュ化パスワード・ポイントカード番号などが含まれる。クレジットカード情報は当該システムで保有しておらず流出対象外としている。不正アクセスは10月6日に確認され攻撃元からの通信は既に遮断済み。同社は全システムを対象に緊急総点検を実施し、対象者への個別通知と恒久的な再発防止策を進める方針。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">IPA（情報処理推進機構）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000041.000178657.html" target="_blank" rel="noopener">IPAがAIセーフティ評価の実証・評価環境整備に関する報告会を開催——上期実証活動の成果と下期展開を共有</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IPA（情報処理推進機構）傘下のAIセーフティ・インスティテュート（AISI）は2026年10月7日、AIセーフティ評価の実証活動と評価環境整備に関する2つの報告会を開催し、10月9日にプレスリリースを公表した。「AISI事業実証ワーキンググループ 2026年度上期報告会」では各サブワーキンググループの活動成果を共有し、下期以降の実証展開について関係者間で意見交換が行われた。同日「AIセーフティ評価環境 検討タスクフォース」総会も開催し、AI評価環境整備の方針を議論。日本のAI安全性評価体制の充実化が着実に進んでいることが示された内容となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.anthropic.com/news/claude-dashboards-and-motion" target="_blank" rel="noopener">Anthropic、Claudeに「Dashboards」と「Motion」をベータ公開——データ接続の対話型ダッシュボードとAIアニメーション生成を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはClaude.aiに新機能「Claude Dashboards」と「Claude Motion」のベータ版を公開した。DashboardsはSnowflake・Databricks・Amazon Redshift・ClickHouseなどのデータプラットフォームやSalesforceに接続し、自然言語でデータを問い合わせて対話型ダッシュボードをその場で生成する機能で、各数値には元のクエリが表示される。MotionはプロンプトやレポートからMP4形式の短いコードベースのアニメーション解説動画を生成する。同時にDocs・Slides・Designが全プラン（無料含む）で利用可能になった。Dashboardsは有料プラン（Pro・Max・Team・Enterprise）、MotionはTeam・Enterprise向けで、Enterprise管理者はOrganization設定から有効化が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://blog.google/innovation-and-ai/products/google-synthid-ai-content-detector/" target="_blank" rel="noopener">Google、AI生成コンテンツ検出ツール「SynthID Detector」を全ユーザーに一般公開——OpenAI・NVIDIA・Kakaoの生成物も検出可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは、AI生成コンテンツの電子透かしを検出する無料ウェブツール「SynthID Detector」（synthid.com）を英語で全世界に一般公開した。これまでメディア関係者向けに限定提供していたものを全ユーザーへ開放。Google・OpenAI・NVIDIA・KakaoのAIモデルが埋め込んだSynthID透かしを持つ画像・動画・音声を判定できるほか、Apple対応も近日予定。Googleはこれまで1,800億件超の画像・動画および24万年分の音声コンテンツに透かしを埋め込んでいるとする。ただし検出は透かしの有無を示すものであり、未透かしコンテンツの真偽は判断できない点に留意が必要。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon GuardDuty / AWS Security Hub</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-guardduty-security-hub-threat-analytics/" target="_blank" rel="noopener">Amazon GuardDuty Runtime Monitoring が AWS Security Hub Threat Analytics プランに統合——セキュリティ可視性を一元化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon GuardDuty Runtime Monitoring を Security Hub の Threat Analytics プランに組み込み、課金を Security Hub に一本化する変更を実施した。EC2・ECS・EKS・Lambda上のランタイム動作の異常検知と、Security Hub が提供するマルチサービス横断の脅威コリレーションが一元管理できるようになる。GuardDuty を個別に有効化していた場合も移行は自動的に行われる。Security Hub Threat Analytics プランには GuardDuty に加え Inspector・Macie・CSPM の知見が統合されており、AIによるアラート集約でアラート件数を最大60%削減できるとされている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EKS</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-auto-mode-nodeclass-advanced-configuration/" target="_blank" rel="noopener">Amazon EKS Auto Mode、NodeClass でkubelet・カーネル・sysctl・hugepagesの詳細設定に対応——ノード構成の柔軟性を向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon EKS Auto Modeに、NodeClassリソースを通じてkubelet設定・カーネルパラメーター・sysctl値・hugepagesを詳細にチューニングできる機能が追加された。これによりパフォーマンス要件の厳しいワークロードや特殊なシステム設定が必要なアプリケーションにおいても、Auto Modeのフルマネージド（プロビジョニング・スケーリング・パッチ適用・アップグレード）の恩恵を受けながら必要な低レベル設定変更を適用できる。ノードの詳細設定は引き続きEKSが管理するため、運用オーバーヘッドを増やさずに高度なカスタマイズが実現できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Citrix / CVE-2026-107406</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.theregister.com/security/2026/10/09/citrix_gives_netscaler_admins_another_critical_reason_to_patch/" target="_blank" rel="noopener">Citrix NetScaler ADC/Gatewayに認証不要RCEのCritical脆弱性（CVE-2026-107406、CVSS 9.5）——SAML構成の管理者は即時パッチ適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CiscoはNetScaler ADCおよびGatewayにCVSS v4.0スコア9.5のCritical脆弱性（CVE-2026-107406）を公表した（アドバイザリCTX697191、2026年10月8日）。メモリオーバーフローに起因し、SAML IdP（アイデンティティプロバイダー）またはSP（サービスプロバイダー）として構成されたアプライアンスでリモートコード実行またはDoSを引き起こす可能性がある。現時点で実際の悪用事例は報告されていないが、Citrixは早急なアップグレードを強く推奨。修正済みバージョン：14.1-73.46、13.1-64.29（FIPSバージョン含む）。SAML設定の有無（add authentication samlAction / samlIdPProfile コマンドの存在）を確認の上、優先的にパッチを適用すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ahsay / CVE-2026-105133, CVE-2026-105134</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.huntress.com/blog/ahsaycbs-flaws-exploit" target="_blank" rel="noopener">AhsayCBSの認証バイパス＋RCE脆弱性2件が野外で積極的に悪用——WebシェルとXMRig仮想通貨マイナーを展開、パッチ未確定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Huntressは、バックアップ製品AhsayCBSの脆弱性2件が実際に悪用されていることを確認した。CVE-2026-105133（CVSS 9.3）はcheckSysPwd関数の認証バイパス、CVE-2026-105134は未認証リモートコード実行で、攻撃者はこれらを連鎖させてJSPウェブシェルを設置し、Microsoft Edgeに偽装した仮想通貨マイナー「XMRig（edge.exe）」を展開する。悪用開始は2026年10月7日23:20 UTC。当初の修正版とされたバージョン10.3.4も依然として影響を受ける可能性があり、確実な修正バージョンは未確定。管理インターフェースへのアクセスを信頼済みIPやVPN経由に限定する暫定対策を直ちに実施することが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Splunk Enterprise / CVE-2026-76268</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-09</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/splunk-enterprise-vulnerabilities-october-2026/" target="_blank" rel="noopener">Splunk Enterprise に CVSS 9.8 の未認証OS コマンド実行脆弱性（CVE-2026-76268）——22件の脆弱性を修正するアドバイザリを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Splunkは2026年10月7日、Splunk Enterpriseの脆弱性22件を修正するアドバイザリSVD-2026-1001/1002を公開した。最も深刻なCVE-2026-76268（CVSS 9.8）はPatroni REST APIの認証欠如により、未認証の攻撃者がサーチヘッドクラスターメンバー上でOSコマンドを実行できる。影響バージョンは10.4.3未満および10.2.7未満の一部バージョン。別途CVE-2026-76281（CVSS 9.8、アクセス制御の不備）も重大な問題として含まれる。修正済みバージョン10.4.3・10.2.7・10.0.10・9.4.15への早急なアップグレードを推奨。Edge Processor等を使用していない場合は server.conf の[postgres]セクションを無効化する暫定対策も可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-brand">DX・AI・AWS Update</div>
+    <div>2026-10-10 &nbsp;/&nbsp; Daily Tech Report</div>
+  </div>
+</footer>
+
+</body>
+</html>
