@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 12 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">piyolog / 国内組織 不正アクセス連続事案</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://piyolog.hatenadiary.jp/entry/2026/10/11/004353" target="_blank" rel="noopener">9〜10月に国内組織39件超の不正アクセスが連続発生—ブックオフ643万件・第一興商872万件など大規模被害の構造をpiyologが総括</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年9月〜10月にかけて、国内の主要企業・団体を狙った不正アクセス事件が連続・集中して発生した実態をpiyologが分析・総括した。確認された主な被害事案はブックオフ（643万件）・バイトル（388万件）・第一興商（872万件）・ゴルフダイジェスト（520万件）など39件超に上り、合計で数千万件規模の個人情報が流出した可能性がある。攻撃手法の傾向としては①公開Webシステムの既知脆弱性悪用、②VPN装置・境界機器への不正アクセス、③業務委託先・SaaSプラットフォーム経由のサプライチェーン侵害の3パターンが目立つ。また、10月10日に発覚したIDCフロンティアへのランサムウェア攻撃（495社・自治体に連鎖）・コミューン不正アクセス（30.7万件）・スカイチケット流出（1,464万件）はこの波の一部として位置づけられており、組織の防御態勢の抜本的見直しが急務とされている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JPCERT/CC</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.jpcert.or.jp/at/2026/at260030.html" target="_blank" rel="noopener">JPCERT/CC 緊急注意喚起 at260030「直近で相次いでいる国内組織における不正アクセス」—既知脆弱性への即時パッチ適用と委託先管理強化を要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">JPCERT/CCは2026年10月11日付でアラート at260030「直近で相次いでいる国内組織における不正アクセスに関する注意喚起」を発行した。9月〜10月に集中した国内企業・自治体への不正アクセス連続事案を受け、①公開サービスの既知脆弱性への即時パッチ適用（特にEOL機器の早期更新）、②VPN装置・ゲートウェイ機器の設定とファームウェアの確認・更新、③業務委託先のセキュリティ対策状況の確認・強化を強く求めている。また、通信ログや認証ログの取得・保管体制の整備と、不審な通信・アクセスに対する監視強化も勧告している。国内での連続インシデントに対して公的機関が正式な緊急注意喚起を発したことで、情報セキュリティ担当者には速やかな対応と経営層への報告が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / LLMGateway 週次モデル動向</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://llmgateway.io/blog/new-ai-models-this-week-2026-10-11" target="_blank" rel="noopener">今週の新AIモデル：Claude Haiku 5.5がHaiku 4.5比75%コスト削減・エフォート設定に初対応、Mistral Large 4（1兆パラメータMoE）もプレビュー公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">LLMGatewayの週次AIモデルトラッカーによると、今週の主要リリースはAnthropicの「Claude Haiku 5.5」とMistral AIの「Mistral Large 4」の2つが目立った。Claude Haiku 5.5はHaiku 4.5と比較して応答品質を大幅に向上させながら75%のコスト削減（$0.10/$0.50 per Mトークン）を実現した。Haikuシリーズとして初めてエフォート（extended thinking）設定に対応しており、推論タスクへの適用範囲が広がっている。また中国のZhipuAIが「GLM 5.3 Fast」をリリースし、高速推論・低コストを売りに競合モデルに対抗。Mistral Large 4は1兆パラメータ規模のマルチモーダルMoEアーキテクチャで現在プレビュー公開中。Claude Haiku 5.5はAWS Bedrock・Google Vertex AI・主要プロバイダー経由でも利用可能となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Manus AI / Cloudflare・Deno</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gtstu.com/weekly-ai-startup-news-roundup-2026-10-11" target="_blank" rel="noopener">ManusがMeta買収交渉決裂後に5億ドル超を独立調達、CloudflareがJavaScriptランタイム「Deno」を買収しRyan Dahl氏もジョイン</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">今週のAIスタートアップ注目ニュース2件。1件目：中国発の自律型AIエージェント企業Manusは、Metaとの買収交渉が決裂した後、独立を維持したまま5億ドル（約750億円）超の資金調達ラウンドを完了したと伝えられる。Manusはウェブ操作・ファイル処理・コード実行などを自律的にこなすエージェントとして注目を集めており、個人・業務用途双方への展開を加速させている。2件目：CloudflareがJavaScriptランタイム「Deno」を買収。Node.jsの生みの親でDenoの創設者であるRyan Dahl氏もCloudflareにジョインすることが確認された。Deno DeployサービスはCloudflare Workers KV・R2・D1との統合強化ののち約6ヶ月後をめどに終了予定とされており、CloudflareがJavaScriptランタイムエコシステムの重要インフラを取り込む戦略的な動きとして業界に衝撃を与えた。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内に確認できる新しいAWSアップデートはありませんでした（AWS週次ラウンドアップは月曜公開のため、日曜日は新規情報が少ない傾向があります）。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AhsayCBS（バックアップソフトウェア）— 実被害確認</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prsol.cc/2026/10/11/unpatched-ahsaycbs-flaws-exploited-to-deploy-webshells-mine-crypto" target="_blank" rel="noopener">【緊急・実被害確認】AhsayCBS に未認証RCEゼロデイ CVE-2026-105133/134—5組織超でWebシェル設置・仮想通貨マイニングマルウェア確認、パッチ未提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">バックアップソフトウェア「AhsayCBS」に認証バイパス（CVE-2026-105133）と未認証リモートコード実行（CVE-2026-105134）の危険な脆弱性チェーンが発見され、2026年10月7日以降に少なくとも5組織以上で実際の悪用が確認された。攻撃者は認証バイパスを起点にReplication ReceiverコンポーネントのRCEを悪用し、JSPウェブシェルをサーバーに設置。さらに「Microsoft Edge」プロセスに偽装したXMRigマイナーを展開して仮想通貨マイニングを実行させている。バージョン10.3.4には現時点でパッチが存在せず、ベンダーによる修正状況は不明。CVSSスコアはクリティカル（未認証でのRCEが可能なため）。緊急の対応措置として、管理インターフェースへのアクセスを信頼済みIPアドレスのみに制限し、外部からのReplication Receiverへの接続を遮断することが強く推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Citrix NetScaler ADC / Gateway</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news4hackers.com/weekly-security-roundup-fortibleed-ongoing-threat-patch-tuesday-outlook" target="_blank" rel="noopener">Citrix NetScaler に CVSS 9.5 の深刻脆弱性 CVE-2026-107406—SAML設定環境でメモリオーバーフロー→RCE/DoS、修正版14.1-73.46以上へ即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CitrixはNetScaler ADCおよびGatewayに影響するCVSS 9.5の重大な脆弱性CVE-2026-107406を修正するセキュリティ更新を公開した。対象はSAML SP（サービスプロバイダー）またはIdP（アイデンティティプロバイダー）として設定された環境のみで、攻撃が成功した場合にメモリオーバーフローを引き起こし、リモートコード実行（RCE）またはサービス拒否（DoS）が可能となる。修正済みバージョンは14.1-73.46以上および13.1-64.29以上。SAML設定のNetScalerを運用する組織は緊急度が高く、週次セキュリティラウンドアップでも「即時パッチ適用」対象として取り上げられている。適用前に現行のSAML設定と接続要件を確認したうえで計画的に更新することが推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet FortiOS（FortiBleeder）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-11</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news4hackers.com/weekly-security-roundup-fortibleed-ongoing-threat-patch-tuesday-outlook" target="_blank" rel="noopener">FortiOS「FortiBleeder」脆弱性の悪用が継続中—パッチ未適用のFortiGate機器から設定・認証情報の窃取が報告、最新ファームウェアへの即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinet FortiOSに存在する「FortiBleeder」と呼称される脆弱性の悪用が継続していることが、2026年10月11日付の週次セキュリティラウンドアップで改めて警告された。パッチが未適用のFortiGate / FortiOS機器から、機密性の高い設定情報やVPN接続に用いる認証情報が窃取される被害が複数組織から報告されており、攻撃者はこれを後続の侵入活動に利用しているとされる。Fortinetはセキュリティパッチを既に公開しているが、パッチ未適用のままインターネットに公開された機器が依然として多数稼働しており、積極的な悪用が続いている状況にある。対象機器の管理者は最新ファームウェアへの即時更新を最優先で実施するとともに、窃取された可能性のある認証情報のリセットと不審なVPN接続ログの確認を行うことが強く推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-12 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
