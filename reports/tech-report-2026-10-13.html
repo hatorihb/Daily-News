@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 13 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CEATEC 2026 / JEITA</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目イベント</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.ceatec.com/ja/" target="_blank" rel="noopener">CEATEC 2026が本日開幕—テーマ「Transformation」、国内外821社・団体がAI・DX先端技術を幕張メッセで披露（10月13〜16日）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本最大規模のテクノロジー展示会「CEATEC 2026」が本日10月13日から16日まで幕張メッセで開幕した。今年のコンセプトは「Transformation（変革）」で、国内外821社・団体が出展する。展示の中心はAIエージェント、フィジカルAI、ロボティクス、国産LLM活用、次世代モビリティなど幅広い先端技術。三菱電機は「フィジカルAI」特設ブースを設け、製造・インフラ分野への適用事例を展示するほか、AIスタートアップやSI企業が業務効率化ソリューションを多数披露する。また「CEATEC AWARD 2026」受賞案件の発表も予定されており、Society 5.0実現に向けた産業DXの現状と近未来が一覧できるイベントとなっている。スポーツの日（10月12日）明けの初営業日に開幕し、国内IT業界関係者の注目を集めている。来場は全来場者登録入場制・事前登録で無料。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta / Meta Superintelligence Labs</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder/" target="_blank" rel="noopener">MetaがフロンティアAIモデル「Muse Wonder」を発表—Scale AI創業者によるAI部門再編後初のフロンティアリリース、開発者向けAPIで即日提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Metaは2026年10月12日、同社初のフロンティアAIモデルシリーズとなる「Muse Wonder」と「Muse Wonder Full」を正式発表した。Muse WonderはMeta Model API経由で開発者が即日利用可能で、エージェント用途や高度なコーディング・推論タスクを主なターゲットとする。Muse Wonder Fullは同シリーズ最高性能モデルだがMuse Codeサブスクライバー限定提供でAPI外部公開はない。TechCrunchによれば、Scale AIの創業者Alexandr Wang氏が2025年8月にMetaのAI部門（Meta Superintelligence Labs）を大規模再編して以降、Metaにとって初のフロンティアモデルリリースとなる。MetaはMuse Spark（コーディング・エージェント向け、1Mトークンコンテキスト）・Muse Image・Muse Voice Transcribeなどの専用モデルもMeta Model APIで展開しており、Wonderシリーズはその最上位に位置づけられる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Brad Smith</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://foxnews.com/live-news/ai-news-microsoft-rules-safety-10-12" target="_blank" rel="noopener">Microsoft社長Brad SmithがグローバルなAI規制の早期確立を訴え—AIの安全性ギャップへの警鐘と国際ガバナンス整備を強調</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MicrosoftのPresident（社長）Brad Smithは2026年10月12日、グローバルなAI規制の枠組みを早期に確立するよう強く訴えた。特に自律的に動作するAIシステム（AIエージェント）の安全管理上のギャップを指摘し、各国政府・企業が協調してガバナンスを整備する必要性を強調した。Smithは「AIの安全性は業界の自主規制だけでは不十分」として、EU AI規制法の施行準備が進む中での多国間協調の必要性を述べた。Microsoftは生成AIの急速な普及に伴うリスク（ディープフェイク・自律エージェントの誤動作・偽情報拡散など）に対し、ガバナンス強化を業界リーダーとして積極的に主導してきており、今回の発言も同社のAI責任あり開発（Responsible AI）方針の一環とみられる。業界大手の経営幹部によるAI規制支持の姿勢は、AIスタンダード策定に向けたコンセンサス形成を促す動きとして世界的に注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内に確認できる新しいAWSアップデートはありませんでした（10月12日がスポーツの日の祝日のためRSSフィード取得も全て失敗しており、WebSearchでも10月12〜13日付のAWS新機能情報は確認できませんでした。10月5日週のAWS週次ラウンドアップ以降のまとめ記事が本日公開される可能性があります）。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SonicWall SMA1000 Series — 悪用確認</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://darkreading.com/vulnerabilities-threats/max-severity-ssrf-flaw-sonicwall-sma-devices-under-attack" target="_blank" rel="noopener">【緊急・悪用確認】SonicWall SMA1000に CVSS 10.0 の事前認証SSRFゼロデイ CVE-2026-102255—ハニーポットで135件の攻撃試行検出、今年3度目のSMA SSRF開示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SonicWall SMA1000シリーズのWorkPlaceインターフェースに、認証不要でリモート悪用可能なCVSS 10.0のSSRF脆弱性 CVE-2026-102255 が確認された。SonicWallはパッチを10月6日に公開したが、その直後からセキュリティ研究者Previdianのハニーポットで米国内2IPアドレスからの攻撃試行計135件が検出されている。攻撃は細工されたHTTP OPTIONSリクエストを使い内部CouchDB（127.0.0.1:5984）への到達を試みるもので、成功すると機密設定情報の窃取や後続侵入の足がかりとなる。影響を受けるのはSMA1000（6210・7210・8200v）でバージョン12.4.3-03526以前・12.5.0-02952以前。修正バージョンは12.4.3-03670以上・12.5.0-03082以上。有効なワークアラウンドは存在しないため即時パッチ適用が必須。今年7月・9月にも同シリーズでSSRFが開示されておりいずれもCISA KEVに登録済みであることから、悪用リスクは極めて高い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Bricksforge（WordPressプラグイン）— 実悪用確認</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/attackers-exploit-cvss-100-bricksforge.html" target="_blank" rel="noopener">【緊急・実悪用確認】WordPress プラグイン Bricksforge に CVSS 10.0 の認証不要RCE脆弱性 CVE-2026-85097—10月7日以降に実際の攻撃が多数観測</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WordPressのビルダープラグイン「Bricksforge」に、認証不要でリモートコード実行（RCE）が可能なCVSS 10.0の重大な脆弱性 CVE-2026-85097 が発見され、2026年10月7日21:47 UTC以降、実際の悪用が確認されている（Patchstack報告）。攻撃の流れ：①認証不要のAJAXエンドポイントからnonceを取得 → ②GIF/PHPポリグロットファイルをアップロード（MIMEチェックをバイパス）→ ③フォーム送信時に `.php` 拡張子で配置し任意コード実行。攻撃成功後はWebシェル設置やサイト全体の乗っ取りが可能となる。影響バージョンは3.1.8.9以下で、修正済みバージョンは3.1.8.10。Patchstackは緩和ルールを展開済みだが、即時アップデートを強く推奨している。Bricksforgeを利用しているWordPressサイト管理者は管理画面からプラグインのバージョンを今すぐ確認・更新すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft — October 2026 Patch Tuesday</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://msrc.microsoft.com/update-guide/releaseNote/2026-Oct" target="_blank" rel="noopener">Microsoft 2026年10月 Patch Tuesday（本日公開）—Exchange Server権限昇格 CVE-2026-96940（CVSS 8.8）含む複数の重要更新、AD FS DKMハードニングも施行モードへ移行</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは2026年10月13日（日本時間14日未明）、月例セキュリティ更新「Patch Tuesday」を公開した。注目はExchange ServerのEoP（権限昇格）脆弱性 CVE-2026-96940（CVSS 8.8）で、認証済み攻撃者が同一組織内の他ユーザーのメールや添付ファイルを読み取ることができる。この脆弱性はMicrosoftが内部発見し、9月下旬の帯外アップデートで修正済みだが、今月の定例パッチでも再確認されている。また今月の更新からWindows AD FS分散キー管理（DKM）コンテナのACLハードニング（CVE-2026-56155対応）がEnforcementモードへ移行するため、AD FSを運用する組織は事前のDKMコンテナ権限確認が必須となる。9月のPatch Tuesday（973件・ゼロデイ2件という過去最大規模）に続くものとなる今月の定例更新について、WindowsやExchange・Azureを利用する国内企業は速やかなパッチ適用計画の確認と適用を行うこと。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-13 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
