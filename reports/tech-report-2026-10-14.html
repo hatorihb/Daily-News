@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">グローバルW / Snow Mountain AI（インド）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目案件</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://zaikei.co.jp/article/20261013/873180.html" target="_blank" rel="noopener">グローバルWがインドAI企業Snow Mountain AIと資本業務提携・合弁会社設立へ—AIエージェント基盤「QwikBuild」を活用した日本市場向けDXソリューションを展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東証グロース上場のITサービス企業グローバルW（7340）は2026年10月13日、インドのAIスタートアップSnow Mountain AI Private Limitedと資本業務提携し合弁会社を設立すると発表した。Snow Mountain AIはAIエージェント実装基盤「QwikBuild」を開発・提供するインドのAI企業で、グローバルWはこの技術を活用した日本市場向けのバックオフィスDX・業務自動化ソリューションの展開を加速する計画。グローバルWはRPA・AIエージェント分野でのソリューション提供を強みとしており、インド側との提携により先端AIエージェント技術と開発リソースを獲得する狙い。インド系AI企業との日本企業の提携が相次ぐ中、SMB向けAI活用支援の加速が期待される。発表当日の株価は続伸して引けた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ProVision / Japan DX &amp; AX Week 秋 2026</div>
+          <div class="card-badges">
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000192.000099874.html" target="_blank" rel="noopener">ProVision、「Japan DX &amp; AX Week 秋 2026（10月21〜23日・東京）」に出展—AIシステムの品質検証・脆弱性診断と社内AI活用のリスク管理ソリューションを展示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ・ソフトウェア品質保証を手がけるProVisionは2026年10月13日、10月21〜23日に東京ビッグサイトで開催される「Japan DX &amp; AX Week 秋 2026」への出展を発表した。展示内容はAIシステムの品質検証・脆弱性診断サービスと、社内生成AIにおけるリスク対策ソリューションが中心で、急増するAIガバナンス・AIリスク管理のニーズに応える内容となっている。企業のAI実装が加速する一方で第三者評価・品質検証の重要性が増しており、同社のような専門業者への注目度が上昇している。Japan DX &amp; AX Weekは国内最大級のDX展示会で、今秋会は10月21〜23日のリアル開催。生成AI関連展示が急増しており、AIガバナンス・セキュリティ対策に特化した企業の出展も増加傾向にある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-argon/" target="_blank" rel="noopener">Google Gemini 4 Argon が本日より一般提供開始—API入門価格は入力$2/出力$10（1Mトークン）、11月末まで適用。Google AI Pro・Ultraおよび GitHub Copilot 全プランでも利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleのDeepMindは2026年10月13日、フラッグシップAIモデル「Gemini 4 Argon」をAI Studio・Gemini APIで全開発者向けに一般提供（GA）開始したと発表した。9月30日に承認制の「Fairwindプログラム」（サイバー防衛向け限定）で初公開されていたが、今回から制限なく利用可能となった。API入門価格は入力$2/出力$10（100万トークンあたり）で、2026年11月30日まで適用。12月以降は入力$4/出力$20の通常価格へ移行する。Google AI ProおよびUltraサブスクライバーはGeminiアプリ・AI Modeからも利用可能。同日GitHub Copilot（Individual・Business・Enterprise全プラン）にも統合された。Gemini 4 ArgonはMemoryBenchなどのベンチマークで他社最上位モデルと競合する性能を持ち、ソフトウェア開発・科学研究・法務・金融分析など複雑なタスク向けに設計されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitHub / Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://windowsforum.com/news/gemini-4-argon-in-github-copilot-plans-admin-controls-and-ai-credit-pricing.448180/" target="_blank" rel="noopener">GitHub Copilot、本日より全プランでGemini 4 Argon の利用を開始—Enterprise向けに管理者コントロールとAIクレジット課金の詳細も発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MicrosoftのGitHubは2026年10月13日、GitHub CopilotにGoogle DeepMindの「Gemini 4 Argon」を統合し、Individual・Business・Enterpriseの全プランで段階的に提供開始することを発表した。AnthropicのClaude・OpenAIのGPTシリーズに続く第3の主要モデルオプションとして追加される。GitHub Copilot Businessでは管理者が利用モデルを選択・制限できる管理者コントロール機能も提供される。またモデルごとのコスト差を吸収するAIクレジット制度の料金体系も同日公開された。Gemini 4 Argonはコーディング支援・コードレビュー・テスト生成での活用が期待され、開発者が目的に応じてモデルを使い分けられる環境が整いつつある。GitHubの公式changelogでも一般提供開始が確認されている（段階的ロールアウト）。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日はAWS What's NewのRSSフィード取得が全てエラー（プロキシ403）となり、代替のWeb検索でも2026年10月13〜14日付の新機能アナウンスを確認できませんでした。直近の確認済みアップデートとしては10月5日週のウィークリーまとめ（OpenAIを搭載したAmazon Bedrockマネージドエージェントのパブリックプレビュー等）があります。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ivanti Connect Secure — 悪用確認・CISA KEV登録</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/" target="_blank" rel="noopener">【緊急・悪用確認・CISA KEV登録】Ivanti Connect Secure に3ゼロデイ連鎖（CVE-2026-104935）—認証不要でroot権限取得可能、10月1日より実被害、1件は未修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Ivantiは2026年10月13日、VPN製品「Connect Secure」において3件のゼロデイ脆弱性が連鎖的に悪用されていることを公表した。中核となるCVE-2026-104935（CVSS 8.6）は事前認証不要のリモートコード実行が可能で、低複雑度・ユーザー操作不要。Volexityが顧客のインシデント調査で発見し、脅威アクターUTA0576が3ゼロデイを連鎖させてフルパッチ済み機器でもroot権限取得に成功していたことが判明した。10月1日より実際の悪用が確認されており、CISAは同日CVE-2026-104935をKEVカタログに追加した。影響バージョンはConnect Secure 22.8R2.4以前・25.1.1.1以前・25.1.2.2以前で、修正済みバージョン（22.8R2.5・25.1.1.2・25.1.3.0・25.1.3.1）への即時アップグレードが必須。なお連鎖する3件のうち権限昇格につながる1件は依然未修正で、Ivantiは数週間以内の修正提供を予定している。Ivanti Connect Secureを運用している組織は今すぐアップグレードとIntegrity Checker Toolの実行を行うこと。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SAP — 2026年10月 Patch Day</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/sap-security-patch-day-october-2026/" target="_blank" rel="noopener">【重要】SAP 2026年10月セキュリティパッチデー—Cloud SDK for Python に CVSS 10.0 の OAuth2 SSRF（CVE-2026-89111）、NetWeaver・S/4HANAにも CVSS 9.9 の Critical 脆弱性</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SAPは2026年10月13日（現地時間）、月次セキュリティパッチデーを公開した。最大の注目はSAP Cloud SDK for Python（バージョン0.45.2未満）に存在するOAuth2 SSRF脆弱性CVE-2026-89111（CVSS 10.0）で、マルチテナントアプリのテナントサブドメイン値を操作することで攻撃者が自身のサーバーへOAuth2トークンリクエストを誘導し、アプリのクライアント資格情報を窃取できる。即時パッチ適用が困難な場合の暫定対策としてtenant_subdomainのホワイトリスト検証が推奨されている。その他の重大脆弱性として、SAP NetWeaver Visual Composerのアクセス制御不備CVE-2026-89110（CVSS 9.9）、S/4HANAのコードインジェクションCVE-2026-89107（CVSS 9.9）、Manufacturing Integration and IntelligenceのCVE-2026-89108（CVSS 9.1）も修正。今月は合計約20件の脆弱性が対処されており、SAPのBusiness Technology Platform（BTP）を利用している組織は至急パッチ適用計画を確認されたい。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JPCERT/CC — 国内不正アクセス注意喚起</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://innovatopia.jp/cyber-security/cyber-security-news/118740/" target="_blank" rel="noopener">JPCERT/CC、国内組織での相次ぐ不正アクセスを注意喚起（AT260030）—Metabase CVE-2026-72898（CVSS 10.0）悪用など4パターンの手口を公表、複数自治体でも防災メールシステム被害</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">JPCERT/CCは注意喚起AT260030を公開し、最近相次いで発生している国内組織への不正アクセス事例について警告した。確認された4つの手口のうち製品名が明示されているのはBIツール「Metabase」のSQLインジェクション脆弱性CVE-2026-72898（CVSS 10.0）の悪用のみだが、残り3パターンについても国内での侵害が確認されている。CVE-2026-72898はパスワードリセット用APIエンドポイントへの未認証SQLインジェクションで、悪用成功時に接続データベースを含む管理者権限が奪取される。Metabaseを利用している組織は直ちに最新バージョンへの更新と過去の侵害有無の確認が必要。また大分県・千葉県南房総市・山口県下関市では防災メール配信システムを運用する委託先業者への不正アクセスが相次いで発生し、個人情報漏洩の可能性が生じてシステムが一時停止する事態となっている。自治体のデジタルサービス基盤を狙った攻撃が継続しており、委託先を含めたサプライチェーンの管理強化が急務だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-14 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
