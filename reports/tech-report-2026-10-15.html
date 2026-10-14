@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a; --white:#ffffff; --red:#E60012;
+  --gray:#f2f2f2; --mid:#888; --border:#e0e0e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;background:var(--gray);color:var(--black);line-height:1.6}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1100px;margin:0 auto;padding:0 16px}
+header{background:var(--black);color:var(--white);padding:28px 0 22px}
+header h1{font-size:1.5rem;font-weight:700;letter-spacing:.04em}
+.header-date{margin-top:4px;font-size:.85rem;color:#aaa;letter-spacing:.08em}
+nav{background:var(--white);border-bottom:2px solid var(--red);position:sticky;top:0;z-index:10}
+nav .container{display:flex;gap:0;overflow-x:auto}
+nav a{display:block;padding:12px 20px;font-size:.82rem;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:border-color .15s}
+nav a:hover,nav a:focus{border-bottom-color:var(--red);text-decoration:none}
+main{padding:32px 0 48px}
+section{margin-bottom:40px}
+.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.section-num{font-size:.75rem;font-weight:700;color:var(--red);letter-spacing:.1em;text-transform:uppercase}
+.section-title{font-size:1.1rem;font-weight:700}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.card-service{font-size:.72rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.05em}
+.card-badges{display:flex;align-items:center;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.impact{font-size:.68rem;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.03em}
+.impact-high{background:#ffeaea;color:#c0001a}
+.impact-medium{background:#fff5e0;color:#8a5c00}
+.impact-low{background:#eaf5ea;color:#1a6b1a}
+.card-date{font-size:.72rem;color:var(--mid)}
+.card-title{font-size:.97rem;font-weight:600;line-height:1.45}
+.card-title a{color:var(--black)}
+.card-title a:hover{color:var(--red)}
+details{font-size:.85rem;color:#444}
+details summary{cursor:pointer;color:var(--mid);font-size:.78rem;user-select:none;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▶ "}
+details[open] summary::before{content:"▼ "}
+.card-desc{margin-top:8px;line-height:1.65}
+footer{background:var(--black);color:#aaa;padding:20px 0;font-size:.78rem}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.footer-brand{color:var(--white);font-weight:700}
+@media(max-width:600px){
+  nav a{padding:10px 14px;font-size:.78rem}
+  .cards{grid-template-columns:1fr}
+  .section-title{font-size:1rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 15 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+<nav>
+  <div class="container">
+    <a href="#domestic">01 国内IT・DX</a>
+    <a href="#ai">02 AI</a>
+    <a href="#aws">03 AWS</a>
+    <a href="#security">04 セキュリティ</a>
+  </div>
+</nav>
+<main>
+  <div class="container">
+
+    <!-- 01 国内IT・DX -->
+    <section id="domestic">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <span class="section-title">国内IT・DX</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">ユーザーローカル</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">注目</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000016.000016880.html" target="_blank" rel="noopener">ユーザーローカルAI、LLMO（AI検索エンジン最適化）自動提案機能をリリース</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">ユーザーローカルは、企業向けAI分析ツール「ユーザーローカルAI」にLLMO（Large Language Model Optimization）自動提案機能を追加した。AI検索エンジンに対してコンテンツを最適化するための改善施策を自動的に提案する機能で、ChatGPTやPerplexityなどのAI検索への露出向上を支援する。SEOに代わる次世代コンテンツ最適化戦略として注目を集めており、国内企業のAI検索対応を加速する狙い。今後はAI検索エンジンの台頭に伴いLLMO需要が拡大すると見込まれる。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">データX</div>
+            <div class="card-badges">
+              <span class="impact impact-low">情報</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000196.000013454.html" target="_blank" rel="noopener">データX、「Japan DX & AX Week 秋」に出展——kpiee最新機能をデモ展示</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">データXは、2026年10月下旬に開催予定の「Japan DX & AX Week 秋」展示会への出展を発表した。同社のKPI管理SaaS「kpiee」の最新機能をブースでデモ展示し、業務のDX・AX（AI変革）推進をテーマに来場者との商談を実施する。kpieeは部門横断のKPI可視化とAIによる分析示唆を強みとする国産SaaSで、製造・小売・サービス業を中心に導入が広がっている。展示会では新機能として自然言語でのデータ操作インターフェースが公開される予定。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">IPA・経産省</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">政策</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.ipa.go.jp/digital/dx/2026-dx-promotion.html" target="_blank" rel="noopener">IPA、中小企業向けDX推進ガイドライン2026年度版を公開——生成AIの業務活用指針を追加</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">独立行政法人情報処理推進機構（IPA）は、中小企業向け「DX推進ガイドライン2026年度版」を公開した。今年度版では生成AIの業務活用に関する指針を新たに追加し、導入時のリスク管理や社内ルール整備の手順を具体的に示している。経済産業省との連携のもと策定されたもので、段階的なDX実践ロードマップと生成AI導入チェックリストが含まれる。中小企業がベンダーロックインを避けながらクラウドとAIを活用するための実践的な内容となっている。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 02 AI -->
+    <section id="ai">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <span class="section-title">AI</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Modal</div>
+            <div class="card-badges">
+              <span class="impact impact-high">大型調達</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://modal.com/blog/series-d" target="_blank" rel="noopener">Modal、シリーズD 7億5,000万ドル調達——評価額157.5億ドルでAIインフラ投資競争が激化</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">AIクラウドインフラ企業のModalは、シリーズDラウンドで7億5,000万ドル（約1,130億円）の資金調達を完了し、評価額157.5億ドル（約2兆3,600億円）に達したと発表した。ModalはGPUクラスター上でPythonコードをサーバーレスに実行できるプラットフォームを提供しており、AI開発者に急速に採用が広がっている。今回の調達資金はGPUインフラ増強、エンタープライズ向け機能開発、グローバルリージョン拡大に充当する。CoreWeaveやLambda Labsとの競争が激化するAIインフラ市場において、評価額規模での大型調達となった。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Anthropic</div>
+            <div class="card-badges">
+              <span class="impact impact-high">IPO</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://news.bgov.com/banking-law/anthropic-said-to-target-mega-ipo-before-thanksgiving-holiday" target="_blank" rel="noopener">Anthropic、感謝祭前のIPOを目標に投資家説明会——評価額500億ドル超での大型上場へ</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Claude開発元のAnthropicが、米国感謝祭（11月下旬）前の株式公開（IPO）を目標に、機関投資家向け説明会を実施していることが複数の関係者情報として明らかになった。評価額は500億ドル超を目指しており、実現すればOpenAIのIPO計画と並ぶAI業界最大規模の上場となる。Amazonは同社の主要投資家として最大40億ドルを出資済みで、Google、Salesforceなども株主に名を連ねる。IPO後もAmazon Bedrockとの統合やClaudeのAPIサービス拡大を継続する方針。上場計画は市場環境によって変更される可能性がある。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Google DeepMind</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">研究発表</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://deepmind.google/research/publications/gemini-4-multimodal-reasoning/" target="_blank" rel="noopener">Google DeepMind、Gemini 4の詳細論文公開——マルチモーダル推論でGPT-5に対抗</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Google DeepMindは、次世代基盤モデル「Gemini 4」の技術論文を公開した。特に複数の画像・動画・音声・テキストを組み合わせた複合的な推論タスクにおいて、従来モデルを大幅に上回るベンチマーク結果を示している。新アーキテクチャではMixture of Experts（MoE）を強化し、トークン当たりの計算効率を改善しながらも高精度を維持する設計が採用されている。Gemini 4はGoogle AI Studio・Vertex AIで段階的に提供開始予定であり、OpenAI GPT-5との直接比較が今後注目される。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 03 AWS -->
+    <section id="aws">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <span class="section-title">AWS</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">AWS Lambda</div>
+            <div class="card-badges">
+              <span class="impact impact-high">GA</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://aws.amazon.com/jp/blogs/compute/aws-lambda-web-functions-generally-available/" target="_blank" rel="noopener">AWS Lambda Web Functions、一般提供（GA）開始——Lambda URLsの後継として標準Web APIをネイティブサポート</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">AWSは「Lambda Web Functions」の一般提供を開始した。従来のLambda URLsを拡張し、標準Web API（Request/Response オブジェクト、Fetch API互換）をネイティブサポートすることで、Next.jsやRemix等のモダンWebフレームワークをLambdaで直接実行できるようになる。コールドスタートの削減とフレームワーク互換性の向上が主な改善点で、Node.js 22・Python 3.14ランタイムから利用可能。既存のLambda URLsからの移行パスも提供され、段階的な移行が可能となる。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">AWS</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">UX改善</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://aws.amazon.com/jp/blogs/news/aws-sign-in-new-providers-2026/" target="_blank" rel="noopener">AWSサインイン画面刷新——Google・GitHub・Apple・Amazonアカウントでの連携ログインに対応</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">AWSは、マネジメントコンソールおよびAWS Builder IDのサインイン画面を刷新し、Google・GitHub・Apple・Amazonアカウントを使用したソーシャルログインに正式対応した。従来のIAMユーザー・SSOに加え、個人開発者や小規模チームが手軽にAWSサービスを利用できる入り口を拡充する狙い。AWS Builder IDとの統合により、re:PostやAWS Skill Builderなどのサービスとのシームレスなシングルサインオンが実現する。エンタープライズ向けのSCIM・SAML連携は引き続き別途提供される。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Amazon Bedrock</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">新機能</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://aws.amazon.com/jp/blogs/machine-learning/amazon-bedrock-knowledge-bases-structured-data-retrieval/" target="_blank" rel="noopener">Amazon Bedrock Knowledge Bases、構造化データ取得（Structured Data Retrieval）をGA——RDS・Redshiftとの直接連携が可能に</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Amazon Bedrockの「Knowledge Bases」機能に、構造化データを直接クエリできる「Structured Data Retrieval」が一般提供された。これによりAmazon RDS（PostgreSQL・MySQL）やAmazon Redshiftのデータを、自然言語でAIエージェントから検索・取得できるようになる。従来は非構造化テキストのみ対象だったが、数値データや集計クエリにも対応し、社内の業務データベースをそのままRAGのデータソースとして活用できる。エンタープライズでのBedrockエージェント活用が大きく前進する機能追加となった。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 セキュリティ -->
+    <section id="security">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <span class="section-title">セキュリティ</span>
+      </div>
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">Microsoft</div>
+            <div class="card-badges">
+              <span class="impact impact-high">重要度 高</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-october-2026-patch-tuesday-fixes-1-411-flaws-3-zero-days/" target="_blank" rel="noopener">Microsoft 2026年10月 Patch Tuesday——CVE 1,411件修正・悪用確認済みゼロデイ CVE-2026-96951（CVSS 8.8）を含む</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">Microsoftは2026年10月のセキュリティ更新プログラム（Patch Tuesday）を公開し、合計1,411件のCVEに対処した。うち悪用が確認されているゼロデイは3件で、中でもWindows SCRIPTINGエンジンのリモートコード実行脆弱性 CVE-2026-96951（CVSS 8.8）は標的型攻撃での悪用が確認済み。また、Windows Hyper-Vの権限昇格脆弱性 CVE-2026-37985（CVSS 9.0）はCISA KEVに追加されており、即時適用が推奨される。IPA/JPCERTも同日に注意喚起を発出しており、国内企業は優先的な適用対応が必要。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">WordPress / Bricksforge</div>
+            <div class="card-badges">
+              <span class="impact impact-high">重要度 高</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.securityweek.com/bricksforge-wordpress-plugin-vulnerability-exploited-in-the-wild/" target="_blank" rel="noopener">WordPress プラグイン Bricksforge に CVE-2026-85097（CVSS 10.0）——認証不要RCEが野生で悪用中</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">人気WordPressページビルダープラグイン「Bricksforge」に、CVSS 10.0の最高深刻度を持つリモートコード実行脆弱性 CVE-2026-85097 が発見され、すでに野生での悪用が確認されている。認証なしで任意のPHPコードを実行可能であり、影響を受けるバージョンは3.1.7以前（修正済みバージョン: 3.1.8）。攻撃者はこの脆弱性を利用してWebシェルを設置しサーバーを乗っ取るケースが報告されている。Bricksforgeを使用するサイト管理者はただちに3.1.8へのアップデートと侵害痕跡（IOC）の確認を実施すること。CISA KEV への追加も検討中。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">IDCフロンティア / 国内企業</div>
+            <div class="card-badges">
+              <span class="impact impact-high">重要度 高</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://enterprisezine.jp/news/detail/25188" target="_blank" rel="noopener">IDCフロンティアへのランサムウェア攻撃で495組織に影響——国内10社超でサイバーインシデント相次ぐ</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">クラウドサービス大手IDCフロンティアへのランサムウェア攻撃が明らかになり、同社のクラウドサービスを利用していた495組織が影響を受けたと発表された。同時期に国内10社以上でサイバーインシデントが相次いで報告されており、サプライチェーン攻撃の可能性も含めJPCERT/CCが調査・情報収集を開始している。被害組織にはエネルギー・金融・製造業が含まれており、業務停止や情報漏洩が確認されているケースもある。企業はクラウドベンダーのセキュリティ状況確認とバックアップ体制の見直しを急ぐ必要がある。</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <div class="card-service">JPCERT/CC</div>
+            <div class="card-badges">
+              <span class="impact impact-medium">注意喚起</span>
+              <span class="card-date">2026-10-14</span>
+            </div>
+          </div>
+          <div class="card-title"><a href="https://www.jpcert.or.jp/at/2026/at260025.html" target="_blank" rel="noopener">JPCERT/CC、Adobe・Apache・Citrix製品の緊急脆弱性に注意喚起——悪用の試みを国内で検知</a></div>
+          <details>
+            <summary>詳細を表示</summary>
+            <p class="card-desc">JPCERT/CCは、Adobe Commerce（旧Magento）、Apache Struts 2、Citrix NetScalerの各製品に存在するCVSS 9.0以上の脆弱性について、国内での悪用試みを検知したとして注意喚起を発出した。Adobe CommerceのCVE-2026-34123（CVSS 9.8）は認証不要のSQLインジェクションで、既に海外ではランサムウェアグループの踏み台に使われた事例がある。Apache Struts 2のCVE-2026-29201（CVSS 9.1）も未パッチシステムへのスキャンが急増しており、早急なパッチ適用と侵入ログの確認が求められる。</p>
+          </details>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+</main>
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-15 &nbsp; 過去24時間以内のアップデートを自動収集。</span>
+  </div>
+</footer>
+</body>
+</html>
