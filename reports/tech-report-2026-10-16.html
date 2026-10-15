@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a; --white:#ffffff; --red:#E60012;
+  --gray:#f2f2f2; --mid:#888; --border:#e0e0e0;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif;background:var(--gray);color:var(--black);line-height:1.6}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:underline}
+
+header{background:var(--black);color:var(--white);padding:2rem 0 1.5rem}
+header .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+header h1{font-size:1.6rem;font-weight:700;letter-spacing:.04em}
+.header-date{font-size:.85rem;color:#aaa;margin-top:.4rem;letter-spacing:.06em}
+
+nav{background:var(--white);border-bottom:2px solid var(--red);position:sticky;top:0;z-index:100}
+nav .container{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;gap:0;overflow-x:auto}
+nav a{display:block;padding:.7rem 1.1rem;font-size:.82rem;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:border-color .15s}
+nav a:hover{border-bottom-color:var(--red);text-decoration:none}
+
+main{max-width:1100px;margin:2rem auto;padding:0 1.5rem}
+section{margin-bottom:3rem}
+.section-header{display:flex;align-items:baseline;gap:.8rem;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid var(--black)}
+.section-number{font-size:.75rem;font-weight:700;color:var(--white);background:var(--red);padding:.15rem .5rem;letter-spacing:.06em}
+.section-title{font-size:1.1rem;font-weight:700}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+
+.card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.2rem;display:flex;flex-direction:column;gap:.7rem}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem}
+.card-service{font-size:.78rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.04em}
+.card-badges{display:flex;align-items:center;gap:.4rem;flex-shrink:0}
+.impact{font-size:.7rem;font-weight:700;padding:.15rem .45rem;border-radius:2px;white-space:nowrap}
+.impact-high{background:#ffebeb;color:#c00}
+.impact-medium{background:#fff8e1;color:#8a6000}
+.impact-low{background:#e8f5e9;color:#2e7d32}
+.card-date{font-size:.72rem;color:var(--mid);white-space:nowrap}
+.card-title{font-size:.95rem;font-weight:700;line-height:1.4}
+.card-title a{color:var(--black)}
+.card-title a:hover{color:var(--red)}
+
+details summary{font-size:.8rem;color:var(--mid);cursor:pointer;list-style:none;padding:.2rem 0}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"▶ ";font-size:.65rem}
+details[open] summary::before{content:"▼ "}
+.card-desc{font-size:.83rem;color:#333;line-height:1.65;margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--border)}
+
+footer{background:var(--black);color:#aaa;text-align:center;padding:1.5rem;font-size:.78rem;margin-top:3rem}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 16 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a href="#domestic">01 国内IT・DX</a>
+    <a href="#ai">02 AI</a>
+    <a href="#aws">03 AWS</a>
+    <a href="#security">04 セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section id="domestic">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <span class="section-title">国内IT・DX</span>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">アルカディア / 総務省消防庁</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rocket-boys.co.jp/security-measures-lab/speecan_raiden_arcadia_cyberattack_affected_municipalitie/" target="_blank" rel="noopener">防災情報メール不正アクセス — さいたま市3.4万件など複数自治体の被害詳細が判明、消防庁が緊急要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">アルカディアが提供する防災情報メール配信サービスへの不正アクセス事案で、さいたま市の約3.4万件を含む複数自治体の具体的被害件数が明らかになった。総務省消防庁は各自治体に対し、代替手段の確保と住民への告知を緊急要請。被害を受けたサービスの復旧見通しはまだ示されておらず、公共インフラとしての防災情報伝達に深刻な影響が続いている。自治体は防災行政無線・エリアメール等の補完手段を急ぎ確認するよう求められている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NICT / 総務省</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2147764.html" target="_blank" rel="noopener">A2B攻撃をNICT・総務省が公表 — Androidアプリ解析からバックエンドサーバー侵害、国内情報漏洩の主要手口に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NICTと総務省は、国内情報漏洩事案の主要手口として「A2B（Android-to-Backend）攻撃」を公式に警告した。攻撃者はAndroidアプリのAPKを解析してAPIキーやエンドポイント情報を抽出し、企業のバックエンドサーバーに直接侵入する手法で、複数の国内サービス事業者が被害を確認している。スマートフォンアプリに埋め込まれた機密情報の管理が問題の根本であり、APIキーのサーバー側管理や証明書ピンニング導入を求めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section id="ai">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <span class="section-title">AI</span>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bloomberg.com/news/articles/2026-10-15/meta-releases-open-ai-model-while-keeping-its-best-tech-closed" target="_blank" rel="noopener">Meta、Muse Spark オープンウェイト公開 — フロンティアモデルは非公開を維持しつつ中量級モデルをOSS化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Metaは生成AIモデル「Muse Spark」のオープンウェイト版と、API・CLI経由で利用できる「Muse Spark 1.3」を公開した。同社は最高性能のフロンティアモデルは引き続き非公開とし、中量級クラスのモデルをオープンソース化するという二層戦略を維持している。Muse Sparkはマルチモーダル対応で画像・テキスト生成に対応し、研究者や企業が自前のインフラで展開できる。オープンソースAIとクローズドAIの競争が激化する中、Metaはコミュニティへの普及力を強みとする路線を継続する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Z.ai</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tech-noisy.com/2026/10/15/glm-legal-zai-legal-llm-release/" target="_blank" rel="noopener">Z.ai、法律特化LLM「GLM-Legal」公開 — 320B/18B MoE構成でHarvey LABベンチマーク19.2%を達成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国のZ.ai（Zhipu AI）は法律分野に特化した大規模言語モデル「GLM-Legal」を公開した。320Bパラメータの大型モデルと18Bの軽量モデルをMoE（Mixture of Experts）アーキテクチャで構成し、法律AI評価基準「Harvey LAB」で19.2%を達成。契約書レビュー・判例検索・法律相談のユースケースを想定している。日本語法律文書への対応状況や日本市場への展開計画は未発表だが、法務DXの加速に向けたLLM競争が国際的に激化している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section id="aws">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <span class="section-title">AWS</span>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Health</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/aws-health-introduces-version-catalog-software-lifecycle-management/" target="_blank" rel="noopener">AWS Health、バージョンカタログ追加 — ソフトウェアライフサイクル管理・EOL/パッチ状況を一元可視化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Healthサービスに「バージョンカタログ」機能が追加され、利用中のAWSサービスや依存ソフトウェアのEnd-of-Life（EOL）日程・パッチ適用状況をダッシュボードで一元管理できるようになった。古いランタイムやエンジンバージョンを使用しているリソースを自動検出し、アップグレードの優先度付けを支援する。セキュリティパッチ管理とコンプライアンス対応の効率化が主な目的で、多数のAWSリソースを運用する企業にとって管理コスト削減が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon ElastiCache</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws-news.com/article/01a0fdf1-a5b2-5c7f-63d4-82fa4b519964" target="_blank" rel="noopener">Amazon ElastiCache for Valkey、ElastiCache InsightsダッシュボードとOpenTelemetryメトリクスのCloudWatch送信に対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon ElastiCache for Valkeyが新機能として「ElastiCache Insights」ダッシュボードを追加し、キャッシュヒット率・レイテンシ・コネクション数などの主要メトリクスを視覚的に監視できるようになった。さらにOpenTelemetryプロトコルでAmazon CloudWatchへのメトリクス送信も対応し、既存のオブザーバビリティパイプラインとの統合が容易になる。ValkeyはRedisのOSSフォークであり、Redisからの移行を検討している組織にとってモニタリング機能の成熟は重要な判断材料となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section id="security">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <span class="section-title">セキュリティ</span>
+    </div>
+    <div class="card-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ivanti / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.prsol.cc/2026/10/15/ivanti-warns-of-connect-secure-zero-day-exploited-in-attacks/" target="_blank" rel="noopener">【緊急】Ivanti Connect Secure ゼロデイ CVE-2026-104935 (CVSS 8.6) — CISA KEV登録、完全パッチ済み機器も侵害、修正版25.1.3.0以降へ即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Ivantiは「Ivanti Connect Secure」に存在するゼロデイ脆弱性CVE-2026-104935（CVSS 8.6）を公開した。3つのCVEを連鎖させることで認証なしにroot権限でのRCEが可能となり、既に野外での攻撃が確認されCISA KEVに登録された。最も深刻な点は、完全にパッチが適用された機器でも数日後に侵害される事例が報告されており、単純なパッチ適用では不十分な可能性がある。影響を受けるバージョン: 22.x系全バージョン・24.x系。修正版: 25.1.3.0以降。対応: 即時アップグレード＋ファクトリーリセット＋IOCスキャンを推奨。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Citrix / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/exploitation-of-citrix-netscaler-zero-day-hits-appliances-patched-days-earlier/" target="_blank" rel="noopener">Citrix NetScaler ゼロデイ CVE-2026-88771/88772 — パッチ適用済みアプライアンスも数日後に侵害される新事実が発覚</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Citrix NetScalerの新規ゼロデイCVE-2026-88771・CVE-2026-88772について、パッチを適用した機器が数日後に侵害されたケースが複数確認された。攻撃者はパッチ適用前に埋め込んだウェブシェルやバックドアが残存しているとみられ、パッチだけでは防御が不完全であることが示された。企業はパッチ適用に加えてフォレンジック調査・設定リセット・ネットワーク通信の異常監視を組み合わせた多層対応が必須となる。日本国内でも同アプライアンス利用企業は至急対応を確認すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">発車オーライネット</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-10-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rocket-boys.co.jp/security-measures-lab/hassha-orai-net-api-reservation-data-leak" target="_blank" rel="noopener">発車オーライネット APIサーバー不正アクセス — 最大8,341件の顧客予約情報漏洩の恐れ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">高速バス予約サービス「発車オーライネット」（ジョルダン株式会社運営）のAPIサーバーが不正アクセスを受け、最大8,341件の顧客情報が漏洩した可能性があることが明らかになった。漏洩の恐れがある情報には氏名・メールアドレス・電話番号・乗車区間・予約日時が含まれる。クレジットカード情報の漏洩は確認されていないが、フィッシング詐欺や成りすましへの悪用に注意が必要。同社は対象顧客への個別連絡と再発防止策の実施を表明している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>DX・AI・AWS Update &nbsp;|&nbsp; 2026-10-16 &nbsp;|&nbsp; 情報は各ソースの公開時点のものです</p>
+</footer>
+
+</body>
+</html>
