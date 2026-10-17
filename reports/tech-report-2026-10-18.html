@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 18 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Eストアー / BASE</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2130104.html" target="_blank" rel="noopener">BASE子会社「Eストアー」ショップサーブの情報漏洩が約2335万人分に大幅拡大──クレジットカード情報209万件分（番号一部・有効期限）含む</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BASE子会社のEストアーが運営するECサービス「ショップサーブ」で発生した不正アクセスによる情報漏洩が、2026年8月の当初公表値（885万件）から約2335万人分に大幅に拡大したことが判明した。追加調査の結果、クレジットカードの先頭6桁・下4桁・有効期限を含む約209万人分の情報流出も確認された。不正アクセスは2026年5月〜8月に継続的に発生し、攻撃者がサーバー上で不正プログラムを実行して購入者情報を外部に送信していた。ショップサーブを通じてEC事業者と取引したことがあるユーザーはパスワード変更とクレジットカード明細の確認が強く推奨されている。個人情報保護委員会への報告も完了している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-10-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://bloomberg.com/news/articles/2026-10-17/deepseek-pushes-out-updated-ai-model-it-says-is-faster-leaner" target="_blank" rel="noopener">DeepSeek、更新版AIモデルを公開──「従来比で高速・軽量」を主張、OpenAI・Anthropicへの対抗姿勢を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国のAIスタートアップDeepSeekは10月17日、既存モデルの更新版を公開したとBloombergが報じた。同社は新モデルを従来比で高速かつ軽量と説明しており、ウェブアプリ・モバイルアプリ・APIから利用可能。552BパラメータのMoEアーキテクチャを継承しつつ効率を高めたモデルで、オープンウェイト路線（MIT License）を継続している。低コストの大規模モデルを継続投入することで、OpenAIやAnthropicと正面から競合する戦略を維持している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta / Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-low">情報</span>
+            <span class="card-date">2026-10-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tech-noisy.com/2026/10/17/ai-daily-news-2026-10-16/" target="_blank" rel="noopener">【2026年10月16日のAI公式発表まとめ】Meta「Muse Spark Open」（816B MoE、コンテキスト100万トークン）をオープン公開、Microsoft MAI-Base-2の事前学習完了も発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">tech-noisy.comが10月17日に公開したAIニュースダイジェストによると、Metaはオープンウェイト大規模言語モデル「Muse Spark Open」をリリースした。総816Bパラメータ・アクティブ42BのMoEアーキテクチャで、最大100万トークンのコンテキストウィンドウに対応する。またMicrosoftは独自の基盤モデル「MAI-Base-2」の事前学習完了を発表し、GPT-5.5比で約10倍のコスト効率を主張している。AIモデルの大規模化と効率化を同時に追求する各社の競争が続いており、オープンモデルの多様化が加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Candiru / Discover-Tech / Citizen Lab</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/israeli-ad-firm-doubled-as-candirus-zero-click-spyware-delivery-channel/" target="_blank" rel="noopener">イスラエル広告会社 Discover-Tech が Candiru のゼロクリックスパイウェア配信インフラとして機能──37億件の広告インプレッションを悪用、45台以上のデバイスに感染確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Citizen Lab が10月17日に発表した調査報告によると、イスラエルの広告テクノロジー企業 Discover-Tech が、商業スパイウェアベンダー Candiru のゼロクリック攻撃の配信インフラとして機能していたことが判明した。通常の広告配信ネットワークを経由して標的のデバイスに悪意あるコードを送り込む手法で、約37億件の広告インプレッションが悪用された。アルジャジーラのジャーナリストを含む45台以上のデバイスへの感染が確認されており、ユーザーが何も操作しなくても感染するゼロクリック型である点が深刻。パッチ適用済みデバイスへの侵入事例も確認されており、広告ブロッカーや各種ソフトウェアの最新化が推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ConnectWise SkyKick / Microsoft 365</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/hackers-use-compromised-connectwise.html" target="_blank" rel="noopener">ConnectWise SkyKick Cloud Backup の侵害された認証情報が悪用され、173のMicrosoft 365テナントに不正アクセス──MSPサプライチェーン攻撃が拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ企業Huntressの調査（10月17日発表）によると、攻撃者はConnectWise SkyKick Cloud Backupサービスの侵害された認証情報を悪用し、173のMicrosoft 365テナントへの不正アクセスに成功したことが判明した。クラウドバックアップツールに付与された広範なM365アクセス権が横断的に悪用されるサプライチェーン型の攻撃手法で、単一のMSP（マネージドサービスプロバイダー）経由で複数の顧客環境に影響が拡大している。ConnectWiseを利用するMSPは、バックアップツールの認証情報管理を見直し、多要素認証（MFA）の徹底と最小権限原則の適用が急務。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Eストアー / BASE子会社</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2130104.html" target="_blank" rel="noopener">「ショップサーブ」不正アクセスによる情報漏洩が約2335万人分に拡大確定──クレジットカード情報209万件分（先頭6桁・下4桁・有効期限）含む大規模インシデント</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BASE子会社Eストアーが運営するECサービス「ショップサーブ」への不正アクセスによる情報漏洩が、当初公表（2026年8月、885万件）から約2335万人分へと確定した。クレジットカードの先頭6桁・下4桁・有効期限を含む約209万人分の流出も確認されており、フィッシングやなりすましへの悪用リスクがある。攻撃者は約3カ月にわたりサーバー上で不正プログラムを実行し続けた。現時点で二次被害の報告はないが、同サービス利用履歴を持つユーザーはパスワード変更とクレジットカード明細の定期確認が推奨される。個人情報保護委員会への報告も完了。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-18 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
