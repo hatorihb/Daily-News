@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 19 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">複数日本企業 / 金融庁 / 自民党サイバー本部</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://en.fnnews.com/news/202610181135514429" target="_blank" rel="noopener">「運転免許証を捨てたのに情報は残ったまま」——日本の個人情報漏洩が緊急事態レベルに、与党LDPがサイバー緊急会合を開催</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">FNN（フジニュースネットワーク）が10月18日に報じたところによると、日本では2026年秋以降、大規模な個人情報漏洩が相次いでいる。バーガーキング・ジャパン（スマホアプリ利用者1,118万件）、ヤマト運輸（531万件）、日経新聞社（183万件）などが相次いで個人情報の漏洩を公表。JR東日本では約167万件のメールアドレスが流出したとされる。自民党のサイバーセキュリティ本部が緊急会合を開催し、担当者は「サイバー空間における緊急事態」という認識を示した。金融庁は銀行に対し、チップ内蔵型の本人確認書類（マイナンバーカード・パスポート等）以外を新規口座開設の本人確認に使用しないよう通達。漏洩した運転免許証データを使ったフィッシングやなりすましリスクが高まっており、特に高齢者への注意が呼びかけられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">IDC Frontier / SoftBank子会社 / ランサムウェア</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.ibtimes.co.uk/japan-cyber-crisis-ransomware-data-breaches-1825675" target="_blank" rel="noopener">SoftBank子会社 IDC Frontier にランサムウェア攻撃——495社・自治体の仮想サーバーが停止、JR東日本など主要企業の業務にも波及</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IBTimesが報じたところによると、ソフトバンクのクラウド子会社 IDC Frontier に対するランサムウェア攻撃が10月7日から発生し、東日本地域のクラウドサービスが影響を受けた。495社の法人顧客および地方自治体が利用する仮想サーバーが停止し、JR東日本の顧客データ（約167万件のメールアドレス流出）や JR 東海（約1万5千件のオンライン購入者情報）、物流・行政サービスへの二次被害が拡大した。一元管理されたクラウドインフラへの攻撃が下流の複数組織に被害を連鎖させるサプライチェーン型の被害となった。10月13日時点で大半のサービスは復旧したとされるが、漏洩したデータの悪用リスクは継続している。クラウドプロバイダーへの依存リスクとバックアップ・多重化対策の見直しが急務とされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude Code</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aiagentsdirectory.com/news/ai-agents-news-brief-october-18-2026" target="_blank" rel="noopener">Anthropic、Claude Code にマルチエージェント協調機能を追加してリニューアル——複数AIエージェントの並列実行と役割分担が可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI Agents Directory の10月18日付ニュースブリーフによると、Anthropic は開発者向けコーディングエージェント「Claude Code」をマルチエージェント協調機能付きでリニューアルした。複数の Claude インスタンスが同一タスクに並列で取り組み、サブエージェントに特定の役割（フロントエンド設計、テスト記述、レビューなど）を割り当てられるようになった。大規模なコードベースのリファクタリングや複雑なシステム設計など、単一エージェントでは対処が難しい開発タスクへの対応が可能になり、企業向けのエージェント活用が一段と加速するとみられている。Anthropic は同日、米国議会に対して AI リスクを制限する法案を提案したとも報じられており、技術開発と政策関与の両面でのアプローチが続いている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">California / Governor Newsom / AI Policy</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://riorundown.substack.com/p/ai-news-oct-18-2026-open-models-and" target="_blank" rel="noopener">カリフォルニア州 Newsom 知事、AIモデルの独立検証と「rogue AI」キルスイッチを義務付ける知事令に署名</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Rio Rundown の10月18日付AI ニュースダイジェストによると、カリフォルニア州 Gavin Newsom 知事がAIモデルの独立した第三者による検証と、制御不能な AI エージェント（rogue AI）に対するキルスイッチの義務付けを定める知事令に署名した。特定の計算規模または能力閾値を超えるAIシステムを州内で運用または展開する企業を対象としており、安全性評価レポートの提出と、一定の基準を超えた場合にシステムを強制的に停止させるメカニズムの実装が求められる。カリフォルニア州は2024年に AI 安全性法案（SB 1047）を否決した後も、大統領令・知事令レベルでの規制アプローチを模索してきた。今回の知事令はビジネス界からの反発も予想される一方、AIの安全性を巡る連邦・州レベルの規制競争に新たな一石を投じることになる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">StepFun / Open-Weight LLM</div>
+          <div class="card-badges">
+            <span class="impact impact-low">情報</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://riorundown.substack.com/p/ai-news-oct-18-2026-open-models-and" target="_blank" rel="noopener">中国のStepFun、新オープンウェイトモデルを公開——DeepSeekと並んで10月18日のオープンソースAIリリースが相次ぐ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Rio Rundown の10月18日付 AI ニュースによると、中国の AI スタートアップ StepFun が新たなオープンウェイト大規模言語モデルを公開した。詳細なスペックはまだ確認中であるが、10月17〜18日には DeepSeek の更新チェックポイント公開と合わせ、中国系 AI 企業によるオープンモデルのリリースが相次いでいる。オープンウェイトモデルの急速な拡充により、閉鎖型商用モデルとの性能ギャップが縮まりつつあり、企業のオンプレミス・エッジ展開の選択肢が増加している。一方、輸出規制の観点から米政府によるオープンモデルへの規制議論も活発化しており、今後の政策動向が注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本企業多数 / 個人情報保護委員会</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://en.fnnews.com/news/202610181135514429" target="_blank" rel="noopener">日本で大規模個人情報漏洩が同時多発——バーガーキングJapan 1,118万件・ヤマト運輸531万件ほか、漏洩データの悪用リスクが急上昇</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">FNN（フジニュースネットワーク）が10月18日に報じた記事によると、日本では2026年秋以降に大規模な個人情報漏洩インシデントが続発している。主要な案件だけでも、バーガーキング・ジャパン（スマートフォンアプリ利用者1,118万件：氏名・生年月日・メールアドレス・電話番号・注文履歴）、ヤマト運輸（531万件）、日経新聞社（183万件）、JR東日本（約167万件のメールアドレス）などが確認されており、流出レコード数は2,000万件超に上る。それぞれ単独でも国内有数の大規模漏洩であり、同時多発的に発生している点が今回の特徴。クレジットカード情報は含まれないケースが多いが、氏名・生年月日・メールアドレスの組み合わせはフィッシングやなりすましに悪用できるため、過去の同サービス利用者はメールの不審リンクや電話詐欺に警戒が必要。個人情報保護委員会への報告が相次いでおり、当局が実態解明を急いでいる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">IDC Frontier / SoftBank / ランサムウェア（グループ不明）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.ibtimes.co.uk/japan-cyber-crisis-ransomware-data-breaches-1825675" target="_blank" rel="noopener">SoftBank子会社 IDC Frontier へのランサムウェア攻撃がサプライチェーン型被害を拡大——JR東日本・JR東海・物流・自治体システムに連鎖被害</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IBTimes が報じた分析によると、10月7日に SoftBank のクラウド子会社 IDC Frontier を直撃したランサムウェア攻撃は、サプライチェーン型の二次被害を引き起こした。同社が提供するクラウドサービスを利用していた法人顧客495社および地方自治体の仮想サーバーが停止し、JR東日本（メールアドレス約167万件流出）やJR東海（オンライン購入者約1万5千件）のほか、物流会社・行政サービスにも影響が波及した。ランサムウェアグループの特定には至っていないが、クラウドプロバイダーを経由した大規模サプライチェーン攻撃として注目される。企業は利用中のクラウドプロバイダーのセキュリティ体制を見直し、BCP（業務継続計画）にクラウド障害シナリオを組み込むことが急務。なお、Qilin ランサムウェアグループは同時期に京王電鉄への攻撃を主張するリークサイト掲載を行っており、日本の鉄道・交通インフラへの標的型攻撃も継続している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JPCERT/CC / AIサイバー攻撃 / 日本政府</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://scmp.com/week-asia/economics/article/3370875/ai-armed-hackers-tear-through-corporate-japans-neglected-defences" target="_blank" rel="noopener">JPCERT/CC が AI を使った脆弱性スキャンを確認——AIを武器に武装したハッカーが日本企業の手薄な防御を突破、7月以降に被害が急増</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">South China Morning Post の分析記事によると、JPCERT/CC（日本コンピュータ緊急対応チーム）は日本企業を標的にしたサイバー攻撃の中で、攻撃者が AI を使って脆弱性を自動スキャンしていた事例を確認したと公表した。ただし AI がすべての攻撃に使われていたかどうかは未確認としている。セキュリティ専門家によると、AI の活用によって従来はスキルを要した脆弱性探索が自動化・低コスト化し、日本語環境の壁も突破しやすくなったと分析している。2026年1月から10月初旬の間に日本国内で500件超の企業システム侵害が記録されており、これは2025年通年を超えるペース。総務省・経産省・国家安全保障局が連名で組織のパッチ適用促進と多要素認証の実装を急ぐよう要請しており、能動的サイバー防御法（2026年10月1日施行）に基づく対応が加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-19 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
