@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 20 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Gartner / Global IT Leadership</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4761465-Signature-Series-Top-Strategic-Technology-Trends-for-2027" target="_blank" rel="noopener">Gartner ITシンポジウム/Xpo 2026 オーランド開幕 ─ 「AIはもはや差別化要因でなく基盤インフラ」</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年10月19日、Gartner ITシンポジウム/Xpo 2026がオーランド（フロリダ州）で開幕した（〜22日）。約7,000名のCIO・IT幹部が参加するなか、「Ignite Intelligence」をテーマに掲げ、AIはもはや競争優位の源泉ではなく、全企業にとっての基盤インフラと化したとの認識が議論の軸を貫く。翌20日（EDT）には「2027年トップ10戦略テクノロジートレンド」が発表予定で、今後のIT投資の優先順位に直結する内容として注目される。日本向けシンポジウムは2026年11月4日にAPACで開催予定。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services / Enterprise DX</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/top-announcements-of-the-whats-next-with-aws-2026/" target="_blank" rel="noopener">「What's Next with AWS 2026」発表まとめ ─ Amazon Bedrock に OpenAI モデルが限定プレビュー追加、Amazon Connect をアジェンティック AI で刷新</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS の年次アップデートイベント「What's Next with AWS 2026」で、Amazon Bedrock に OpenAI モデルが限定プレビューとして追加された。マルチモデル戦略を採ることで、既存 AWS 環境上で OpenAI の言語モデルを活用できるようになる。また Amazon Connect が4つのアジェンティック AI ソリューションへと刷新され、コンタクトセンターの自動化・知識支援・品質保証が強化された。さらに Amazon Quick（職場向け AI アシスタント）が発表され、企業の生産性向上ツールとして提供開始された。国内企業の DX 推進に直結するアップデートとして注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / IPO</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.claudeainews.com/news/anthropic-ipo-october-2026" target="_blank" rel="noopener">Anthropic、2026年11月の上場を目指す ─ 機密 S-1 提出済み、評価額 1.8〜2兆ドル規模</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic は2026年6月1日に SEC へ S-1 を機密提出しており、最短で2026年11月中旬の NYSE 上場を目指していることが複数メディアで報じられている。想定評価額は 1.8〜2兆ドル規模で、OpenAI の非公開評価額に匹敵する。同社はパブリック・ベネフィット・コーポレーション（PBC）として組織され、長期的な AI 安全性確保を株主への受益義務と並立させる構造をとる。今後の公開申請で株主構成・収益モデル・AI 安全規約の詳細が明らかになる見込みで、業界の注目が集まっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / M&A</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aiweekly.co/alerts/openai-in-early-talks-to-acquire-security-firm-trail-of-bits" target="_blank" rel="noopener">OpenAI がセキュリティ企業 Trail of Bits の買収交渉中 ─ AI コードの安全性強化を狙う</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI がニューヨーク拠点のセキュリティリサーチ企業 Trail of Bits（約40名規模）の買収に向けた初期交渉を進めていると報じられた。同社はソフトウェア監査・コード安全性・暗号プロトコルに強みを持ち、米国防総省や主要テック企業を顧客に持つ。OpenAI は昨年来、共同バグバウンティプロジェクト「Patch the Planet」を通じて Trail of Bits と連携しており、買収はセキュリティ人材・知見の取り込みを目的とするとみられる。交渉は破談となる可能性もあると情報筋は述べており、正式発表には至っていない。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Gartner / AI Strategy</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.gartner.com/en/conferences/na/symposium-us/sessions/detail/4761465-Signature-Series-Top-Strategic-Technology-Trends-for-2027" target="_blank" rel="noopener">Gartner、本日「2027年トップ10戦略テクノロジートレンド」を発表 ─ CIO の AI 投資判断に直結</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Gartner は2026年10月20日（EDT 10:30）、ITシンポジウム/Xpo 2026 の目玉セッションとして「2027年のトップ10戦略テクノロジートレンド」を発表する。本セッションでは AI エージェント、自律型システム、エネルギー効率化技術など、今後1〜3年でビジネスインパクトを持つ技術を10件選定・解説する。日本向けには11月4日の APAC シンポジウムで同等のセッションが予定されており、国内 CIO の IT 予算計画策定の重要な参考資料となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.classmethod.jp/en/articles/bedrock-claude-haiku-5-5/" target="_blank" rel="noopener">Claude Haiku 5.5 が Amazon Bedrock で GA ─ 最高速・最軽量の Claude 5.5 ファミリー、初の Effort 制御対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic の最速・最軽量モデル Claude Haiku 5.5 が Amazon Bedrock で一般提供（GA）を開始した。コンテキストウィンドウは 100万トークン（最大出力 128K）で、Claude 5.5 ファミリー唯一の Effort 制御（thinking budget）に対応し、レイテンシーと処理深度をタスク毎にチューニングできる。価格は入力 0.10 ドル/100万トークン・出力 0.50 ドル/100万トークンと、Haiku 4.5 比で約 75% のコスト削減を実現。高ボリューム・低レイテンシー用途のコーディングエージェントや RAG パイプラインでの採用が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / Nova</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://codezine.jp/news/detail/30008" target="_blank" rel="noopener">Amazon Nova 2.5 Sonic 登場 ─ 音声対話モデルが 256K コンテキスト・ツール呼び出し・低レイテンシーを実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS が Amazon Nova 2.5 Sonic を発表。音声入力から音声出力までをエンドツーエンドで処理する speech-to-speech モデルで、256K トークンのコンテキストウィンドウを備える。推論能力・指示追従性・ツール呼び出しが前世代比で強化され、レイテンシーも低減された。Amazon Bedrock 上で利用可能で、音声エージェント・コンタクトセンター自動化・リアルタイム翻訳などのユースケースに対応する。Nova 2.5 シリーズのマルチモーダル対応強化と合わせ、音声 AI プラットフォームとしての機能拡充が加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitLab / CVE-2026-97229</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 10.0</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rocket-boys.co.jp/?p=43360" target="_blank" rel="noopener">GitLab に CVSS 10.0 の認証不要 RCE 脆弱性（CVE-2026-97229）─ CI/CD 正規表現エンジンの整数オーバーフロー、即時更新を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitLab CE/EE の CI/CD 正規表現エンジンに整数オーバーフロー起因の認証不要リモートコード実行（RCE）脆弱性 CVE-2026-97229（CVSS 10.0）が公開された。影響バージョンは CE/EE 19.2.8 未満、19.3.5 未満、19.4.2 未満で、これらを利用しているすべての環境が対象。認証なしにパイプラインランナーとして任意コードを実行できるため悪用リスクが極めて高い。GitLab は 2026年10月12日に修正版（19.2.8 / 19.3.5 / 19.4.2）を公開しており、自己ホスト型インスタンスの管理者は即時アップデートが必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">BeyondTrust / CVE-2026-102764</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 9.3</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.csoonline.com/article/4236421/beyondtrust-zero-day-tied-to-chinese-spies-puts-remote-support-users-on-alert.html" target="_blank" rel="noopener">BeyondTrust Remote Support にゼロデイ（CVE-2026-102764 / CVSS 9.3）─ 中国関連 APT が 2026年8月から悪用、緊急パッチ公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BeyondTrust Remote Support に存在する認証不要のゼロデイ脆弱性 CVE-2026-102764（CVSS 9.3）が、中国連携の脅威アクター ARMORY CASTLE（別名 UNC5221）によって 2026年8月から標的型攻撃に悪用されてきたことが判明した。影響バージョンは 24.3.1〜26.2.3 で、特権昇格とリモートセッション乗っ取りが可能。BeyondTrust は2026年10月15日に緊急パッチ BT26-05-RS を公開した。政府機関・重要インフラ・金融機関など遠隔サポートツールを利用する組織は最優先での適用が求められる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress / Bricksforge / CVE-2026-85097</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 10.0</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/attackers-exploit-cvss-100-bricksforge.html" target="_blank" rel="noopener">WordPress プラグイン Bricksforge に CVSS 10.0 の PHP ファイルアップロード RCE（CVE-2026-85097）─ 63 IP から野放し攻撃、約 6,000 サイトが対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WordPress 向け高度ビルダープラグイン Bricksforge に認証不要の PHP ファイルアップロードによるリモートコード実行脆弱性 CVE-2026-85097（CVSS 10.0）が発見・悪用確認された。インストール数は約 6,000 で、10月7日から少なくとも 63 の IP アドレスを発信元とする攻撃が観測されている。修正バージョンは 3.1.8.10 または 4.0.1。Bricksforge を利用しているすべての WordPress 管理者は即時更新が必要で、ファイルシステムに不審なファイルがないかの事後確認も推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Patch Tuesday 2026-10</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date" data-card-date="2026-10-19">2026-10-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cloud.watch.impress.co.jp/docs/news/2147973.html" target="_blank" rel="noopener">Microsoft 10月月例パッチ、過去最多 1,413件の脆弱性を修正 ─ Windows Shell ゼロデイ（CVE-2026-96951）が悪用確認、AD/NDES の Critical RCE にも注意</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoft は2026年10月14日（Patch Tuesday）に過去最多となる 1,413件の脆弱性修正を公開した。うち CVE-2026-96951（Windows Shell セキュリティ機能バイパス、CVSS 8.8）は Mark of the Web 保護を迂回して悪意あるファイルを実行できる手法で既に野放し攻撃が確認されており、CISA も連邦機関向けに対応を求めた。Critical 評価では Active Directory Domain Services の RCE（CVE-2026-70229）、NDES の RCE（CVE-2026-69802、CVSS 9.9）、AD FS のなりすまし（CVE-2026-108131 / CVE-2026-96222）なども含まれる。ドメインコントローラー・AD FS サーバーの優先適用が推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-20 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
