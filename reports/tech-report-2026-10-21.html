@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 21 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">デジタル庁 / Government AI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2610/20/2000002428/" target="_blank" rel="noopener">デジタル庁、政府職員18万人にAIエージェント環境「ガバメントAI 源内」を展開 ─ 独自安全基準「源内基準」も公表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">デジタル庁は2026年10月20日、政府職員向けの生成AI利用環境「ガバメントAI 源内」に2種類のAIエージェント利用環境を追加し、提供を開始すると発表した。職員が自らAIエージェントを作成・実行できる環境を順次導入する計画で、各省庁の業務自動化・効率化の加速が見込まれる。あわせて、政府内での安全なAIエージェント活用を規定する独自ガイドライン「源内基準」も公表した。国家公務員約18万人を対象とした大規模なAIエージェント普及施策であり、行政DX推進の重要な一歩となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">RX Japan / Japan DX &amp; AX Week</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japan-it.jp/dx/en-gb/about.html" target="_blank" rel="noopener">「Japan DX &amp; AX Week 秋 2026」幕張メッセで開幕 ─ AIエージェント・業務自動化など140社超が出展</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">国内最大級のDX・AI専門展「Japan DX &amp; AX Week 秋 2026」が2026年10月21日、幕張メッセで開幕した（〜23日）。AI &amp; Business Automation Expo、In-house Operations DX Expo など5つの専門展で構成され、出展社140社超、来場者1万4,000人規模を見込む。NTTアドバンステクノロジのAIエージェント×RPA実機デモや、AIを活用した経営管理・業務改革ソリューションが集結。来場無料（事前登録制）で、海浜幕張駅から徒歩5分。AI実装・DX推進の現場ニーズを把握できる場として注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">リコー / Safeguard AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新技術</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.mynavi.jp/techplus/article/20261020-5163123/" target="_blank" rel="noopener">リコー、生成AIの安全な業務活用を支援する日本語向けセーフガードモデルを刷新 ─ Gemmaベースで小型化・精度向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">リコーは2026年10月20日、生成AIへの入力・出力に含まれる有害コンテンツを判定するガードレールモデル「Ricoh SafeGuard」の改良版を発表した。新モデルはGoogle「gemma-4-E4B-it」をベースとし、従来の「Llama-Ricoh-SafeGuard-20260520」より小型化しながら日本語の有害コンテンツ検出精度を向上させた。企業の生成AI導入においてコンプライアンス・安全対策として不可欠なセーフガード機能を、より軽量・低コストで実装できる点が特徴。2026年11月より順次提供開始予定で、国内企業の安全なAI活用推進に貢献が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Gartner / Strategic Tech Trends 2027</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.gartner.com/en/newsroom/press-releases/2026-10-20-gartner-identifies-the-top-strategic-technology-trends-for-2027" target="_blank" rel="noopener">Gartner、「2027年トップ10戦略テクノロジートレンド」を正式発表 ─ 大規模定量モデル・音声推論・世界モデルが並ぶ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Gartnerは2026年10月20日、ITシンポジウム/Xpo 2026（オーランド）で「2027年トップ10戦略テクノロジートレンド」を正式発表した。テーマは「自律性時代への安全なリード」で、トレンドは①大規模定量モデル（LQM）②音声推論モデル③世界モデルなど「テキスト外のAIフロンティア」、自律型デジタルワーカーのコンテキスト・ガバナンス・制御を整備する「自律エージェントプラットフォームの統治」、そして主権技術・使い捨てアプリ・ウェットウェア・アズ・ア・サービス（WaaS）などの「持続可能な俊敏性構築」の3グループに分類される。CIOのIT投資優先順位と予算計画に直接影響する内容として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Transform / Azure Migration</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2610/20/2000002414/" target="_blank" rel="noopener">AWS Transform が機能拡充 ─ Azure Functions のコードを Lambda 用に自動変換、Azure→AWS 移行をエンドツーエンドで支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年10月20日、クラウド移行支援ツール「AWS Transform」に Azure SDK で書かれた .NET アプリを AWS SDK コードへ変換する機能と、Azure Functions のコードを AWS Lambda 用に変換する機能を追加した。従来から対応していた Azure 仮想マシン・データベースの移行に加え、サーバーレス関数レベルのコード変換も自動化され、Azure→AWS の移行フローがエンドツーエンドで完結できるようになった。マルチクラウド環境を維持しつつ AWS 側のワークロードを拡大したい企業や、コスト最適化でクラウド一本化を検討している組織への導入が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon CloudFront / Lambda Web Functions</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.classmethod.jp/en/articles/aws-lambda-web-functions-cloudfront-oac/" target="_blank" rel="noopener">Amazon CloudFront、AWS Lambda Web Functions をオリジンとして正式サポート ─ OAC でセキュアな CDN 構成が実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年10月20日、Amazon CloudFront が AWS Lambda Web Functions をオリジンとして指定できるようになったと発表した。CloudFront の Origin Access Control（OAC）が Lambda Web Function エンドポイントに対応し、SigV4 署名により指定ディストリビューション以外からの直接呼び出しを防止できる。Lambda Web Functions は Node.js 24 上で Express・Hono・Next.js などの HTTP フレームワークをネイティブ実行できる新サービスで、CloudFront との組み合わせによりウェブアプリケーションを完全なサーバーレス構成で CDN 配信できるようになった。AWS Shield Standard による DDoS 保護と AWS WAF ルール適用も利用可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Fortinet / CVE-2026-106173</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 9.4</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/critical-fortisiem-flaw-gets-public.html" target="_blank" rel="noopener">Fortinet FortiSIEM に CVSS 9.4 の認証不要 RCE 脆弱性（CVE-2026-106173）─ 公開 PoC が出回り、即時パッチ適用を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Fortinet FortiSIEM に存在するパストラバーサル起因の重大な脆弱性 CVE-2026-106173（CVSS v3 9.4）の実証コード（PoC）が Horizon3.ai によって2026年10月20日に公開された。gRPC の QueryResultReq ハンドラがパス検証なしにメタデータを処理するため、認証不要でリモートから任意コードを実行できる。影響バージョンは FortiSIEM 7.5.0 で、修正版は 7.5.1 以降（FortiSIEM 7.6 は影響なし）。PoC 公開により悪用リスクが急上昇しており、FortiSIEM を外部公開している環境は最優先でアップグレードが必要。Fortinet 公式アドバイザリでの確認と即時パッチ適用を強く推奨する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Signal / CVE-2026-113380</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 9.3</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cyberinsider.com/signal-fixes-critical-flaw-that-could-keep-audio-active-after-hangup/" target="_blank" rel="noopener">Signal に CVSS 9.3 の重大脆弱性（CVE-2026-113380）─ 電話切断後も音声・動画が継続する可能性、RingRTC 2.72.0 で修正済み</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Signal の通話ライブラリ「RingRTC」に存在する CVSS v4.0 9.3 の重大脆弱性 CVE-2026-113380 が2026年10月20日に公開された。通話の相手がイベントキューを溢れさせることで、ローカル側の「切断」操作が完了しないままオーディオ（および場合によって映像）が継続して送受信される可能性がある。修正は RingRTC 2.72.0 に含まれており、Signal の最新アプリをインストールすることで対処できる。現時点で実際の悪用（in-the-wild exploitation）は確認されていないが、プライバシー上の深刻なリスクをはらむため、Signal ユーザーは速やかにアプリを最新版へ更新することを推奨する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Go / 緊急アップデート</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">緊急対応</span>
+            <span class="card-date" data-card-date="2026-10-20">2026-10-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/go-issues-emergency-update-blocking.html" target="_blank" rel="noopener">Go 言語が緊急リリース（1.27.3 / 1.26.10）─ 中間 CA キー 8 件を無効化、TLS 証明書チェーン検証に影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Go プロジェクトは2026年10月20日、緊急リリース 1.27.3 および 1.26.10 を公開した。今回の変更により、Go の証明書検証器は問題のある中間認証局（CA）キー 8 件を経由する証明書チェーンを拒否するようになる。新バージョンでビルドされたプログラムは、これらの CA キーで発行された TLS 証明書を信頼しなくなるため、当該 CA に依存するサービスとの接続が失敗する可能性がある。Go を利用したシステムの運営者は、影響を受ける CA が自社サービスで使用されていないか確認し、必要に応じて証明書の更新を行った上で新バージョンへの移行を行う必要がある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-21 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
