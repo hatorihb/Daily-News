@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 22 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">国土交通省 / フィジカルAI・造船</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/business/articles/2610/22/news009.html" target="_blank" rel="noopener">日本の「造船業」は復活できるのか ─ 国交省が「かつてない規模の予算」でフィジカルAI・ロボット導入を推進</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">四面を海に囲まれた日本の基幹産業である造船業が、中韓との競争で建造能力が縮小するなか、国土交通省が前例のない規模の予算を投じてフィジカルAIとロボティクスの活用を支援している。2025年度補正予算で創設された「造船業再生基金」に加え、BRIDGE事業としてAI造船ロボット・AI溶接ロボット・AIシミュレーション基盤の開発に150億円が配分され、2035年に国内建造量の倍増を目指す政策目標に沿った取り組みが加速している。日米連携による技術開発も本格始動しており、熟練技能者の高齢化・人手不足という課題に対し、強化学習ベースのAIロボットが実用化されれば国内産業の競争力回復が期待される。2026年10月6日に東京で開催された関連シンポジウムでは国交省が後援し、現場への普及促進に向けた議論が行われた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">東レ / API管理・基幹DX</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">DX推進</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://it.impress.co.jp/articles/-/29238" target="_blank" rel="noopener">東レ、基幹システム刷新に合わせAPI管理基盤を導入 ─ ファイル連携をAPI連携に転換し内部統制と俊敏性を両立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東レは基幹システムの全面刷新に合わせ、社内データ連携の方式をFTPファイル連携から標準APIによる連携へ転換するため、API管理基盤を新たに導入したと報じられた。データベース直接参照・ファイル連携・個別APIが混在していた旧来の構成を整理し、API仕様の一元管理・セキュリティポリシーの統一適用・利用状況のモニタリングを実現する。製造業大手がAPIファーストのアーキテクチャへ移行することで、新サービスや外部パートナーとの連携スピードが向上し、内部統制の強化にも寄与する。基幹システム刷新とAPI基盤整備を同時に進める事例として、製造業DXの先進事例として注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / IPO・上場準備</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://finance.yahoo.com/markets/stocks/articles/anthropic-public-1-still-missing-210349323/" target="_blank" rel="noopener">Anthropic、10月の上場窓が開くもSECへの公開S-1はまだ未登録 ─ 評価額$2兆超・Nasdaq上場を目指す準備が続く</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはS-1（上場申請書）を2026年6月1日にSECへ機密提出済みであることが確認されているが、10月の上場窓が開いた現在もSEC EDGAR上に公開申請書は登録されていない。上場先はNasdaqで、評価額は約$2兆超、5月のシリーズH-1ラウンド（$65B調達・時価総額$965B）からさらに引き上げが見込まれている。公開S-1はロードショー開始の約15日前に開示される見通しで、11月上旬の中間選挙後の上場が有力視されている。OpenAIが評価額$1.4兆超での$300億ドル調達を急ぐ中、AnthropicがIPOを先行させることでAI業界全体のバリュエーション基準が大幅に引き上げられる可能性があり、市場からの注目度は極めて高い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DeepSeek / 推論エンジン戦略転換</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">戦略転換</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://getcoai.com/news/deepseek-pivots-to-sharing-ai-components-instead-of-full-inference-engine" target="_blank" rel="noopener">DeepSeek、本番推論エンジン全体のOSS公開を断念 ─ vLLMフォークを個別コンポーネントとして既存OSSプロジェクトへ貢献する方針に転換</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">DeepSeekは独自に構築してきた本番推論エンジン（vLLMの1年前のフォークをベースに大規模カスタマイズ）を丸ごとOSSとして公開する計画から方針を転換し、エンジンの個別コンポーネントを既存のオープンソースプロジェクト（vLLM等）へ貢献する形での共有に切り替えると報じられた。技術的には1年以上前のvLLMフォークをDeepSeekのモデル特性に合わせて高度にカスタマイズしており、スタンドアロンプロジェクトとしての維持管理コストが課題だったと見られる。OSSコミュニティへの貢献姿勢は維持しつつも、全体公開に伴う技術流出リスクや運用負担を考慮した判断と分析されており、推論効率化技術の競争が激化するなかでのDeepSeekの現実的な対応策として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Well-Architected / AIエージェント</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能プレビュー</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/aws-well-architected-agent/" target="_blank" rel="noopener">AWS Well-Architected Agent がプレビュー公開 ─ AIがアーキテクチャの問題を自動検出し改善策を提案</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは、AWS Well-Architected Frameworkのレビューを自動化する「AWS Well-Architected Agent」のプレビュー版を公開した。信頼性・セキュリティ・パフォーマンス効率・コスト最適化・運用上の優秀性・持続可能性の6本の柱に基づき、AIが構成を分析してリスクを特定し、具体的な改善アクションを提案する。従来は専門家によるマニュアルレビューが必要だったアーキテクチャ評価を自動化・継続化できるため、特にスタートアップや中規模チームでの迅速なベストプラクティス適用が期待される。AWS Trusted AdvisorやAWS Security Hubとの統合も視野に入れており、クラウドガバナンスのAIエージェント化が一段と進む動きとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon EKS / Kubernetes 1.37</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">バージョンアップ</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/amazon-eks-distro-kubernetes-version-1-37/" target="_blank" rel="noopener">Amazon EKS および EKS Distro が Kubernetes 1.37 を正式サポート ─ コンソール・eksctl・IaC から新規クラスター作成・アップグレードが可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon EKSおよびAmazon EKS Distroが最新のKubernetes 1.37をサポートし、AWS マネジメントコンソール・eksctl・Terraform等のIaCツールから新規クラスターの作成および既存クラスターのアップグレードが可能になった。Kubernetes 1.37では動的リソース割り当て（DRA）のStable昇格やJobのスタック回避機能の強化など、本番ワークロードに直接影響する改善が含まれている。EKSチームは各新バージョンのサポート開始後14ヶ月のサポートウィンドウを設けており、早期アップグレードによりセキュリティパッチと新機能の恩恵を受けられる。GovCloudリージョンを含む全リージョンで利用可能で、EKS Auto Modeとの組み合わせによる自律的クラスター管理もサポートされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP / CVE-2026-109618 &amp; CVE-2026-109619</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 9.8</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.helpnetsecurity.com/2026/10/21/php2shell-php-vulnerabilities-patched-cve-2026-109618-cve-2026-109619/" target="_blank" rel="noopener">PHP「PHP2Shell」緊急脆弱性（CVE-2026-109618・CVE-2026-109619）CVSS 9.8 ─ 未認証RCEの修正版が公開、直ちにアップデートを</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PHPプロジェクトは2026年10月21日、未認証リモートコード実行（RCE）が可能な深刻な脆弱性2件（CVE-2026-109618・CVE-2026-109619）を修正したPHP 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 を緊急リリースした。CVSSスコアはNVDが両CVEとも9.8（Critical）、PHP公式はv4.0スコアで9.2を付与。CVE-2026-109618はメモリ破壊（out-of-memory corruption）、CVE-2026-109619はセッションアップロード進捗機能の stale global state が原因で、いずれも認証不要でリモートから悪用可能。全世界のPHP利用サイトの約70%が影響を受けるとされ、詳細が事前に公開されたため大規模攻撃が即日開始するリスクが指摘されている。PHP 8.1以前はEOLのため修正対象外。CVE-2026-109619の緊急回避策として `session.upload_progress.enabled=0` の設定も有効だが、パッチ適用が最優先。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Palo Alto Networks / CVE-2026-0257</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">悪用確認・CISA KEV</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/cve-2026-0257-qilin-ransomware/" target="_blank" rel="noopener">PAN-OS CVE-2026-0257 ─ Qilin・INC ランサムウェアが認証バイパスを悪用してVPN侵入、Veeamバックアップとの組み合わせ攻撃も確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Palo Alto Networks GlobalProtectポータル・ゲートウェイの認証バイパス脆弱性CVE-2026-0257（CVSS 7.8）を悪用したランサムウェア攻撃が継続中であることをUnit 42が最新報告で警告した。Qilin（Spikey Scorpius）・Inc Ransomware（Tarnished Scorpius）・Settra の3グループが積極的に悪用しており、特定の証明書構成の環境では認証オーバーライドクッキーの偽造が可能。Arctic Wolfは2026年6月以降の複数インシデントがすべて本脆弱性を起点とすることを確認。さらにCVE-2023-27532（Veeamバックアップインフラの脆弱性）と組み合わせ、侵入後に横展開する手口も観測されている。CISAはKnown Exploited Vulnerabilities（KEV）カタログに登録済み。修正済みバージョン（PAN-OS 10.2.10 / 11.0.5 / 11.1.3以降）へのアップグレードを至急実施すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Siemens / CVE-2026-110936</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-medium">CVSS 8.4</span>
+            <span class="card-date" data-card-date="2026-10-21">2026-10-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityweek.com/siemens-software-center-vulnerability-exploited-in-clickfix-malware-attacks" target="_blank" rel="noopener">Siemens Software Center の DLL 乗っ取り脆弱性（CVE-2026-110936）が ClickFix 攻撃で悪用 ─ 正規の署名付きバイナリが兵器化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Siemensは2026年10月15日に Software Center の DLL サーチパス脆弱性CVE-2026-110936（CVSS v4 8.4）を開示し、バージョン4.0.9.8で修正済みと公表したが、同21日にアドバイザリを更新し実際の悪用（in-the-wild exploitation）が確認されたことを明らかにした。攻撃者は有効なSiemensのデジタル署名が付いた正規バイナリと悪意のあるDLLを同梱し、ClickFix誘導型の偽インストーラーとして配布する手口を採用。プログラム起動時に同フォルダ内のDLLが読み込まれ、アプリケーション権限で任意コードが実行される。Siemensは「自社の配布チャネルは改ざんされていない」と強調しているが、攻撃者がサードパーティ経由で悪性パッケージを拡散している可能性があり、Software Centerをバージョン4.0.9.8以降にアップデートし、入手元を公式チャネルに限定することを強く推奨する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-22 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
