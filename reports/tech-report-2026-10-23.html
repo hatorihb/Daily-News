@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 23 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ServiceNow / デロイト トーマツ サイバー</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">セキュリティDX</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://enterprisezine.jp/news/detail/25345" target="_blank" rel="noopener">ServiceNow × デロイト トーマツ サイバー、AI時代のサイバー攻撃に備えるソリューションを発表 ─ ITSMと生成AIを統合しインシデント対応を自動化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ServiceNow Japanとデロイト トーマツ サイバーが共同で、生成AIとServiceNowのIT Service Managementプラットフォームを組み合わせたサイバーインシデント対応ソリューションを発表した。フィッシング攻撃・ランサムウェア・APT（高度持続的脅威）などが高度化するなか、脅威検知から対応手順の自動生成・チケット起票・関係部署への通知まで一連のワークフローをAIが支援する。国内企業のSOC（セキュリティ運用センター）が直面するアナリスト不足と対応工数の増大に対し、平均対応時間（MTTR）の大幅短縮を目指す。2026年内の提供開始を予定しており、金融・製造・小売など幅広い業種での導入を見込む。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">DEEPX / Japan IT Week 秋 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">日韓連携</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://finance.yahoo.com/sectors/technology/articles/deepx-showcases-physical-ai-ecosystem-000000886.html" target="_blank" rel="noopener">DEEPX、Japan IT Week 秋2026（幕張メッセ）でPhysical AIエコシステムを展示 ─ 日韓AI協力の推進を表明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">韓国のPhysical AIチップベンダーDEEPXが、10月21〜23日に幕張メッセで開催された「Japan IT Week 秋2026」最終日に、同社のAI推論プロセッサとパートナーエコシステムを出展した。産業用ロボット・製造ライン・スマートカメラなどエッジデバイスへのAI組み込みを実現するチップを中心に、日本企業との協業拡大に向けたデモを実施した。今回の出展では日韓の中小企業間AI・DXサプライチェーン協力強化の一環として位置づけられており、「Made in Japan」製品のインテリジェント化に向けた具体的な協業案件の獲得を目指している。今年のJapan IT Weekには700社超が出展し、AIエージェント・サイバー防衛・Physical AIが主要テーマとなった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">IBM Research / llm-d 1.0</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">OSSリリース</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://xenospectrum.com/llm-d-production-inference-operations" target="_blank" rel="noopener">IBMリサーチ主導の分散LLM推論フレームワーク「llm-d 1.0」が本番対応版を公開 ─ AIエージェントと人間のGPUリソース共有・優先度制御を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IBM Research・Google・Red Hatが共同開発するKubernetesネイティブのオープンソース分散LLM推論フレームワーク「llm-d」がバージョン1.0に到達し、PyTorch Conference 2026で本番対応版として発表された。AIエージェントと人間のリクエストが混在するマルチテナント環境でのGPUリソース共有を想定し、優先度ベースのスケジューリングと無停止ローリングアップデート機能を新たに強化。IBMはllm-d採用による推論コストの11.5倍削減効果を報告しており、約1億トークンあたり0.11ドルを達成したと主張している。プリフィル・デコードの分離処理やキャッシュローカリティに基づくリクエストルーティングなど、大規模本番環境の効率化に特化した設計が特徴で、分散推論インフラの標準化を加速する可能性がある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">リコー / 日本語LLMセーフガード</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">国内AI</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ai.watch.impress.co.jp/docs/news/2149590.html" target="_blank" rel="noopener">リコー、日本語向けLLMセーフガードモデルを刷新 ─ Gemma-4ベースで小型化・安全性判定性能を維持、11月から製品標準搭載</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">リコーは生成AIの安全な業務活用を支援する日本語向けセーフガードモデルを刷新したと発表した。ベースモデルをGoogle製「gemma-4-E4B-it」に変更し、パラメーター数を大幅に削減しながら従来モデルと同等の安全性判定性能を維持することに成功した。有害コンテンツ生成・個人情報漏洩・ハルシネーション・脱獄（Jailbreak）への対応を強化したガードレール機能を搭載し、11月より「RICOHオンプレLLMスターターキット」に標準搭載される予定。軽量化により推論コストを抑えながらリスク低減を実現するアプローチは、オンプレミス環境での生成AI展開を検討する国内企業にとって有力な選択肢となる。安全性評価の基準見直しも合わせて実施されており、日本語特有の表現に対応した判定精度の向上も図られている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Builder Center / Capabilities by Region</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/awscapabilities-enhancements/" target="_blank" rel="noopener">AWS Builder Center の「Capabilities by Region」がフィーチャーレベルの可用性通知と高度フィルターをサポート ─ サービス展開計画の精度が向上</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAWS Builder Centerの「Capabilities by Region」機能を強化し、個別サービス機能単位での可用性通知と高度なフィルタリングオプションを追加した。これまではサービスレベルのリージョン展開情報しか参照できなかったが、今回の更新により特定の機能（例: Amazon S3の特定ストレージクラス、Amazon EKSの特定アドオン）がいつどのリージョンで利用可能になるかを機能単位で通知購読できるようになった。マルチリージョン展開やコンプライアンス要件に応じたインフラ設計において、機能の地域展開スケジュールを把握しやすくなり、クラウド移行・拡張計画の精度向上に貢献する。フィルター機能の強化により、用途・業界・コンプライアンス要件に合わせた絞り込みも可能となった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Health / ソフトウェアライフサイクル管理</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/10/aws-health-introduces-version-catalog-software-lifecycle-management/" target="_blank" rel="noopener">AWS Health、ソフトウェアライフサイクル管理向け「バージョンカタログ」を導入 ─ EOL・EOSに備えた計画的アップグレードを支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Healthに新たに「バージョンカタログ」機能が追加され、AWSサービス（Amazon RDS・Amazon EKS・AWS Lambda ランタイムなど）のバージョンごとのEnd of Life（EOL）・End of Support（EOS）日程を一元管理できるようになった。従来はリリースノートや各サービスのドキュメントを個別に確認しなければならなかったバージョン管理情報が一覧化され、近く期限を迎えるバージョンに対してAWS Health Event形式でアラートが届く仕組みを提供する。大規模なマルチサービス環境を運用する企業が計画的なバージョンアップグレードを実施しやすくなり、セキュリティパッチ未適用リスクや非推奨APIへの依存リスクを低減できる。AWS OrganizationsおよびAWS Config Rulesとの連携も想定されており、ガバナンス強化に活用可能だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitLab / CVE-2026-97229</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 10.0</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability/" target="_blank" rel="noopener">GitLab CVE-2026-97229（CVSS 10.0）のPoC公開 ─ CI/CD正規表現コンパイラの整数オーバーフロー、認証不要でRCE可能、パッチ未適用環境は今すぐ更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitLab CE/EEのCI/CD正規表現コンパイラに存在する最大深刻度（CVSS 10.0）の整数オーバーフロー脆弱性CVE-2026-97229の概念実証コード（PoC）が公開され、パッチ未適用インスタンスへの即時攻撃リスクが高まった。この脆弱性は2026年10月12日にリリースされた19.4.2・19.3.5・19.2.8で修正済みだが、PoC公開により攻撃ハードルが大幅に低下。認証不要かつ特別なユーザー操作なしにリモートコード実行が可能で、GitLab.comおよびGitLab Dedicatedは影響を受けない。CI/CDパイプラインにアクセスできる環境下ではソースコード窃取・バックドア埋め込み・サプライチェーン汚染が懸念される。影響範囲はGitLab CE/EE 19.2.x（19.2.8未満）・19.3.x（19.3.5未満）・19.4.x（19.4.2未満）の全バージョンで、自己ホスト型を運用する管理者は直ちに対象バージョンへアップグレードすること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP / CVE-2026-109618・CVE-2026-109619（続報）</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">ゼロデイ悪用確認</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities" target="_blank" rel="noopener">【続報】PHP2Shell ─ Amazonが「パッチ公開4日前から攻撃開始」を確認、Cloudflare/QualysがWAFで自動緩和を展開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年10月21日にパッチ公開されたPHPの重大脆弱性CVE-2026-109618・CVE-2026-109619（通称"PHP2Shell"、CVSS 9.8）について、Amazonの脅威インテリジェンスチームがパッチ公開の4日前（10月17日頃）から実際の攻撃が観測されていたことを確認し、ゼロデイ悪用が事後的に裏付けられた。CloudflareはPHP利用サイト向けにWAFルールを即日展開、Qualysはセッションアップロード進捗機能を自動的に無効化するミティゲーションをデプロイ。国内ではpixiv・BOOTHが予防的緊急メンテナンスを実施済み。修正済みバージョン（8.5.12 / 8.4.27 / 8.3.36 / 8.2.35）への更新が完了していない場合は直ちに対応が必要。PHP 8.1以前はEOLのためパッチなし。緊急回避策として`session.upload_progress.enabled=0`の設定が有効。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Collabora Online / CVE-2026-110447</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="impact impact-high">CVSS 9.2・悪用確認</span>
+            <span class="card-date" data-card-date="2026-10-22">2026-10-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-collabora-rce-flaw-to-backdoor-nextcloud-servers/" target="_blank" rel="noopener">Collabora Online（CODE Server）CVE-2026-110447（CVSS 9.2）が悪用 ─ 9月から攻撃継続、Nextcloudサーバーに PHPウェブシェルが設置される被害</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NextcloudのオプションコンポーネントであるCollabora Online CODE Serverアプリ（richdocumentscode）に存在するOS命令実行脆弱性CVE-2026-110447（CVSS 9.2）の悪用が複数の管理者から報告されており、攻撃者はPHPウェブシェルをサーバーに設置して永続的なアクセス権を確立していることが確認された。CVE開示は2026年10月14日だが攻撃は約1か月前の9月中旬から継続しており、GitHubのCVE処理バックログが開示遅延の原因とされる。認証不要でリモートから任意OSコマンドを実行できる深刻な脆弱性で、影響を受けるのはrichdocumentscodeアプリのバージョン26.4.303未満。Nextcloudの管理パネルからアプリを「無効化」するだけでは不十分で、26.4.303以降へのアップデートまたはアプリの完全削除が必要。スタンドアロン型Collabora Online Serverには本脆弱性は存在しない。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-23 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
