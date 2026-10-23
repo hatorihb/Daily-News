@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 24 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">eMudhra / CA信頼基盤</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急対応</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/mozilla-google-apple-block-compromised-emudhra-ca-certificates/" target="_blank" rel="noopener">eMudhra 中間CA証明書 8件で秘密鍵流出確認 ─ Google・Mozilla・Apple・Microsoftが失効処置、国内eMudhra証明書ユーザーは至急確認を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">グローバルCAであるeMudhra（インド）が発行した8件の中間CA証明書で、秘密鍵が公開鍵から逆算可能な脆弱なエントロピー（P-384鍵でエントロピー値4以下）であることが判明した。Mozilla・Google Chrome・Apple・Microsoftはそれぞれ2026年10月19〜20日にかけて該当証明書を失効リストに追加し、Chromeは10月27日にルート証明書「emSign ECC Root CA – G3」そのものを削除する予定。国内でeMudhra発行のTLS証明書またはコード署名証明書を利用している企業・開発者は、代替CAへの証明書再発行が必要。公開鍵から秘密鍵が再構築される可能性があるため、既存証明書によるドメイン認証やソフトウェア署名の有効性が毀損されるリスクがある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Japan IT Week 秋 2026 / 幕張メッセ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">国内イベント</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japan-it.jp/hub/ja-jp/showreport/autumn.html" target="_blank" rel="noopener">Japan IT Week 秋 2026 閉幕レポート ─ AIエージェント・サイバー防衛・Physical AIが主要テーマに、700社超が出展</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">幕張メッセで2026年10月21〜23日に開催された「Japan IT Week 秋 2026」が閉幕した。700社超が出展し、AIエージェント・サイバー防衛・Physical AIが主要テーマとなった。最終日の10月23日には日立製作所のセッション「AIエージェント時代、ソフトウェア開発はどう変わるか」が注目を集め、企業内ソフトウェア開発の自動化・品質保証へのAIエージェント活用に関する具体的な事例が共有された。また、会場内のWAFを提供するビットフォレストはイベント期間中（10月10〜23日）に日本国内の企業WebサイトへのAIエージェントを用いた攻撃が複数観測されたことを報告した。サービスとしてのAIエージェント（Agent-as-a-Service）が企業ITの主流に近づくなか、攻守両面での対策が急務となっている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Moonshot AI / Kimi</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.unite.ai/moonshot-ai-releases-kimi-k3-1-pro-first-model-in-new-k3-1-series/" target="_blank" rel="noopener">Moonshot AI、Kimi K3.1 Pro をリリース ─ 1M トークンコンテキスト・Claude Opus 5.5 並みのコーディング性能、11月4日オープンウェイト公開予定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国のAIスタートアップMoonshot AIが、Kimi K3.1シリーズの最初のモデル「Kimi K3.1 Pro」を2026年10月23日にKimiアプリおよびAPIでリリースした。1Mトークンのコンテキストウィンドウを持ち、ターミナルベンチ4.0では65.7%を達成（Claude Opus 5.5は66.4%）と同等水準。高速推論向け「K3.1 Pro Highspeed」バリアントは標準版の2〜3倍の処理速度。API価格は入力$2/出力$10（100万トークン当たり）。11月4日にオープンウェイトとして公開予定。サイバーセキュリティ用途のトレーニングデータは意図的に除外されており、悪用防止対策が施されていることが特徴。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Hi3D / 3D生成AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">オープンソース</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.webdisclosure.com/press-release/hi3d-etr-hi3d-v10-goes-open-source-the-first-production-validated-open-source-ai-3d-model-fziZIC7pASw" target="_blank" rel="noopener">Hi3D V1.0、Apache 2.0 でオープンソース化 ─ 本番検証済み初のオープンソース3D生成AIモデル、研究・商用利用を解放</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">3D生成AIモデル「Hi3D V1.0」（旧称 Sparc3D）が2026年10月23日にApache 2.0ライセンスでオープンソース公開された。開発元によれば「本番環境で検証済みの初のオープンソース3D生成AIモデル」と位置づけており、開発者・研究者・企業がゲーム、メタバース、ロボティクス、製造設計などの用途で自由に利用・改変できる。テキストまたは単一画像から高品質な3Dメッシュを生成する能力を持ち、既存の商用3D生成ツールと比較しても遜色ない品質を達成していると発表されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS European Sovereign Cloud</div>
+          <div class="card-badges">
+            <span class="impact impact-high">データ主権</span>
+            <span class="card-date" data-card-date="2026-10-24">2026-10-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/security/aws-european-sovereign-cloud-demonstrating-an-independent-operation/" target="_blank" rel="noopener">AWSヨーロッパ主権クラウド、EU域外インフラからの完全分離運用演習を10月24日実施 ─ GDPR・データ主権要件対応を実証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年10月24日、AWS European Sovereign CloudをAWSグローバルネットワークバックボーンから数時間にわたり物理的に切り離し、EU域外のインフラに一切依存せず単独で動作できることを実証する演習を実施した。欧州のGDPR・NIS2指令・デジタル主権要件への適合を必要とする金融機関や公共機関などの顧客に向け、欧州域内のみでデータ処理・インフラ管理が完結することを証明することが目的。演習中も対象リージョン内のサービスは通常通り稼働し、可用性への影響はなかったと報告されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock Guardrails</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.to/aws-builders/aws-serverless-weekly-roundup-october-2026-highlights-1ih6" target="_blank" rel="noopener">Amazon Bedrock Guardrails、文脈整合性チェックに Standard ティアを追加 ─ RAGアプリのハルシネーション検出コストを低減</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon Bedrock GuardrailsのContextual Grounding Check（文脈整合性チェック）機能に「Standardティア」が追加され、2026年10月17〜23日のAWSサーバーレス週次まとめに掲載された。Standardティアは精度を維持しつつ推論コストを抑えた設定であり、RAG（Retrieval-Augmented Generation）構成のアプリケーションにおけるハルシネーション（事実誤認）の検出コストを従来比で大幅に削減できる。大量のドキュメント参照を伴うエンタープライズ向けチャットボットや自動文書処理パイプラインでの利用拡大が期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- CRITICAL: CISA KEV / in-the-wild exploitation -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Plex Media Server / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CISA KEV / 悪用確認</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-hackers-chain-plex-flaws-in-plex2shell-attacks-to-breach-servers/" target="_blank" rel="noopener">【CISA KEV / 緊急】Plex2Shell 攻撃キャンペーン ─ CVE-2026-96652 など4件を連鎖させ未認証 RCE、暗号通貨マイナー・プロキシマルウェアを展開中、連邦機関は10月23日までのパッチ適用を指令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年10月23日を期限として、Plex Media Serverに存在する4件の脆弱性（CVE-2026-96652、CVE-2026-96654、CVE-2026-96655、CVE-2026-96656）を既知の悪用脆弱性カタログ（KEV）に追加し、連邦機関に緊急パッチ適用を指令した。これらの脆弱性を連鎖させた「Plex2Shell」攻撃キャンペーンが確認されており、認証不要でリモートコード実行（RCE）が可能。攻撃者は侵害したサーバーを利用して暗号通貨マイナーおよびプロキシマルウェアを展開しているとされる。修正済みバージョンは Plex Media Server 1.43.3.10861（2026年8月3日リリース）。加えてCISAは同日、Siemens Software Center の DLL サイドローディング脆弱性（CVE-2026-110936）および SiteGuard のコマンドインジェクション脆弱性（CVE-2026-106931）もKEVに追加した。</p>
+        </details>
+      </div>
+
+      <!-- CRITICAL: unpatched PHP RCE -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP / RCE</div>
+          <div class="card-badges">
+            <span class="impact impact-high">未パッチ / RCE</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/urgent-php-warns-of-another-unpatched.html" target="_blank" rel="noopener">【未パッチ緊急開示】PHP CVE-2026-115560 ─ セッションシリアライザー切替設定でRCEの恐れ、パッチ未提供のまま公開・緩和策はアップロード進行状況の無効化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PHPプロジェクトは2026年10月23日、新たな脆弱性 CVE-2026-115560 を公式CVEおよびThe Hacker Newsにて開示した。セッションシリアライザーハンドラーの動的切り替え（php.ini で session.serialize_handler を変更可能な設定）と session.upload_progress.enabled の組み合わせにより、リモートコード実行（RCE）が可能になる可能性がある。悪用にはやや特殊なサーバー設定（デフォルトでは無効な組み合わせ）が必要だが、一部のマネージドホスティング環境やレガシー設定を持つサーバーでは危険。現時点でパッチは提供されておらず、通常のリリースサイクルで対応予定とのこと。緩和策として session.upload_progress.enabled=Off への設定変更が推奨されている。実際の悪用事例は未確認。</p>
+        </details>
+      </div>
+
+      <!-- eMudhra CA incident -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">eMudhra / PKI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">証明書失効</span>
+            <span class="card-date" data-card-date="2026-10-23">2026-10-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/mozilla-google-apple-block-compromised-emudhra-ca-certificates/" target="_blank" rel="noopener">eMudhra 中間CA証明書 8件の秘密鍵が公開鍵から逆算可能と判明 ─ 主要ブラウザが失効、10月27日にGoogle Chromeがルート証明書を削除予定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">インドのCA（認証局）eMudhra が発行した8件の中間CA証明書において、秘密鍵のエントロピーが著しく低く（P-384 鍵でエントロピー値4以下）、公開鍵から秘密鍵を計算可能であることが判明した。この問題はMozillaが10月17日に通知し、10月20日に公開。Mozilla Firefox・Google Chrome・Apple Safari・Microsoft Edgeの各ブラウザが数時間以内に失効処理を適用した。さらにGoogle Chromeは10月27日にルート証明書「emSign ECC Root CA – G3」を証明書ストアから完全削除する予定。Certificate Transparencyログには問題の中間証明書6件（TLS用）から発行されたTLS証明書は確認されていないが、既存のコード署名証明書等については至急確認が必要。eMudhra証明書を使用している組織は早急に代替CAへの移行を行うこと。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-24 &nbsp;/&nbsp; RSS: all feeds failed (DNS) — web search fallback &nbsp;/&nbsp; Generated by Claude</span>
+  </div>
+</footer>
+
+</body>
+</html>
