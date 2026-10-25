@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 26 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <p class="empty-note">本日（2026-10-26 JST）時点で、前日レポートと重複しない国内 IT・DX 案件は確認できませんでした。RSS フィードおよびウェブ検索を実施しましたが、前回報告済みの案件（GMO/お名前.com 不正アクセス・SoftBank/大和証券被害・NISC 警戒要請等）以外に 24 時間以内の新規情報は得られませんでした。</p>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Moonshot AI / Kimi</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデルリリース</span>
+            <span class="card-date" data-card-date="2026-10-25">2026-10-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://unite.ai/moonshot-ai-releases-kimi-k3-1-pro-first-model-in-new-k3-1-series/" target="_blank" rel="noopener">Moonshot AI、Kimi K3.1 Pro をリリース ─ 3 兆パラメータ規模・コンテキスト 100 万トークンの新フラッグシップ、Artificial Analysis 総合評価で世界 4 位に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中国 AI スタートアップ Moonshot AI は 2026 年 10 月 23〜24 日、新シリーズ Kimi K3.1 の最初のモデル「Kimi K3.1 Pro」を公開した。3 兆パラメータ（Mixture-of-Experts）クラスのオープンウェイトモデルで、コンテキストウィンドウは 100 万トークンを実現している。MXFP4 量子化に対応した高速サービング版「Kimi K3.1 Highspeed」も同時提供される。2026 年 10 月 25 日時点の Artificial Analysis Intelligence Index では総合 4 位を記録し、コーディング・数学・多段階推論の各ベンチマークで GPT-4o および Gemini 1.5 Pro を上回るスコアを示した。モデルは Apache 2.0 ライセンスで商用利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / Wiz Research / AI Security Research</div>
+          <div class="card-badges">
+            <span class="impact impact-high">AI 活用脆弱性発見</span>
+            <span class="card-date" data-card-date="2026-10-25">2026-10-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619/" target="_blank" rel="noopener">AI が CVSS 9.2 の PHP ゼロデイを発見 ─ OpenAI・Wiz・カリフォルニア大学が AI 支援スキャンで大規模クリティカル脆弱性を世界初検出、AI 活用セキュリティ研究の新地平</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CVE-2026-109618 / CVE-2026-109619（CVSS v4.0 9.2）は、OpenAI のセキュリティチーム・Wiz Research・カリフォルニア大学の研究者が AI を活用したソースコード解析ツールを用いて発見した。従来の手動コードレビューでは見落とされていた複数のコードパスを AI が組み合わせて探索することで、ゼロデイ段階での検出に成功している。この成果は「AI による大規模脆弱性発見の初の実証例」として広く注目されており、OpenAI の Greg Brockman 氏は政府機関向けに AI 支援の認可スキャンプログラムの提供を提案している。一方、悪意ある攻撃者も同様の AI ツールを用いて未知の脆弱性を発見する可能性があるとして、セキュリティ研究者は AI を活用した攻防の非対称リスクを警告している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <p class="empty-note">本日（2026-10-26 JST）時点で 24 時間以内の AWS 公式発表は確認できませんでした。AWS What's New RSS フィードへのアクセスは DNS エラーにより失敗しました。ウェブ検索での代替確認も実施しましたが、前日レポートと重複しない新規発表は得られませんでした。</p>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- Critical: PHP2Shell CVSS 9.2 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP Foundation / Palo Alto Unit 42</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急 CVSS 9.2</span>
+            <span class="card-date" data-card-date="2026-10-25">2026-10-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://unit42.paloaltonetworks.com/cve-2026-109618-cve-2026-109619/" target="_blank" rel="noopener">PHP2Shell ─ CVE-2026-109618 / CVE-2026-109619（CVSS v4.0 9.2）：全 PHP Web サーバーに影響する RCE 脆弱性、野外悪用確認・PHP 8.5.12 / 8.4.27 / 8.3.36 / 8.2.35 へ即時更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CVE-2026-109618 および CVE-2026-109619 は PHP インタープリターに存在するリモートコード実行（RCE）の脆弱性ペアで、CVSS v4.0 スコアは 9.2。PHP Foundation は 2026 年 10 月 21 日に PHP 8.2.35、8.3.36、8.4.27、8.5.12 向けの緊急パッチをリリースした（PHP 8.1 以下は EOL のため公式修正なし）。Palo Alto Unit 42 は 2026 年 10 月 25 日付け更新分析レポートで、政府機関・金融・医療分野でのアクティブな野外悪用を確認と発表。未認証のリモート攻撃者が HTTP リクエスト一件でシェルを取得できる攻撃チェーンの PoC が公開されている。影響バージョン：PHP 8.5.11 以下・8.4.26 以下・8.3.35 以下・8.2.34 以下。即時パッチ適用または該当 PHP サービスの一時停止が強く推奨される。</p>
+        </details>
+      </div>
+
+      <!-- PHP2Shell: Government Impact -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">各国政府機関 / FBI / NSA / ホワイトハウス</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急対応</span>
+            <span class="card-date" data-card-date="2026-10-25">2026-10-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/php2shell-exploitation-hits-government.html" target="_blank" rel="noopener">PHP2Shell 悪用が政府機関を直撃 ─ 欧州 4 か国が公式サイトを緊急停止、ホワイトハウスが連邦機関に緊急通達、FBI・NSA が共同警告・IoC 公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PHP2Shell（CVE-2026-109618/CVE-2026-109619）の野外悪用を受け、2026 年 10 月 25 日に複数の政府機関が緊急対応を開始した。オランダ、フィンランド、ドイツ（ラインラント＝プファルツ州・マインツ市）、オーストリアは政府公式ウェブサイトをシステム調査のため一時停止。ホワイトハウスは事態を 10 月 16 日に把握しており、10 月 25 日に全連邦機関へ緊急対応を指示する通達を発令した。FBI と NSA は共同でセキュリティ勧告を発表し、侵害指標（IoC）を公開している。OpenAI の Greg Brockman 氏はホワイトハウス向けに AI 活用の政府スキャンプログラムを提案し、未修正システムの特定支援を申し出た。組織は脆弱なシステムを即時パッチ適用またはオフラインへの切り離しを推奨する。</p>
+        </details>
+      </div>
+
+      <!-- BlackX UEFI Bootkit -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Kaspersky GReAT / APT41 (Winnti)</div>
+          <div class="card-badges">
+            <span class="impact impact-high">APT・高度標的型攻撃</span>
+            <span class="card-date" data-card-date="2026-10-25">2026-10-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/10/blackx-uefi-bootkit-bypasses-secure.html" target="_blank" rel="noopener">BlackX UEFI ブートキット ─ APT41 関連 TTP で CVE-2022-21894 を悪用し Secure Boot をバイパス、中央アジア外交機関を標的とした持続的侵害を Kaspersky が解析</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Kaspersky GReAT が報告した「BlackX」は UEFI ブートキットで、2022 年 1 月に修正済みの CVE-2022-21894（Baton Drop）を悪用して Secure Boot をバイパスする。多くの実環境で UEFI の DBX（失効証明書リスト）が更新されていないため、パッチ済み Windows 環境でも攻撃が成立する点が深刻。BlackX は中央アジアの外交機関を標的としており、Kaspersky は中程度の確信度で APT41（Winnti グループ）との TTP の類似性を指摘した。攻撃者はまず管理者権限を取得した後、カスタム MOK（Machine Owner Key）を UEFI に書き込み、未署名の EFI ドライバーを起動時に自動ロードする仕組みを構築する。OS 上のマルウェア対策では検出が困難なため、UEFI ファームウェア更新と Secure Boot の失効リスト（DBX）の手動適用が推奨される。The Hacker News が 2026 年 10 月 25 日に詳細解説記事を掲載した。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-26 &nbsp;/&nbsp; RSS フィード 7 件すべて DNS エラー・ウェブ検索で収集。各カードの URL は出典元を参照。</span>
+  </div>
+</footer>
+
+</body>
+</html>
