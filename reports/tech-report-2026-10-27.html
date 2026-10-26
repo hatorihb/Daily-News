@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 27 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本酸素ホールディングス</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">DX 推進事例</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.mynavi.jp/techplus/kikaku/20261026-5172899/" target="_blank" rel="noopener">日本酸素グループ、非IT部門主導のDX推進を実現 ─ AIコーディングエージェントとローコードツールで業務アプリを内製化、現場社員が数時間で開発</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本酸素ホールディングスのDX推進事例をマイナビが 10 月 26 日に詳報した。同グループでは製造・物流・営業などの現場部門がAIコーディングエージェントとローコードプラットフォームを組み合わせ、IT部門や外部ベンダーに依頼することなく業務アプリを自ら内製化している。従来数週間以上かかっていた開発が数時間に短縮されたケースも出ており、現場起点のDXが加速している。AIは要件定義のドキュメント作成からコード生成・デバッグまでをサポートし、プログラミング経験のない社員でもアプリ開発を完結できる体制を整えた。IT人材不足の深刻化が続く国内製造業で、外部依存を減らしながらDXを推進するモデルとして他社からも注目されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">東京海上日動火災保険</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新サービス発表</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://jp.ibtimes.com/tokio-marine-nichido-launch-ai-robot-insurance-november-2026-104983" target="_blank" rel="noopener">東京海上日動、AIロボット専用保険を 11 月発売 ─ 機体損傷・第三者賠償・事業中断損失を一括カバー、製造・物流・介護分野を主要ターゲットに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東京海上日動火災保険は 2026 年 10 月 26 日、AI 搭載ロボット向けの専用保険商品を 11 月より販売開始すると発表した。補償の柱は三つで、ロボット本体の機器損傷、稼働中に発生した第三者への賠償責任、ロボット停止による事業継続損失の一括カバーとなる。製造・物流・介護・医療分野でのロボット活用が急拡大するなか、既存の機器保険や賠償保険ではAI固有の動的リスクに対応しきれない課題があった。同社は今後、ロボットの稼働データ解析を活用したリスクコンサルティングとの一体提供も視野に入れており、AI・ロボット関連を次世代の成長保険領域として位置づけている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">IPO 申請</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://edition.cnn.com/2026/10/26/tech/anthropic-files-ipo" target="_blank" rel="noopener">Anthropic、SEC に公開 S-1 を提出 ─ AI 企業史上最大規模の IPO へ、年換算収益 470 億ドル・Nasdaq 上場を予定、S-1 が財務リスクも初開示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic は 2026 年 10 月 26 日、米証券取引委員会（SEC）に公開版の S-1 登録届出書を提出し、IPO に向けた正式手続きを開始した。2026 年 5 月に機密書面を事前提出しており、今回の公開 S-1 が投資家向けの財務詳細を初めて開示する。S-1 によると年換算収益は約 470 億ドル（約 7 兆円）で、2025 年末から 5 倍超に急拡大。最終私募評価額は 9,650 億ドルで、Nasdaq 上場が予定されており、IPO が実現すれば AI 企業として史上最大規模の株式公開となる見通し。一方で S-1 は財務リスクとして巨大なインフラ投資コストを明示し、また過去 9 か月の収益のうち 5〜7% が後に利用規約違反が判明した顧客由来であったことも開示した。Forbes は「Anthropic の IPO が AI ブーム最大のリスクを明らかにした」と報じている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitLab / AI セキュリティ研究</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CVSS 10.0 緊急</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gbhackers.com/gitlab-patches-critical-10-0-rce-vulnerability/" target="_blank" rel="noopener">GitLab に CVSS 10.0 の完全 RCE 脆弱性（CVE-2026-110264）─ 2014 年以来の全バージョンに影響、緊急パッチ提供・未認証リモート実行が可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitLab は CVSS 10.0 の最高スコアを持つリモートコード実行（RCE）脆弱性 CVE-2026-110264 の修正バージョンをリリースした。正規表現コンパイラ内の整数オーバーフロー（Ruby バンドルの Onigmo エンジン）が原因で、バージョン 7.0（2014 年）以降の全セルフマネージドサーバーが影響を受ける。修正済みバージョンは 19.5.1、19.4.3、19.3.6、19.2.9、19.1.9、19.0.10、18.11.13。GitLab.com はすでにパッチ済みで、10 月 12 日に提供されたパッチは CVE-2026-110264 をカバーしていないため再度の更新が必要。HackerOne のバグバウンティ経由で発見されたもので、GitLab は執筆時点で野外悪用の兆候は確認されていないと述べている。回避策はなく、即時アップグレードが唯一の対処法となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Polly / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能 GA</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-polly-generative-engine-torchneuron-for-trainium-and-more-october-26-2026/" target="_blank" rel="noopener">Amazon Polly Generative Engine、14 の新ボイス追加 ─ ヒンディー語・フィンランド語が一般提供（GA）に、ブラジルポルトガル語新ボイスも追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">10 月 26 日付の AWS 週次アップデートで、Amazon Polly の Generative エンジンに 14 の新ボイスが追加されたことが発表された。新言語としてヒンディー語とフィンランド語が初めて GA となり、ブラジルポルトガル語には Leo と Carolina の 2 ボイスが加わった。Generative エンジンは標準・Neural エンジンより自然なイントネーションと感情表現が可能で、コールセンター・音声アシスタント・e ラーニングなどのアプリケーションでの採用が進んでいる。国際展開を進める日本企業にとってもヒンディー語対応は魅力的な選択肢となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Continuum / TorchNeuron / AWS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">GA・ベータ公開</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-amazon-polly-generative-engine-torchneuron-for-trainium-and-more-october-26-2026/" target="_blank" rel="noopener">AWS Continuum がコード脆弱性スキャンで GA ─ AI がプルリクエストまで自動作成、TorchNeuron の Trainium ネイティブ PyTorch サポートもベータ公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">10 月 26 日の AWS 週次まとめで、コードの脆弱性を AI が自動検出・優先度付け・修正プルリクエスト作成まで行う「AWS Continuum for code vulnerabilities」の一般提供（GA）が発表された。2026 年 6 月のニューヨーク AWS Summit で限定プレビューとして披露され、GitHub などの CI/CD パイプラインに統合してセキュリティシフトレフトを自動化する。同日、AWS Trainium 向けネイティブ PyTorch サポート「TorchNeuron」のパブリックベータ公開も発表された。従来の Neuron SDK を使わずに PyTorch コードをそのまま Trainium 上でコンパイル・実行できるようになり、AI モデルのトレーニングコスト削減が期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- 最優先: PHP2Shell 野外 RCE 確認 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP Foundation / BleepingComputer / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急 CVSS 9.2 野外 RCE 確認</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://bleepingcomputer.com/news/security/php2shell-security-flaws-now-sucessfully-exploited-in-the-wild" target="_blank" rel="noopener">PHP2Shell（CVE-2026-109618/619）、ハニーポットで Apache mod_php への実際の RCE を確認 ─ 新脆弱性 CVE-2026-115560 も発見・未修正、CISA が即時パッチを要請</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BleepingComputer は 10 月 26 日、PHP2Shell（CVE-2026-109618/CVE-2026-109619、CVSS v4.0: 9.2）の積極的悪用が実証されたと報告した。セキュリティハニーポットで Apache mod_php PHP 8.4.26 実行サーバーへのリモートコード実行（RCE）が確認され、攻撃試行は数百万件以上に達しているとも報告されている。CISA は連邦機関・民間組織へ即時パッチ適用を改めて強く要請した。また cybernews.com は同日、PHP に新たな未修正の脆弱性 CVE-2026-115560 も発見されたと報じた。CVE-2026-115560 は特異な PHP セッション設定の組み合わせを要件とするため多くのアプリは影響を受けにくいが、暫定策として session.upload_progress.enabled=0 の設定が推奨されている。PHP 8.2.35 / 8.3.36 / 8.4.27 / 8.5.12 への即時更新を強く推奨する。</p>
+        </details>
+      </div>
+
+      <!-- Brotli CVE-2026-111497 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Wiz Research / Node.js / .NET / Python / Bun</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急 CVSS 9.2 多環境影響</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.wiz.io/blog/cve-2026-111497-brotli-rce-node-js" target="_blank" rel="noopener">Brotli デコーダー（CVE-2026-111497、CVSS 9.2）─ Node.js・Python・.NET・Bun・Envoy など広範に RCE リスク、Wiz が「Broccoli2Shell」として詳細解析を公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google Brotli ライブラリ（バージョン 1.0.3〜1.2.0）のデコーダーに存在するバッファオーバーフロー脆弱性 CVE-2026-111497（CVSS 4.0: 9.2）が、Node.js だけでなく Python・.NET・Bun・Envoy・Istio など広範なランタイムや OSS に影響することが判明した。Wiz Research は「Broccoli2Shell」として詳細解析を 10 月 26 日に公開した。攻撃者が細工した Brotli 圧縮データを送信することでクラッシュ・メモリリーク・コード実行を引き起こす可能性がある。修正済みランタイムは Node.js 22.23.4 / 24.22.1 / 26.12.1（10 月 21 日）、.NET 8.0.33 / 9.0.22 / 10.0.14（10 月 25 日帯外パッチ）。各ディストリビューションや PaaS 環境での brotli ライブラリ更新状況をベンダーのリリースノートで確認することを強く推奨する。</p>
+        </details>
+      </div>
+
+      <!-- Arista VeloCloud CISA KEV -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Arista Networks / CISA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急 CVSS 9.9 CISA KEV</span>
+            <span class="card-date" data-card-date="2026-10-26">2026-10-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/191919" target="_blank" rel="noopener">Arista VeloCloud Orchestrator（CVE-2026-114625、CVSS 9.9）、CISA KEV 登録 ─ 低権限ユーザーが SQL インジェクションでスーパーユーザー昇格可能、米連邦機関の修正期限は 10 月 26 日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は 10 月 23 日、Arista VeloCloud Orchestrator（VCO）の SQL インジェクション脆弱性 CVE-2026-114625（CVSS v3.1: 9.9 / v4.0: 9.4）を既知悪用脆弱性（KEV）カタログに追加した。Enterprise Read Only ロールを含む低権限の認証済みユーザーがローカルスーパーオペレーター権限へ昇格できる脆弱性で、7 月の CVE-2026-16812（CVSS 10.0）に続く VCO への 3 件目の深刻なゼロデイ悪用事例となる。米連邦機関への修正期限は 2026 年 10 月 26 日に設定された。修正済みバージョンは VCO On-Prem 5.2.3.18・6.1.3.10・6.4.2.12 で、Arista のホスト型・専用型インスタンスはすでにパッチ適用済み。同日 CISA は Collabora Online の CVE-2026-110447（CVSS 9.2）も同 KEV カタログに追加している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-27 &nbsp;/&nbsp; RSS フィード 7 件すべて DNS エラー。Web 検索で収集。各カードの URL は出典元を参照。</span>
+  </div>
+</footer>
+
+</body>
+</html>
