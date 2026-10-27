@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 28 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GMO Internet Group / お名前.com</div>
+          <div class="card-badges">
+            <span class="impact impact-high">ランサムウェア被害続報</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/10/27/japan-internet-giant-gmo-says-hackers-posted-stolen-customer-data/" target="_blank" rel="noopener">GMO Internet、攻撃者がハイジャックした顧客データを外部公開 ─ FX 口座含む個人情報が流出・5,000 万ドルの身代金要求を拒否、26,739 台のサーバーに悪性プログラム</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GMO Internet グループが運営する「お名前.com デスクトップクラウド」へのランサムウェア攻撃に関し、攻撃者グループは身代金の支払い拒否への報復として盗んだ顧客データをダークウェブ上に公開したと TechCrunch が 10 月 27 日に報じた。被害を受けた企業には FX 取引サービスを展開する 5 社が含まれており、口座情報や取引データが外部に露出した可能性がある。攻撃者が要求した身代金は約 5,000 万ドル（約 78 億円）で、GMO 側はこれを拒否した。感染したサーバー台数は 26,739 台に達するとされ、日本のホスティング・クラウドサービスへの過去最大規模のランサムウェア攻撃として注目されている。GMO は影響を受けた顧客への対応・警察当局への報告を進めており、セキュリティ強化策を検討中としている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本政府 / 財務省</div>
+          <div class="card-badges">
+            <span class="impact impact-high">政府緊急対応・能動的防衛</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.thestar.com.my/tech/tech-news/2026/10/27/japan-vows-to-address-cyber-attack-on-fx-with-urgency" target="_blank" rel="noopener">日本政府、FX サービスへのサイバー攻撃に緊急対応を宣言 ─ 財務大臣が「能動的サイバー防衛」権限の初行使を表明、5 社被害を正式確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本の財務大臣は 10 月 27 日、GMO Internet グループのインフラを経由して複数の FX 取引サービスが被害を受けたサイバー攻撃に対し、政府として緊急対応にあたると表明した。被害を受けた企業 5 社を正式に確認し、利用者保護と再発防止のための政府主導の調査を開始する。さらに政府が有する「能動的サイバー防衛」の権限を発動する意向を示した。能動的サイバー防衛は 2025 年に成立したサイバー防衛強化法の柱で、攻撃元に対する先制的・対抗的な措置を可能にするもの。今回の事案は同権限が実際に発動される初の事例となる可能性があり、日本のサイバーセキュリティ政策の大きな転換点として注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新ハードウェア発表</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techcrunch.com/2026/10/27/apple-unveils-new-14-inch-macbook-pro-with-m6-chip/" target="_blank" rel="noopener">Apple、M6 チップ搭載 MacBook Pro 14 インチ・新 iMac を発表 ─ 2nm プロセス採用・Apple Intelligence 強化、$1,999〜 で 11 月 6 日出荷開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Apple は 10 月 27 日、最新の M6 チップを搭載した MacBook Pro 14 インチと新しい iMac を発表した。M6 チップは 2nm プロセスを採用し、前世代の M5 比で CPU 性能が最大 40% 向上したとされる。オンデバイスで動作する Apple Intelligence の機能もさらに拡充され、生成 AI テキスト処理・画像生成・Siri の高度な推論能力が強化されている。MacBook Pro 14 インチの価格は 1,999 ドル（約 31 万円）からで、10 月 28 日より予約受付を開始し、11 月 6 日に出荷開始予定。新 iMac も同日発表され、デスクトップ向け M6 チップを搭載してフルリニューアルされた。AI 処理性能の飛躍的向上が見込まれ、クリエイター・開発者双方から注目されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Mistral AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">オープンウェイト公開</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://mistral.ai/news/mistral-large-4/" target="_blank" rel="noopener">Mistral、Large 4 のオープンウェイトを公開 ─ 1 兆パラメータ・52B 活性・最長 100 万トークンのコンテキスト、API は 10 月 6 日プレビューより利用可</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Mistral AI は 10 月 27 日、旗艦モデル「Mistral Large 4」のオープンウェイト（モデルの重みファイル）を公開した。Large 4 は 1 兆パラメータを持つネイティブマルチモーダルモデルで、52B の活性パラメータと最長 100 万トークンのコンテキストウィンドウを備える。API プレビューは 10 月 6 日より Mistral Studio および API 経由で利用可能だったが、今回のオープンウェイト公開により自社サーバーへのデプロイも可能になった。GPT-5 および Claude Sonnet 4.6 と同等の性能をベンチマーク上で示しており、欧州発の有力 OSS 基盤モデルとして注目されている。ライセンスは研究・商用利用ともに許容される Apache 2.0 が採用された。日本企業が自社環境にデプロイして利用できるマルチモーダル基盤モデルとして選択肢が広がった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <p class="empty-note">本日（2026-10-28 JST）は過去 24 時間以内の AWS What's New 新着情報を確認できませんでした。RSS フィードへのアクセスが本セッションのネットワーク制限により取得不可（DNS ENOTFOUND）であったため、Web 検索で補完を試みましたが、該当期間内の新機能・サービス発表は見つかりませんでした。最新情報は <a href="https://aws.amazon.com/jp/about-aws/whats-new/" style="text-decoration:underline">AWS What's New</a> で直接ご確認ください。</p>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- 最優先: PHP2Shell CISA KEV 正式追加 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP Foundation / CISA / Amazon MadPot</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CISA KEV 登録 CVSS 9.2 連邦期限 10/29</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks/" target="_blank" rel="noopener">CISA、PHP2Shell（CVE-2026-109618/619、CVSS 9.2）を KEV カタログに正式追加 ─ 連邦機関の修正期限は 10 月 29 日、Amazon MadPot が 10/17 以降の悪用ログを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は 10 月 27 日、PHP2Shell の 2 件の脆弱性（CVE-2026-109618/CVE-2026-109619、CVSS v4.0: 9.2）を既知悪用脆弱性（KEV）カタログに正式追加し、連邦機関に対して 10 月 29 日までのパッチ適用を義務付けた。Amazon の脅威インテリジェンス基盤「MadPot」は 10 月 17 日以降に記録された悪用試行ログを公開しており、攻撃の実態が裏付けられた形となる。The Register が独自取材で報じた内容によると、主要なホスティング・クラウドプロバイダーへの大規模な自動スキャンが確認されており、日本のホスティング事業者も標的に含まれる可能性がある。影響を受けるバージョンは PHP 8.2.34 以前・8.3.35 以前・8.4.26 以前で、修正済みバージョンは PHP 8.2.35 / 8.3.36 / 8.4.27 以降。フレームワーク・CMS のアップストリーム更新状況も合わせて確認が必要。</p>
+        </details>
+      </div>
+
+      <!-- GMO/Onamae Desktop Cloud セキュリティ技術観点 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GMO Internet / お名前.com デスクトップクラウド</div>
+          <div class="card-badges">
+            <span class="impact impact-high">大規模侵害 26,739 台感染</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/" target="_blank" rel="noopener">お名前.com デスクトップクラウドへのランサムウェア攻撃 ─ 26,739 台にマルウェア展開・FX 事業者 5 社の顧客データ窃取を確認、攻撃者グループが漏えい証拠を公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BleepingComputer の 10 月 27 日付報道によると、GMO Internet グループの「お名前.com デスクトップクラウド」サービスへの侵入で合計 26,739 台のサーバーにマルウェアが展開されたことが確認された。攻撃者グループは侵入から数日以内に内部ネットワークを横断移動（ラテラルムーブメント）し、FX 取引サービスを提供する 5 事業者のシステムに到達して顧客情報を窃取した。初期侵入手法については VPN 機器への認証情報スタッフィング攻撃が疑われており、多要素認証（MFA）が未設定のアカウントが踏み台にされた可能性がある。同種のホスティング環境を利用している国内企業は、VPN ログイン履歴の確認・MFA の即時有効化・ネットワーク異常トラフィックの検査を強く推奨する。攻撃グループはダークウェブ上に盗取データのサンプルを公開しており、被害範囲の拡大が懸念されている。</p>
+        </details>
+      </div>
+
+      <!-- Apple CoreGraphics ゼロデイ バックポート -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple / BleepingComputer</div>
+          <div class="card-badges">
+            <span class="impact impact-high">ゼロデイ 旧機種緊急パッチ</span>
+            <span class="card-date" data-card-date="2026-10-27">2026-10-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/" target="_blank" rel="noopener">Apple、CoreGraphics ゼロデイ（CVE-2026-86950）パッチを旧型 iPhone・iPad にバックポート ─ iOS 17.7.3 / iPadOS 17.7.3 公開、悪用確認済み脆弱性として即時更新推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Apple は 10 月 27 日、CoreGraphics フレームワークに存在するゼロデイ脆弱性（CVE-2026-86950）の修正パッチを iOS 18 系に続いて旧バージョンの iOS 17.7.3 および iPadOS 17.7.3 にもバックポートした。この脆弱性は細工された PDF ファイルや Web コンテンツを処理した際にメモリ破壊が生じ、任意コードの実行につながる可能性がある。Apple の脅威インテリジェンスチームは、この脆弱性が既に野外で悪用されている証拠を確認したと発表しており、特定のターゲットを狙ったスパイウェア配布に使われた可能性が指摘されている。iPhone 8 以降・iPad（第 5 世代以降）などの対象端末を利用しているユーザーは設定 → 一般 → ソフトウェアアップデートから即時の更新を強く推奨する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-28 &nbsp;|&nbsp; RSS 取得結果: AWS What's New: FAILED (DNS) / ITmedia NEWS: FAILED (DNS) / ITmedia AI+: FAILED (DNS) / Security NEXT: FAILED (DNS) / JVN iPedia: FAILED (DNS) / 窓の杜: FAILED (DNS) / Impress Watch: FAILED (DNS) — 全フィード DNS エラー、Web 検索で補完</span>
+  </div>
+</footer>
+
+</body>
+</html>
