@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 29 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ドン・キホーテ / 長崎屋 / 橘百貨店 / UDリテール</div>
+          <div class="card-badges">
+            <span class="impact impact-high">個人情報漏洩可能性</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ascii.jp/elem/000/004/446/4446479/" target="_blank" rel="noopener">ドン・キホーテなど4社、時計修理委託先（株式会社コックス）へのランサムウェア攻撃で顧客情報漏洩の可能性 ─ 2025年9月以降の修理依頼者が対象、氏名・住所・電話番号が暗号化サーバーに保存</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ドン・キホーテ、長崎屋、橘百貨店、UDリテールの4社は2026年10月28日、時計修理を委託していた株式会社コックスのサーバーがランサムウェア攻撃を受け、一部の顧客情報が暗号化されたと発表した。対象は2025年9月以降に4社グループ店舗で時計修理を依頼した顧客で、漏洩の可能性がある情報は氏名と一部の住所・電話番号。コックスは2026年9月15日にサイバー攻撃の可能性を検知し外部接続を遮断したが、サーバーはまだ完全に復元できていない状態が続いている。現時点で個人情報の漏洩事実・不正利用は確認されていないものの、可能性を完全には否定できないとしている。対象顧客数は調査中のため未公表で、4社は詳細が判明次第、対象者へ個別に連絡を行う予定としている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">マークラインズ株式会社</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新サービス正式リリース</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000122.000009111.html" target="_blank" rel="noopener">マークラインズ、自動車産業向け「マークラインズ生成AI ver.1.0」を正式リリース ─ 業界独自データとLLMを組み合わせた60言語対応の垂直特化型AI、情報プラットフォーム会員に無料提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">マークラインズ株式会社は2026年10月28日、自動車業界プロフェッショナル向け情報プラットフォームに統合した生成AI「マークラインズ生成AI ver.1.0」を正式リリースした。2026年1月のβ版提供開始から約10か月の改善を経た正式版で、同社が保有する自動車産業の独自データベースとLLMを組み合わせた業界特化型の構成が特徴だ。ユーザーが自然言語で質問すると、独自データを根拠とした数値を「データ」として提示しながらその分析内容を文章で回答する点が一般的な生成AIと異なる。対応言語は60以上と、グローバルな自動車サプライチェーンに従事する担当者も母国語で活用できる。情報プラットフォーム会員であれば原則として無料で利用可能で、業界調査や競合分析の工数削減への活用が期待される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">リサーチプレビュー公開</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://deepmind.google/blog/genie-4-a-new-generation-of-world-simulation/" target="_blank" rel="noopener">Google DeepMind、次世代インタラクティブ世界モデル「Genie 4」をリサーチプレビュー公開 ─ 音声・物理シミュレーション対応・最大2分の一貫した仮想世界生成、Gemini Omni統合</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google DeepMindは第4世代の対話型世界シミュレーションモデル「Genie 4」を発表し、信頼できるテスター向けにリサーチプレビューを開始した。前世代比でシーンの一貫性維持時間が2倍の最大2分間に延長され、より現実的な物理挙動と自然な人物表現が実現されている。ネイティブ音声対応が新機能として加わり、環境音・BGM・NPCとの対話音声をシミュレーション中にリアルタイム生成できるようになった。ユーザーが天候・視点の変更や人物・物体の追加などを自由形式で指示でき、Gemini Omniが実世界の外観と物理法則に基づいてシーンを整合させる。Google AI Ultraサブスクライバーおよびデベロッパー向けには数週間以内に提供拡大予定で、ゲーム・映画制作・ロボティクス研究・教育分野での活用が見込まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Liquid AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">オープンウェイト公開</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.liquid.ai/blog/lfm3" target="_blank" rel="noopener">Liquid AI、6種のオープンウェイトマルチモーダルモデル「LFM3」ファミリー公開 ─ 約2Bパラメータの共通バックボーンでテキスト・音声・動画を統合処理、HuggingFaceで即日公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米Liquid AIは「LFM3」と名付けたオープンウェイトのモデルファミリー6種を公開した。全モデルが約2Bパラメータの単一ベースモデル（LFM3-1.7B-Base）から派生し、テキスト・ビジョン+動画・音声・マルチモーダル・2種の意思決定モデルで構成される。新アーキテクチャ「tri-hybrid」はゲート付き短期畳み込み・スライディングウィンドウアテンション・グローバルアテンションの3種を組み合わせ、固定サイズのメモリで長いシーケンスを処理できる。LFM3-Audio-2Bは18言語に対応しtime-to-first-tokenが最短50ミリ秒を達成、LFM3-Omni-2Bは最大10.7Bパラメータのモデルを一部ベンチマークで上回る性能を示した（同社内評価）。重みファイルはHugging Face・Liquid AI Playground・APIで即日公開され、LFM Open License v1.0のもとで商用利用も許可されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <p class="empty-note">本日（2026-10-29 JST）は過去24時間以内の AWS What's New 新着情報を確認できませんでした。RSS フィードへのアクセスが DNS 制限により取得不可のため、Web 検索で補完を試みましたが、2026-10-28〜2026-10-29 の期間に公開された新機能・サービス発表は確認できませんでした。最新情報は <a href="https://aws.amazon.com/jp/about-aws/whats-new/" style="text-decoration:underline">AWS What's New</a> で直接ご確認ください。</p>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- 最優先: Veeam CVSS 9.1 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Veeam Software</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高 CVSS 9.1</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gbhackers.com/critical-veeam-backup-replication-flaw-2/" target="_blank" rel="noopener">Veeam Backup &amp; Replication 13 に認可バイパスの重大脆弱性（CVE-2026-108142、CVSS v4.0: 9.1）─ 認証不要でCDP Coordinatorサービスへのアクセス可能、即時パッチ推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Veeamは2026年10月27日（日本時間10月28日）、Backup &amp; Replication 13系のCDP Coordinator Serviceに認証なしで認可チェックをバイパスできる重大な脆弱性CVE-2026-108142（CVSS v4.0: 9.1）を公開した。影響を受けるバージョンはV13.1.1.18以下およびV13.0.2.29以下で、修正版はそれぞれ13.1.2.57および13.0.3.63。バグバウンティ（HackerOne）経由で報告され、現時点では実際の悪用は確認されていない。ただし過去のVeeamバックアップサーバーはランサムウェア攻撃の踏み台として繰り返し悪用されており（KEV登録事例あり）、セキュリティ組織は迅速なパッチ適用を強く推奨している。V12.x以下は本脆弱性の影響を受けないが、バックアップサーバー自体のセキュリティレビューも合わせて推奨される。</p>
+        </details>
+      </div>
+
+      <!-- Chrome/Firefox 重大アップデート -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / Mozilla Firefox</div>
+          <div class="card-badges">
+            <span class="impact impact-high">Critical 4件含む重大更新</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/chrome-and-firefox-updates-patch-over-200-vulnerabilities/" target="_blank" rel="noopener">Chrome 156 / Firefox 159 アップデート公開 ─ Chrome にCritical 4件含む52脆弱性・Firefox は167件修正、CVE-2026-118306はサンドボックス外での任意コード実行の恐れ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleとMozillaは2026年10月28日（JST）、主要ブラウザの大規模セキュリティアップデートをリリースした。Chrome 156は52件の脆弱性を修正し、うち4件がCritical評価。最も深刻なCVE-2026-118306はFileSystemのメモリ破壊バグで、細工したHTMLページを開くだけでサンドボックス外での任意コード実行が可能とされる。修正済みバージョンはWindows/Mac向け156.0.8078.73/.74、Linux向け156.0.8078.73。Firefox 159は167件の脆弱性を修正（High評価108件）し、うち41件はOpenAIのCodex Securityエージェントが自動発見したことで注目を集めた。Chromeのゼロデイ悪用は現時点で報告されていないが、Critical脆弱性が複数含まれるため早急な更新を推奨する。</p>
+        </details>
+      </div>
+
+      <!-- ドン・キホーテ委託先ランサムウェア セキュリティ観点 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">国内 / サプライチェーン型ランサムウェア</div>
+          <div class="card-badges">
+            <span class="impact impact-high">ランサムウェア被害 顧客情報暗号化</span>
+            <span class="card-date" data-card-date="2026-10-28">2026-10-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.daily.co.jp/society/economics/2026/10/28/0020977696.shtml" target="_blank" rel="noopener">ドン・キホーテなど4社委託先・株式会社コックスのサーバーがランサムウェア被害 ─ 個人情報の暗号化を確認、委託先経由のサプライチェーン型攻撃として国内で相次ぐ典型事例</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ドン・キホーテほか4社が2026年10月28日に公表した時計修理委託先・株式会社コックスへのランサムウェア攻撃は、企業のサプライチェーンセキュリティの脆弱性を改めて露わにした事案として注目されている。コックスは2026年9月15日に不正アクセスを検知し外部ネットワーク接続を遮断したが、サーバーはまだ完全に復元できていない状態が続く。顧客の氏名・住所・電話番号が保存されていたサーバーが暗号化されており、漏洩の可能性は否定できない。委託先事業者を経由した情報流出は2026年に国内で相次いでいるサプライチェーン型被害の典型例で、特にSMB（中小企業）委託先へのセキュリティ基準の設定・監査が求められている。本件では取引先企業への影響調査・委託先管理プロセスの見直しが急務で、VPN機器の認証強化・MFA設定の有効化を改めて確認するよう専門家は促している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-29 &nbsp;|&nbsp; RSS 取得結果: AWS What's New: FAILED (DNS) / ITmedia NEWS: FAILED (DNS) / ITmedia AI+: FAILED (DNS) / Security NEXT: FAILED (DNS) / JVN iPedia: FAILED (DNS) / 窓の杜: FAILED (DNS) / Impress Watch: FAILED (DNS) — 全フィード DNS エラー、Web 検索で補完</span>
+  </div>
+</footer>
+
+</body>
+</html>
