@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 10 — 30 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">株式会社データX</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新製品出展</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000201.000013454.html" target="_blank" rel="noopener">データX、AI搭載の経営管理ツール「kpiee」を「DX 総合EXPO 2026 秋 東京」に出展 ─ 経営データを横断分析するAIと外部ツール連携で意思決定を加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">株式会社データXは2026年10月29日、AI搭載の経営管理ツール「kpiee」を2026年10月29日〜31日開催の「DX 総合EXPO 2026 秋 東京」に出展すると発表した。kpieeはKPIや財務データを一元管理し、AIが複数部門のデータを横断的に分析・可視化する経営管理プラットフォーム。AIが「経営データを5分で可視化する」とうたうAI・DX診断機能をブースで体験できる。外部AIエージェント「つなぎAI」との連携デモも行われ、手作業が多い経営企画・経理部門の業務負荷を削減できる点を訴求する。2026年秋のDX関連展示会では製造・流通・金融を中心にAIエージェントを業務フローに組み込む事例が増加しており、今回の出展も中堅企業のAIファースト経営への移行需要を背景にしている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTアドバンステクノロジ株式会社</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">AI×RPA展示</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000393.000023654.html" target="_blank" rel="noopener">NTT-AT、「Japan DX &amp; AX Week 秋 2026」でAI×RPAによる新たな業務変革モデルを展示 ─ 人手不足の現場を自律エージェントが補完する実機デモを公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTアドバンステクノロジ（NTT-AT）は2026年10月29日、「Japan DX &amp; AX Week 秋 2026」（東京ビッグサイト、10月29〜31日）への出展を発表し、AIとRPAを組み合わせた業務変革モデルを展示すると明らかにした。同社が提案するのは、従来のルールベースのRPA処理にLLMエージェントを重ね合わせることで例外処理や自然言語での指示に対応できるハイブリッド自動化の仕組みだ。特にバックオフィス業務（請求書処理・在庫管理・人事申請）での活用デモを予定しており、深刻化する人手不足を自律エージェントが補完するシナリオを実機で紹介する。同イベントには300社超が出展し、AIエージェント活用が中心テーマとなっており、製造・物流・金融など幅広い業種でのAI×DX推進の最新動向が集まる。NTT-ATは今後、AIエージェントとセキュリティを組み合わせたDXソリューションの提供を強化する方針を示している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cohere / カナダ連邦政府</div>
+          <div class="card-badges">
+            <span class="impact impact-high">C$16億 段階的政府投資</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bnnbloomberg.ca/business/artificial-intelligence/2026/10/29/ottawa-investing-up-to-16b-in-canadian-ai-company-cohere/" target="_blank" rel="noopener">カナダ連邦政府、AIスタートアップ Cohereに最大C$16億（約1,760億円）の段階的投資を決定 ─ 定期報告と企業コミットメントを条件に企業価値・AI主権を両立</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">カナダ連邦政府は2026年10月29日、カナダに本社を置く企業向けAI（エンタープライズAI）スタートアップのCohereに最大C$16億（約1,760億円）を段階的に投資すると発表した。資金は企業コミットメントの達成状況を確認しながら複数回に分けて提供される。Cohereはエンタープライズ向けの大規模言語モデル（LLM）を中心に、プライベートクラウドやオンプレミス環境への展開を特徴とする。カナダのAI研究拠点として同国の「AI主権」確保の観点から重要な投資と位置付けられており、米国・英国の大型AI投資に対抗する形での政策的意義も強調されている。Cohereはこれまでに約4.45億ドルの民間資金を調達し、Oracle・Salesforce・Nvidia等との提携で企業顧客基盤を拡大中だ。今回の政府資金は研究開発、計算インフラ増強、国内雇用創出に充てられる見通しで、G7諸国の間で政府主導のAI産業育成競争が激化する中での注目事例となった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Cloud</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">エアギャップ環境 AI強化</span>
+            <span class="card-date" data-card-date="2026-10-30">2026-10-30</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securitybrief.asia/story/google-adds-ai-partner-tools-to-air-gapped-cloud" target="_blank" rel="noopener">Google Cloud、エアギャップ環境向けに Gemini AI・エンタープライズ検索・NVIDIA GPU基盤を大幅強化 ─ 規制産業・政府機関の完全オフライン AI 利用を拡充</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google Cloudは2026年10月30日、インターネットから物理的に隔離されたエアギャップ環境（Google Distributed Cloud Air-Gapped）向けに、Gemini AIアシスタント、エンタープライズ検索、NVIDIA Blackwell Ultra GPUベースのインフラ、セキュリティ強化ツールを追加したと発表した。特に政府機関・防衛・金融・医療などの規制産業を対象に、クラウド接続なしでもフルスペックの生成AIと検索機能を利用できるよう設計されている。Geminiモデルはエアギャップ環境でも揮発性メモリ上で動作し、電源オフ時にモデル重みが消去される設計で情報漏洩リスクを最小化する。対応パートナーISVのアプリもネイティブで統合できるようになり、セキュリティグループの自動更新とネットワーク変更管理も追加された。同社はインドをはじめアジア太平洋地域の規制対応ニーズへの対応を加速しており、今回の強化はAIのオンプレミス・主権展開の競争が激化する中での重要アップデートとなる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">GitHub (Microsoft)</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">Octoverse 2026 年次調査</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://github.blog/news-insights/research/octoverse-2026/" target="_blank" rel="noopener">GitHub Octoverse 2026：9月のプルリクエストの40%超がAIエージェントで起草 ─ ソフトウェア開発のAI化が転換点を超えた節目の調査結果</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GitHubは年次開発者調査「Octoverse 2026」を公開し、2026年9月時点でプラットフォーム全体のプルリクエストの40%超がAIエージェントによって下書き・起草されていると報告した。前年比で約2倍の水準で、GitHub Copilot Agentや外部AIエージェントがコードを提案し人間が最終レビューするワークフローが急速に標準化されつつあることを示す。調査では生産性の向上だけでなく、コードレビューの担い手がAI → 人間へシフトし、エンジニアの役割が「実装者」から「承認・監督者」へ変化しつつあるという構造的転換も指摘されている。AI生成コードのセキュリティレビューに関する懸念も高まっており、GitHub Advanced Security のAI支援スキャン導入企業が急増している。国内でもアジャイル開発チームを中心にAIエージェントをCI/CDパイプラインに組み込む動きが広がっており、開発現場のDX推進の新たな段階を象徴する調査結果として注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <p class="empty-note">本日（2026-10-30 JST）は過去24時間以内の AWS 新着情報を確認できませんでした。RSS フィードへのアクセスが DNS 制限により取得不可のため、Web 検索で補完を試みましたが、2026-10-29〜2026-10-30 の期間に公開された新機能・サービス発表は確認できませんでした。最新情報は <a href="https://aws.amazon.com/jp/about-aws/whats-new/" style="text-decoration:underline">AWS What's New</a> で直接ご確認ください。</p>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- 最優先: .NET Broccoli2Shell緊急パッチ -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / .NET</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高 緊急帯域外パッチ</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-emergency-net-patches-for-critical-brotli-flaw/" target="_blank" rel="noopener">Microsoft、.NET 向け緊急帯域外パッチを公開 ─ CVE-2026-111497「Broccoli2Shell」Brotli デコーダーの境界外書き込みで任意コード実行の恐れ、.NET 8/9/10/11 RC3 が対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftは定例パッチ外の緊急セキュリティアップデートを公開し、.NETのBrotli圧縮デコーダーに存在するCritical評価の境界外書き込みバグ（CVE-2026-111497、別称：Broccoli2Shell）を修正した。対象バージョンは.NET 8、.NET 9、.NET 10、および.NET 11 Release Candidate 3で、悪意あるBrotli圧縮データを処理させることでリモートから任意コードを実行できる可能性がある。HTTP/2やgRPC通信でBrotli圧縮を利用するWebAPIやマイクロサービスへの影響が特に懸念されており、Microsoftは「できるだけ早急に更新するよう」強く推奨している。本脆弱性はOSSのBrotliライブラリ由来で、Node.js（Node2Shell）やApache HTTPサーバー（HTTP2Shell）など他のランタイムにも類似の問題が報告されており、複数のエコシステムに影響が及ぶ可能性がある。修正は各バージョンのNuGetパッケージとSDKのアップデートを通じて提供されており、企業向けLTS版の.NET 8ユーザーも急ぎ適用が求められる。</p>
+        </details>
+      </div>
+
+      <!-- Cisco ASA/FTD SSL VPN CVE-2026-76418 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco Systems</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高 CVSS 8.6 悪用確認</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gbhackers.com/cisco-patches-actively-exploited-ssl-vpn-vulnerability/" target="_blank" rel="noopener">Cisco ASA・FTD の SSL VPN に積極的悪用が確認された高危険度の DoS 脆弱性（CVE-2026-76418、CVSS 8.6）─ 即時パッチ適用をCiscoが強く推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Cisco は2026年10月28日（日本時間10月29日）、Cisco Adaptive Security Appliance（ASA）および Firepower Threat Defense（FTD）の SSL VPN 機能に CVSS v3.1 スコア 8.6 の高危険度 DoS 脆弱性 CVE-2026-76418 が存在すると公表し、Cisco PSIRT が同月中旬から攻撃者による実際の悪用を確認済みであると明かした。認証なしでリモートから特定のリクエストを送信すると対象デバイスが強制再起動（リロード）し、VPN 接続が断絶する。コード実行や権限昇格は不可能とされるが、VPN 経路の完全遮断という影響を持つため、多要素認証や Zero Trust のゲートウェイとして広く使われている Cisco ASA/FTD 機器を保有する組織は迅速なパッチ適用が必須だ。修正済みバージョンは各 ASA/FTD メジャーリリースの最新パッチで確認でき、暫定回避策として SSL VPN のフロントエンドに WAF を置く方法も示されているが、完全な修正ではないとされる。国内でも多くの企業・官公庁が Cisco の VPN 機器を導入しているため、セキュリティ担当者は速やかに対応されたい。</p>
+        </details>
+      </div>
+
+      <!-- WordPress 7.1.4 -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress / Automattic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">緊急セキュリティ更新</span>
+            <span class="card-date" data-card-date="2026-10-29">2026-10-29</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gbhackers.com/wordpress-7-1-4-security-update/" target="_blank" rel="noopener">WordPress 7.1.4 セキュリティアップデート公開 ─ RCE・保存型XSS・認証バイパス等22件の脆弱性を修正、全世界 4.3 億サイトに影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">WordPressは2026年10月28〜29日、バージョン7.1.4のセキュリティアップデートをリリースし、22件の脆弱性を修正した。対象はWordPressコアのブロックエディタ、Customizer、Interactivity APIなどで、脆弱性の種別にはリモートコード実行（RCE）・保存型クロスサイトスクリプティング（Stored XSS）・情報漏洩・認可バイパスが含まれる。WordPressはウェブサイト全体の約40%（約4.3億サイト）で使われており、パッチが適用されない旧バージョンは大規模なボット・ランサムウェアキャンペーンの標的となりやすい。今回の修正には外部バグバウンティ研究者が発見したものも含まれており、公開と同時に概念実証（PoC）が出回るリスクが高い。自動更新が有効なサイトには既に適用済みのケースも多いが、プラグインやカスタマイズの都合で手動管理しているサイトは7.1.4への即時アップグレードを推奨する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-10-30 &nbsp;|&nbsp; RSS 取得結果: AWS What's New: FAILED (DNS) / ITmedia NEWS: FAILED (DNS) / ITmedia AI+: FAILED (DNS) / Security NEXT: FAILED (DNS) / JVN iPedia: FAILED (DNS) / 窓の杜: FAILED (DNS) / Impress Watch: FAILED (DNS) — 全フィード DNS エラー、Web 検索で補完</span>
+  </div>
+</footer>
+
+</body>
+</html>
