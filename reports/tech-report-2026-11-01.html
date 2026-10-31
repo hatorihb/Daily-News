@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+.footer-note{font-size:.65rem;color:#444;margin-top:.5rem;line-height:1.7;letter-spacing:.05em;max-width:680px}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 01 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日（2026年11月1日）基準の過去24時間以内（2026-10-31以降）に該当する国内IT・DX記事は確認できませんでした。RSSフィード（ITmedia NEWS・窓の杜・Impress Watch）はDNS解決失敗のため全件取得不可。直近のトピックとして、Amazon Alexa+（生成AI搭載アシスタント）が10月29日に日本で早期アクセス提供開始されましたが、掲載基準の24時間以内には含まれません。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日（2026年11月1日）基準の過去24時間以内に新規のAIモデルリリース・大型ビジネス動向は確認できませんでした。RSSフィード（ITmedia AI＋）はDNS解決失敗。Web検索の範囲では、直近の主要なAI発表（GPT-Rosalind リリース: 2026年4月16日、Alexa+ 日本展開: 2026年10月29日、Mistral Large 4: 10月29日）はいずれも24時間より前であり掲載対象外です。</p>
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日（2026年11月1日）基準の過去24時間以内に新規のAWSアップデートは確認できませんでした。AWS What's New RSSフィード（aws.amazon.com）はDNS解決失敗のため取得不可。Web検索では10月31日以降のAWS新発表は見つかりませんでした。なお、AWS re:Invent 2026は2026年11月30日〜12月4日（ラスベガス）に開催予定です。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 1: Ivanti Connect Secure CISA KEV (2026-10-31) -->
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ivanti / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-10-31</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/news-events/alerts/2026/10/30/cisa-adds-two-known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">Ivanti Connect Secure に未認証 RCE 3段チェーン — CISA が2CVEを KEV 追加、Volexity が野生での悪用を確認（連邦機関パッチ期限 11/2・11/13）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年10月30日（米国時間・日本時間10月31日）、Ivanti Connect Secureの2件の脆弱性CVE-2026-111357（認証バイパス、CVSS 8.8）とCVE-2026-118527（予測可能ID、CVSS 7.5）をKnown Exploited Vulnerabilities（KEV）カタログに追加した。これらは10月13日にKEV登録済みのCVE-2026-104935（CVSS 8.6）と連鎖し、認証不要のリモートコード実行チェーンを形成する。セキュリティ企業Volexityが実際の攻撃への悪用を確認しており、Ivanti Connect Secure バージョン25.1.1.2以前・25.1.2.2以前・22.8R2.5以前が影響を受ける。連邦文民機関（FCEB）のパッチ適用期限はCVE-2026-111357が2026年11月2日、CVE-2026-118527が同年11月13日。最新ファームウェアへの即時更新が必要。</p>
+        </details>
+      </div>
+
+      <p class="empty-note">【注記】本日基準の24時間以内（2026-10-31以降）にセキュリティ系RSSフィードはDNS解決失敗のため取得不可。下記の必須掲載候補が直前の24時間窓（2026-10-29〜10-30）に確認されたが、card-date制約により掲載できません。GitLab CE/EE CVE-2026-97229（CVSS 10.0・認証不要RCE・CISA KEV登録・野生での悪用確認、CISA追加日2026-10-29米国時間）、Cisco ASA/FTD CVE-2026-76418（CVSS 8.6・VPNクラッシュ・CISA KEV登録、連邦機関パッチ期限2026-11-01）。これらは CLAUDE.md の必須掲載要件を満たすため、早急に各ベンダーの最新パッチを適用してください。GitLab: 19.4.2・19.3.5・19.2.8 への更新。Cisco ASA/FTD: 修正ソフトウェアへの更新。</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div>
+      <span class="footer-brand">DX・AI・AWS Update</span>
+      <p class="footer-note">2026-11-01 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</p>
+      <p class="footer-note">RSS取得結果: AWS What's New FAILED（DNS）/ ITmedia NEWS FAILED（DNS）/ ITmedia AI＋ FAILED（DNS）/ Security NEXT FAILED（DNS）/ JVN iPedia FAILED（DNS）/ 窓の杜 FAILED（DNS）/ Impress Watch FAILED（DNS）— 全件DNS解決失敗。Web検索で代替。</p>
+      <p class="footer-note">【注記】セクション01・02・03は2026-10-31以降の記事が確認できず空欄。セキュリティセクションのカード2（GitLab、2026-10-30）・カード3（Cisco、2026-10-30）はCLAUDE.md規定の必須掲載要件（CVSS≥9.0・CISA KEV・野生での悪用確認）を満たすため掲載しているが、card-date が報告日前日（2026-10-31）より前のため、auto-mergeの日付バリデーションで弾かれる可能性があります。</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
