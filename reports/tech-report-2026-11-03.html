@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 03 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ユミルリンク / Cuenote FC</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2151621.html" target="_blank" rel="noopener">ユミルリンク「Cuenote FC」不正アクセス、JR東海・りそなグループ等に波及 — 被害規模が最大5,162万件に拡大</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">メール配信サービス「Cuenote FC」を運営するユミルリンクへの不正アクセス被害が拡大し、JR東海・JR西日本・JR九州・りそなグループ・毎日新聞など大手企業が顧客情報の流出可能性を相次いで発表した。被害規模は当初の約900万件から最大5,162万件超に膨らんだとされる。攻撃者はプログラムの脆弱性を悪用して認証情報を取得し、データベースからメールアドレスなどの個人情報を窃取したとされる。日本のITインフラを支えるメール配信基盤の供給チェーンリスクが改めて浮き彫りになった形で、同サービスを利用する企業は速やかな調査と利用者への開示対応が求められている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">楽天グループ / 楽天トラベル</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.watch.impress.co.jp/docs/news/2151286.html" target="_blank" rel="noopener">楽天トラベル海外ホテル予約サイトへの不正アクセスを公表 — 最大260万件の個人情報・クレジットカード情報3.6万件が対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">楽天グループは海外ホテル予約サイトの一部ページおよび多言語予約サイトへの不正アクセスを公表した。海外ホテル予約サイトでは最大約260万件、多言語予約サイトでは最大約86万件の利用者情報が対象となり、うち最大3万6千件の予約者については支払情報も含まれる。不正アクセスは10月20日に検知され、翌21日に改修完了。個人情報保護委員会への報告も済ませたとしている。流出した可能性がある情報は氏名・電話番号・メールアドレス等で、クレジットカード番号の全桁・パスワード・住所は含まれないとしている。対象ユーザーへの個別連絡が順次行われる予定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / Claude</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techweez.com/2026/11/02/anthropic-is-bringing-text-watermarking-to-more-claude-models/" target="_blank" rel="noopener">Anthropic、全ClaudeモデルへのSynthID-Text文字透かし適用を開始 — EU AI法 Article 50 透明性要件に対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicはGoogleのSynthID-Textをベースとした文字透かし技術を既存のClaudeモデルへも展開すると顧客に通知した。EU AI法のArticle 50が定めるAI生成コンテンツの透明性要件に対応するためで、12月2日までに全モデルへの適用を完了する予定。透かしは追加トークン・品質劣化・コスト増なく適用され、秘密鍵を持つ検出APIによってのみ統計的に識別可能。適用範囲はEUに限らずグローバルとなるため、日本国内でClaudeを活用している企業も独自の開示対策を検討する必要がある。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいAWSアップデートは確認されませんでした。次の大型発表は AWS re:Invent 2026（11月30日〜12月4日、ラスベガス）が予定されています。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Linux カーネル / 全ディストリビューション</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/critical-linux-kernel-flaw-allows-remote-root-attacks-on-mptcp-servers/" target="_blank" rel="noopener">【CVSS 9.8】CVE-2026-98432 — Linuxカーネル TCP/MPTCP脆弱性で認証なしのリモートroot権限奪取が可能、パッチ対応はディストリビューションで差異</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Linuxカーネル 4.4以降に存在するIPv4 TCP処理のuse-after-freeバグ（CVE-2026-98432、CVSS 9.8）が公開された。MPTCPリスナーが有効なサーバーに対して認証なしでリモートからroot権限を奪取できる可能性があり、Anthropicの内部研究モデルが実証テストで48分でのカーネルアドレスリーク・その後5分でコード実行を確認した。影響バージョンはカーネル 4.4以降。現時点でin-the-wild悪用は未確認。Debian・Oracle UEKはパッチ適用済み、Ubuntu・RHELは配布待ち。即時緩和策として「net.mptcp.enabled=0」の設定が推奨され、Go 1.24以降のプログラムには「GODEBUG=multipathtcp=0」も有効。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ivanti / Connect Secure</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/ivanti-patches-two-more-zero-days-exploited-in-connect-secure-attack-chain/" target="_blank" rel="noopener">Ivanti Connect Secure ゼロデイ3件チェーン悪用にパッチ公開 — CVE-2026-111357・CVE-2026-118527がCISA KEV登録、米連邦機関に即日対応指示</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IvantiはConnect Secureの新たなゼロデイ2件（CVE-2026-111357: CVSS 8.8 権限昇格、CVE-2026-118527: CVSS 4.3 ファイルアップロード）にパッチを公開した。この2件を既知の認証バイパスCVE-2026-104935（CVSS 8.6）とチェーン接続する攻撃が限定的な顧客環境で実際に確認されている。両CVEはCISA KEVカタログに登録され、米連邦機関にはCVE-2026-111357の対応期限として本日11月2日、CVE-2026-118527には11月13日が設定。修正バージョンは25.1.1.3および22.8R2.6。Shadowserverによると5,000超のICS インスタンスがインターネットに公開されており、速やかなアップグレードが必須。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">楽天グループ / 楽天トラベル</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-02</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://scan.netsecurity.ne.jp/article/2026/11/02/56646.html" target="_blank" rel="noopener">「楽天トラベル」海外ホテル予約サイトへの不正アクセス — 最大260万件の利用者情報と支払情報3.6万件流出の可能性</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">楽天グループは海外ホテル予約サイトおよび多言語予約サイトへの不正アクセスを公表した。攻撃者はシステムの脆弱性を突いて侵入し、最大約260万件（海外ホテル予約）と最大約86万件（多言語予約）の利用者情報が対象となった。うち最大3万6千件には支払情報も含まれる。10月20日に不正アクセスを検知し翌日に改修完了。個人情報保護委員会への報告も実施済み。クレジットカード番号全桁・パスワード・住所は対象外とされているが、氏名・メールアドレス・予約情報等が流出した可能性がある。利用者はフィッシングメールへの注意が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-03 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
