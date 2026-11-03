@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 04 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">エバーリッジ / 幕張メッセ</div>
+          <div class="card-badges">
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000238.000078233.html" target="_blank" rel="noopener">「DX総合EXPO 2026 秋 東京」「AI World 2026 秋 東京」が幕張メッセで本日開幕（〜11/6）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">国内最大規模のAI・DXソリューション展示会「DX総合EXPO 2026 秋 東京」「AI World 2026 秋 東京」「ビジネスイノベーション Japan 2026 秋 東京」が本日（11月4日）より幕張メッセにて3日間（〜6日）の日程で開幕した。生成AI・AIエージェント活用ソリューション、AI業務改革支援、DX推進ツールなど国内外の数百社が出展する。今回より「展示会ナビ」エリアが設置され、AIコンシェルジュが来場者の会場回遊をサポートする仕組みが初導入された。国内企業のDX・AI活用の最新動向を把握する場として3日間にわたって情報が発信される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="card-date">2026-11-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://asia.nikkei.com/business/markets/ipo/anthropic-seeks-to-raise-up-to-3.5bn-from-japanese-investors-in-ipo" target="_blank" rel="noopener">Anthropic、ナスダック上場に向け日本向け最大35億ドル（約5,528億円）の調達計画を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米Anthropicがナスダック（ティッカー：ANT）へのIPOに向け、みずほ証券など日本の主要金融機関を通じた日本向け販売で最大35億ドル（約5,528億円）を調達する計画を発表した。外資系AI企業による日本向けIPO調達額としては過去最大規模とされる。全体の資金調達目標は約750億ドル、想定時価総額は約1.5兆ドルで、ナスダック上場は11月中旬を目指す。同社は2026年5月にシリーズHで650億ドルを調達しており、今回のIPOは2026年最大級のテック上場案件となる見込み。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon / AWS</div>
+          <div class="card-badges">
+            <span class="card-date">2026-11-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://press.aboutamazon.com/2026/11/amazon-launches-new-amazon-sustainability-deep-tech-accelerator-to-fast-track-adoption-opportunities-for-breakthrough-climate-technologies" target="_blank" rel="noopener">Amazon、AWS・デバイス部門連携の「Sustainability Deep Tech Accelerator」設立を発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazonは11月3日、気候技術スタートアップの評価・採用を加速させる「Amazon Sustainability Deep Tech Accelerator」の設立を発表した。AWS、Amazon Devices、Amazon Private Brandsの3部門が一体となり、スタートアップが開発する突破口型気候技術を評価・導入するプログラムで、AWSのクラウドインフラを通じた技術検証・スケールアップ支援が含まれる。企業は同プログラムを通じてAWSの技術リソースと広範なサプライチェーンへのアクセスが得られる。サプライチェーンの脱炭素化・再生可能エネルギー調達効率化を目指す企業が主な対象となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ノジマオンライン</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nowledge.co.jp/security-news/2026-11-03-jp-nojima-online-7m/" target="_blank" rel="noopener">ノジマオンライン会員管理システムへの不正アクセスで約700万件の個人情報が漏洩</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">家電量販店ノジマが運営する「ノジマオンライン」と「中古スマホ買取サイト」の会員管理システムが不正アクセスを受け、会員情報約700万件が漏洩したことが判明した。11月1日に不正アクセスを検知し、同日に外部への漏洩を確認した。漏洩情報には氏名・住所・電話番号・メールアドレス・ログインID・暗号化パスワードが含まれる。クレジットカード情報は非保持のため対象外としており、両サイトは現在一時休止中。対象者への個別連絡と個人情報保護委員会への報告を進めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Next.js / Vercel</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-03</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://nextjs.org/blog/november-2026-security-release" target="_blank" rel="noopener">Next.js 2026年11月セキュリティリリース — 7件のMedium脆弱性を修正、即時アップグレードを推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">人気Reactフレームワーク「Next.js」が定例セキュリティリリースを実施し、7件のMedium（中）深刻度の脆弱性に対処した。10月27日に事前予告を公開しており、本日（11月3日）正式リリースと各脆弱性のアドバイザリが公開された。影響を受けるバージョンや対処法（アップグレード先バージョン）はアドバイザリに記載されており、開発チームは即時のアップグレードを推奨している。Next.jsは週45万件以上のnpmダウンロード数を誇る広く使われるフレームワークであり、影響範囲は広い。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Android</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cyber.spool.co.jp/cyber_news/20261104-android-bulletin-november-2026/" target="_blank" rel="noopener">Android 2026年11月セキュリティ情報 — 216件の脆弱性を修正、ユーザー操作不要のリモートコード実行リスクも</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleが「Android セキュリティ情報 2026年11月」を公開し、合計216件の脆弱性に対処した。最も深刻な問題として、Frameworkコンポーネントの脆弱性（CVE-2026-58868）が挙げられており、ユーザーの操作なしにリモートからコードを実行されるおそれがある。対象はAndroid 14〜17。現時点で悪用の事実は確認されていないが、最新のセキュリティパッチレベルへのアップデートが推奨される。端末のアップデートは「設定 → セキュリティ → システムアップデート」から確認できる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-04 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
