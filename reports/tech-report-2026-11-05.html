@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 05 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">東北大学・アイシン</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://monoist.itmedia.co.jp/mn/articles/2611/04/news046.html" target="_blank" rel="noopener">東北大学とアイシン、STT-MRAMを活用したエッジAIチップを共同開発——低消費電力でオンデバイス推論を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東北大学とアイシンは2026年11月4日、スピン移行トルク磁気抵抗メモリ（STT-MRAM）を組み込んだエッジAI向け専用チップの共同開発を発表した。STT-MRAMはSRAMに比べ待機電力を大幅に削減でき、車載・産業機器向けの省電力オンデバイス推論に適している。両社は量産試作を2027年度内に目指すとしており、自動車ECUや工場ラインへの展開を想定している。国内製造業のAI内製化を加速する取り組みとして注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">富士通</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新発表</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://xtech.nikkei.com/atcl/nxt/news/24/02301/" target="_blank" rel="noopener">富士通、光伝送システム「1FINITY」にAI障害予測機能を統合——ネットワーク運用のDXを推進</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">富士通は2026年11月4日、光伝送プラットフォーム「1FINITY」シリーズにAIベースの障害予測・自動復旧機能を追加したソフトウェアアップデートを発表した。機械学習モデルがリアルタイムの光信号品質データを解析し、障害発生前に異常を検知してオペレーターにアラートを出す。通信キャリアや大手企業のネットワーク管理コストを削減し、ネットワーク運用のDX化を後押しすることが狙いだ。国内通信事業者を中心に2027年上半期からの導入を見込んでいる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apple</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gadget-otaku.com/2026/11/04/siri-ai-developers-open-third-party-apps/" target="_blank" rel="noopener">Apple、Siri AI Developer Previewを公開——サードパーティアプリからAI機能を直接呼び出せる新API</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Appleは2026年11月4日、Siri AIの機能をサードパーティアプリが直接利用できる「Siri AI Developer Preview」を開発者向けに公開した。新APIを通じてアプリは自然言語理解・画像解析・テキスト要約などのApple Intelligence機能をオンデバイスで呼び出せるようになる。プライバシーを保ちながらAI機能を活用できる点が特徴で、iOS 20.2以降を対象としている。ヘルスケアや生産性ツールなど様々な分野でのAI統合アプリの登場が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">研究発表</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gigazine.net/gsc_news/en/20261104-anthropic-flashprove/" target="_blank" rel="noopener">Anthropic、zkSNARK技術「FlashProve」を発表——AIの推論過程を暗号学的に証明するフレームワーク</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年11月4日、ゼロ知識証明（zkSNARK）をAIモデルの推論ステップに適用する新フレームワーク「FlashProve」を研究論文として発表した。FlashProveはLLMが特定の推論ステップを踏んで回答したことを、モデルの内部重みを開示せずに暗号学的に証明できる仕組みを提供する。AIの説明責任・監査可能性を高める技術として注目されており、規制対応が求められる金融・医療分野でのAI活用を後押しする可能性がある。オープンソースとして公開される予定だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Backup / Amazon Redshift</div>
+          <div class="card-badges">
+            <span class="impact impact-low">アップデート</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.classmethod.jp/articles/20261104-aws-backup-adds-redshift-restore-testing/" target="_blank" rel="noopener">AWS Backup、Amazon Redshiftの復元テストに対応——バックアップの完全性を自動検証できるように</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年11月4日、AWS BackupがAmazon Redshiftのバックアップ復元テスト（Restore Testing）に対応したことを発表した。これにより、定期バックアップが実際に復元可能かどうかを自動テストするジョブをスケジュール実行できるようになった。復元テストの結果はAWS Backup コンソールとAmazon CloudWatchで確認でき、バックアップ戦略の信頼性向上に役立つ。コンプライアンス要件（ISO 27001、SOC 2等）を満たすためのバックアップ検証プロセスの自動化が容易になる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-flags-wordpress-rce-flaw-as-actively-exploited-in-attacks/" target="_blank" rel="noopener">CISA、WordPressのRCE脆弱性CVE-2026-119977をKEVカタログに登録——連邦機関への修正期限は11月6日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米CISAは2026年11月4日、WordPressコアに存在するリモートコード実行（RCE）脆弱性CVE-2026-119977（CVSS 8.1）を「Known Exploited Vulnerabilities（KEV）」カタログに追加した。この脆弱性は認証済みユーザーが細工したリクエストを送ることでサーバー上で任意コードを実行できるもので、実際の悪用（in-the-wild exploitation）が確認されている。影響を受けるバージョンはWordPress 6.5.x〜6.7.3で、修正済みバージョン6.7.4への早急な更新が推奨される。連邦政府機関は2026年11月6日までの対応が義務付けられた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Siemens IoT2050</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/attackers-exploit-critical-siemens.html" target="_blank" rel="noopener">Siemens IoT2050にCVSS 10.0の脆弱性CVE-2026-58115——バックドア経由の野外悪用が確認、緊急パッチ公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Siemensは2026年11月4日、産業用IoTゲートウェイ「IoT2050」シリーズに存在するCVSS 10.0の最高深刻度脆弱性CVE-2026-58115に対する緊急パッチを公開した。攻撃者はネットワーク経由で認証なしにデバイスへのバックドアを設置でき、ファクトリーやインフラ設備への不正アクセスが可能になる。製造業・エネルギー・水道などのOT環境で使われる機器であり、実際の悪用（in-the-wild exploitation）が複数のインシデント対応企業によって確認されている。影響バージョンはファームウェア2.x〜3.4.x、3.5.0以降への更新が必須。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress / CryptoPayment Gateway</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-04</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/attackers-target-unpatched.html" target="_blank" rel="noopener">WordPressプラグイン「CryptoPayment Gateway」にCVSS 10.0の脆弱性CVE-2026-81648——未パッチのまま仮想通貨ウォレット窃取攻撃が多発</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">研究者は2026年11月4日、WordPressの仮想通貨決済プラグイン「CryptoPayment Gateway」（インストール数13万以上）にCVSS 10.0の脆弱性CVE-2026-81648が存在することを公表した。攻撃者は認証なしでプラグイン設定を書き換え、決済先ウォレットアドレスを攻撃者のものに差し替えることができる。開発者との連絡が取れない状態が続いており、パッチは未公開のまま。WordPressリポジトリからプラグインは一時閉鎖措置が取られたが、既にインストール済みのサイトは引き続き危険な状態で、即時の無効化と代替プラグインへの移行が推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-05 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
