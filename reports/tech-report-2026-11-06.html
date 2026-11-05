@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --surface2: #f0f2f5;
+  --border: #e1e4e8;
+  --text: #24292e;
+  --text-muted: #586069;
+  --accent: #0366d6;
+  --accent-hover: #0256c0;
+  --tag-high-bg: #ffeef0;
+  --tag-high-fg: #d73a49;
+  --tag-medium-bg: #fff3cd;
+  --tag-medium-fg: #856404;
+  --tag-low-bg: #e6f7e6;
+  --tag-low-fg: #2e7d32;
+  --header-bg: #1b1f23;
+  --header-fg: #ffffff;
+  --nav-active: #0366d6;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #21262d;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-muted: #8b949e;
+    --accent: #58a6ff;
+    --accent-hover: #79b8ff;
+    --tag-high-bg: #3d1a1a;
+    --tag-high-fg: #f97583;
+    --tag-medium-bg: #3d2e00;
+    --tag-medium-fg: #e3b341;
+    --tag-low-bg: #1a3a1a;
+    --tag-low-fg: #56d364;
+    --header-bg: #010409;
+    --header-fg: #c9d1d9;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #21262d;
+  --border: #30363d;
+  --text: #c9d1d9;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-hover: #79b8ff;
+  --tag-high-bg: #3d1a1a;
+  --tag-high-fg: #f97583;
+  --tag-medium-bg: #3d2e00;
+  --tag-medium-fg: #e3b341;
+  --tag-low-bg: #1a3a1a;
+  --tag-low-fg: #56d364;
+  --header-bg: #010409;
+  --header-fg: #c9d1d9;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+header {
+  background: var(--header-bg);
+  color: var(--header-fg);
+  padding: 24px 16px 20px;
+  text-align: center;
+}
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+.header-date {
+  font-size: 0.875rem;
+  opacity: 0.75;
+  letter-spacing: 0.08em;
+}
+nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+nav a {
+  display: inline-block;
+  padding: 12px 14px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+nav a:hover { color: var(--text); }
+nav a.active { color: var(--nav-active); border-bottom-color: var(--nav-active); }
+main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+section {
+  margin-bottom: 40px;
+  scroll-margin-top: 56px;
+}
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+.section-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  transition: box-shadow 0.15s;
+}
+.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.card-top {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.card-service {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+.card-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex-wrap: wrap;
+}
+.impact {
+  display: inline-block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+.impact-high { background: var(--tag-high-bg); color: var(--tag-high-fg); }
+.impact-medium { background: var(--tag-medium-bg); color: var(--tag-medium-fg); }
+.impact-low { background: var(--tag-low-bg); color: var(--tag-low-fg); }
+.card-date {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.card-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.card-title a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.card-title a:hover { color: var(--accent-hover); text-decoration: underline; }
+details summary {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: "▶";
+  font-size: 0.6rem;
+  transition: transform 0.15s;
+}
+details[open] summary::before { transform: rotate(90deg); }
+.card-desc {
+  margin-top: 10px;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  padding-left: 2px;
+}
+footer {
+  background: var(--surface2);
+  border-top: 1px solid var(--border);
+  padding: 16px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>DX・AI・AWS Update</h1>
+  <p class="header-date">2026 &mdash; 11 &mdash; 06 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+</header>
+<nav>
+  <a href="#domestic" class="active">01 国内IT・DX</a>
+  <a href="#ai">02 AI</a>
+  <a href="#aws">03 AWS</a>
+  <a href="#security">04 セキュリティ</a>
+</nav>
+<main>
+
+<!-- ===================== 01 国内IT・DX ===================== -->
+<section id="domestic">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <span class="section-title">国内IT・DX</span>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">NTTドコモ</div>
+      <div class="card-badges">
+        <span class="impact impact-high">重要度 高</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://www.nhk.or.jp/shutoken/newsup/20261105d.html" target="_blank" rel="noopener">NTTドコモ 顧客情報最大約30万件流出の可能性を発表</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">NTTドコモは2026年11月5日、自社サーバーへの不正アクセスにより、顧客の氏名・住所・生年月日・携帯電話番号など最大約30万件の個人情報が漏洩した恐れがあると発表した。同社は流出経路の詳細を調査中で、不審な連絡への注意喚起と、パスワード変更などの自衛措置を顧客に呼びかけている。日本最大手の通信キャリアへの攻撃であり、広範な顧客への影響が懸念される。なお、同社は10月にドコモ光「plala（Sコース）」でも別の漏洩事案を公表しており、継続的なセキュリティ強化が課題となっている。</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">アイリスオーヤマ</div>
+      <div class="card-badges">
+        <span class="impact impact-high">重要度 高</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://www.irisplaza.co.jp/news/2026/11/05/security.html" target="_blank" rel="noopener">アイリスオーヤマ 公式通販への不正アクセスで約770万人分の個人情報漏洩の可能性</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">生活用品大手のアイリスオーヤマは2026年11月5日、公式通販サイト「アイリスプラザ」への不正アクセスにより、約770万人分の個人情報（氏名・住所・メールアドレス・電話番号・生年月日等）が漏洩した可能性を発表した。同サイトは10月下旬から一時停止中で、現時点でクレジットカード情報の流出は確認されていない。対象者への個別通知と再開時期の発表が待たれる状況で、被害規模の詳細な調査が続いている。</p>
+    </details>
+  </div>
+
+</section>
+
+<!-- ===================== 02 AI ===================== -->
+<section id="ai">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <span class="section-title">AI</span>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">OpenAI</div>
+      <div class="card-badges">
+        <span class="impact impact-medium">重要度 中</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://openai.com/blog/chatgpt-ui-update-november-2026" target="_blank" rel="noopener">OpenAI、ChatGPTのUIを刷新 — Chat/WorkタブをOne Viewに統合、Codexとのクォータ共通化も</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">OpenAIは2026年11月5日、ChatGPTアプリのUIを刷新し「Chat」「Work」の独立タブを廃止して一画面に統合すると発表した。まず一部ユーザーへの段階ロールアウトから始まり、12月からはコーディングエージェント「Codex」との利用枠（クォータ）も共通化される予定。ユーザーが用途ごとにコンテキストを切り替える手間を省き、エージェント型AIワークフローの統合を促進する意図がある。エンタープライズ向け機能拡充とも連動した変更とみられる。</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">Google / Gemini</div>
+      <div class="card-badges">
+        <span class="impact impact-medium">重要度 中</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://cloud.google.com/blog/products/ai-machine-learning/gemini-4-carbon-security-preview" target="_blank" rel="noopener">Google、Gemini 4 Carbon をサイバーセキュリティ専門家向けに段階提供開始</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">Googleは2026年11月よりGemini 4 Carbonのサイバーセキュリティ専門家向け先行提供を段階的に開始した。同モデルはGeminiファミリー最高性能とされ、コード生成・推論・長文脈理解で前世代を上回る。セキュリティアナリストによる脅威インテリジェンス分析や侵入テストの自動化への活用が期待され、まず認定サイバーディフェンダーを中心に公開される。一般向け提供時期は未定で、価格はGemini 4 Argonと同水準が予想されている。</p>
+    </details>
+  </div>
+
+</section>
+
+<!-- ===================== 03 AWS ===================== -->
+<section id="aws">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <span class="section-title">AWS</span>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">AWS Lambda</div>
+      <div class="card-badges">
+        <span class="impact impact-low">重要度 低</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://aws.amazon.com/about-aws/whats-new/2026/11/aws-lambda-soci-lazy-loading/" target="_blank" rel="noopener">AWS Lambda、SOCIによるコンテナイメージのLazy Loading対応でコールドスタートを最大70%削減</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">AWSは2026年11月5日前後、Lambda Managed Instances向けにSeekable OCI（SOCI）を使ったコンテナイメージのLazy Loading（遅延読み込み）サポートを発表した。SOCIを有効にすることでイメージ全体のダウンロードを待たずに関数実行を開始でき、コールドスタート時間を最大70%削減できるとしている。対象はLambda Managed Instancesのコンテナイメージ関数のみで、SOCI Index Manifest v2が必要。最初の呼び出し時にオンデマンドでファイルが取得されるため、所要時間が若干伸びる場合がある点に留意が必要。</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">Amazon ECS</div>
+      <div class="card-badges">
+        <span class="impact impact-low">重要度 低</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://aws.amazon.com/about-aws/whats-new/2026/11/amazon-ecs-managed-instances-cross-instance-spot/" target="_blank" rel="noopener">Amazon ECS Managed Instances、クロスインスタンス統合とSpotインスタンス統合をサポート</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">AWSは2026年11月5日のアップデートで、Amazon ECS Managed Instancesにクロスインスタンス（異なるインスタンスタイプ間）の統合とSpotインスタンスの統合機能を追加した。未使用キャパシティを自動的に回収・再割り当てし、クラスターの実効コストを削減できる。大規模なコンテナワークロードを運用する組織にとって、Spotインスタンスの活用率向上とインフラコスト最適化に直結するアップデートとなっている。設定はECSコンソールまたはAPIから有効化できる。</p>
+    </details>
+  </div>
+
+</section>
+
+<!-- ===================== 04 セキュリティ ===================== -->
+<section id="security">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <span class="section-title">セキュリティ</span>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">Google Android</div>
+      <div class="card-badges">
+        <span class="impact impact-high">重要度 高</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://source.android.com/docs/security/bulletin/2026-11-01" target="_blank" rel="noopener">Android 11月セキュリティ情報 — 216件の脆弱性を修正、CVE-2026-58868でユーザー操作不要のRCE</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">Googleは2026年11月5日、Androidの11月度セキュリティ情報を公開し、216件の脆弱性を修正した。うち23件がCritical評価で、最も深刻なのはFrameworkコンポーネントのCVE-2026-58868（リモートコード実行）で、ユーザーの操作なしに悪用される恐れがある。影響を受けるバージョンはAndroid 14〜17（16-QPR2含む）で、2026-11-05パッチレベル以降で全修正が適用される。端末メーカー・機種によって適用時期が異なるため、早急なアップデート確認が推奨される。</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">Linux / Red Hat</div>
+      <div class="card-badges">
+        <span class="impact impact-high">重要度 高</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://access.redhat.com/security/cve/CVE-2026-98432" target="_blank" rel="noopener">LinuxカーネルのMPTCPに CVSS 9.8 の脆弱性 CVE-2026-98432 — RHEL・OpenShiftに認証不要RCEの恐れ</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">2026年11月5日、LinuxカーネルのMultipath TCP（MPTCP）リスナーに存在するCVSS 9.8の脆弱性CVE-2026-98432が詳細公開された。認証なしでネットワーク越しに任意のコードをroot権限で実行できる可能性があり、RHEL 8/9およびOpenShiftへの影響が確認されている。Red Hatは修正済みパッケージを提供しており、即時のアップデートが強く推奨される。AWSもセキュリティ速報（2026-160-aws）でEKS向けパッチ（v20261031 AMI）を案内している。アップデートが困難な環境向けには暫定的な緩和策も公開されている。</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <div class="card-service">損保ジャパン / 松井証券 他</div>
+      <div class="card-badges">
+        <span class="impact impact-medium">重要度 中</span>
+        <span class="card-date">2026-11-05</span>
+      </div>
+    </div>
+    <div class="card-title">
+      <a href="https://www.sompo-japan.co.jp/news/2026/1105.html" target="_blank" rel="noopener">損保ジャパン・松井証券など複数社で顧客情報漏洩 — 委託先への不正アクセスが波及</a>
+    </div>
+    <details>
+      <summary>詳細を表示</summary>
+      <p class="card-desc">2026年11月5日、損保ジャパンと松井証券がそれぞれ委託先システムへの不正アクセスを原因とする顧客情報漏洩を発表した。損保ジャパンは自動車保険の契約情報・問い合わせ履歴など約6万5,000件、松井証券は顧客のメールアドレス最大83万件の漏洩可能性を公表している。いずれも自社システムへの直接侵入ではなく、業務委託先を経由した間接的な漏洩であり、メール配信サービス「アララ メッセージ」への不正アクセスによる7,700万件超のメールアドレス流出から連鎖する形で複数社への被害が広がっている。サプライチェーンリスク管理の重要性を改めて示した事例となっている。</p>
+    </details>
+  </div>
+
+</section>
+
+</main>
+<footer>
+  <span>2026-11-06 &nbsp; 過去24時間以内のアップデートを自動収集。各社公式発表・ニュースサイトより要約。情報は執筆時点のものです。</span>
+</footer>
+</body>
+</html>
