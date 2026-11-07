@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update — 2026-11-08</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <p class="header-label">Daily Tech Report</p>
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 08 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTドコモ / So-net</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2154115.html" target="_blank" rel="noopener">NTTドコモ委託先・So-net不正アクセスでplala Sコース顧客44万3,495件の情報流出—So-net全体では258万5,481件に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年10月19日に発生した委託先So-netへの不正アクセスで、NTTドコモはドコモ光plala（Sコース）の顧客44万3,495件の個人情報（氏名・電話番号・生年月日・住所・メールアドレス等）が外部流出したと発表した。So-net全体では計258万5,481件に上る大規模な漏洩となっており、旧プレミアムプランも含むSo-netユーザーにも影響が及んでいる。同社は不正利用の確認や二次被害対策を呼び掛けており、影響を受けた顧客に個別に通知を行っている。今回の事案はサプライチェーン経由の情報漏洩リスクの深刻さを改めて示すものとなった。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.datacenterdynamics.com/en/news/openai-to-rebrand-its-data-centers-as-compute-campuses-as-part-of-broader-policy-and-pr-push/" target="_blank" rel="noopener">OpenAI、AIデータセンターを「AIコンピュートキャンパス」に再定義—地域参加型建設プロセスを義務付ける州法化を提案</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIがAIデータセンターを「AIコンピュートキャンパス」として再定義し、地域住民・自治体が建設プロセスに参加できるよう義務付ける州法の制定を提案した。地域との共生を重視する政策・PR戦略の一環であり、エネルギー消費や環境負荷への批判に対応する動きとみられる。日本国内でも進むAIデータセンター整備に向けた立地・地域協議のあり方に影響を与える可能性がある。同社は国家規模のAIインフラ整備において、企業・政府・地域が協調する新たなモデルの確立を目指している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://247wallst.com/investing/2026/11/07/anthropic-could-postpone-its-1-5-trillion-ipo-per-one-investor-as-market-sours-on-ai-trade-another-says-it-could-end-up-closer-to-1-trillion/" target="_blank" rel="noopener">Anthropic IPO、中間選挙後のAI株安で延期リスク浮上—Kalshi予測市場での今月上場確率が60%へ急落、評価額も下方修正の見方</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">中間選挙後にAI・半導体株が急落し、Anthropicの今月IPO実施確率がKalshi予測市場で60%へ低下した。投資家の一部は評価額が$1.5兆から$1.2〜1.3兆に下方修正されると見ており、IPO自体の延期シナリオも現実味を帯びている。AI投資に慎重論が高まる市場環境の中、同社はNasdaq上場ロードショーを10日に開始する予定を維持しているが、最終的な判断は市場動向次第となっている。AIセクター全体への投資家信頼の揺らぎを示す重要な指標として注目されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aiweekly.co/ai-news-today/edition/2026-11-07" target="_blank" rel="noopener">OpenAI GPT-6 Cyber、自律研究で81件のFirefox新規脆弱性を発見—AIによる大規模ソフトウェア脆弱性調査の実用化を実証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIのセキュリティ特化モデルGPT-6 Cyberが、自律的にFirefoxブラウザの新規脆弱性81件を発見したと報告された。人間の研究者のガイダンスを最小限にしながら広範な脆弱性調査を実施できることを実証した形で、AIが攻撃側・防御側の双方に与える影響が改めて注目されている。セキュリティ研究の生産性向上に貢献する一方、悪意ある利用への懸念も高まっており、OpenAIはモデルへのアクセス制限を含む安全対策を検討中とされる。国際的なAIセキュリティ研究への投資が加速する中、AIと脆弱性発見の関係に新たな局面が生じている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS Security Hub / Amazon EKS</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.to/nadtakanfuthoem/serverless-aws-roundup-week-of-2026-11-06-1k29" target="_blank" rel="noopener">週次まとめ: AWS Security HubがSBOM組織横断インベントリを提供開始、EKS Argo CDがNotificationsをサポート</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">今週（2026年11月6日締め）の主要AWSリリースをまとめたサーバーレス週次レポートが公開された。AWS Security Hubが組織全体のコンピュートリソースに存在するソフトウェアパッケージのSBOM（ソフトウェア部品表）を一元インベントリとして提供開始し、サプライチェーンリスクの可視化が容易になった。またAmazon EKS Capability for Argo CDがArgo CD Notifications controllerをサポートし、GitOpsワークフローにおけるアラート通知・Slackや他ツールへの連携設定が可能になった。セキュリティ強化とDevOps運用効率化を後押しするアップデートが続いている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS re:Invent 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-low">イベント</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/apn/know-before-you-go-an-aws-partners-guide-to-reinvent-2026/" target="_blank" rel="noopener">AWS re:Invent 2026 プレビュー: Matt Garman CEOキーノートは12月1日開始、ラスベガスで2,200超のセッション—AIエージェント系テーマが中心</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS re:Invent 2026（ラスベガス、2026年11月30日〜12月4日）のパートナー向けプレビューガイドがAWS Partner Network（APN）ブログで公開された。CEO Matt GarmanによるCEOキーノートは12月1日午前8:30（PT）に開始予定で、今年はAIエージェント・生成AI・Amazon Bedrockを中心に2,200以上のセッションが予定されている。バーチャル参加でキーノートのライブ視聴も可能となり、現地参加できないパートナーへの対応も強化される。re:Inventでの発表内容は日本のAWS活用企業にとっても注目必至の内容となる見通しだ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google / Android</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/google-patches-critical-android-flaw.html" target="_blank" rel="noopener">Android 2026年11月セキュリティ更新: CVE-2026-58868（Critical、ゼロクリックRCE）含む216件を修正—即時アップデートを強く推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">GoogleがAndroid 14〜17向けに216件の脆弱性を修正する2026年11月セキュリティパッチを公開した。最重大はCVE-2026-58868（Critical）で、ユーザーの操作を一切必要とせずリモートからコード実行が可能なゼロクリックRCEであり、パッチレベル2026-11-01に修正が含まれている。企業・個人ともに速やかなアップデート適用が強く推奨される。モバイルデバイス管理（MDM）を利用している組織は優先度を上げて展開対応を進めること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SonicWall</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-07</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/sonicwall-patches-exploited-sonicos-bug-that-weakens-vpn-logins/" target="_blank" rel="noopener">SonicWall CVE-2026-19868、SSL VPN MFAバイパスで実際の悪用を確認—連邦機関に11月20日までの対応が義務付け</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">SonicWall SonicOSのCVE-2026-19868（CVSS 7.1）は、認証済みユーザーがSAML認証チェックおよびSAML強制MFAを迂回できる脆弱性で、SonicWall自身が実際の悪用（in-the-wild exploitation）を確認した。対処済みバージョンはSonicOS 7.3.4-7013以降および8.2.3-8015以降。CISAが連邦機関にBOD 26-04に基づき11月20日までの対応を義務付けており、企業・組織も速やかなパッチ適用が求められる。SSL VPNを使用しているすべての組織は影響バージョンの確認を直ちに行うこと。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">eSecurity Planet</div>
+          <div class="card-badges">
+            <span class="impact impact-low">週次まとめ</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://esecurityplanet.com/weekly-roundup/active-exploits-ai-attacks-and-massive-breaches-define-the-week" target="_blank" rel="noopener">今週のサイバーセキュリティまとめ: 重大脆弱性の積極的悪用・AI活用攻撃・大規模侵害が週を定義—Androidパッチ・SonicWall・WordPressが主要課題</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">eSecurity Planetの週次セキュリティまとめによると、今週（11月第1週）はAndroid Critical RCE（CVE-2026-58868）・SonicWall SSL VPN悪用確認・WordPressの積極的悪用継続など、実際に悪用が確認された重大脆弱性が多数重なった。AIを活用した攻撃の増加傾向も改めて浮き彫りになっており、防御側のAI活用も急務となっている。大規模な個人情報流出（NTTドコモ委託先等）も相次ぎ、組織のサプライチェーンセキュリティ強化が求められる週となった。セキュリティチームはパッチ優先度の見直しとインシデント対応計画の確認を推奨する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-08 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
