@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 11 &mdash; 09 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Salesforce Japan</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/yasuhitoo/n/n16302eaa1424" target="_blank" rel="noopener">Salesforce Japan、AIエージェント「Agentforce Coworker」国内正式提供開始 — 人間とAIの協働を商用化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Salesforceは今週、業務AIエージェントと人間が同一プロジェクト内で協働する「Agentforce Coworker」の国内一般提供を開始した。SalesforceのCRMや基幹業務データに直接アクセスし、顧客対応・商談管理・マーケティング自動化を自律的に実行できる。日本語インターフェースと監査ログ機能を標準搭載し、金融・保険・製造業などの大企業からの引き合いが高まっている。競合するMicrosoft Copilot StudioやServiceNow AI Agentとの差別化要素として「Salesforceデータとのゼロコピー統合」を前面に打ち出している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">BizAIdea / 調査レポート</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://bizaidea.com/press-release/45336/" target="_blank" rel="noopener">「AIネイティブDX白書2026年版」発刊 — 国内492社調査でAI本格活用企業が前年比2倍に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BizAIdeaが発刊した白書は、国内492社を対象とした調査をもとにAI導入の成熟度・ROI・組織変革の事例をまとめている。生成AIを本格活用する企業の比率は前年調査から約2倍に増加した一方、効果が出ない企業の最大障壁は「データ整備の遅れ」（58%）と「AI人材不足」（52%）だった。製造業・金融・医療分野での成功事例とAIエージェント活用ロードマップも収録されており、DX推進担当者や経営企画部門の参考資料として注目されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Cloud</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://note.com/yasuhitoo/n/n16302eaa1424" target="_blank" rel="noopener">Google Cloud、企業データ×AIエージェント基盤「Agentic Data Cloud」発表 — BigQueryとAgentspaceを統合</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは今週、BigQueryとAgentspaceを統合した「Agentic Data Cloud」を発表した。企業のデータレイクにAIエージェントが直接アクセスし、データパイプラインを構築せずに自律的な分析・レポート生成・意思決定支援が可能になる。Google Workspaceとの連携により、AIエージェントがGoogleドキュメントやスプレッドシートを直接操作する機能も含まれる。BigQuery・Vertex AI・Agentspaceの全スタックにエージェント機能を組み込む「Agentic First」戦略の中核製品として位置付けられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-gpt-6-1-terra-on-bedrock-step-functions-as-agent-tools-and-more-november-2-2026/" target="_blank" rel="noopener">OpenAI「GPT-6.1 Terra」、Amazon Bedrock経由で一般提供開始 — コーディングAI競争が新局面へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIの最新モデル「GPT-6.1 Terra」がAmazon Bedrock経由での一般提供を開始した。コーディングアシスタント向けに最適化されたモデルで、既存のGPT-6系モデルと比較してコード生成精度が大幅に向上している。AWS Lambda・Bedrock Agents・Step Functionsとのシームレスな連携が可能で、既存AWSワークフローに即時組み込める。AIコーディングツール市場でのAnthropicのClaude Code・Google Geminiとの競争が激化する中、OpenAIのクラウドパートナーシップ戦略の重要な一手として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Cognito</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.to/nadtakanfuthoem/serverless-aws-roundup-week-of-2026-11-06-1k29" target="_blank" rel="noopener">Amazon Cognito Plus プラン、SLA 99.99% へ強化（11月1日より適用） — 金融・EC向け高可用性を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは11月1日より、Amazon CognitoのPlusフィーチャープランにおいてSLAを99.99%に引き上げた（従来は99.9%）。ユーザー認証・セッション管理に高可用性が求められる金融機関・大規模ECサイト・SaaSプロバイダーに直接メリットがある。Plusプランには多要素認証の強化機能、カスタムドメイン、高度なセキュリティ設定も含まれる。SLAの強化は既存のPlusプランユーザーに自動適用され、追加コストは不要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon DynamoDB</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.to/nadtakanfuthoem/serverless-aws-roundup-week-of-2026-11-06-1k29" target="_blank" rel="noopener">Amazon DynamoDB「Bulk Import from Existing Tables」GA — 本番DBからの大規模データ移行を簡略化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSはAmazon DynamoDBの「Bulk Import from Existing Tables」機能を一般提供（GA）した。これまで新規テーブルへのインポートのみサポートされていたが、既存のDynamoDBテーブルへの大規模データ一括インポートが可能になった。S3に保存したCSV・DynamoDB JSON・Amazon Ion形式のデータを直接インポートでき、大規模なデータ移行・マイグレーション作業の工数が大幅に削減される。リージョンをまたいだデータ複製やテーブル統合のユースケースにも対応する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Linux Kernel / Red Hat</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tracpath.com/works/cloudops/linux-kernel-cve-2026-98432/" target="_blank" rel="noopener">【CVSS 9.8/Critical】Linux kernel CVE-2026-98432 — 認証不要のリモートコード実行、Red Hatが緊急評価</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Red HatはLinuxカーネルの脆弱性「CVE-2026-98432」をCVSS 3.1スコア9.8（Critical）と評価している。認証不要（Unauthenticated）でリモートから任意コードを実行される恐れがあり、特権昇格も伴う可能性が指摘されている。影響を受けるバージョンはLinux kernel 6.x系の特定バージョンで、Red Hat・Ubuntu・SUSEなど各ディストリビューションベンダーから緊急パッチが提供されている。ただちにカーネルをアップデートし、即時対応が難しい場合は影響を受けるサービスの一時停止を検討すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Trend Micro / Microsoft / Adobe</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.trendmicro.com/ja_jp/research/26/j/the-october-2026-security-update-review.html" target="_blank" rel="noopener">【月次まとめ】2026年10月セキュリティアップデート解説 — Microsoft 1,417件・Adobe 174件の脆弱性に対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">トレンドマイクロが公開した2026年10月のセキュリティアップデート解説によると、MicrosoftはPatch Tuesdayで1,417件（うちCritical 70件）、AdobeはReader/Acrobat・Photoshopなどで174件の脆弱性を修正した。Microsoftの修正にはゼロデイ1件（悪用確認済み、CVE-2026-96951、CVSS 8.8）が含まれており、早急なWindows Updateの適用が推奨される。Adobe製品でもリモートコード実行を許す重大脆弱性が複数含まれているため、Adobe製品ユーザーも更新が必要。企業の脆弱性管理担当者は優先度付けの参考にすること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">WordPress / Web セキュリティ</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-11-08</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tane-creative.co.jp/column/6335/" target="_blank" rel="noopener">【2026年11月版】WordPress プラグイン脆弱性まとめ — 高リスク脆弱性が急増、即時アップデートを推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年11月版のWordPress脆弱性情報まとめによると、今月は高リスク（CVSSスコア7.0以上）のプラグイン脆弱性が先月比で増加している。影響を受ける代表的なプラグインにはWooCommerce関連プラグイン、SEOプラグイン、フォームビルダー系が含まれており、SQLインジェクションや権限昇格のリスクがある。サイト管理者はWordPress管理画面からプラグインを最新版に更新し、使用していないプラグインは無効化・削除することが推奨される。自動更新が有効でない環境では特に注意が必要。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-09 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
