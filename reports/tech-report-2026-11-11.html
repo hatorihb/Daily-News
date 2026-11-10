@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update — 2026-11-11</title>
+<style>
+:root {
+  --black: #0a0a0a;
+  --white: #f5f5f5;
+  --red: #c0392b;
+  --gray: #2c2c2c;
+  --mid: #555;
+  --border: #3a3a3a;
+  --accent: #e74c3c;
+  --bg: #111;
+  --card-bg: #1a1a1a;
+  --text: #e0e0e0;
+  --subtext: #999;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif;font-size:15px;line-height:1.7}
+a{color:inherit;text-decoration:none}
+header{padding:48px 24px 32px;border-bottom:1px solid var(--border);max-width:900px;margin:0 auto}
+header .date{font-size:13px;letter-spacing:.15em;color:var(--subtext);margin-bottom:12px}
+header h1{font-size:28px;font-weight:700;letter-spacing:.02em}
+header .subtitle{font-size:13px;color:var(--subtext);margin-top:8px}
+nav{max-width:900px;margin:0 auto;padding:16px 24px;display:flex;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
+nav a{font-size:13px;padding:6px 14px;border:1px solid var(--border);border-radius:20px;color:var(--subtext);transition:all .2s}
+nav a:hover{border-color:var(--accent);color:var(--white)}
+main{max-width:900px;margin:0 auto;padding:32px 24px}
+section{margin-bottom:48px}
+section h2{font-size:12px;letter-spacing:.2em;color:var(--subtext);text-transform:uppercase;margin-bottom:20px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:14px;transition:border-color .2s}
+.card:hover{border-color:#555}
+.card-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.card-service{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--subtext);text-transform:uppercase}
+.card-badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-size:10px;padding:2px 8px;border-radius:3px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.badge-high{background:#4a1a1a;color:#ff6b6b;border:1px solid #7a2a2a}
+.badge-medium{background:#2a3a1a;color:#82c46b;border:1px solid #3a5a2a}
+.badge-low{background:#1a2a3a;color:#6bb4c4;border:1px solid #2a4a5a}
+.badge-critical{background:#6a0a0a;color:#ff4444;border:1px solid #9a1a1a}
+.card-date{margin-left:auto;font-size:11px;color:var(--subtext)}
+.card-title{font-size:16px;font-weight:600;margin-bottom:8px;line-height:1.5}
+.card-title a:hover{color:var(--white)}
+details{margin-top:8px}
+summary{font-size:13px;color:var(--subtext);cursor:pointer;user-select:none;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'▶ ';font-size:10px;transition:transform .2s}
+details[open] summary::before{content:'▼ '}
+.card-desc{font-size:13px;color:#aaa;margin-top:10px;line-height:1.75}
+.cve-info{margin-top:8px;font-size:12px;color:#ff9999;font-family:monospace;padding:8px 12px;background:#1f0f0f;border-radius:4px;line-height:1.9}
+footer{max-width:900px;margin:0 auto;padding:24px;border-top:1px solid var(--border);font-size:12px;color:var(--subtext);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<header>
+  <div class="date">2026 — 11 — 11</div>
+  <h1>DX · AI · AWS Update</h1>
+  <div class="subtitle">国内IT / AI / AWS / セキュリティ — Daily Tech Report</div>
+</header>
+<nav>
+  <a href="#domestic">01 国内IT・DX</a>
+  <a href="#ai">02 AI</a>
+  <a href="#aws">03 AWS</a>
+  <a href="#security">04 セキュリティ</a>
+</nav>
+<main>
+
+<!-- ==================== 01 国内IT・DX ==================== -->
+<section id="domestic">
+  <h2>01 — 国内 IT · DX</h2>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">Government / Cybersecurity</span>
+      <div class="card-badges"><span class="badge badge-medium">Medium</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://news.mynavi.jp/techplus/article/20261110-5292935" target="_blank" rel="noopener">
+        政府、サイバー対策に予備費100億円 閣議決定 — AIを活用した脆弱性診断20億円含む
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        政府は2026年11月10日の閣議で、サイバー攻撃対策として2026年度予算の予備費から約100億円の支出を決定。内訳はAIを活用して政府機関の重要システムの脆弱性を点検する事業に約20億円、警察のサイバー捜査機材整備に41億円、デジタル庁のシステム強化に38億円。近年の国内情報漏えい事案の多発を受け、防御側のAI活用を加速する方針。来年度以降の本格的なAIセキュリティ診断体制の整備につながる施策として注目される。
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">PFN / LLM</span>
+      <div class="card-badges"><span class="badge badge-medium">Medium</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://pc.watch.impress.co.jp/docs/news/2154837.html" target="_blank" rel="noopener">
+        PFN、金融業務特化LLM「PLaMo 3.0 Fin」をオープンウェイトで公開 — 商用利用可能ライセンス
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        Preferred Networks（PFN）が金融業務に特化した国産LLM「PLaMo 3.0 Fin」をオープンウェイトで公開した。問い合わせ分類、顧客確認（KYC）書類の突き合わせ、不正検知アラートの分析、融資先業況分析などの金融業務を想定した設計で、金融用語・規制文書に対する精度を重点的に向上。商用利用可能なライセンスで提供され、国内金融機関がモデルをファインチューニングして自社プロセスに組み込みやすい形態。国産モデルの金融垂直展開として注目される。
+      </div>
+    </details>
+  </div>
+
+</section>
+
+<!-- ==================== 02 AI ==================== -->
+<section id="ai">
+  <h2>02 — AI</h2>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">Anthropic / IPO</span>
+      <div class="card-badges"><span class="badge badge-high">High</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://fortune.com/2026/11/10/anthropic-ipo-price-range-ai-stock-sell-off/" target="_blank" rel="noopener">
+        Anthropic、NASDAQ上場に向けロードショー開始 — 仮条件70〜78ドル、時価総額最大1.4兆ドル規模
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        AnthropicはNASDAQ（ティッカー「ANT」）への新規株式公開（IPO）に向けたロードショーを2026年11月10日に開始した。仮条件は1株70〜78ドルで、全株売り出せば最大約643億5000万ドル（約10兆2300億円）の調達となる。Google・NVIDIAを含む戦略的パートナー7社がIPOとは別に260億ドルの出資を約束しており、上場後の完全希薄化ベース時価総額は最大1.4兆ドルとの評価。AI企業上場としては過去最大規模となる可能性があり、市場のAIセクターへの需要を測る試金石として注目が集まっている。
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">Anthropic / Claude</span>
+      <div class="card-badges"><span class="badge badge-medium">Medium</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://oodaloop.com/briefs/technology/anthropic-launches-claude-fable-5-2-and-claude-mythos-5-2-with-lower-pricing-and-advanced-agentic-reasoning/" target="_blank" rel="noopener">
+        Anthropic、Claude Fable 5.2 と Mythos 5.2 を発表 — 価格20%引き下げ・推論速度30%向上
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        AnthropicはClaude Fable 5.2とClaude Mythos 5.2を発表した。Fable 5.2は入力1Mトークンあたり8ドル・出力40ドルで前世代比20%値下げ。両モデルとも推論速度は前世代比30%向上。コーディング・多段階推論・ビジョン性能が強化され、エージェント型ワークフローへの適性が高まっている。Mythos 5.2はライフサイエンス・サイバーセキュリティ認証プログラム参加組織向けの限定提供。IPO直前のタイミングでの競争力強化として、コスト削減と性能向上を同時に達成した点が業界から注目されている。
+      </div>
+    </details>
+  </div>
+
+</section>
+
+<!-- ==================== 03 AWS ==================== -->
+<section id="aws">
+  <h2>03 — AWS</h2>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">AWS / Healthcare</span>
+      <div class="card-badges"><span class="badge badge-medium">Medium</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://www.healthcaredive.com/news/aws-pledges-100m-in-cloud-ai-credits-to-close-health-equity-gaps/874103/" target="_blank" rel="noopener">
+        AWS、医療格差解消に向け「AWS Health Impact Initiative」発表 — クラウド・AIクレジット1億ドル提供
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        AWSは医療格差（Health Equity）の解消を目指す医療・ヘルスケア機関を対象に、クラウドおよびAIサービスのクレジット計1億ドルを提供する「AWS Health Impact Initiative」を発表した。AIを活用した健康診断支援・疾病予測・医療アクセス改善ツールの開発を支援する。対象は低所得地域向け医療サービスを提供する非営利組織や医療研究機関。Amazon BedrockやAmazon HealthLake、Amazon Comprehend Medicalなどのマネージドサービスを活用し、フォーミュラリー管理・患者スクリーニング・医療翻訳などのユースケースを想定している。
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">AWS / re:Invent 2026</span>
+      <div class="card-badges"><span class="badge badge-medium">Medium</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://aws.amazon.com/events/reinvent/" target="_blank" rel="noopener">
+        AWS re:Invent 2026 プレビュー — 生成AI・マルチモーダルエージェント・新Gravitonが焦点に
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        来月ラスベガスで開催されるAWS re:Invent 2026（12月1〜5日）に向け、AWSがキーノートと発表トラックの予告を公開した。今年の焦点は生成AIエージェントの本番環境スケーリング、マルチモーダルモデルのBedrockへの追加、新世代Gravitonプロセッサ（Graviton5）、そしてServerless向けのゼロコールドスタート新機能が中心となる見通し。事前登録セッションはこれまでで最速のペースで埋まっており、エンタープライズのクラウドAI投資の活況を反映している。
+      </div>
+    </details>
+  </div>
+
+</section>
+
+<!-- ==================== 04 セキュリティ ==================== -->
+<section id="security">
+  <h2>04 — セキュリティ</h2>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">SAP / Critical Patch</span>
+      <div class="card-badges"><span class="badge badge-critical">Critical</span><span class="badge badge-high">CVSS 10.0</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://thehackernews.com/2026/11/sap-patches-four-cvss-100-flaws.html" target="_blank" rel="noopener">
+        【SAP Patch Day 11月】NetWeaver系にCVSS 10.0の脆弱性4件 — 認証不要のRCEとなりすましが悪用可能
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        SAPは2026年11月度Patch Day（第2火曜日: 11月10日）に、NetWeaverシステムに影響するCVSS 10.0の最高深刻度脆弱性4件を含むセキュリティアップデートを公開した。認証不要のリモートコード実行やなりすましが可能な脆弱性が含まれており、SAPを基幹システムとして利用する企業は最優先での対応が必要。SAP NetWeaer ABAPおよびJava Stackを運用する環境では即時パッチ適用を推奨。
+        <div class="cve-info">
+CVE-2026-120017 — SAML2認証バイパス (NetWeaver ABAP) — CVSS 10.0<br>
+  影響バージョン: SAP NetWeaver ABAP 7.50〜8.0 / 修正: SAP Note 3521908<br>
+CVE-2026-76964 — ICMメモリ破壊によるRCE — CVSS 10.0<br>
+  影響バージョン: SAP Web Dispatcher 7.77〜7.93 / 修正: SAP Note 3519982<br>
+CVE-2026-89126 — Web Dispatcherメモリ破壊 — CVSS 10.0<br>
+  影響バージョン: SAP Web Dispatcher ≤7.93 / 修正: SAP Note 3521103<br>
+CVE-2026-89103 — SAP Gatewayアクセス制御欠陥 — CVSS 10.0<br>
+  影響バージョン: SAP NetWeaver Gateway 7.50〜8.0 / 修正: SAP Note 3520416
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">Google Chrome / Zero-day</span>
+      <div class="card-badges"><span class="badge badge-critical">Critical</span><span class="badge badge-high">野良悪用確認</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://www.theregister.com/security/2026/11/10/chrome-zero-day-whack-a-mole-continues-as-2026-tally-hits-8/5308732" target="_blank" rel="noopener">
+        Chrome 2026年8件目のゼロデイ — CVE-2026-125350（XMLコンポーネントUAF）が実際の攻撃で悪用確認
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        GoogleはChrome 157.0.8103.50/.51（Windows/Mac）および157.0.8103.50（Linux）をリリースし、実際の攻撃で悪用が確認されたゼロデイ脆弱性CVE-2026-125350を修正した。XMLコンポーネントのUse-After-Free（UAF）に起因し、細工されたWebページを開くだけでリモートコード実行が可能。2026年に入って8件目のChrome野良悪用ゼロデイとなり、今年最多ペースを更新。Chromeの自動更新が有効な環境では既に配布開始されており、手動で確認・更新することを推奨。
+        <div class="cve-info">
+CVE-2026-125350 — Chrome XMLコンポーネント UAF — CVSS 9.6（推定）<br>
+  影響: Chrome 156.x以前（全プラットフォーム）<br>
+  修正版: Windows/Mac = 157.0.8103.50/.51 / Linux = 157.0.8103.50<br>
+  悪用: 野良悪用確認済み（Googleが認定）
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="card-top">
+      <span class="card-service">技研製作所 / Ransomware</span>
+      <div class="card-badges"><span class="badge badge-high">High</span></div>
+      <span class="card-date">2026-11-10</span>
+    </div>
+    <div class="card-title">
+      <a href="https://act1.co.jp/2026-11-10-03/" target="_blank" rel="noopener">
+        技研製作所にランサムウェアを含む不正アクセス — 約3,200人の個人情報漏えいのおそれ
+      </a>
+    </div>
+    <details>
+      <summary>詳細を見る</summary>
+      <div class="card-desc">
+        建設機械メーカーの技研製作所は2026年11月10日、社内ネットワークへの不正アクセスを受けランサムウェアに感染したことを公表した。漏えいのおそれがある情報は取引先および従業員を含む約3,200人分の個人情報（氏名、連絡先、取引情報など）。現在外部専門機関と連携して調査中であり、影響範囲の特定と被害拡大防止策を進めている。対象者への個別通知と相談窓口の設置を行っている。製造業のOT（運用技術）環境を狙ったランサムウェア攻撃が続いており、同業他社でも警戒が必要。
+      </div>
+    </details>
+  </div>
+
+</section>
+
+</main>
+<footer>
+  <span>2026-11-11 | Daily Tech Report</span>
+  <span>RSS feeds: all unavailable (network policy) — fallback: WebSearch</span>
+</footer>
+</body>
+</html>
