@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update — 2026-11-12</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Helvetica Neue',Arial,'Hiragino Kaku Gothic ProN',Meiryo,sans-serif;background:var(--white);color:var(--black);line-height:1.6;}
+a{color:inherit;text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* Header */
+header{background:var(--black);color:var(--white);padding:32px 0 28px;}
+header .container{max-width:900px;margin:0 auto;padding:0 20px;}
+header h1{font-size:1.6rem;font-weight:700;letter-spacing:.04em;}
+.header-date{margin-top:6px;font-size:.85rem;color:#aaa;letter-spacing:.08em;}
+
+/* Nav */
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100;}
+nav .container{max-width:900px;margin:0 auto;padding:0 20px;display:flex;gap:0;}
+nav a{display:inline-block;padding:12px 18px;font-size:.8rem;font-weight:600;letter-spacing:.05em;border-right:1px solid var(--border);transition:background .15s;}
+nav a:first-child{border-left:1px solid var(--border);}
+nav a:hover{background:var(--gray);text-decoration:none;}
+
+/* Main */
+main{max-width:900px;margin:0 auto;padding:40px 20px 60px;}
+
+/* Section */
+.section{margin-bottom:52px;}
+.section-header{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--black);}
+.section-number{font-size:.7rem;font-weight:700;color:var(--mid);letter-spacing:.12em;}
+.section-title{font-size:1.1rem;font-weight:700;letter-spacing:.02em;}
+
+/* Card */
+.card{border:1px solid var(--border);border-radius:4px;padding:20px 22px;margin-bottom:14px;transition:border-color .15s;}
+.card:hover{border-color:#aaa;}
+.card-meta{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.card-date{font-size:.72rem;color:var(--mid);font-weight:500;letter-spacing:.04em;}
+.badge{display:inline-block;padding:2px 8px;border-radius:2px;font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;}
+.badge-high{background:#ffeaea;color:#c0392b;border:1px solid #f5c6c6;}
+.badge-medium{background:#fff3e0;color:#b45309;border:1px solid #fcd9a0;}
+.badge-low{background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7;}
+.badge-info{background:#e3f2fd;color:#1565c0;border:1px solid #90caf9;}
+.card-title{font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.45;}
+.card-title a{color:var(--black);}
+.card-title a:hover{color:var(--red);text-decoration:none;}
+.card-body{font-size:.85rem;color:#333;line-height:1.65;}
+.card-body p{margin-bottom:4px;}
+.card-body strong{font-weight:600;}
+.cve-box{margin-top:10px;padding:10px 14px;background:var(--gray);border-radius:3px;font-size:.8rem;}
+.cve-box span{margin-right:16px;}
+
+/* Empty note */
+.empty-note{padding:16px 20px;background:var(--gray);border-radius:4px;font-size:.85rem;color:var(--mid);}
+
+/* Footer */
+footer{background:var(--gray);border-top:1px solid var(--border);padding:20px 0;}
+footer .container{max-width:900px;margin:0 auto;padding:0 20px;font-size:.78rem;color:var(--mid);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 11 &mdash; 12 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a href="#domestic">01 国内IT・DX</a>
+    <a href="#ai">02 AI</a>
+    <a href="#aws">03 AWS</a>
+    <a href="#security">04 セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section" id="domestic">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <span class="section-title">国内 IT・DX</span>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-11</span>
+        <span class="badge badge-medium">IMPACT: MEDIUM</span>
+      </div>
+      <div class="card-title">
+        <a href="https://www.jcci.or.jp/news/2026/1111104500.html" target="_blank" rel="noopener">
+          日本商工会議所 ネット試験システムに不正アクセス — 受験者最大98万人分の個人情報が漏えいのおそれ
+        </a>
+      </div>
+      <div class="card-body">
+        <p>日本商工会議所は2026年11月11日、同所が運営するネット試験（簿記・販売士・ITパスポートなど）のシステムに不正アクセスがあったと発表した。2022年4月1日〜2026年11月4日に受験した最大約98万人分の受験者情報（氏名・生年月日・合否判定・得点）が漏えいした可能性がある。</p>
+        <p>11月1日に不正プログラムが設置され、11月4日に異常を検知して削除。クレジットカード情報は別システム管理のため対象外。現時点で情報の不正利用は確認されていないが、同所は個人情報保護委員会へ報告し、影響を受けた受験者に個別通知を行う予定。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-11</span>
+        <span class="badge badge-medium">IMPACT: MEDIUM</span>
+      </div>
+      <div class="card-title">
+        <a href="https://scan.netsecurity.ne.jp/article/2026/11/11/56746.html" target="_blank" rel="noopener">
+          内閣サイバーセキュリティセンター（NISC）、AI活用型サイバー攻撃の継続を警告 — 100万件超の大規模情報漏えいが急増
+        </a>
+      </div>
+      <div class="card-body">
+        <p>NISCが公表した2026年上半期のサイバーセキュリティ動向レポートによると、AIを活用した攻撃プロセスの自動化・高度化が顕著に進んでいる。フィッシングメールのパーソナライゼーション、脆弱性スキャンの自動化、ソーシャルエンジニアリングの精度向上が特に報告されている。</p>
+        <p>国内では100万件超の大規模な情報漏えい事案が前年比で増加傾向にあり、特に製造業・医療機関・地方公共団体を標的にしたランサムウェア攻撃が継続している。NISCはゼロトラストアーキテクチャへの移行とEDR導入率向上を引き続き推奨している。</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section" id="ai">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <span class="section-title">AI</span>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-12</span>
+        <span class="badge badge-medium">IMPACT: MEDIUM</span>
+      </div>
+      <div class="card-title">
+        <a href="https://www.digitalapplied.com/blog/openai-ends-cursor-model-access-november-cutoff" target="_blank" rel="noopener">
+          OpenAI、AIコーディングエディタ Cursor へのモデルアクセスを本日終了 — SpaceX による Anysphere 買収後の契約解除
+        </a>
+      </div>
+      <div class="card-body">
+        <p>OpenAI は2026年11月12日をもって、AIコーディングエディタ「Cursor」（開発元: Anysphere）への API アクセス提供を終了した。SpaceX が8月末に Anysphere を買収したことに伴い、OpenAI が契約の Change of Control 条項を発動。90日間の移行期間を経て本日付けで失効した。</p>
+        <p>Cursor は既に Anthropic Claude および Google Gemini モデルへの切り替えを完了しており、ユーザーへのサービス影響は最小限とされている。競合の GitHub Copilot も OpenAI モデルを維持しており、AI コーディングツール市場でのモデル供給構図が変化している。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-12</span>
+        <span class="badge badge-low">IMPACT: LOW</span>
+      </div>
+      <div class="card-title">
+        <a href="https://www.anthropic.com/news/2026-usage-policy-update" target="_blank" rel="noopener">
+          Anthropic、2026年版利用ポリシーを本日施行 — Claude への持続的な虐待行為を新たに禁止項目へ追加
+        </a>
+      </div>
+      <div class="card-body">
+        <p>Anthropic の改訂利用ポリシーが2026年11月12日付けで正式施行された。主な変更点は、Claude に対する持続的・反復的な虐待的言動の禁止（感情的フラストレーションの一時的な発散は許容範囲内と明記）、Deceptive Activity セクションの新設（ディープフェイク・自動世論操作ツールの明確な禁止）、政治キャンペーンを標的にしたマイクロターゲティングルールの改定など。</p>
+        <p>本ポリシーは Claude.ai 直接利用者のみならず、AWS Bedrock および Google Cloud Vertex AI 経由で Claude を利用するエンタープライズユーザーにも適用される。API 利用企業は利用規約の確認と自社プロダクトへの反映が求められる。</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section" id="aws">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <span class="section-title">AWS</span>
+    </div>
+
+    <div class="empty-note">
+      本日（2026-11-12）は過去24時間以内に確認された新規 AWS サービス・機能アップデートはありませんでした。
+    </div>
+
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section" id="security">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <span class="section-title">セキュリティ</span>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-11</span>
+        <span class="badge badge-high">IMPACT: HIGH</span>
+      </div>
+      <div class="card-title">
+        <a href="https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/" target="_blank" rel="noopener">
+          【緊急】OpenSSH「SSHole」CVE-2026-123158 の野良悪用が急加速 — CISA KEV 登録済み、ボットネット・マイニング目的でroot権限を奪取
+        </a>
+      </div>
+      <div class="card-body">
+        <p>OpenSSH の重大な認証バイパス脆弱性「SSHole」の実際の攻撃悪用がここ48時間で急増していると Bleeping Computer が報告した。CISA は既に Known Exploited Vulnerabilities（KEV）カタログへ登録済み。</p>
+        <div class="cve-box">
+          <span><strong>CVE:</strong> CVE-2026-123158</span>
+          <span><strong>CVSS:</strong> 8.1 (High)</span>
+          <span><strong>CISA KEV:</strong> 登録済み</span>
+          <br><br>
+          <span><strong>影響:</strong> musl libc 環境 + PAM 無効の OpenSSH 全バージョン（glibc 環境・PAM 有効環境は影響なし）</span>
+          <br>
+          <span><strong>修正バージョン:</strong> OpenSSH 10.6p2</span>
+        </div>
+        <p style="margin-top:10px;">257〜1024バイトの特定サイズのパスワードを送信することで、ロックアウトされたアカウントへのログインが成功する。攻撃者はこれを利用してボットネット構築や仮想通貨マイニングのための root シェルを取得している。Alpine Linux など musl libc ベースのコンテナ環境が特に危険。即時パッチ適用または PAM 有効化を強く推奨。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-11</span>
+        <span class="badge badge-high">IMPACT: HIGH</span>
+      </div>
+      <div class="card-title">
+        <a href="https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/" target="_blank" rel="noopener">
+          Microsoft 11月定例パッチ（Patch Tuesday） — Outlook ゼロデイ CVE-2026-124194 が実際の攻撃で悪用確認、1,235件の脆弱性を修正
+        </a>
+      </div>
+      <div class="card-body">
+        <p>Microsoft は2026年11月第2火曜日（Patch Tuesday）として、1,235件のセキュリティ脆弱性を修正する更新プログラムを公開した。うち64件が Critical、1件が実際の攻撃での悪用が確認されたゼロデイ脆弱性。</p>
+        <div class="cve-box">
+          <span><strong>CVE:</strong> CVE-2026-124194</span>
+          <span><strong>CVSS:</strong> 6.5 (Moderate)</span>
+          <span><strong>悪用状況:</strong> 実際の攻撃で悪用確認済み</span>
+          <br><br>
+          <span><strong>製品:</strong> Microsoft Outlook (複数バージョン)</span>
+          <span><strong>種別:</strong> NTLMv2 ハッシュリーク → なりすまし攻撃</span>
+        </div>
+        <p style="margin-top:10px;">特別に細工されたメールをプレビューするだけで NTLMv2 認証ハッシュが流出し、攻撃者によるなりすましに悪用される可能性がある。Outlook の更新は Office 更新チャネル経由（Windows Update では提供されないため注意）。IPA も注意喚起を発出済み。</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-meta">
+        <span class="card-date">2026-11-11</span>
+        <span class="badge badge-medium">IMPACT: MEDIUM</span>
+      </div>
+      <div class="card-title">
+        <a href="https://nodejs.org/en/blog/vulnerability/november-2026-security-releases" target="_blank" rel="noopener">
+          Node.js 2026年11月セキュリティリリース — HIGH 脆弱性7件を含む全16件修正（v22.23.5 / v24.22.3 / v26.13.1）
+        </a>
+      </div>
+      <div class="card-body">
+        <p>Node.js セキュリティチームは2026年11月11日（UTC）、全サポートラインのセキュリティ修正バージョンをリリースした。High 以上の脆弱性が7件含まれており、HTTP/2 および TLS に集中している。</p>
+        <div class="cve-box">
+          <strong>HIGH CVE（主要7件）:</strong><br><br>
+          <span>CVE-2026-123866: HTTP/2 Use-After-Free (22.x / 24.x / 26.x)</span><br>
+          <span>CVE-2026-123864: TLS ヒープメモリリーク (22.x / 24.x / 26.x)</span><br>
+          <span>CVE-2026-123872: TLS 再ネゴシエーション mTLS バイパス (22.x / 24.x / 26.x)</span><br>
+          <span>CVE-2026-126051: TLS サーバーリモートプロセス終了 (24.x / 26.x)</span><br>
+          <span>CVE-2026-123874: HTTP/2 respondWithFile() UAF (24.x / 26.x)</span><br>
+          <span>CVE-2026-123865: HTTP/2 セッションメモリ / FD リーク (24.x / 26.x)</span><br>
+          <span>CVE-2026-123863: HTTP/2 リモートアボート (24.x / 26.x)</span>
+        </div>
+        <p style="margin-top:10px;">Node.js を本番環境で稼働させているサービスはいずれかのサポート対象バージョン（v22 LTS, v24 LTS, v26 Current）への早急なアップデートを推奨。v20 は2026年4月でサポート終了済みのため、今回の修正は提供されない。</p>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span>2026-11-12 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
