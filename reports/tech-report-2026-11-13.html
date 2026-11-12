@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update — 2026-11-13</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2;color:var(--red)}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 11 &mdash; 13 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">アララ / 内閣府・自治体</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.gate02.ne.jp/lab/incident-news/cabinet-office-20261112/" target="_blank" rel="noopener">アララメッセージへの不正アクセスが波及 — 内閣府6.3万件・千葉興業銀行17万件など官公庁・金融機関に被害拡大、メール配信停止が継続</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">メール配信サービス「アララメッセージ」（アララ株式会社）が2026年10月28日に不正アクセスを受けた事案の影響が拡大している。内閣府は11月11日、14種類のメールマガジン登録者の合計62,863件のメールアドレス（重複除き61,751件）が漏洩した可能性があると発表。氏名・ニックネーム・年齢層・所属組織なども流出のおそれがある。千葉興業銀行も顧客メールアドレス約17万件の漏洩を発表しており、兵庫県姫路市をはじめ複数の自治体・金融機関に被害が波及している。アララは10月31日からアララメッセージの全面停止を継続中で、侵入経路と最終的な被害範囲の調査を進めている。漏洩メールアドレスを悪用した標的型フィッシングへの注意が呼びかけられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本IBM</div>
+          <div class="card-badges">
+            <span class="impact impact-low">重要度 低</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.mynavi.jp/techplus/article/20261112-5308855/" target="_blank" rel="noopener">日本IBM、AIでSAP Cloud ERPへの移行を支援する導入サービスを開始 — 現行業務の自動分析とFit to Standard検討をAIが支援</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本IBMは2026年11月12日、AI技術を活用してSAP Cloud ERPへの移行を支援する新たな導入コンサルティングサービスの提供を開始した。現行業務プロセスのAIによる自動分析、SAP標準機能との適合率（Fit to Standard）の検討支援、標準機能で対応できない業務のアドオン開発判断支援を提供する。国内企業のERPクラウド移行はコスト・工数の見通しの立てにくさが障壁となっており、AIを活用することで移行前のアセスメント精度を向上させるねらい。IBMはすでにSAPと共同クラウドソリューションの採用拡大に取り組んでおり、今回のサービスはその国内向け展開の一環となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.zaikei.co.jp/article/20261112/877212.html" target="_blank" rel="noopener">Anthropic、NASDAQ IPOのロードショー開始 — 需要は応募株数の数倍、公募・私募合計で最大904億ドル（約14.5兆円）調達目指す</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicは2026年11月10日にNASDAQへのIPOに向けたロードショーを開始し、公開価格帯を1株70〜78ドルに設定した。公募と私募増資を合わせた最大調達額は904億ドル（約14兆5,000億円）で、実現すれば史上最大規模のIPOとなる見込みである。需要はすでに募集株数の数倍に達しており（財経新聞、2026年11月12日報道）、主要テクノロジー企業7社が私募で計260億ドル分の購入を確約済みとされる。公開価格の確定は2026年11月18日（EST）、NASDAQ（ティッカー：ANT）への上場開始は11月19日の予定。Anthropicは日本でも有価証券届出書を提出しており、最大35億ドル分の公募株が日本の投資家向けに設定されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google DeepMind</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.digitaltrends.com/computing/google-gemini-4-carbon-is-now-available-for-complex-ai-tasks/" target="_blank" rel="noopener">Google、フロンティアAIモデル「Gemini 4 Carbon」を一般提供開始 — 長期多段階ワークフロー向け、API入力 $2/百万トークン</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年11月10日、フロンティアAIモデル「Gemini 4 Carbon」の一般提供を開始した。限定的なサイバーセキュリティ研究機関向けFairwindプレビューを経て、API開発者・法人向けGemini（Gemini for Business）・Google AI Ultraサブスクライバーへの提供が始まった。Gemini 4 Argonが汎用ソフトウェアエンジニアリング向けとされるのに対し、Carbonは複数ステップの長期ワークフロー・科学的推論・発見に特化した設計。APIの価格は入力$2/百万トークン・出力$10/百万トークン。Google AI StudioおよびGemini appのAI Ultraプランで利用可能で、AIプロ・研究者・科学系ユーザーを主な対象とする。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日（2026-11-13）は過去24時間以内に確認された新規 AWS サービス・機能アップデートはありませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Barracuda / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/cisa-kev-six-vulnerabilities-november-2026/" target="_blank" rel="noopener">【CISA KEV・連邦修正期限本日】Barracuda ESG に認証バイパス＋OSコマンドインジェクションの組み合わせ攻撃 — CVE-2026-116606 / CVE-2026-111560</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年11月10日、Barracuda Email Security Gateway（ESG）の2件の脆弱性をKEVカタログに登録した。CVE-2026-116606（認証バイパス）はESGの管理インターフェースに対して管理者権限なしでアクセスできる脆弱性で、CVE-2026-111560（OSコマンドインジェクション。複数のBarracuda製品に影響）と組み合わせることでroot権限を取得可能。セキュリティ企業Previdianは2026年11月9〜11日の間に17件の攻撃試行を観測し、実際の攻撃が進行中と警告している。影響を受けるバージョンはBarracuda ESG 9.4.0.030以前。利用組織はただちにアップデートを適用する必要があり、米国連邦政府機関への修正期限は本日（2026年11月13日）。ESGのほかBarracuda WAF・ADC・Archiverにも影響する可能性があるため、同社製品の利用組織は製品横断での確認が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://socradar.io/blog/cve-2026-125350-google-chrome-xml-0day/" target="_blank" rel="noopener">【CISA KEV登録済み】Google Chrome ゼロデイ CVE-2026-125350 — XMLコンポーネントの Use-After-Free、2026年8本目の実悪用ゼロデイ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleは2026年11月9日、ChromeのXMLコンポーネントにおけるUse-After-Free脆弱性（CVE-2026-125350、重要度：高）の修正版をリリースした。Google自身が「野生での悪用を認識している」と明言しており、CISAは11月10日に同CVEをKEVカタログへ登録（米国連邦機関への修正期限は11月24日）。2026年Chromeにおける8本目のゼロデイとなる。修正済みバージョンはChrome 157.0.8103.50（Windows/macOS は .50/.51）、拡張安定版は156.0.8078.96。ChromiumベースのMicrosoft Edgeも影響を受けており、Edge 157.0.4341.46以降への更新が推奨される。更新後はブラウザの完全再起動が必要で、起動済みの場合は「設定 → Chromeについて」から手動で確認できる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">アララ / 内閣府・千葉興業銀行</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-12</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.gate02.ne.jp/lab/incident-news/cabinet-office-20261112/" target="_blank" rel="noopener">委託先SaaS経由の大規模情報漏洩が継続 — アララメッセージ不正アクセスで内閣府・千葉興業銀行など複数の官公庁・金融機関に被害</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">メール配信SaaS「アララメッセージ」（アララ株式会社）への不正アクセスによる被害が、同サービスを利用していた多数の組織に波及している。内閣府では14種類のメルマガ登録者62,863件のメールアドレスと氏名等が漏洩のおそれ（11月11〜12日発表）。千葉興業銀行も顧客メールアドレス約17万件の漏洩を発表。兵庫県姫路市をはじめ複数の自治体からも同様の被害が報告されている。侵入は10月28日に発見され、アララは同日から全面停止継続中。サプライチェーンリスクの観点から、外部委託のメール配信・マーケティングオートメーションサービスの利用状況の棚卸しと、顧客への情報変更通知を推奨する。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-13 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
