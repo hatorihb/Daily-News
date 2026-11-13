@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 14 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">国内スタートアップ / 資金調達</div>
+          <div class="card-badges">
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.nikkei.com/article/DGXZQOUC123SD0S6A111C2000000/" target="_blank" rel="noopener">国内AIスタートアップ相次ぎ調達 — Booost 17.5億円（非財務情報開示AI）、BALLAS 10億円（建設DX）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI活用した非財務情報収集・開示支援SaaSを提供するBooostが、スパークスやAGキャピタル等から17.5億円を調達した。建設工事向け部材調達代行サービスのBALLASも同日、10億円の資金調達を発表。いずれも国内企業のDX需要を背景に成長しており、特にBooostはESG・サステナビリティ対応でのAI活用を加速する。大手企業の非財務情報開示義務強化を追い風に、今後の事業拡大が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">良品計画 / 情報漏洩</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://internet.watch.impress.co.jp/docs/news/2154222.html" target="_blank" rel="noopener">無印良品、「MUJI Card」カード番号約109万件の流出可能性も判明 — 累計2,726万件漏洩、2021年以前入会者に影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">良品計画は、2021年7月以前にMUJI Cardへ入会した会員最大約109万件（うち約34.5万件は現時点で有効）でカード番号の全桁・MUJI Card ID・生年月日が流出した可能性があると発表した。MUJIアプリへのリスト型攻撃に端を発した今回の漏洩は、無印良品ネットストアにも波及し、累計約2,726万件（うち約52万件は住所・氏名・電話番号を含む）に拡大している。カード番号はポイント連携のため2021年7月の連携終了後も良品計画のシステムに残存していたことが判明した。身に覚えのないカード請求がないか確認し、不審なメール内URLへのアクセスを避けることが推奨されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cohere / 日本事業</div>
+          <div class="card-badges">
+            <span class="card-date">2026-11-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.manilatimes.net/2026/11/13/tmt-newswire/pr-newswire/cohere-deepens-commitment-to-japan-with-sovereign-ai-investments-and-growing-enterprise-adoption/2469247" target="_blank" rel="noopener">Cohere、日本法人設立へ — 富士通との「Takane」がデジタル庁GENAI環境で評価採択</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">エンタープライズ向けLLMを手がけるCohereが、日本法人の設立計画を公表した。富士通と共同開発した日本語特化LLM「Takane」（Command R+ベース）が、デジタル庁の政府AI活用環境「GENAI」の評価において採択されたことも合わせて発表された。ソブリンAI（データ主権を確保した国内AIインフラ）への投資意向を明確にし、日本の公共・金融・製造分野での拡大を狙う。国産AI基盤の整備が加速する中、海外AI企業による日本特化モデルの提供競争が本格化している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / IPO</div>
+          <div class="card-badges">
+            <span class="card-date">2026-11-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://allmind.ai/research/anthropic-ipo-preview" target="_blank" rel="noopener">Anthropic IPO: クラウド・半導体7社から$260億のアンカー投資確保、11月19日の上場へ向け需要好調</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NASDAQへの上場（ティッカー ANT）を目指すAnthropicのIPOロードショーが進行中で、Amazon・Google等クラウド・半導体7社が議決権なしのClass N株式を合計260億ドル取得することで合意したことが確認された。価格レンジは1株$70〜78（完全希薄化後時価総額$1.4兆〜、調達総額約$61億ドル）で、11月18日の価格決定・19日の取引開始が見込まれている。AIセクターの売り相場が続く中でも機関投資家の需要は堅調で、ブックビルディングは順調に進んでいると伝えられる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内に確認できた新しいAWSアップデートはありませんでした（全RSSフィードおよびAWS What's Newページへのアクセスが環境制限により不可）。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Patch Tuesday 2026-11</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://msrc.microsoft.com/blog/2026/11/november-2026-security-updates/" target="_blank" rel="noopener">Microsoft 11月定例パッチ — Outlookゼロデイ CVE-2026-124194 実悪用確認・CISA KEV登録、連邦機関の修正期限は11月24日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Microsoftの2026年11月のセキュリティ更新では計1,093件のCVEが修正され、うち63件がCriticalに分類された。なかでも CVE-2026-124194（Microsoft Outlookのなりすまし脆弱性、CVSS 6.5）は実際の攻撃への悪用が確認されCISA KEVカタログへ登録された（連邦機関の修正期限：2026年11月24日）。細工したメッセージファイルを開くだけでNTLMv2ハッシュが漏洩し、攻撃者がなりすましに利用可能。影響対象はMicrosoft 365 Apps・Office LTSC 2021および2024で、緊急対策としてSMBポート445のアウトバウンドブロックが推奨されている。発見者はBenoît Sevens氏（Anthropic Claude使用）。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Node.js / セキュリティリリース</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://nodejs.org/en/blog/vulnerability/november-2026-security-releases" target="_blank" rel="noopener">Node.js 緊急セキュリティ更新 — 7件のHigh脆弱性をv22.23.5 / v24.22.3 / v26.13.1で修正（2026年11月11日リリース）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Node.jsは2026年11月11日、全アクティブリリースライン（22.x / 24.x / 26.x）向けにセキュリティ更新をリリースした。修正された脆弱性は計16件で、うちHigh評価が7件含まれる。主な脆弱性はHTTP/2によるリモートアボート、TLSヒープデータリーク、Use-after-freeによるメモリ破壊、TLS再ネゴシエーションを悪用した認証バイパス等。サーバー公開環境やCI/CDパイプラインでNode.jsを使用している場合は即時アップデートが推奨される。旧来の安定版（18.x以前）は今回のアップデート対象外のためEOLへの注意も必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenSSH / CVE-2026-123158</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-13</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://rocket-boys.co.jp/security-measures-lab/weekly-csirt-2026-11-week2/" target="_blank" rel="noopener">OpenSSH「SSHole」CVE-2026-123158 — CISA KEV登録済み、開示から数日で実悪用確認・特定設定で認証バイパス可能</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenSSHの認証バイパス脆弱性 CVE-2026-123158（通称「SSHole」）は、特定の設定が有効な場合に認証を回避してリモートアクセスを可能にするもので、公開後数日以内に実際の悪用が確認された。2026年11月9日にCISA KEVカタログへ登録されており、政府機関や重要インフラへの影響が懸念されている。国内でも多くのLinuxサーバーでOpenSSHが稼働しているため、当該設定の有無を速やかに確認し、ベンダーが提供するパッチまたは設定変更による回避策を適用することが急務となっている。SSH公開鍵認証のみでの運用やアクセス元IPの制限も有効な緩和策として推奨されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-14 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
