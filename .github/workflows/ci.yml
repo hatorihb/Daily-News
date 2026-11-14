@@ -1,0 +1,52 @@
+name: CI
+
+# PR ごとにハーネス自体（ワークフロー・RSS スクリプト・検証 hook）を検査する。
+# dependabot-automerge.yml はこのチェックが全て通った Dependabot の patch/minor PR だけをマージするので、
+# ここが「無人で入る更新」を止める唯一の関門になる。
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-workflows:
+    name: Lint workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      # バージョンを固定して、ローカルで確認した結果と CI の結果を一致させる。
+      # ubuntu-24.04 のシステム Python は externally-managed で pip install を拒否しうるので venv に入れる。
+      # venv の bin を PATH の先頭に置き、actionlint が固定版の shellcheck を使うようにする。
+      - name: Install linters
+        run: |
+          python3 -m venv "$RUNNER_TEMP/lint"
+          "$RUNNER_TEMP/lint/bin/pip" install --quiet actionlint-py==1.7.12.25 shellcheck-py==0.11.0.1 pyyaml==6.0.3
+          echo "$RUNNER_TEMP/lint/bin" >> "$GITHUB_PATH"
+
+      # 構文・式・Action の入力名（メジャー更新で変わりうる）・run: 内のシェルを検査する
+      - name: actionlint
+        run: actionlint -color
+
+      - name: dependabot.yml is valid YAML
+        run: python -c "import yaml; yaml.safe_load(open('.github/dependabot.yml'))"
+
+  test-scripts:
+    name: Test scripts and hooks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - name: RSS pre-fetch script (scripts/fetch_rss.py)
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Report validation hooks (.claude/hooks)
+        run: bash tests/test_hooks.sh

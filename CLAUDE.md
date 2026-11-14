@@ -72,3 +72,10 @@ Dependabot opens a PR immediately whenever a dependency has a published vulnerab
 - `.github/dependabot.yml` is generated: after adding a package directory, re-run `./install.sh add . --with dependabot` instead of editing it.
 - Never add `ignore:` rules to it: Dependabot applies `ignore` to security updates too, so it would silently block vulnerability fixes. To stop a version update, close its PR or use `allow`.
 - Auto-merge is only as safe as the checks behind it. When adding features, add tests — they are what stops a bad update from shipping unattended.
+
+### Daily-News specifics
+
+- **CI (`ci.yml`) is the gate.** It runs on every PR: `actionlint` (with shellcheck) over all workflows, `tests/test_fetch_rss.py`, and `tests/test_hooks.sh` (the report-validation hooks must accept a valid report and reject broken ones). Dependabot PRs auto-merge only after these pass. If you change `scripts/fetch_rss.py` or `.claude/hooks/*`, update the tests in the same PR.
+- **Actions are pinned to full commit SHAs** with the version as a trailing comment (`uses: actions/checkout@<sha> # v4.4.0`). Keep that format for any new `uses:` line — it is what lets Dependabot propose patch/minor bumps, and it stops a moved tag from swapping the code that runs.
+- **Merging needs the Dependabot secret `DEPENDABOT_MERGE_TOKEN`.** Every Dependabot PR here edits `.github/workflows/`, which `GITHUB_TOKEN` can never merge. Use a fine-grained PAT limited to this repository with Contents, Pull requests and Workflows set to read/write, stored under Settings → Secrets and variables → **Dependabot** (Actions secrets are not visible to Dependabot runs). Without it the auto-merge job fails fast and the PR waits for a human.
+- `dependabot-automerge.yml` is customized for the token above. Re-running `install.sh add . --with dependabot` overwrites it (keeping a `.bak`) — re-apply the change afterwards.

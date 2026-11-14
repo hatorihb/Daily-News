@@ -13,7 +13,7 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           ref: main
           fetch-depth: 0
@@ -127,7 +127,8 @@ jobs:
           done <<< "${{ steps.detect.outputs.changed }}"
 
           # index.html が実行時に GitHub API を叩かなくて済むよう、レポート一覧を静的生成する
-          ls reports/tech-report-*.html 2>/dev/null \
+          shopt -s nullglob
+          printf '%s\n' reports/tech-report-*.html \
             | sed 's|^reports/||' | sort -r \
             | jq -R -s 'split("\n") | map(select(length > 0))' > reports.json
           git add reports.json
