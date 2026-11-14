@@ -62,3 +62,13 @@ An alternative to the claude.ai Routine that runs on GitHub Actions with the Ant
 - Don't disable or modify hooks to "make it work" — fix the actual problem.
 - Don't commit `.env` files. The secret-scan hook ignores gitignored paths, but committing them anyway is still a leak.
 - Don't push placeholder / "test" content to a `claude/**` branch — it will auto-merge and go public on `main`.
+
+
+## Dependency updates (Dependabot)
+
+Dependabot opens a PR immediately whenever a dependency has a published vulnerability, and once a week opens one grouped PR of minor/patch updates per package directory (each release held 5 days first). Patch and minor PRs merge automatically once every other check on the PR passes; major updates, and any PR whose checks fail, stay open for manual handling.
+
+- When asked to handle an open Dependabot PR, read the changelog for breaking changes, adapt the code, and get the checks green. Security PRs are priority work — each open one is a known vulnerability in production.
+- `.github/dependabot.yml` is generated: after adding a package directory, re-run `./install.sh add . --with dependabot` instead of editing it.
+- Never add `ignore:` rules to it: Dependabot applies `ignore` to security updates too, so it would silently block vulnerability fixes. To stop a version update, close its PR or use `allow`.
+- Auto-merge is only as safe as the checks behind it. When adding features, add tests — they are what stops a bad update from shipping unattended.
