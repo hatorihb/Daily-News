@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 15 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AI Security Summit / 日本セキュリティ大賞</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">受賞発表</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000195.000115435.html" target="_blank" rel="noopener">日本セキュリティ大賞2026 受賞者発表 — 国内企業・自治体のAI活用と防御取組み13組を表彰</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI & Security Summit 2026（東京）にて、AIを活用したセキュリティ対策や防御実装で優れた国内企業・自治体13組が日本セキュリティ大賞2026を受賞した。製造・金融・自治体など幅広いセクターの取組みが表彰され、ライトニングトーク賞には大東コーポレートと都城市が選出された。自治体のAI活用が本格化する中、同アワードは業界横断の知見共有の場として注目を集めており、各受賞事例は実装ロードマップの参考として広く活用されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AI Security Summit 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-low">事例発表</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000197.000115435.html" target="_blank" rel="noopener">AI & Security Summit 2026 — 国内企業のAI活用事例11組が登壇・発表</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AI & Security Summit 2026では、製造・金融・医療・自治体など各セクターにおける生成AIの業務効率化事例や、AIを用いたセキュリティインシデント対応の取組みを持つ国内企業11組が登壇した。各社の実装事例や課題、成果が共有され、AIとセキュリティの統合的な活用推進に向けた議論が行われた。特にリスク管理とAI導入を両立する手法について実践的な知見が集まった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / IPO</div>
+          <div class="card-badges">
+            <span class="impact impact-high">業界動向</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://fourweekmba.com/ai-anthropic-ipo-said-oversubscribed-115b-book-1-3x-spacex/" target="_blank" rel="noopener">AnthropicのIPO申込倍率が1,150億ドル超に — NVIDIAとGoogleが各100億ドル購入意向、評価額1.5兆ドル超へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropicのロードショー（11月10日開始）で、機関投資家の申込額が1,150億ドル（約17兆円）を超え、スペースXのIPO申込需要の1.3倍に達した。NVIDIAとGoogleがそれぞれ100億ドルの購入意向を表明し、幹事銀行は$70〜78の価格レンジの引き上げを検討している。評価額が1.5兆ドル超となる可能性が浮上しており、AI業界最大規模のIPOとして注目される。11月18日に価格決定、翌19日にNASDAQ（ANT）上場予定。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CrowdStrike / AIセキュリティ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">買収合意</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000180.000031049.html" target="_blank" rel="noopener">CrowdStrike、Fiddler AI・Dreadnodeを計約495億円で買収合意 — Falconに統合AIセキュリティ自動検証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CrowdStrikeはAI説明可能性・ドリフト検知を手がけるFiddler AIと、AIモデル・エージェント・MCPサーバーへの100種以上の攻撃をシミュレートするDreadnodeの買収を発表（合計約4億9500万ドル）。FalconプラットフォームのGuardian機能へ統合し、企業のAIエージェント展開前のセキュリティ検証を自動化する。両社の研究員はCyber Superintelligence Labに合流し、SafeMindモデルの強化にも貢献する予定。FY27 Q4（2027年1月末）までのクローズを見込む。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいAWSアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ivanti / Endpoint Manager</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/192727" target="_blank" rel="noopener">Ivanti Endpoint Manager に CVSS 9.8 の SQL インジェクション RCE（CVE-2026-121653）— 11月度アドバイザリ13件</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IvantiはEndpoint Manager（EPM）Coreに存在するCVSS 9.8のSQL injection脆弱性CVE-2026-121653を修正した。認証不要でリモートコード実行が可能。同時にCloud Services Application（CVE-2026-121683、CVSS 9.4）も認証バイパスとして修正。今月のアドバイザリは5件・計13脆弱性に上る。EPM 2024 SU8以降で修正済み。現時点で公開エクスプロイトは確認されていないが、早急なパッチ適用が推奨される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Zoom / Windows</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/192629" target="_blank" rel="noopener">Zoom Workplace（Windows版）に CVSS 9.6 の権限昇格 — 認証不要で特権奪取（CVE-2026-108186）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Zoom VideoはWindowsデスクトップクライアント（Zoom Workplace）に認証不要の特権昇格脆弱性CVE-2026-108186（CVSS 9.6）を公開した。バージョン7.1.0〜7.1.7が影響を受け、7.1.8で修正されている。リモートから認証なしで管理者権限を取得される可能性があり、エンタープライズ環境での広範な利用を考慮してパッチ適用の優先度は高い。自動更新が有効な場合は既に保護されているが、ポリシーで手動管理している環境は速やかな対応が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SonicWall / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-14</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.esecurityplanet.com/vulnerabilities/news-sonicwall-sslvpn-authentication-bypass-cve-2026-19868/" target="_blank" rel="noopener">SonicWall SonicOS CVE-2026-19868 — CISA KEV登録済み、連邦機関修正期限11月20日に迫る</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAはSonicWall SonicOS SSLVPN認証バイパス脆弱性CVE-2026-19868をKEVカタログに追加、連邦機関（FCEB）の修正期限を2026年11月20日と定めた。SAML認証を使用したSSL VPNログイン環境で、有効な認証情報を持つ攻撃者がMFAを迂回できる（CVSS 7.5）。実際の悪用が確認済みでありワークアラウンドは存在しない。SonicWallアドバイザリSNWLID-2026-0014に記載の修正ビルドへの速やかな更新が推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-15 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
