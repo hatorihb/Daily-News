@@ -6,6 +6,15 @@
 # Does not rely on branch protection: this job waits for the other checks
 # itself. If the PR has no other checks at all, it refuses to merge — an
 # update nothing has verified should wait for a human.
+#
+# Daily-News customization: this repo's only Dependabot ecosystem is
+# github-actions, so every Dependabot PR edits .github/workflows/. GITHUB_TOKEN
+# can never hold the `workflows` permission and cannot merge such PRs, so the
+# merge uses the Dependabot secret DEPENDABOT_MERGE_TOKEN (a fine-grained PAT
+# limited to this repo: Contents, Pull requests and Workflows = read/write).
+# It is only exposed to the final `gh pr merge`, never to third-party actions.
+# Re-running `install.sh add . --with dependabot` overwrites this file — re-apply
+# the change if you do.
 name: Dependabot auto-merge
 
 on: pull_request
@@ -25,7 +34,7 @@ jobs:
     timeout-minutes: 45
     steps:
       - id: meta
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@21025c705c08248db411dc16f3619e6b5f9ea21a # v2.5.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -35,6 +44,7 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
           UPDATE_TYPE: ${{ steps.meta.outputs.update-type }}
           SELF: ${{ github.workflow }}
+          MERGE_TOKEN: ${{ secrets.DEPENDABOT_MERGE_TOKEN }}
         run: |
           case "$UPDATE_TYPE" in
             version-update:semver-patch|version-update:semver-minor) ;;
@@ -43,6 +53,12 @@ jobs:
               exit 0
               ;;
           esac
+
+          # Fail fast instead of waiting up to 40 minutes for checks we could not act on.
+          if [ -z "$MERGE_TOKEN" ]; then
+            echo "::error::Dependabot secret DEPENDABOT_MERGE_TOKEN is not set — GITHUB_TOKEN cannot merge PRs that change workflow files. Add the secret (Settings → Secrets and variables → Dependabot), or review and merge manually."
+            exit 1
+          fi
 
           grace=$((SECONDS + 5 * 60))
           deadline=$((SECONDS + 40 * 60))
@@ -73,4 +89,4 @@ jobs:
           done
 
           echo "All $total other checks passed — merging $UPDATE_TYPE."
-          gh pr merge "$PR_URL" --squash
+          GH_TOKEN="$MERGE_TOKEN" gh pr merge "$PR_URL" --squash
