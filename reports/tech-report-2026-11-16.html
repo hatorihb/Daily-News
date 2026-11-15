@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 11 &mdash; 16 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ゴムマリ / 調達・購買 AI</div>
+          <div class="card-badges">
+            <span class="impact impact-low">新機能リリース</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://trends.codecamp.jp/blogs/media/news-prt-185093-17" target="_blank" rel="noopener">ゴムマリ、調達・購買部門向け「発注データ分析AIエージェント」を2026年11月15日より提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">東京のゴムマリ株式会社が、調達・購買部門の発注データ分析業務を自動化するAIエージェント「発注データ分析AIエージェント」を2026年11月15日より提供開始した。過去の発注実績・在庫推移・価格変動をAIが自動分析し、適切な発注タイミングや数量を提案する機能を持つ。同社は製造・小売業向けに調達業務のAI化を推進しており、今回のサービスは業務AIエージェントシリーズの一環。初期費用なしのSaaS型で提供され、企業の購買コスト削減と業務効率化を支援する。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / 365 サービス障害</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重大障害</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://journalarta.com/en/2026/11/15/microsoft-outage-20000-complaints-a-minute/" target="_blank" rel="noopener">Microsoft 365 世界規模障害、24時間超継続で74ヶ国・740万件超の障害報告 — 日本でも業務影響</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">11月12日に始まったMicrosoft 365の世界規模障害について、JournalArtaが11月15日に詳細を報告した。障害はOutlook・Teams・SharePoint等の主要サービスに及び、74ヶ国・地域で計740万件超の障害報告が寄せられ、ピーク時は1分間に2万件超のダウン報告が出た。内閣官房長官もOutlookなどが使用不能になったと言及し、国内企業の業務DXへの影響が浮き彫りになった。原因はソフトウェアアップデートと判明しており、企業のクラウド集中リスク管理の重要性が改めて問われている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AT&amp;T / AIエージェント</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">事例・導入</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aiweekly.co/alerts/att-runs-500-agentic-ai-workflows-processing-45b-tokens-a-day-targets-3x-by-2027" target="_blank" rel="noopener">AT&amp;T、約500件のAIエージェントワークフローを本番稼働 — 1日450億トークンを処理、2027年に3倍化を目指す</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AT&TがBusiness Agent Foundryプラットフォームを通じ、約500件の自律型AIエージェントワークフローを本番環境に展開したと明らかにした。処理量は1日あたり450億トークン超に達し、顧客プロビジョニングから営業支援・ネットワーク管理まで多岐にわたる業務が自動化されている。精度が中〜高90%台に達したワークフローのみ自律運用に移行する方針で、人間によるオーバーサイトを維持。2027年までに現状の3倍となる1,500件規模への拡大を目標としており、テレコム大手のAIエージェント大規模展開事例として注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">LangChain / AIエージェント基盤</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">資金調達</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://casrai.org/news/langchain-3-billion-valuation-funding-ai-agents-2026" target="_blank" rel="noopener">LangChain、3億ドルSeries C調達 — 評価額30億ドルでAIエージェントガバナンス・可観測性を強化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AIエージェント開発・管理プラットフォームのLangChainが、Alphabet傘下のCapitalG主導でSeries Cとして3億ドルを調達した。調達後評価額は30億ドルと前回の2.5倍超となり、累計調達額は約4億6,000万ドルに達した。LangSmithプラットフォームは7,000組織以上で活用され、1日10億イベント超を処理している。同社は11月20日に新機能の発表を予定しており、AIエージェントのガバナンス・可観測性・デバッグ領域での機能拡充が見込まれる。エンタープライズ向けAIエージェント基盤の覇権争いが加速している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / AgentCore</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">GA・デフォルト変更</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.classmethod.jp/articles/amazon-bedrock-agentcore-runtime-v2-tried/" target="_blank" rel="noopener">Amazon Bedrock AgentCore Runtime V2 が全リージョンでデフォルトに昇格 — 冷間起動2秒未満を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">次世代のAmazon Bedrock AgentCore Runtime V2が全新規エージェントランタイムのデフォルトとなった。V2はセッションごとに専用のFirecracker microVMで分離され、スナップショット起動により2GBイメージの冷間起動をP75で2秒未満に短縮（旧V1は29.7秒）。最大8 vCPU・32GBメモリまで拡張可能で10GBコンテナイメージをサポート。アイドル状態のエージェントはゼロまでスケールダウンする従量課金モデルを採用し、エンタープライズのAIエージェント本番運用コストの大幅削減が期待される。東京・シンガポール・ムンバイ等APACリージョンでも利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / 11月アップデート</div>
+          <div class="card-badges">
+            <span class="impact impact-low">複数機能リリース</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://builder.aws.com/content/3LoBWXqi6PmsVdK0zEx0SXNnUjJ/aws-dominates-cloud-innovation-ai-agents-security-tools-and-cost-savings-lead-november-2026" target="_blank" rel="noopener">AWS 11月アップデートまとめ — AIエージェント・セキュリティ・コスト削減で多数の新機能を投入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが11月に投入した主な新機能として、AWS Security HubによるSBOM（ソフトウェア部品表）インベントリ機能が一般提供開始され、EC2・ECR・Lambdaにインストールされたパッケージを一覧管理できるようになった。AWS Interconnect（Equinixとのプライベート接続プレビュー）はクロスコネクト注文不要でAWSへの専用回線を設定可能にする。Amazon Route 53では変更ベースのスロットリングが導入され、APIリクエストレートが秒5→10に引き上げられた。DynamoDB向けのS3からの一括インポート機能（Bulk Put）も一般提供された。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / Windows Search</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.rescana.com/post/microsoft-patch-tuesday-november-2026-windows-search-ldap-rce-prepare-now" target="_blank" rel="noopener">【CVSS 9.8 / Critical】Windows Search RCE 脆弱性（CVE-2026-116928）— Exchangeメール経由の攻撃経路を確認、即時パッチ適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年11月のMicrosoft定例パッチ（Patch Tuesday）で修正されたWindows SearchのRCE脆弱性CVE-2026-116928（CVSS 3.1 9.8、CWE-787）について、セキュリティ研究者が緊急対応を呼びかけている。Exchange Serverがメール本文のインデックス作成時にWindows Searchコンポーネントを呼び出す仕組みを悪用し、細工されたメールを送るだけで認証不要でリモートからコード実行が可能になる恐れがある。影響バージョンは未修正のWindows Server / Windows 11環境。修正バージョンは2026年11月の累積アップデート（KB5094139等）を適用すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://braindetox.kr/en/posts/chrome_cve_2026_125350_kev.html" target="_blank" rel="noopener">【CVSS 8.8・CISA KEV登録・野外悪用確認】Chrome XMLゼロデイ（CVE-2026-125350）— 2026年8件目の悪用確認、連邦機関修正期限11/24</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Google ChromeのXMLコンポーネントに存在するuse-after-free脆弱性CVE-2026-125350（CVSS 8.8）が実際の攻撃で悪用確認され、CISAがKnown Exploited Vulnerabilities（KEV）カタログに登録した。2026年通じてChromeの悪用確認ゼロデイは8件目に達する。修正済みバージョンはChrome 157.0.8103.50以上（Windows/macOS/Linux）で、連邦機関の修正期限は11月24日。攻撃者・ターゲット等の詳細はGoogleが未公開であるが、早急なブラウザ更新が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft Outlook / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-15</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/outlook-zero-day-cve-2026-124194/" target="_blank" rel="noopener">【CISA KEV登録・野外悪用確認】Microsoft Outlook CVE-2026-124194 — NTLMv2ハッシュ窃取攻撃が判明、パッチ適用前から悪用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">11月10日のMicrosoft定例パッチで修正されたOutlookのスプーフィング脆弱性CVE-2026-124194（CVSS 6.5 / JVN CVSS v4.0 8.7）が、パッチ適用前から実際の攻撃に悪用されていたことが判明した。細工されたファイルを開くことでOutlookが攻撃者の制御するネットワーク位置に接続し、NTLMv2認証ハッシュが漏洩する可能性がある。CISAがKEVカタログに登録し連邦機関の修正期限は11月24日。修正はOfficeアップデート経由で適用。影響を受けるバージョン：Microsoft Outlook 2016/2019/LTSC 2021/M365 Apps for Enterprise。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-16 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
