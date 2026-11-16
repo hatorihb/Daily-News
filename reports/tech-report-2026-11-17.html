@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 &mdash; 11 &mdash; 17 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTT / サイバーセキュリティAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新技術発表</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.ntt.com/about-us/press-releases/news/article/2026/1116.html" target="_blank" rel="noopener">NTT、主権型（ソブリン型）サイバーセキュリティAI技術を開発 — ソースコードを外部送信せず高精度な脆弱性検出を実現</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTが、フロンティアAIに匹敵するサイバーセキュリティAI技術として「ソブリン型」サイバーセキュリティAIを開発したと発表した。外部サーバーへのソースコード送信を不要とする独自アーキテクチャにより、機密性の高いコードベースでも安全に脆弱性を検出できる点が特徴。企業のコード資産や顧客情報を社外に出さずに自社環境内で分析が完結する主権型AIの要件を満たしており、政府・金融・医療といった機密性を重視する業界での採用を見込む。NTTグループのセキュリティサービスへの組み込みを通じ、2027年度内の事業化を目指す。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Check Point Research / 日本向け脅威動向</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000571.000021207.html" target="_blank" rel="noopener">Check Point Research、2026年10月グローバル脅威レポート公表 — 日本向けサイバー攻撃が前年比82%増加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Check Point Researchが発表した2026年10月のグローバル脅威レポートによると、世界全体でサイバー攻撃件数が前年比約30%増加するなか、日本への攻撃は前年比82%増と際立った急増を記録した。教育・研究機関、政府・軍事機関、ヘルスケア業種が攻撃対象の上位を占める傾向が続き、ランサムウェアグループによる活動も引き続き活発だという。攻撃者はAIを使ったフィッシング文の生成やゼロデイ脆弱性の悪用チェーンを多用しており、AI活用が攻撃側の生産性を向上させている実態が明らかになった。日本企業・機関においては多要素認証の徹底、パッチ適用の迅速化、SIEM・XDRの整備が急務とされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / IPO</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-17</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techtarget.itmedia.co.jp/tt/article/2611/17/2000003221/" target="_blank" rel="noopener">Anthropic、IPO価格帯$70〜$78を設定 — Altimeter Capital 50億ドル出資表明、11月19日Nasdaq「ANT」上場見通し</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Claudeを開発するAnthropicのIPOが最終局面を迎えた。修正S-1登録届出書で1株70〜78ドルの価格帯を設定し、仮条件上限時の想定時価総額は約1兆〜1.4兆ドルに達する。Altimeter Capital が50億ドルの引受申し込みを表明（CNBC報道）するなど、機関投資家の需要は募集株数の約6倍に達したとされる。価格決定は11月18日、Nasdaqへの「ANT」ティッカーでの取引開始は11月19日の見通し（確定は規制承認次第）。企業向けAI基盤の信頼性が問われる中、IPO後の研究・安全開発継続方針が投資家の最大の関心事となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Alibaba / Qwen</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデルリリース</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://alphasignal.ai/news/alibaba-launches-qwen4-max-with-agent-first-coding-and-1m-token-support" target="_blank" rel="noopener">Alibaba、Qwen4-Max をプレビュー公開 — エージェント向けコーディング特化・100万トークンコンテキスト対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">アリババが次世代フラッグシップモデル「Qwen4-Max」のプレビューアクセスを開放した。9月のAlibaba Cloud Apsaraカンファレンスで予告されていたもので、エージェント向けコーディング（Agent-First Coding）と100万トークンコンテキストが主な特徴。Token Plan・QwenWork・Qoder・Qwen Appを通じてプレビュー参加が可能。競合モデルより低い価格設定を打ち出しており、コスト競争を加速させる可能性がある。正式版のモデルカードやベンチマーク数値、オープンウェイトの有無については未発表で、一般提供（GA）の時期も未定。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Nitro Sandboxes</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能提供開始</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/compute/nitro-sandboxes-hardware-isolation-for-every-eks-pod-ecs-task-and-ec2-workload/" target="_blank" rel="noopener">AWS Nitro Sandboxes 提供開始 — EKS Pod・ECSタスク・EC2 VM ごとに専用 Nitro VM でハードウェア完全分離を実現、追加料金なし</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが「Nitro Sandboxes」を全商用リージョンで提供開始した。EKS Pod・ECSタスク・EC2インスタンスのそれぞれに専用の軽量Nitro VMを割り当て、ハイパーバイザーレベルでのハードウェア分離を実現する。コンテナ間のサイドチャネル攻撃リスクを大幅に軽減し、マルチテナント環境やAIワークロードのセキュリティ強度を向上させる。Nitroベースの大多数のEC2インスタンスタイプで動作し、追加料金は発生しない。機密モード（完全な証明可能性）とダイレクトモードの2方式を選択可能で、AIエージェントや機密コンピューティングのユースケースに適する。同週のAWS Weekly Roundupで取り上げられ注目を集めている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Bedrock / Claude Fable 5.2</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル追加</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/11/claude-fable-5-2-amazon-bedrock/" target="_blank" rel="noopener">Claude Fable 5.2、Amazon Bedrock および Claude Platform on AWS で利用可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのClaude Fable 5.2モデルが、Amazon BedrockおよびClaude Platform on AWSで利用可能になった。Fable 5.2は11月9日にAnthropicが一般公開した最新世代モデルで、コーディング・分析・マルチステップ推論などのユースケースで前世代比で精度が向上している。BedrockのModel Garden経由で既存のAPIと同じインターフェースからアクセスでき、AWS環境で構築されたエンタープライズAIエージェントへの組み込みが容易になる。BedrockのガードレールやモデレーションAPIとの統合も引き続き利用可能で、企業向けのコンプライアンス要件にも対応する。東京リージョンを含む主要リージョンで順次展開中。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Check Point / CVE-2026-123039</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/check-point-gateways-hacked-via-php2shell-to-deploy-vmware-esxi-wiper/" target="_blank" rel="noopener">【ゼロデイ悪用確認・CISA期限到来】Check Point ゲートウェイにPHP2Shell連鎖でESXiワイパー展開 — CVE-2026-123039でroot権限奪取</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Check Point SecurityゲートウェイのDynamicCLIコンポーネントにゼロデイ脆弱性CVE-2026-123039（CVSS 7.8）が確認された。攻撃者はMobile Access PortalへのPHP2Shell侵入（CVE-2026-109618/109619、CVSS 9.2）と連鎖させてroot権限を奪取し、内部ネットワークへ横展開してVMware ESXiホストのデータをワイパー「destroy_v6」で消去する破壊的攻撃が確認された。イスラエルや複数国の24社以上で悪用が確認済みで、CISAが11月16日を連邦機関パッチ適用期限として設定。修正はCheck Point 11月Jumboホットフィックスの適用が必須。インターネット向けMobile Access Portalを持つゲートウェイを優先的にパッチ適用すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apache HTTP Server / CVE-2026-119618</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.secpod.com/learn/security-research/microsoft-s-november-2026-patch-tuesday-1-093-vulnerabilities-63-critical-fixes-and-an-outlook-threat" target="_blank" rel="noopener">【Critical・認証不要RCE】Apache HTTP Server mod_http2 競合状態の脆弱性（CVE-2026-119618）— HTTP/2有効環境で遠隔コード実行の恐れ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Apache HTTP Serverのmod_http2モジュールに競合状態（race condition）に起因する重大な脆弱性CVE-2026-119618が発見された。HTTP/2を有効化している環境において認証不要でリモートからコード実行が可能となる可能性があり、攻撃条件のハードルが低い。HTTP/2はApache 2.4.17以降で標準サポートされているため影響範囲は広く、パブリックインターネットに公開されているウェブサーバーは特に早急な対応が求められる。修正済みバージョンへのアップグレードまたは設定でHTTP/2を無効化する回避策の適用が推奨される。セキュリティ研究機関が11月16日の週次脅威レポートで本脆弱性を重要課題として取り上げている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">UnrealIRCd / CVE-2026-114713</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-16</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/recent-unrealircd-vulnerability-exploited-in-attacks/" target="_blank" rel="noopener">【CISA KEV登録・野外悪用確認】UnrealIRCd CVE-2026-114713 — 連邦機関パッチ期限11月16日、IRCサーバー管理者権限奪取の攻撃継続中</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IROCの人気IRCサーバーソフトウェアUnrealIRCdのlabeled-responseモジュールに存在するコマンドインジェクション脆弱性CVE-2026-114713が野外で悪用されていることが確認された。UnrealIRCd開発チームが「現在インターネット上で悪用が進行中」と警告し、CISAがKnown Exploited Vulnerabilities（KEV）カタログに追加した（連邦機関の修正期限：11月16日）。2台以上のサーバーがリンクしているIRCネットワークにおいて、一般ユーザーがサーバー管理者（IRCOp）権限でコマンドを実行できるようになる重大な欠陥。影響バージョン：UnrealIRCd 6.0.0〜6.2.7。修正済みバージョン：6.2.7.1（9件の脆弱性を同時修正）に速やかにアップグレードすること。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-17 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
