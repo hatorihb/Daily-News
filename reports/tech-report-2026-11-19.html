@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 19 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">JASA（組込みシステム技術協会）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">調査レポート</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000015.000172759.html" target="_blank" rel="noopener">JASAレポート2026発表——「SDxという終わらない製品進化」「AI駆動開発という産業革命」「フィジカルAIという新大陸」を横浜で提言</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">組込みシステム技術協会（JASA）が2026年11月18日の横浜講演で「JASAレポート2026」を発表した。ソフトウェア定義製品（SDx）が継続的進化のスタンダードとなる動向、AIが設計・開発プロセスを自律化する「AI駆動開発」が産業革命に相当するインパクトをもたらすこと、そしてロボティクス・自動車・製造向けにリアルワールドを理解・操作するAI「フィジカルAI」が新産業領域を形成しつつあることを示した。国内組込み・IoT産業の中期トレンドを把握する上で注目のレポート。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AIエージェントDXPO / 国内各社</div>
+          <div class="card-badges">
+            <span class="impact impact-low">イベント開幕</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000271.000017704.html" target="_blank" rel="noopener">「AIエージェントDXPO東京'26【秋】」本日開幕（11/19〜20）——クラウドエース・AIファシリなど国内AIエージェント最前線が集結</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2026年11月19日〜20日、有明GYM-EXで「AIエージェントDXPO東京'26【秋】」が初開催された。クラウドエースはGoogle CloudのAIエージェント活用事例を展示。トライフォースは会議の脱線をリアルタイムで検知・軌道修正する「AIファシリ」を初披露。AIエージェントの実装・業務自動化に関心を持つ国内企業のDX担当者が多数来場。AIエージェントの実業務への組込みが急速に進む現状を示すイベントとなった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">IPO上場</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cnbc.com/2026/11/18/anthropic-ipo-ai-offering-price.html" target="_blank" rel="noopener">Anthropic IPO価格$83/株で確定——本日（11/19）NASDAQ「ANT」で取引開始、時価総額1.4兆ドル超</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのIPO価格が1株$83で確定し、2026年11月18日（現地時間）に発表された。当初の提示レンジ（$70〜78）を大幅に上回り、受注は6〜7倍超の過熱状態だった。2026年11月19日（本日）からNASDAQでティッカー「ANT」として取引が開始。時価総額は1.4兆ドルを超える見込みで、AI企業のIPOとして歴史的な規模となる。上場で得た資金はモデル開発・インフラ拡充と国際展開に充てられる予定。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデルリリース</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://tech-noisy.com/2026/11/18/ai-daily-news-2026-11-17/" target="_blank" rel="noopener">OpenAI、GPT-6.2「Astra」と「Sol」をリリース——AI自己改善能力「High」評価の初モデル、API・ChatGPTで提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIが2026年11月17日にGPT-6.2シリーズとして高性能版「Astra」と軽量版「Sol」をリリースした。AstraはOpenAIが公開したモデルとして初めてAIの自己改善能力評価で「High」を獲得し、自己改善研究開発の加速リスクを警告するSafety Cardも同時公開された。APIモデル名はgpt-6.2-astraとgpt-6.2-sol。Plus・Pro・Enterprise・EduユーザーがChatGPT WorkとCodexで利用可能。SolはAstraの性能の95%を約1/5のコストで実現し、Pro($200/月)プランでUltrafast Modeに初対応した。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新モデル群発表</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.neowin.net/news/microsoft-takes-on-openai-and-anthropic-with-seven-new-ai-models-at-ignite-2026/" target="_blank" rel="noopener">Microsoft Ignite 2026——MAI第2世代7モデル発表（MAI-Code-2・Cyber-2-Flash・Image-2.7・Realtime-1）OpenAI・Anthropicに対抗</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MicrosoftがIgnite 2026（11月17日開幕）でMAI第2世代の7モデルを発表した。MAI-Code-2は100万トークンコンテキストの高度なコーディングエージェント向けモデル、MAI-Code-2-Flashは高頻度・日常コーディング向け軽量版。MAI-Image-2.7はArtificial Analysisの画像編集ランキング1位を主張。MAI-Cyber-2-Flashはセキュリティ防衛者専用の最新セキュリティAI。MAI-Realtime-1はMicrosoft初のライブ音声対話モデル（早期アクセス）。MAI-Decision-1.1はGAとして一般提供開始。自社チップMaia 200も量産フェーズへ移行した。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Amazon EMR</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">LTS リリース</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://mwpro.co.uk/blog/2026/11/18/amazon-emr-8-2-is-now-available/" target="_blank" rel="noopener">Amazon EMR 8.2 GA——Spark 4.1.3・Iceberg 1.11.0・Delta Lake 4.2.0 LTSリリース、S3への並行Delta Lake書き込みに対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Amazon EMR 8.2がLTS（長期サポート）リリースとして一般提供開始。Apache Spark 4.1.3・Iceberg 1.11.0・Delta Lake 4.2.0にアップグレードされ、EMR on EC2・EKS・Serverless全プラットフォームで利用可能。同一S3テーブルへの複数クラスターからの並行Delta Lake書き込みに対応（DynamoDBログストアが不要に）。Icebergマテリアライズドビューの増分更新にも対応。EMR on EC2ではSparkが高並列環境でユーザープロビジョニングのレイテンシを最大97%削減するSecret Agent改善も含む。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Amazon Connect</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">ヘルスケアAI拡充</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cxtoday.com/in-brief/aws-expands-amazon-connect-health-for-patient-access-uwtDwGQNDS2yO1jtJruFQnw" target="_blank" rel="noopener">Amazon Connect Health 拡充——予約スケジューリング・処方箋リフィル・パスワードリセットをAIエージェントが自律処理</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSがAmazon Connect Healthに医療向けAIエージェント機能を拡充した。患者からの電話応対で、外来予約・処方箋リフィル・パスワードリセットをAIが自律的に処理し、複雑ケースや感情的な患者応対は医療スタッフへ自動エスカレーション。UC San Diego Healthでのコール放棄率30〜60%削減事例が報告されている。保険事前承認の確認など医療固有のワークフローにも対応し、AWS HealthLakeとの連携でデータ活用も強化される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Apache HTTP Server</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急・実悪用確認</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://gbhackers.com/critical-apache-http-server-vulnerability/" target="_blank" rel="noopener">【緊急】CVE-2026-119618（CVSS 9.8）Apache HTTP Server HTTP/2モジュールに認証不要RCE、実際の攻撃で悪用確認——今すぐ2.4.71へ更新を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Apache HTTP ServerのHTTP/2モジュール（mod_http2）にヒープ破損によるリモートコード実行脆弱性CVE-2026-119618（CVSS 9.8）が発見され、実際の攻撃での悪用が確認された。影響バージョン：Apache HTTP Server 2.4.55〜2.4.70（HTTP/2有効環境のみ）。修正版：2.4.71（2026年11月11日リリース）。シンガポールCSAが2026年11月17日に緊急警告を発令し、公開POCの存在も確認されている。HTTP/2を無効化するか2.4.71への即時アップデートを強く推奨。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Perforce Puppet Enterprise</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CISA KEV登録・実悪用</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.securityweek.com/critical-perforce-puppet-rce-exploited-in-attacks/" target="_blank" rel="noopener">CVE-2026-115731（CVSS 9.4）Puppet Enterprise に認証済みRCE——CISA KEV登録、連邦機関パッチ期限は12/1</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PerforcのPuppet EnterpriseにCAサイン済みエージェント証明書を持つクライアントからPuppetサーバー上でコード実行できるデシリアライズ脆弱性CVE-2026-115731（CVSS 4.0: 9.4 / CVSS 3.1: 9.9）が発見され、CISAが2026年11月17日にKEVカタログへ登録した。影響バージョン：Puppet Enterprise 2025.0.0〜2025.12.0および2026.0.0。修正版：Puppet Enterprise 2026.0.1・2025.12.1・2023.8.13（Puppet Core 8.22.2・9.1.3）。米連邦機関への対応期限は2026年12月1日。修正の適用後はPuppetサーバーの再起動が必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Google Chrome / Mozilla Firefox</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">セキュリティアップデート</span>
+            <span class="card-date">2026-11-18</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.security-next.com/192998" target="_blank" rel="noopener">Google Chrome 158——脆弱性204件に対処（うちクリティカル6件）、Firefox 160.0.1は動画再生関連の「高」脆弱性2件を修正</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Googleが2026年11月18日にChrome 158をリリース。204件の脆弱性に対処し、うち6件が最も高い「クリティカル」評価。同日、MozillaもFirefox 160.0.1を公開し、動画再生関連の脆弱性2件（いずれも4段階中2番目に高い「高」評価）を修正した。ChromeとFirefoxは多くの組織で広く使われているブラウザのため、早期のアップデート適用が推奨される。Chromeは設定→Chromeについてで自動更新を確認、Firefoxはヘルプ→Firefoxについてで更新可能。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-19 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
