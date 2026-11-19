@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 20 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NTTグループ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dxmagazine.jp/?p=225887" target="_blank" rel="noopener">NTTグループ、約16.5万人のスキルを共通データモデルで一元管理へ――グループ横断の人材可視化を推進</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NTTグループが傘下の全社員（約16万5000人）のスキルデータを共通のデータモデルで一元管理する取り組みを公表した。事業会社ごとに異なるスキル定義を統一することで、グループ横断での人材配置・育成・可視化を実現する。AIを活用したスキルギャップ分析や最適配置支援も視野に入れており、大企業における人材DX（HR Tech）推進の先進事例として注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">RX Japan</div>
+          <div class="card-badges">
+            <span class="impact impact-low">イベント</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aismiley.co.jp/event_detail/japandxaxweek20261119/" target="_blank" rel="noopener">Japan DX &amp; AX Week 大阪 2026 開催中（2日目）―― AI活用DXソリューションが一堂に、250社出展・来場12,000人超</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">大阪インテックス大阪で開催中の「Japan DX &amp; AX Week 大阪 2026」（会期：11月18〜20日）が2日目を迎えた。AI and Business Automation Expo・Office-work DX Expo・Management Transformation Expo など5専門展で構成され、出展社250社・来場者12,000人規模を見込む。国内外のベンダーが最新のAIエージェント・業務自動化・ノーコード開発などのDXソリューションを展示しており、企業のDX戦略立案に向けた情報収集の場として注目を集めている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ElevenLabs</div>
+          <div class="card-badges">
+            <span class="impact impact-high">買収・M&amp;A</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.businessinsider.jp/article/2611-elevenlabs-acquires-kotoba-technologies/" target="_blank" rel="noopener">ElevenLabs、日本語音声AI企業 Kotoba Technologies を約159億円で買収――日本企業初の買収で日本語音声市場を本格攻略</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">音声AI大手ElevenLabsが、日本語特化型音声AIを開発する国内スタートアップKotoba Technologies（社員15名）を全株式交換・約1億ドル（約159億円）相当で買収したと発表した。ElevenLabsによる日本企業の買収は初。Kotoba製の高精度日本語音声モデル「Koto」がElevenLabsのプラットフォームに統合され、Salesforce Agentforce Voiceとの連携も予定されている。急拡大するAIエージェントの音声インターフェース市場で、日本語対応の精度向上と企業向け展開を加速する戦略的な動きとして評価されている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">みずほフィナンシャルグループ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">AI人材育成</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aismiley.co.jp/ai_news/mizuho-ai-bootcamp-reskilling/" target="_blank" rel="noopener">みずほFG「みずほ AI Bootcamp」本格運用開始――非エンジニア社員を最短3ヶ月でAIアプリ開発人材に育成</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">みずほフィナンシャルグループは、営業職・事務職などの非エンジニア社員を最短3ヶ月でAIアプリケーション開発人材に育成するプログラム「みずほ AI Bootcamp」の本格運用開始を発表した。2026年6〜8月の先行実施では知識テストの平均正答率92%を達成し、参加者の中にはエンジニア職へ転換した例も生まれた。従来1年半以上かかっていた育成期間を大幅に短縮しており、今後はまず100人規模の育成を目指し段階的な全社展開を予定する。金融業界における生成AIを活用した内製化・リスキリングの先進事例として注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Palo Alto Networks</div>
+          <div class="card-badges">
+            <span class="impact impact-high">買収・M&amp;A</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.sec.gov/Archives/edgar/data/0001327567/000132756726000030/ex992pressrelease_november.htm" target="_blank" rel="noopener">パロアルトネットワークス、AIスタートアップ Applied Compute を45億ドルで買収合意――セキュリティ×AIインフラの統合を加速</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">セキュリティ大手パロアルトネットワークスは、AI特化型コンピューティングスタートアップApplied Computeを全株式交換・約45億ドルの評価額で買収することに合意したと発表した（規制承認次第FY2027 Q3クローズ予定）。Applied ComputeのAIインフラ技術をPalo Alto NetworksのAIセキュリティ基盤に統合することで、AIワークロードの保護・可視化・コスト最適化を一体化する狙い。Q1 FY2027決算発表（11月18日PT）とあわせて戦略の詳細が示された。AIとセキュリティの融合が加速する中、大型M&Aによる業界再編の一例として注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-high">緊急セキュリティ</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/security/security-bulletins/2026-190-aws/" target="_blank" rel="noopener">AWSセキュリティ情報 2026-190：PHPの重大脆弱性に対応、Amazon Linux 2023向けパッケージを緊急更新・WAFルールも適用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年11月19日、PHPの全サポートバージョンに影響する重大な脆弱性群（CVE-2026-115560ほか計18件）に対応するセキュリティ情報（2026-190-AWS）を公開した。Amazon Linux 2023向けに更新済みのPHPパッケージを提供しており、EC2・ECS・EKS・Fargate上で自己管理のPHPを実行しているユーザーは速やかなアップデートが推奨される。一部CVEについてはAWS WAFのマネージドルールでも対応済みと案内されている。セルフホスト型PHPアプリケーションを運用するAWSユーザーは、公式ガイダンスに従った対応を急ぐこと。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">PHP Foundation / 国家サイバー統括室</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2157690.html" target="_blank" rel="noopener">PHPに最高深刻度「Critical」の脆弱性、全バージョン向け緊急セキュリティリリース公開（CVE-2026-115560含む18件修正）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">PHPの全サポートバージョン（8.2系〜8.5系）に影響するCritical脆弱性CVE-2026-115560（セッションアップロードプログレス機能のリモートコード実行）を含む計18件を修正する緊急セキュリティリリースが日本時間11月19日夜に公開された。影響を受けるバージョン：PHP 8.5.12以前・8.4.27以前・8.3.36以前・8.2.35以前。修正版：PHP 8.5.13・8.4.28・8.3.37・8.2.36。CVE-2026-115560はデフォルト構成から変更された設定か特殊な実行環境が条件だが、国家サイバー統括室も速やかな更新を呼びかけており、先月のPHP2Shell脆弱性（CVE-2026-39177）とは別の問題となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">F5 / NGINX</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2157695.html" target="_blank" rel="noopener">Webサーバー「nginx」に10件の脆弱性、HTTP/2経由で未認証リモートコード実行が可能（CVE-2026-123007・CVE-2026-123633）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米F5がWebサーバー「nginx」の安定版v1.30.7と開発版v1.31.9を公開し、計10件の脆弱性を修正した。最も深刻なCVE-2026-123007はHTTP/2を有効にした構成で未認証のリモートコード実行を許す可能性があり（影響バージョン：v1.30.6以前・v1.31.8以前）、CVE-2026-123633とあわせて国家サイバー統括室が緊急対応を呼びかけた（通称：nginx2shell）。さくらインターネットなど国内クラウド事業者も自社サービスの対応を完了したと発表している。HTTP/2を有効にしたnginxを運用している場合は、v1.30.7または v1.31.9への速やかなアップデートが必要。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Ruby開発チーム / 窓の杜</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-19</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://forest.watch.impress.co.jp/docs/news/2157700.html" target="_blank" rel="noopener">「Ruby」に7件の脆弱性、RCE実証コード（PoC）が公開済み――修正版への更新を強く推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Rubyの開発チームが正規表現エンジン（Oniguruma）と文字列の大文字・小文字変換処理に関する7件の脆弱性を公表した。一部についてはリモートコード実行を示す実証コード（PoC）の存在も確認されており、影響を受けるバージョンを使用するサーバーやアプリケーションは早急なアップデートが求められる。RubyはRailsアプリケーションや多数の国内システムに広く使われており、特にインターネット公開環境での対応を優先すること。各ディストリビューションの公告で影響バージョンと修正バージョンを確認してほしい。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-20 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
