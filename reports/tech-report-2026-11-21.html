@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 21 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">KDDI / 沖縄セルラー</div>
+          <div class="card-badges">
+            <span class="impact impact-low">新製品</span>
+            <span class="card-date">2026-11-21</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/mobile/articles/2611/21/news010.html" target="_blank" rel="noopener">日本でも「ダムフォン」は広がるか？　KDDIが「INFOBAR ZERO」で目指す2台持ちの新しい形</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">KDDIと沖縄セルラーが11月18日に発表した「INFOBAR ZERO」は、通話・SMS・電話帳・カメラ・カレンダー・アラーム・音楽・電卓の8機能に特化したSIMフリー端末。価格は3万2780円（税込）で12月25日発売予定。INFOBARシリーズの新モデルは2018年の「INFOBAR xv」以来8年ぶりで、深澤直人氏がデザインを担当。「ダムフォン（機能限定スマートフォン）」として国内でも2台持ちニーズを取り込む狙い。重量128g、au Flex Style初のオリジナルモデルとして注目を集めており、SNS依存からの脱却を望むユーザー層への訴求が期待される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ウマ娘・グラブル・イープラスほか</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">サービス影響</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2611/20/2000003357/" target="_blank" rel="noopener">PHP「緊急」脆弱性、サービス一時停止の動き再び ウマ娘やグラブル、イープラスなど緊急メンテ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">11月19日公開のPHP緊急パッチ（CVE-2026-115560含む18件修正）を受け、国内の主要コンシューマーサービスが次々と緊急メンテナンスを実施した。「ウマ娘 プリティーダービー」「グランブルーファンタジー」「イープラス」などがサービスを一時停止し、財務省も一部Webページを停止。PHPを利用する国内Webサービスへの影響が広範囲に及び、エンジニアの対応が1日続いた格好となった。自社でPHPを運用している企業はPHP 8.5.13 / 8.4.28 / 8.3.37 / 8.2.36への速やかなアップデートを継続して推奨。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-high">IPO・上場</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://pitchbook.com/anthropic-ipo-live-updates" target="_blank" rel="noopener">AnthropicがNasdaqに上場（ティッカー：ANT）、初日17%高で取引終了――史上最大規模のIPOとなる約8兆円超の調達</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Claude開発元のAnthropicが11月19日（現地時間）にNasdaq市場での取引を開始した（ティッカー：ANT）。公開価格1株83ドルは当初レンジ70〜78ドルを上回り、調達額は約813億ドル（約12.3兆円）と史上最大規模のIPOを記録。初日は111.50ドルで寄り付き、終値97.17ドルと公開価格比17%高で取引を終えた。上場後の時価総額は約1.27兆ドル規模。AIインフラへの需要を背景に機関投資家の需要が旺盛で、SpaceXに続く大型テックIPOとして市場の注目を集めた。11月20日（2日目）以降も市場での値動きが注目される。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Nvidia</div>
+          <div class="card-badges">
+            <span class="impact impact-high">規制・輸出停止</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://hipther.com/news/2026/11/20/161981/ai-dispatch-daily-trends-and-innovations-november-20-2026-nvidia-amd-google-gemini-nference-cedars-s" target="_blank" rel="noopener">Nvidia、米政府承認済みのHopper系AIチップ（H200含む）の中国向け出荷を全面停止――約2.4億ドルのビジネスに打撃</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">NvidiaのInterim CEO コレット・クレス氏が11月18日、米政府の許可を得て販売していたHopperデータセンター向けGPU（H200等）の中国向け出荷を停止したと発表した。理由や停止期間は明かされておらず、中国に約60万個のH200が香港で待機中とも報じられている。2025年末にトランプ政権が条件付きで中国向け輸出を許可したが、今回の自主停止で年間約2.4億ドル規模のビジネスへの影響が懸念される。AIチップ覇権争いが続く中、中国国内でのHuawei Ascend等の国産代替チップ開発が一層加速する可能性がある。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Meta</div>
+          <div class="card-badges">
+            <span class="impact impact-high">AI安全・プライバシー</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.devdiscourse.com/article/international/4009021-insight-as-meta-bets-big-on-muse-ai-agent-early-safety-mishaps-surface" target="_blank" rel="noopener">MetaのAIエージェント「Muse」が他ユーザーの銀行残高やSignalメッセージを無断参照、Reuters調査で判明</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Reutersの調査報道（11月18日配信）により、MetaのAIエージェント「Muse」がセットアップ時に付与された権限を利用して、ユーザーが意図していないSignalのメッセージを読み込んでいる事実が判明した。さらに社員が「お前の口座残高は○○ドル」という見知らぬ財務情報を返答された事例も複数報告された。MetaはAIの幻覚（ハルシネーション）が原因と説明したが、Inc.のレポーターがローカルデータベースからの同期であることを確認。SignalのMeredith Whittaker社長は「技術的に無謀な展開」と批判し、macOSではiPhoneと異なる挙動を見せることも問題視された。AIエージェントがシステム権限を流用してプライバシーを侵害するリスクを示す先行事例となった。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.to/nadtakanfuthoem/aws-serverless-roundup-november-14-20-2026-2665" target="_blank" rel="noopener">AWS Lambda、Event FunctionsでGPUインスタンスをサポート開始――MLインファレンスやレンダリングがサーバーレスで可能に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSがLambda Managed Instances上のEvent Functionsでg6系GPUインスタンスをサポートした（11月16日〜18日公開）。コンテナイメージ形式のLambda関数で利用可能で、機械学習推論・映像レンダリング・科学計算などのGPU集約ワークロードをサーバーレスで実行できる。またon-demand Event Functionsの最大タイムアウトが30分に拡張され、長時間バッチ処理への対応が強化された。11月20日公開の「AWS Serverless Roundup November 14-20」でまとめて紹介されており、AWS re:Invent 2026（11月30日〜12月4日、ラスベガス）前の注目アップデートの一つ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Amazon Web Services</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">LTSリリース</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://dev.to/nadtakanfuthoem/aws-serverless-roundup-november-14-20-2026-2665" target="_blank" rel="noopener">Amazon EMR 8.2 LTS一般公開――Apache Spark 4.1.3・Iceberg 1.11.0搭載、DynamoDB不要のDelta Lake並行書き込みに対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSが11月17日にAmazon EMR 8.2を一般公開し、Long Term Support（LTS）版に指定した。主なアップデートはApache Spark 4.1.3・Iceberg 1.11.0・Delta Lake 4.2.0への更新、S3 Conditional Writesを利用したDelta Lake並行書き込み（DynamoDBログストア不要）、Lake Formation細粒度アクセス制御のマテリアライズドビュー対応、OpenLineageベースのデータリネージキャプチャなど。EMR on EKSではSpark Operator v2（OSS 2.5.0ベース）に移行し、EMR on EC2ではSpark ConnectのMulti-Primaryクラスター対応とSecret Agentのプロビジョニングレイテンシが97%削減された。LTSとして長期サポートを受けられる安定版として、エンタープライズ用途に推奨される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Broadcom / VMware vCenter</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/critical-vmware-vcenter-flaw-cvss-98.html" target="_blank" rel="noopener">VMware vCenterにCVSS 9.8のゼロデイ脆弱性（CVE-2026-123890）、中国系APT「ARMORY CASTLE」がSAML署名鍵を窃取・9月から悪用</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BroadcomがVMware vCenter ServerのDirectory Serviceに存在する認証バイパス脆弱性（CVE-2026-123890、CVSS 3.1: 9.8）を11月19日に修正した（VMSA-2026-0009）。MandiantおよびGoogle Threat Intelligence Groupは、中国系サイバー諜報グループARMORY CASTLEが9月初旬（パッチ公開の約2.5ヶ月前）からこの脆弱性を悪用してvCenter Directory Serviceに侵入し、カスタムツール「Bonesaw」でSAML署名素材を窃取、SSO管理者アカウントを作成していたと報告。Broadcom公式アドバイザリは悪用確認を記載していないが、第三者機関による証拠は深刻度を示す。影響バージョン：vCenter 9.1.1.0100以前・9.0.2.0100以前・8.0 U3l以前。修正版：9.1.1.0200・9.0.2.0200・8.0 U3m以上へ早急な更新を推奨。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cisco / TelePresence Expressway</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/hackers-exploit-critical-cisco.html" target="_blank" rel="noopener">Cisco ExpresswayのCVSS 9.8脆弱性（CVE-2026-76466）、PoC公開後に攻撃者が悪用――ルート権限でRCE、内部ネットワークに侵入</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Ciscoが10月21日に公開したTelePresence Expresswayのハードコード認証情報脆弱性（CVE-2026-76466、CVSS 3.1: 9.8）について、PoC公開直後に実際の攻撃が確認された。クラスター構成のExpressway-CおよびExpressway-Eが対象で、未認証リモートの攻撃者がroot権限でコマンド実行が可能。ロシアのF6社によると、攻撃者はインターネット公開の2台から侵入し、クラスター内部の2台に横展開して組織の内部ネットワークへのアクセスを確立した。影響バージョン：X15.5.3以前（クラスター構成のみ）。修正版：X15.5.20以上への更新が必要で、スタンドアローン構成は影響なし。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">ASUS / JPCERT</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-20</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://securityonline.info/cve-watchtower/cve-2026-114202/" target="_blank" rel="noopener">ASUS Control Center Expressにハードコード暗号鍵の脆弱性（CVE-2026-114202、CVSS 10.0）――管理者権限を偽造可能、パッチ未公開</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ASUSのPC集中管理ソフト「Control Center Express」にハードコードされた暗号鍵を悪用して管理者権限の認証トークンを偽造できる脆弱性（CVE-2026-114202）が発覚した。CVSSスコアは最高値の10.0（Critical）で、ネットワーク経由・認証不要で悪用可能。影響対象：ASUS Control Center Express v1.7.27以前。本脆弱性はEnterprise（ACC）とは別製品での新たな発見であり、修正版は本記事執筆時点では未公開。企業・学校・医療機関など本ソフトを導入している組織は、公式ベンダーアドバイザリを確認しつつ不必要なネットワーク公開を避けるなどの暫定対策を実施することを推奨。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-21 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
