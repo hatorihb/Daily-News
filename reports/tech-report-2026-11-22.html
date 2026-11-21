@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+  --accent:#0057e7;
+  --accent-light:#e8f0fe;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;background:var(--gray);color:var(--black);line-height:1.6}
+header{background:var(--black);color:var(--white);padding:2rem 1.5rem 1.5rem}
+header h1{font-size:1.6rem;font-weight:700;letter-spacing:0.05em}
+.header-date{margin-top:0.4rem;font-size:0.95rem;color:#ccc;letter-spacing:0.08em}
+nav{background:var(--white);border-bottom:2px solid var(--border);padding:0 1rem;display:flex;gap:0;overflow-x:auto}
+.nav-link{display:inline-block;padding:0.75rem 1.1rem;font-size:0.85rem;font-weight:600;color:var(--mid);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color 0.15s,border-color 0.15s}
+.nav-link:hover{color:var(--accent);border-color:var(--accent)}
+main{max-width:900px;margin:0 auto;padding:1.5rem 1rem 3rem}
+.section{margin-bottom:2.5rem}
+.section-heading{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--mid);border-bottom:2px solid var(--border);padding-bottom:0.5rem;margin-bottom:1rem}
+.section-heading span{color:var(--red);margin-right:0.5rem}
+.card{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:1.1rem 1.2rem;margin-bottom:0.9rem;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;margin-bottom:0.5rem}
+.card-service{font-size:0.75rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:0.05em}
+.card-badges{display:flex;align-items:center;gap:0.4rem;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.impact{font-size:0.7rem;font-weight:700;padding:0.15rem 0.5rem;border-radius:3px;text-transform:uppercase;letter-spacing:0.05em}
+.impact-high{background:#fde8e8;color:#c0392b}
+.impact-medium{background:#fef3cd;color:#856404}
+.impact-low{background:#e8f5e9;color:#2e7d32}
+.card-date{font-size:0.72rem;color:var(--mid);background:var(--gray);padding:0.15rem 0.45rem;border-radius:3px}
+.card-title{font-size:1rem;font-weight:600;line-height:1.4;margin-bottom:0.5rem}
+.card-title a{color:var(--black);text-decoration:none}
+.card-title a:hover{color:var(--accent);text-decoration:underline}
+details{font-size:0.875rem}
+summary{cursor:pointer;color:var(--accent);font-size:0.8rem;font-weight:600;list-style:none;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▶ "}
+details[open] summary::before{content:"▼ "}
+.card-desc{margin-top:0.6rem;color:#333;line-height:1.65}
+footer{background:var(--black);color:#aaa;text-align:center;padding:1.2rem;font-size:0.78rem}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DX・AI・AWS Update</h1>
+  <p class="header-date">2026 — 11 — 22 / Past 24 Hours</p>
+</header>
+
+<nav>
+  <a class="nav-link" href="#domestic">01 国内 IT・DX</a>
+  <a class="nav-link" href="#ai">02 AI</a>
+  <a class="nav-link" href="#aws">03 AWS</a>
+  <a class="nav-link" href="#security">04 セキュリティ</a>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <h2 class="section-heading"><span>01</span>国内 IT・DX</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Microsoft</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://news.microsoft.com/source/asia/features/microsoft-ignite-2026-empowering-human-ambition-intelligence-and-trust/?lang=ja" target="_blank" rel="noopener">
+          Microsoft Ignite 2026 ― Copilot が「仕事のOS」として本格稼働、AI エージェント Workspaces を発表
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Microsoft は Ignite 2026 において、Copilot を単なるアシスタントから「仕事の OS」として位置づける戦略転換を発表した。新機能 Copilot Workspaces では AI エージェントと人間がプロジェクトスペースを共有し、定期タスクを自律実行する Autopilot が搭載された。セキュリティ分野では Microsoft Perception が GA となり、テナント全体のセキュリティエージェントとして稼働を開始。AI 透明性イニシアティブには 40 以上の組織が参加を表明し、ガバナンス強化を訴えた。ハードウェア面では Azure Cobalt 200 VM が GA となり、Arm ベースの高コスト効率ワークロードに対応する。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Google</div>
+        <div class="card-badges">
+          <span class="impact impact-medium">重要度 中</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://www.online-tech-tips.com/google-gemini-tasks-free-six-countries-workspace/" target="_blank" rel="noopener">
+          Google「Gemini Tasks」が日本を含む6カ国で無料開放、AI 電話代行機能も搭載
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Google は AI タスク管理サービス「Gemini Tasks」を日本・米国・韓国・カナダ・オーストラリア・インドの6カ国で無料提供を開始した。バックエンドには Gemini 4 Hydrogen モデルを採用し、Google Workspace との深い統合により、メールや予定表からタスクを自動生成する機能が追加された。AI 電話代行（Duplex 後継）は米国から先行提供され、予約・問い合わせを自律的に処理できる。日本語対応品質も前バージョンから大幅に向上しており、エンタープライズプランでは管理者によるデータリテンション設定も可能となった。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <h2 class="section-heading"><span>02</span>AI</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Tencent</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://aitoolsrecap.com/Blog/ai-news-november-21-2026" target="_blank" rel="noopener">
+          Tencent が Hy4 をオープンウェイト公開 ― 224B 総パラメータの MoE モデル、Hy4 Flash 軽量版も同時リリース
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Tencent は大規模言語モデル「Hy4」のオープンウェイトを公開した。総パラメータ数 224B、MoE（Mixture of Experts）アーキテクチャにより推論時のアクティブパラメータは 12B に抑えられ、高性能と省リソースを両立する。同時に軽量版「Hy4 Flash」も公開され、エッジデバイスや低遅延アプリケーションへの展開を想定している。コーディング・数学・多言語能力でオープンモデルの中でトップクラスのベンチマークを達成したと発表されており、中国系オープンモデルの競争がさらに加速する見通しだ。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Amazon / Decart</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://www.timesofisrael.com/liveblog_entry/amazon-reportedly-eyeing-7b-deal-to-purchase-israeli-owned-ai-startup/" target="_blank" rel="noopener">
+          Amazon がイスラエル AI スタートアップ Decart を約 750 億円で買収交渉中 ― Trainium との統合を視野に
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Amazon が、チップ非依存の AI 効率化ソフトウェアを手がけるイスラエルのスタートアップ Decart の買収交渉を進めていると複数の情報筋が明かした。買収総額は 70〜75 億ドル（約 1.05〜1.13 兆円）と見られ、今年5月時点の評価額 40 億ドルから大幅に上昇した。Decart の技術は AWS Trainium チップとの親和性が高く、AI トレーニングコスト削減が主な狙いとされる。なお Anthropic が以前 約 60 億ドルで打診したが交渉は不成立に終わっており、現時点で最終合意には至っていない。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Apple</div>
+        <div class="card-badges">
+          <span class="impact impact-medium">重要度 中</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://aitoolsrecap.com/Blog/ai-news-november-21-2026" target="_blank" rel="noopener">
+          Apple Siri AI 強化版が英語ベータ配信開始 ― 他言語は 12 月以降を予定
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Apple は生成 AI を深く統合した新世代 Siri のベータ版を英語圏向けに 11 月 21 日より段階的に配信開始した。自然言語による画面操作、アプリをまたぐ複合タスク処理、オンデバイス推論の三本柱が実装されており、プライバシー保護を前面に押し出した設計となっている。日本語を含む他言語への展開は 12 月以降を予定しており、地域ごとの展開スケジュールは別途アナウンスされる見通しだ。企業向けには Siri Business（仮称）として専用 API が提供予定とも報告されている。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <h2 class="section-heading"><span>03</span>AWS</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Amazon Bedrock</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://dev.to/nadtakanfuthoem/aws-serverless-roundup-november-14-20-2026-2665" target="_blank" rel="noopener">
+          Amazon Bedrock AgentCore ランタイム V2 が東京含む6新リージョンで GA ― Agent Registry も拡張
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Amazon Bedrock AgentCore Runtime V2 がアジアパシフィック（東京）を含む新たな6リージョンで一般提供（GA）となった。新規対応リージョンは欧州（フランクフルト・ストックホルム）、アジアパシフィック（ムンバイ・シンガポール・シドニー・東京）で、グローバルなエージェントワークロードのレイテンシ最適化が可能になる。同時に AWS Agent Registry も4リージョンに拡張され、マルチエージェント構成の登録・検索・呼び出しを統一的に管理できるようになった。re:Invent（11 月 30 日〜12 月 4 日）前のアップデートとして注目を集めている。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">AWS</div>
+        <div class="card-badges">
+          <span class="impact impact-medium">重要度 中</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://builder.aws.com/content/3LoBWXqi6PmsVdK0zEx0SXNnUjJ/aws-dominates-cloud-innovation-ai-agents-security-tools-and-cost-savings-lead-november-2026" target="_blank" rel="noopener">
+          Amazon Quick 発表 ― AI エージェントが業務を代行する AWS ワークアシスタント、40 以上のコネクタに対応
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">AWS は業務支援 AI「Amazon Quick」を発表した。Slack・Outlook・Salesforce など 40 以上のコネクタに対応し、自然言語で業務レポートの生成や会議ノートの要約、CRM 更新などを自律的に実行する。エージェントには細粒度の権限レベルが設定でき、IAM ポリシーと VPC 内通信によりセキュリティを担保する設計となっている。re:Invent 2026（11 月 30 日〜12 月 4 日）でさらなる詳細が公開される予定であり、エンタープライズ向け正式提供は 2027 年第 1 四半期が目標とされる。</p>
+      </details>
+    </div>
+
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <h2 class="section-heading"><span>04</span>セキュリティ</h2>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Apache Roller / CISA KEV</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://thehackernews.com/2026/11/hackers-exploit-critical-vmware-cisco.html" target="_blank" rel="noopener">
+          【緊急】CVE-2026-129448 (CVSS 9.8) ― Apache Roller の XML-RPC デシリアライズ RCE が野生で悪用、CISA KEV に追加
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Apache Roller のブログサーバーに存在する未認証の XML-RPC エンドポイントにおいて、Java デシリアライズ脆弱性（CVE-2026-129448、CVSS 9.8）の実際の悪用が確認された。影響バージョンは 4.0.0〜6.1.4 で、PoC が 9 月 28 日に公開されて以降、ランサムウェアグループが初期侵入に活用していることを Threat Intelligence 各社が報告している。CISA は 11 月 21 日に Known Exploited Vulnerabilities (KEV) カタログへ追加し、連邦機関に 12 月 5 日までの修正を義務付けた。修正版は Roller 6.1.6 または 6.1.7。緊急回避策として WEB-INF/web.xml から XML-RPC サーブレットを無効化することが推奨されている。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">ピーチ・アビエーション / Cuenote FC</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://www.ktv.jp/news/articles/?id=31119" target="_blank" rel="noopener">
+          ピーチ・アビエーション 899 万件超の個人情報漏洩 ― 委託先メール配信「Cuenote FC」への不正アクセスが原因
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">ピーチ・アビエーションは 11 月 21 日、顧客 8,997,106 件の個人情報が漏洩した可能性を発表した。原因はメール配信委託先のユミルリンクが提供するサービス「Cuenote FC」への不正アクセスで、侵害は 10 月 18 日に発生していた。漏洩対象は氏名・生年月日・住所・電話番号・メールアドレス・旅程情報で、クレジットカード情報とパスポート情報は含まれていない。同社は影響を受ける顧客へ個別に通知を進めており、フィッシングメールへの注意を呼びかけている。SaaS 型メール配信基盤を経由したサプライチェーン攻撃の典型例として注目される。</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="card-top">
+        <div class="card-service">Microsoft Entra</div>
+        <div class="card-badges">
+          <span class="impact impact-high">重要度 高</span>
+          <span class="card-date">2026-11-21</span>
+        </div>
+      </div>
+      <div class="card-title">
+        <a href="https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/" target="_blank" rel="noopener">
+          Microsoft Entra Connect Health の API 欠陥を悪用 ― 管理者メールとテナントメタデータが窃取される
+        </a>
+      </div>
+      <details>
+        <summary>詳細を表示</summary>
+        <p class="card-desc">Microsoft は、ハイブリッド ID 管理ツール「Entra Connect Health」の API に存在した認可不備の欠陥が実際に悪用され、管理者のメールアドレスとテナントメタデータが窃取されたことを明らかにした。攻撃者はこの情報をスピアフィッシングや BEC（ビジネスメール詐欺）に転用していたと見られる。パスワードや認証トークンは対象外だったと Microsoft は説明しており、欠陥はサーバーサイドで 11 月 19 日に修正済みとなった。影響を受けたテナント数は非公表で、Microsoft は影響テナントへ個別通知を送付している。</p>
+      </details>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <span>2026-11-22 過去24時間以内のアップデートを自動収集。</span>
+</footer>
+
+</body>
+</html>
