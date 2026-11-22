@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 23 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thenextweb.com/news/openai-slowdown-pachocki-alien-mind-research-intern-compute" target="_blank" rel="noopener">OpenAI 主任科学者が事前学習ベンチマークを初公開、AI業界横断のコンピュート上限設定を提言</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAI の主任科学者 Jakub Pachocki 氏が11月22日（日曜）、同社内部の事前学習スコアを業界初めて公開する形で発表した。9月6日に公開したエッセイ「An Alien Mind」に続く動きで、今回は定量的なベンチマーク結果を外部に開示した。Pachocki 氏はあわせて「自主的な計算リソース制限が業界慣行になるまでの間、共通の安全基準を設ける必要がある」として、第三者機関または政府による監査付きの業界横断ボランタリー制限を提言。OpenAI はすでに事前学習コンピュートの約20%を安全監視に充てているという。他のAI企業でこの種の内部ベンチマークを公開した例はないとされており、透明性・競争・規制の観点から大きな議論を呼んでいる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://finance.yahoo.com/technology/live/anthropic-ipo-live-company-said-to-price-stock-at-83-begin-trading-thursday-212656452.html" target="_blank" rel="noopener">Anthropic（ANT）IPO後初の週末 — 公開価格$83・初日終値$97.17、史上最大規模AI IPOとして$81.3Bを調達</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Anthropic（NYSE: ANT）は11月19日（木）に公開価格$83で上場し、初日終値$97.17（+17.1%）を記録した。今週末（11月22〜23日）に IPO 決済が完了し、調達総額は$81.3Bと AI 企業では史上最大規模となった。時価総額は約$1.5兆円相当とされ、Nasdaq-100 への速成入りが期待されている。初日に公開価格を18%超えて引けた一方、翌11月20日（金）には約9.6%の調整安を記録しており、AI株全体のボラティリティの高さを改めて示した。次の注目点はQ3決算発表（12月予定）と Nasdaq-100 組み入れ判断のタイミングとされる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">NVIDIA</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001045810&type=8-K&dateb=&owner=include&count=10" target="_blank" rel="noopener">NVIDIA 暫定 CEO Colette Kress 就任から10日、取締役会議長に Harvey Jones 氏を新任 — CEO 後継者選定中</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Jensen Huang 氏が11月11日に NVIDIA CEO を辞任してから10日が経過し、CFO の Colette Kress 氏が暫定 CEO として初の対外声明を発表した。同時に Harvey Jones 氏が NVIDIA 初の独立取締役会議長に就任。取締役会は内外から後継 CEO 候補を選定中としており、AI チップ事業など各事業の通常運営は継続されている。Huang 氏の辞任発表直後に NVIDIA 株は一時14%超の下落を見せたが、現在は－4.3%前後に落ち着いている。次世代 GPU アーキテクチャ「Feynman」の開発タイムラインへの影響を懸念する声もあり、後任 CEO の選定完了が注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+      <p class="empty-note">本日は過去24時間以内の新しいアップデートは確認されませんでした。</p>
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">VMware / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cyber.spool.co.jp/cyber_news/20261123-cisa-adds-vmware-cisco-flaws/" target="_blank" rel="noopener">【緊急・本日期限】VMware vCenter CVE-2026-123890（CVSS 9.8）ほか3件を CISA KEV に追加、連邦機関パッチ期限11月23日（本日）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は11月20日、VMware vCenter Directory Service の認証バイパス脆弱性 CVE-2026-123890（CVSS 9.8）を含む計4件を KEV カタログに追加、連邦機関へのパッチ適用期限を11月23日（本日）に設定した。同脆弱性は認証不要でリモートから悪用可能な深刻度 Critical。Mandiant（Google傘下）は中国系 APT グループ「ARMORY CASTLE」による9月以降のゼロデイ悪用を確認しており、パッチ公開前に2か月にわたって使用されていたとみられる。対処版は VMware vCenter 8.0 Update 3m（9.1.1.0200 / 9.0.2.0200）。同バッチには Cisco Expressway CVE-2026-76466（CVSS 9.8）、SAP NetWeaver、Apache Roller の脆弱性も含まれる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">CISA KEV / Cisco BroadWorks</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-22</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://labs.cloudsecurityalliance.org/research/ciso-daily-briefing-20261122/" target="_blank" rel="noopener">Cisco BroadWorks CVE-2026-20320（CVSS 7.5）など6件が CISA KEV に登録、連邦機関パッチ期限11月24日（明日）</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は11月10日に Cisco BroadWorks OCI XML パーサーの XXE 脆弱性 CVE-2026-20320（CVSS 7.5）を含む6件を KEV に追加、連邦機関の適用期限を11月24日に設定した。CVE-2026-20320 は認証不要のリモート攻撃者がOCI XMLインターフェース経由で機密ファイルを読み取り可能な脆弱性で、欧州の通信事業者を含む10社以上での悪用が確認されている。対処版は Cisco BroadWorks RI.2026.07。同バッチには Microsoft Outlook、Google Chrome、Barracuda 製品の脆弱性も含まれる。Cloud Security Alliance の CISO デイリーブリーフィングは11月22日付でこれら KEV 期限到来情報を整理している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">The Hacker News / 週次まとめ</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-23</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/weekly-recap-n-able-0-days-windows-0.html" target="_blank" rel="noopener">週次セキュリティまとめ（11/23）: N-Able 0-day・Windows 0-day・Chrome 悪用・Samsung Android RCE</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">The Hacker News が11月23日（月）付けで先週のセキュリティ主要動向をまとめた。N-Able Remote Monitoring &amp; Management（RMM）に対するゼロデイ攻撃、Windows のゼロデイ脆弱性（CVE-2026-124194）の悪用確認、Google Chrome への実際の悪用が確認された高深刻度欠陥、Samsung および Android の認証不要リモートコード実行脆弱性、BeyondTrust Remote Support CVE-2026-102764 の即時展開推奨が主なトピック。また AI 関連リスクとして LLMjacking（盗用した API 認証情報で LLM を不正利用する攻撃）とサプライチェーン侵害による被害拡大が今週も続いたとされる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-23 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
