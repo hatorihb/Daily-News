@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 25 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">住友ゴム工業（DUNLOP）/ NEC</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">AI Agent</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://news.mynavi.jp/techplus/article/20261124-5399114/" target="_blank" rel="noopener">DUNLOP × NEC、AIエージェント同士でタイヤ商品開発の部門間調整を自動化する机上実証を実施 ― 調整期間を約90%短縮へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">住友ゴム工業（DUNLOPブランド）とNECは2026年11月24日、タイヤ商品開発における部門間調整業務をAIエージェント同士で自動化する机上実証の結果を発表した。マーケティング部門と設計部門にNECのAIエージェントをそれぞれ配置し、2026年4〜10月にかけてエージェント間の交渉・合意形成を通じた開発計画策定を実施。複数部門へ展開した場合、全社的な調整期間を約90%短縮できる見込みとしている。両社はNECとの2025年7月締結の戦略的パートナーシップに基づき、材料開発・タイヤデザインなどの領域にもAI活用を拡大する計画だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Sionic AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">New Service</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.kspost.biz/en-us/articles/3318" target="_blank" rel="noopener">Sionic AI、高速推論に特化したLLMゲートウェイ「OpenGateway」を正式リリース ― オープンウェイトモデルを最大5倍高速化</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">韓国スタートアップのSionic AIは2026年11月24日、オープンウェイト型大規模言語モデルの高速推論に特化したゲートウェイサービス「OpenGateway」を正式リリースした。自社開発カーネル最適化と投機的デコーディングにより、GLM-5.3 Flash UltraFastで毎秒最大478トークン（OpenRouter比約5倍）を実現すると主張する。チームごとの権限設定・利用上限管理に対応するほか、金融・公共機関向けにオンプレミス版も提供。OpenAI互換APIを採用しており、コーディングエージェント等との連携が容易な設計となっている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / AI Security</div>
+          <div class="card-badges">
+            <span class="impact impact-low">AI Research</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techgenyz.com/drupal-security-updates-cve-2026-132165/" target="_blank" rel="noopener">Anthropic の AI セキュリティスキャナーが Drupal の重大 RCE 脆弱性（CVE-2026-132165）を発見 ― AI による脆弱性探索が実績を積む</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Drupalのコアインストーラに発見された未認証RCE脆弱性CVE-2026-132165は、Anthropicが開発・運用するAIセキュリティスキャナーによって最初に特定されたと報じられている。同スキャナーはコードベースを自律的に解析し人間が見落としがちな脆弱性パターンを検出する設計で、今回の成果はAIによる脆弱性探索（AI-assisted vulnerability research）の実用性を示す事例として注目されている。CISAは11月24日に本脆弱性をKEVに登録しており、連邦機関の対応期限は11月27日。AIを防御側に活用するアプローチの有効性が改めて示された形だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Compliance</div>
+          <div class="card-badges">
+            <span class="impact impact-low">Certification</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/security/aws-completed-its-second-iso-iec-420012023-surveillance-audit/" target="_blank" rel="noopener">AWS、ISO/IEC 42001:2023（AI管理システム）第2回サーベイランス審査を完了 ― DevOps Agentも新たに認証範囲に追加</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年11月24日、AI管理システムの国際規格「ISO/IEC 42001:2023」の第2回サーベイランス審査を完了したと発表した。今回の審査ではAWS DevOps Agentが新たに認証スコープに追加された。ISO/IEC 42001はAIシステムのリスク管理・ガバナンス・責任あるAI利用のための要件を定める規格で、企業のAI利用における信頼性と透明性の担保を目的としている。AWSのAIサービスを利用するエンタープライズ顧客が、AI活用のコンプライアンス要件（社内規定・規制対応など）を充足しやすい環境が整備された。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Weekly Roundup</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">Multiple Updates</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-weekly-roundup-local-zone-in-bogota-30-minute-lambda-timeout-and-more-november-24-2026/" target="_blank" rel="noopener">AWS週次アップデート（11月24日号）: Lambda タイムアウト30分へ倍増・ボゴタ Local Zone 開設・STS GetScopedCredentials が一般提供開始</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年11月24日付の週次まとめブログを公開した。主なトピックは3点。①AWS Lambda オンデマンド型「Event Functions」のタイムアウト上限が15分から30分へ倍増（全商用リージョン・同期/非同期/ESMに対応）。②コロンビア・ボゴタにAWS Local Zoneを新設し、現地ユーザーが低レイテンシーでAWSを利用可能に。③AWS STS新API「GetScopedCredentials」が一般提供開始 ― 既存の一時認証情報からパーミッションやセッション期間を絞り込んだ子認証情報を即時発行でき、AIエージェントへの最小権限付与が容易になる。re:Invent 2026（11月30日〜12月4日）を1週間後に控え、直前ラッシュが続く。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Drupal / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.rescana.com/post/drupal-core-installer-flaw-cve-2026-132165-exploited-and-in-cisa-kev-update-now" target="_blank" rel="noopener">Drupal コアインストーラに未認証 RCE 脆弱性（CVE-2026-132165）、CISA KEV に登録 ― 連邦機関対応期限 11月27日・実環境での悪用確認済み</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Drupalのコアインストーラ（install.php）に、未認証の攻撃者がサイト全体を乗っ取れるリモートコード実行（RCE）の脆弱性CVE-2026-132165が発見され、2026年11月24日にCISA KEV（悪用確認済み脆弱性カタログ）へ登録された。連邦機関のパッチ適用期限は11月27日。すでに11月19日以降から実環境での悪用が確認されており、パッチ版（10.6.22 / 11.3.22 / 11.4.13）への早急なアップデートが必要。即時対応が困難な場合は Webサーバー設定または .htaccess で `/core/install.php` へのアクセスを遮断することで暫定保護できる。なおセキュリティアドバイザリは SA-CORE-2026-017（2026-11-18 公開）。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Idunno.AntiCsrf / ASP.NET</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/hackers-exploit-critical-aspnet-anti.html" target="_blank" rel="noopener">廃止済み ASP.NET ライブラリ「Idunno.AntiCsrf」に CVSS 9.3 の未認証 RCE（CVE-2026-131914）、パッチなく使用停止・削除を推奨</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">2008年に開発終了したASP.NET向けCSRF対策ライブラリ「Idunno.AntiCsrf」に、深刻な非直列化脆弱性CVE-2026-131914（CVSS 9.3）が発見された。認証不要の単一HTTPリクエストでIISワーカープロセス（w3wp.exe）としてRCEが可能。MandiantおよびwatchTowrは2026年11月24日に実環境での悪用（in-the-wild exploitation）を確認・公表した。開発終了ライブラリのためパッチは提供されず、ライブラリの完全削除と `System.Web.Helpers.AntiForgery` またはASP.NET Core組み込みのIAntiforgeryへの移行が唯一の対処法。Web.configおよびbin/ディレクトリ内の `Idunno.AntiCsrf.dll` 参照を確認のうえ速やかに対応すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Visa / Mastercard / JPMorgan Chase</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">Data Breach</span>
+            <span class="card-date">2026-11-24</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/visa-mastercard-jpmorgan-data-breach/" target="_blank" rel="noopener">Visa・Mastercard・JPMorgan Chase の顧客データがランサムウェアグループ「n0n」によりリーク ― 委託先への第三者攻撃が原因</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">ランサムウェアグループ「n0n」が、Visa・Mastercard・JPMorgan Chaseの顧客に関連する情報をリークサイトに公開した。3社はいずれも「自社システムへの直接侵害はない」と説明しており、委託先のサードパーティ事業者を通じた被害とみられる。Visaはアジア太平洋地域のパートナー経由で一部プレミアム顧客の非決済情報が露出した可能性を認め、JPMorgan Chaseはマーケティングデータへのアクセスを確認している。セキュリティ企業Ostolabの分析では3社への直接侵害は断定できないとしているが、フィッシング詐欺リスクの高まりが指摘されており、心当たりのあるユーザーは届いた「お詫び」メールのリンクを開かず公式サイトで確認するよう注意が必要だ。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-25 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
