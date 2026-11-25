@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 26 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">日本政府 / 内閣</div>
+          <div class="card-badges">
+            <span class="impact impact-high">国家戦略</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.japantimes.co.jp/news/2026/11/25/japan/ai-nation-aim/" target="_blank" rel="noopener">日本政府、「AI立国」実現を宣言 ― 経済・産業政策大綱を閣議決定、2030年までに国内AI産業を10倍規模に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">日本政府は2026年11月25日、AI技術を軸とした経済成長戦略「AI立国推進大綱」を閣議決定した。2030年までに国内AI産業の規模を現在の10倍に拡大することを目標に掲げ、AIスタートアップへの集中投資・規制改革・データ基盤整備の三本柱で推進する方針を示した。企業のAI活用を後押しするため、官民データ連携プラットフォームの整備や、AIリテラシー教育の義務化も盛り込まれた。自動車・製造・医療・金融の各分野でのAI実証特区制度も新設され、海外企業の対日投資誘致にも注力する構えだ。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Miyoshi Tech（三吉テック）</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">DX Award</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://prtimes.jp/main/html/rd/p/000000007.000163783.html" target="_blank" rel="noopener">Miyoshi Tech、AIエージェント×RPA による業務自動化でKANSAI DX AWARD 2026 金賞を受賞 ― Japan DX &amp; AX Week 関西 2026 で登壇</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Miyoshi Tech（三吉テック）は2026年11月25日、「Japan DX &amp; AX Week 関西 2026」において「KANSAI DX AWARD 2026」金賞を受賞したと発表した。同社はAIエージェントとRPAを組み合わせた独自の業務自動化ソリューションを展開しており、受注処理・在庫管理・請求書発行の一連の業務フローを完全自動化した実績が評価された。受賞と同日に登壇セッションを実施し、AIエージェント活用による中堅・中小企業向けDX推進モデルを紹介。製造・流通業界向けに同様のソリューション展開を加速させる方針を表明した。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic / 数学研究</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">AI Research</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cryptobriefing.com/anthropic-ai-aids-in-solving-riemann-hypothesis-awaits-official-recognition/" target="_blank" rel="noopener">Anthropic の AI が160年来の未解決問題「リーマン予想」の証明を支援 ― 専門家による正式認定を待つ段階に</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">数学者 Levent Alpöge 氏が Anthropic の AI を活用してリーマン予想の証明に成功したと主張し、2026年11月25日に論文を公開した。同予想は素数の分布に関する160年以上解かれていない難問で、クレイ数学研究所が設定するミレニアム懸賞問題の一つ。AIは証明の論理構造の検証と代替アプローチの探索を支援したとされている。複数の数学者は証明を査読中であり、公式認定には数ヶ月を要する見込みとしている。正式に認定されれば、AIが純粋数学の最難関問題の解決に貢献した初の事例となる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">OpenAI / GPT-6</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">Model Update</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aiweekly.co/p/november-25-2026" target="_blank" rel="noopener">OpenAI GPT-6、専用ツールなしでタンパク質設計と行列積指数（9/4）の計算に成功 ― 科学研究での汎用推論能力を実証</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">OpenAIの GPT-6 が生物学専用ツールを使わずにタンパク質の三次元構造設計に成功したことが、2026年11月25日に報じられた。同モデルはさらに長年未解決の組み合わせ最適化問題「行列積指数（ω）が9/4である」ことも計算によって示したとされており、科学計算における汎用推論能力の新たな水準を示す成果として注目されている。研究者からは「AlphaFold3の進化版に匹敵する精度」との評価も出ており、創薬・材料科学への応用加速が期待されている。OpenAI は間もなく TerraFamilyシリーズの新モデルも公開する予定としている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS WAF / Amazon Bedrock</div>
+          <div class="card-badges">
+            <span class="impact impact-high">GA リリース</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/about-aws/whats-new/2026/11/waf-ai-endpoint-discovery-protection/" target="_blank" rel="noopener">AWS WAF、LLM・MCP・A2A エンドポイントの自動検出・保護機能が一般提供（GA）開始 ― Amazon Bedrock Guardrails と連携</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年11月25日、AWS WAF において LLM（大規模言語モデル）・MCP（Model Context Protocol）・A2A（Agent-to-Agent）エンドポイントを自動検出してセキュリティポリシーを適用する新機能の一般提供（GA）を発表した。Amazon Bedrock Guardrails と連携し、AIワークロードに特化したプロンプトインジェクション対策・アウトプットフィルタリング・レート制御を WAF レベルで一括管理できる。これまで手動設定が必要だったAIエンドポイントの保護を自動化することで、AI アプリケーションのセキュリティ運用コストの大幅削減が見込まれる。全リージョンで追加費用なしで利用可能。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / DevSecOps</div>
+          <div class="card-badges">
+            <span class="impact impact-high">GA リリース</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/aws/aws-continuum-for-code-vulnerabilities-is-now-generally-available/" target="_blank" rel="noopener">AWS Continuum for Code Vulnerabilities が正式GA ― コードのコミットからデプロイまで脆弱性を継続的に追跡・修正提案</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSは2026年11月25日、コードの脆弱性を CI/CD パイプライン全体で継続的に追跡・修正提案する新サービス「AWS Continuum for Code Vulnerabilities」の一般提供（GA）を発表した。コミット段階からデプロイ後の稼働中まで、同一脆弱性を一貫して追跡し、依存ライブラリのアップグレード提案・パッチ適用の自動化・リスクの優先度付けを統合的に提供する。Amazon CodeGuru Security・Amazon Inspector・AWS Security Hub との統合により、開発者は既存のワークフローを変えずに DevSecOps を実践できる。GitHub・GitLab・Bitbucket との連携もサポート。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Security</span>
+            セキュリティ<br>最新情報
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Broadcom / VMware vCenter</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CVSS 9.8 / 野外悪用</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://thehackernews.com/2026/11/critical-vmware-vcenter-flaw-cvss-98.html" target="_blank" rel="noopener">【緊急】VMware vCenter Server に認証バイパス脆弱性 CVE-2026-123890（CVSS 9.8）― 中国系APTによる野外悪用を確認、即時パッチ適用を</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Broadcom は2026年11月25日、VMware vCenter Server の VMware Directory Service に存在する認証バイパスの脆弱性 CVE-2026-123890（CVSSv3: 9.8）に対し緊急セキュリティアドバイザリ VMSA-2026-0009 を発行した。ネットワーク到達可能な攻撃者が認証なしで管理権限を取得できる。影響を受けるバージョンは vCenter Server 7.0 / 8.0 系（特定ビルド未満）で、修正済みビルドへの更新が唯一の対策（ワークアラウンドなし）。Mandiant の報告により、中国系 APT グループがすでに本脆弱性を積極的に悪用中であることが確認されている。5日前の VMSA-2026-0008（CVE-2026-123879）に続く今週2件目の vCenter 緊急パッチとなる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Mitel / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CISA KEV 追加</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.cisa.gov/known-exploited-vulnerabilities-catalog" target="_blank" rel="noopener">Mitel MiCollab の認証バイパス脆弱性 CVE-2026-133324 が CISA KEV に追加 ― 未認証でシステム設定を改ざん可能、即時対応を要求</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は2026年11月25日、Mitel MiCollab の認証バイパス脆弱性 CVE-2026-133324 を「既知の悪用された脆弱性（KEV）」カタログに追加した。攻撃者は認証なしで MiCollab の管理インターフェースに直接アクセスし、ユーザーアカウント・通話ルーティング・セキュリティポリシーなどのシステム設定を改ざんできる。MiCollab は企業向け統合コミュニケーション基盤として世界中で広く使われており、影響組織は多数に上る見込み。対象バージョンは MiCollab 9.8 以前で、修正版 9.9 SP1 への早急なアップグレードが推奨される。連邦機関は CISA の指定期限内に対応措置の完了が義務付けられる。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">HPE / Juniper Networks</div>
+          <div class="card-badges">
+            <span class="impact impact-high">CISA KEV 追加</span>
+            <span class="card-date">2026-11-25</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.bleepingcomputer.com/news/security/cisa-warns-of-juniper-session-smart-router-vulnerability-exploited-in-attacks/" target="_blank" rel="noopener">Juniper Session Smart Router に認証不備 CVE-2026-103406 ― CISA KEV 追加、ネットワーク機器を標的とした攻撃キャンペーンとの関連も</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISA は2026年11月25日、Juniper Networks（HPE傘下）の Session Smart Router に存在する認証不備の脆弱性 CVE-2026-103406 を KEV カタログに追加した。ネットワーク機器を標的とする複数の攻撃グループが本脆弱性を組み込んだ侵入活動を展開しており、足場確保後にラテラルムーブメントを行うケースが確認されている。影響を受けるバージョンは Session Smart OS 5.x 〜 6.2.x（6.3 未満）で、HPE はセキュリティアドバイザリ JSA-2026-0291 を発行し修正ファームウェアへのアップデートを強く推奨している。VPN・SD-WAN 環境でのネットワーク機器管理画面のインターネット露出についても即時確認が求められる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-26 &nbsp; 過去24時間以内のアップデートを自動収集。</span>
+  </div>
+</footer>
+
+</body>
+</html>
