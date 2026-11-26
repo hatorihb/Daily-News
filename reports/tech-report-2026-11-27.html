@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 27 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">プレイド / KARTE</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.watch.impress.co.jp/docs/news/2157620.html" target="_blank" rel="noopener">KARTEプレイド不正アクセス続報：JINS最大1,829万件など複数社の被害規模が確定</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">顧客データ管理ツール「KARTE」を提供するプレイドへの不正アクセス事件で、影響を受けた各社の被害規模が明らかになった。JINSは最大約1,829万件、カウネットは約30万5千件（確定）、しまむらは最大約700万件、トヨタファイナンスは約12万件、ナイキバランスジャパンも含まれる。漏洩の可能性がある情報は氏名・メールアドレス・購買履歴など。各社は個人情報保護委員会への報告と影響顧客への通知を進めており、二次被害（フィッシング・なりすまし）への注意が呼びかけられている。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">SpaceX / FCC</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://qiita.com/aakan/items/854f515bbf5c73aa21de" target="_blank" rel="noopener">FCC、SpaceX「Starmind」宇宙データセンター衛星100万基の展開計画を承認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">米連邦通信委員会（FCC）が、SpaceXによる低軌道への小型データセンター衛星「Starmind」100万基の展開計画を承認した。SpaceXは地球低軌道に分散型クラウドコンピューティングインフラを構築し、地上データセンターを補完・代替するサービスの提供を目指している。宇宙コンピューティング分野の実用化が進む先駆けとなり、日本を含む世界のIT・クラウド業界への波及が注目される。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Anthropic</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">注目</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.remio.ai/ja/post/claude-duet-invites-reach-us-waitlist-anthropic-says-ja" target="_blank" rel="noopener">Anthropic「Claude Duet」米国待機リスト全体への招待状配信が本格化、Pro/Max/Ultra対象</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AnthropicのAIエージェント研究プレビュー「Claude Duet」で、米国のPro・Max・Ultraプランの待機リスト登録ユーザー全体に招待状の配信が始まった。Claude Duetはユーザーが作業中に先回りして提案・補佐する「先回り対話型」エージェントで、ブラウザ操作やコード実行などの自律的アクションを担う。現時点の対象は米国のiOS・Android・Web限定で、利用枠はPro/Maxプランの共有クォータ内に含まれる。日本を含む海外展開の時期は未発表。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / re:Invent 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-low">イベント</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/machine-learning/the-attendees-guide-to-the-aws-reinvent-2026-ai-ml-track/" target="_blank" rel="noopener">AWS re:Invent 2026 AI/MLトラック攻略ガイド公開――Trainium3・エージェント基盤が焦点、開催まで4日</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS公式ブログが「re:Invent 2026 AI/MLトラック参加者ガイド」を公開した。11月30日〜12月4日（ラスベガス）開催のre:Invent 2026では、AI推論チップTrainium3の最新情報、エージェント実行基盤AgentCore V2の拡張、LLMサービング最適化のセッションが集中して配置される。前年発表のKiro・AWS Security Agent・AWS DevOps Agentの後継・拡張機能についても大型発表が期待されており、AIインフラ投資を検討する国内企業も注目している。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS DevOps Agent</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新機能</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/mt/this-month-in-aws-devops-agent-november-2026/" target="_blank" rel="noopener">AWS DevOps Agent 11月まとめ：GovCloud展開・MCPチャット・AWS Organizations対応</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">「This Month in AWS DevOps Agent: November 2026」として11月のアップデートがまとめて公開された。主な追加機能はAWS GovCloud（US-West）リージョンへの展開、AWS Organizations対応（複数アカウントの一元管理）、KiroやClaude CodeなどMCPクライアントとのチャット統合、Slack・Microsoft Teamsとの双方向チャット、インシデント対応時の自動Slackチャネル作成など。AIエージェントがDevOpsサイクル全体を自律補佐するユースケースが着実に拡大している。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / builder.aws.com</div>
+          <div class="card-badges">
+            <span class="impact impact-low">月次まとめ</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://builder.aws.com/content/3LoBWXqi6PmsVdK0zEx0SXNnUjJ/aws-dominates-cloud-innovation-ai-agents-security-tools-and-cost-savings-lead-november-2026" target="_blank" rel="noopener">2026年11月のAWSクラウドイノベーション総括：AIエージェント・マルチクラウドセキュリティ・コスト削減が牽引</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">builder.aws.comが2026年11月のAWS主要アップデートを総括した。AIエージェント領域ではAgentCore Runtime V2の一般提供、DevOps Agent・Security Agentの機能強化が目立った。セキュリティ面ではSecurity HubのGoogle Cloud Platform（GCP）および Azure対応によるマルチクラウド統合管理が実現。コスト・可用性面ではLambdaの最大実行時間30分への延長、新しいローカルゾーン追加なども含まれ、re:Invent 2026（11/30開始）ではさらなる大型発表が予定されている。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Cybersecurity</span>
+            セキュリティ<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Mitel / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://cybersecuritynews.com/cisa-adds-10-flaws-to-kev/" target="_blank" rel="noopener">Mitel MiCollab に CVSS 10.0 の認証不要コマンドインジェクション (CVE-2026-133323)―― CISA KEV登録、連邦機関に11/28までのパッチ適用命令</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAは2026年11月26日、Mitel MiCollabを含む10件の脆弱性をKEV（Known Exploited Vulnerabilities）カタログに追加した。最も深刻なCVE-2026-133323はMiCollabのREST APIにおける認証不要のコマンドインジェクション（CVSS 10.0）で、ログイン不要でシステムコマンドを遠隔実行可能。影響バージョンはMiCollab 10.3.0.18以前で、修正済みバージョン（10.3最新パッチ）への早急な更新が必要。MiCollab向けには合計5件のCVEが今回のKEVバッチに含まれており、連邦民間機関は11月28日までの対処を義務付けられた。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Vates / Xen Orchestra / CISA KEV</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://shattered.io/cisa-kev-10-exploited-flaws-mitel-micollab-danfoss-juniper-xen-orchestra-nov-26/" target="_blank" rel="noopener">Vates Xen Orchestra に CISA KEV 登録の認証バイパス (CVE-2026-133469)―― XCP-ng 全ホストの root 権限奪取が可能、実攻撃を確認</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">CISAの2026年11月26日KEV追加バッチには、仮想化管理プラットフォーム「Xen Orchestra」の重大な認証バイパス脆弱性CVE-2026-133469も含まれる。REST APIのCookieベース認証を回避して管理インターフェースに侵入し、XCP-ngハイパーバイザーホストのroot権限を奪取できる。実際の攻撃が確認されておりVMサーバー乗っ取りのリスクが高く、同バッチにはDanfoss社の冷凍設備コントローラーやHPE Juniper製ネットワーク機器の脆弱性3件も含まれる。影響バージョンは6.9.x・6.10.0以前で、修正バージョンは6.9.2または6.10.1に更新すること。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">1Password / AgileBits</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">インシデント</span>
+            <span class="card-date">2026-11-26</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.itmedia.co.jp/news/article/2611/26/2000003466/" target="_blank" rel="noopener">1Password、一部顧客の氏名・メールアドレスが流出――保管庫内データへの影響なし</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">パスワード管理サービス「1Password」が、一部顧客の氏名とメールアドレスが流出したと発表した。保管庫（Vault）内に保存したパスワード・認証情報への影響はないとしており、現在調査を継続している。漏洩の経路は委託先からとされ、影響を受けた顧客には個別に通知を行う予定。日本企業・チームにも広く導入されているパスワードマネージャーだけに、IT管理者は状況を確認のうえ社員への注意喚起を検討されたい。フィッシングメールへの警戒が特に重要となる。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <span class="footer-brand">DX・AI・AWS Update</span>
+    <span>2026-11-27 &nbsp; 過去24時間以内のアップデートを自動収集。情報の正確性は各リンク先をご確認ください。</span>
+  </div>
+</footer>
+
+</body>
+</html>
