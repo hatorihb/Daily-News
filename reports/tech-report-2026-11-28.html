@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DX・AI・AWS Update</title>
+<style>
+:root{
+  --black:#0a0a0a;
+  --white:#ffffff;
+  --red:#E60012;
+  --gray:#f2f2f2;
+  --mid:#888;
+  --border:#e0e0e0;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Helvetica Neue','Hiragino Kaku Gothic ProN','Noto Sans JP',sans-serif;
+  background:var(--white);
+  color:var(--black);
+  font-size:16px;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+header{background:var(--black);color:var(--white);padding:4rem 0 3.5rem}
+.container{max-width:960px;margin:0 auto;padding:0 2rem}
+.header-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;color:var(--red);text-transform:uppercase;margin-bottom:1.25rem}
+h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:900;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem}
+.header-date{font-size:.8rem;letter-spacing:.15em;color:#888;font-weight:400}
+nav{border-bottom:2px solid var(--black);background:var(--white);position:sticky;top:0;z-index:100}
+nav .container{display:flex;gap:0;overflow-x:auto}
+.nav-link{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);padding:1rem 1.5rem;border-right:1px solid var(--border);white-space:nowrap;transition:color .15s,background .15s}
+.nav-link:first-child{border-left:1px solid var(--border)}
+.nav-link:hover{color:var(--black);background:var(--gray)}
+main{padding:0}
+.section{border-bottom:1px solid var(--border)}
+.section-header{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1.5rem;padding:3rem 0 2rem;border-bottom:1px solid var(--border)}
+.section-num{font-size:4rem;font-weight:900;color:var(--gray);line-height:1;letter-spacing:-.04em;min-width:4rem;text-align:right}
+.section-title{font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:900;letter-spacing:-.01em;line-height:1.2}
+.section-title span{display:block;font-size:.7rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--mid);margin-bottom:.4rem}
+.section-domestic .section-num{color:#ffe0e0}
+.section-title{color:var(--red)}
+.card{display:grid;grid-template-columns:1fr;border-bottom:1px solid var(--border);padding:2rem 0}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.75rem;flex-wrap:wrap}
+.card-service{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--mid)}
+.card-badges{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.impact{font-size:.65rem;font-weight:700;letter-spacing:.08em;padding:.2rem .6rem;text-transform:uppercase}
+.impact-high{background:var(--red);color:var(--white)}
+.impact-medium{background:var(--black);color:var(--white)}
+.impact-low{background:var(--gray);color:var(--black)}
+.card-date{font-size:.7rem;color:var(--mid);letter-spacing:.05em}
+.card-title{font-size:clamp(1rem,2vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.01em;margin-bottom:.5rem}
+.card-title a{border-bottom:2px solid transparent;transition:border-color .15s}
+.card-title a:hover{border-bottom-color:var(--black)}
+.section-domestic .card-title a:hover{border-bottom-color:var(--red)}
+details{margin-top:.75rem}
+summary{list-style:none;display:flex;align-items:center;gap:.5rem;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);width:fit-content;padding:.25rem 0;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::before{content:'';display:inline-block;width:.5rem;height:.5rem;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s;flex-shrink:0}
+details[open] summary::before{transform:rotate(45deg);margin-top:-.25rem}
+summary:hover{color:var(--black);border-color:var(--black)}
+.section-domestic summary:hover{color:var(--red);border-color:var(--red)}
+.card-desc{margin-top:1rem;font-size:.9rem;line-height:1.9;color:#333;max-width:680px}
+.empty-note{padding:2rem 0;font-size:.9rem;color:var(--mid);letter-spacing:.05em}
+footer{background:var(--black);color:#555;padding:2.5rem 0;font-size:.72rem;letter-spacing:.1em}
+footer .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-brand{font-weight:900;font-size:1rem;color:var(--white);letter-spacing:-.01em}
+@media(max-width:640px){h1{font-size:2rem}.section-num{font-size:2.5rem;min-width:2.5rem}.nav-link{padding:.75rem 1rem}header{padding:2.5rem 0 2rem}}
+@media print{nav,footer{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>DX・AI・AWS Update</h1>
+    <p class="header-date">2026 — 11 — 28 &nbsp;&nbsp;/&nbsp;&nbsp; Past 24 Hours</p>
+  </div>
+</header>
+
+<nav>
+  <div class="container">
+    <a class="nav-link" href="#domestic">01 &nbsp; 国内 IT・DX</a>
+    <a class="nav-link" href="#ai">02 &nbsp; AI</a>
+    <a class="nav-link" href="#aws">03 &nbsp; AWS</a>
+    <a class="nav-link" href="#security">04 &nbsp; セキュリティ</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- 01 国内IT・DX -->
+  <section class="section section-domestic" id="domestic">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div>
+          <div class="section-title">
+            <span>Domestic IT / DX</span>
+            国内 IT・DX<br>最新動向
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Microsoft / 国内企業 IT</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techtarget.itmedia.co.jp/tt/article/2611/27/2000003497/" target="_blank" rel="noopener">Windows 11 24H2 HomeとProが2026年11月でサポート終了—「まだ動く」PCが情報漏洩リスクに</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">MicrosoftのWindows 11バージョン24H2はHome/Pro向け機能更新プログラムの提供が終了し、今後はセキュリティ修正も受けられなくなります。企業・家庭に残存する旧バージョンPCは未パッチの脆弱性を抱えたまま稼動し続けるリスクがあり、情シス担当者は自社環境のWindowsバージョンを早急に棚卸しすることが急務です。Windows 10は2025年10月にEoLを迎えており、旧バージョンのサポート切れ問題が継続して企業IT管理の課題となっています。最新のWindows 11 25H2（またはWindows 12）への計画的な移行が推奨されます。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">BtoB Growth EXPO / IT展示会</div>
+          <div class="card-badges">
+            <span class="impact impact-low">参考情報</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://webtan.impress.co.jp/r/prtimes/items/000000037.000151821" target="_blank" rel="noopener">情シス・DX推進リーダー向け「BtoB Growth EXPO for IT・情シス」11月30日開催—「全社DX×AI」「セキュリティ×AI」がテーマ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">国内企業のDX・AI活用を推進する情シスリーダーや意思決定層150名を対象とした「BtoB Growth EXPO for IT・情シス」が11月30日に開催されます。「全社DX×AI」「セキュリティ×AI」「IT資産管理×AI」の3テーマで、AIを実際の業務に実装するための実践的な知見が一夜に集結します。先進企業によるケーススタディや専門家との交流セッションが予定されており、DX・AI導入を本格化させたい担当者の情報収集の場として注目を集めています。ハイブリッド形式（会場＋オンライン）で参加可能です。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02 AI -->
+  <section class="section section-ai" id="ai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div>
+          <div class="section-title">
+            <span>Artificial Intelligence</span>
+            AI 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">Cognition AI</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">新リリース</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.producthunt.com/posts/1304696" target="_blank" rel="noopener">Cognition が「SWE-2 Flash」をリリース—SWE-2の3倍速・5分の1コスト、11月末まで無料トライアル提供</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AIコーディングエージェント企業Cognitionは、フラッグシップモデル「SWE-2」の高速・低コスト版「SWE-2 Flash」をProduct Huntで公開しました。生成速度は約200トークン/秒（SWE-2の約3倍）で、価格はSWE-2の5分の1に設定されています。同社のDevinエージェントに組み込まれており、CerebrasのWafer-Scale推論インフラを活用した高スループットが特徴です。11月30日まで全ユーザーに無料トライアルが提供されており、反復的なコーディングタスクのコスト削減に最適化されています。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">HackerNoon / AI業界</div>
+          <div class="card-badges">
+            <span class="impact impact-low">業界動向</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://hackernoon.com/why-aws-reinvent-2026-matters-for-the-ai-economy" target="_blank" rel="noopener">AWS re:Invent 2026 がAI経済に重要な理由—エージェント型AIが本番環境移行の「臨界点」へ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">11月30日開幕のAWS re:Invent 2026は、AIがPoC段階から本番運用に移行する「臨界点」を体現するイベントとなる見通しです。複数の業界予測レポートは、エージェント型AI（Agentic AI）の生産環境移行が最大テーマになると指摘しており、エンタープライズ向けの安全なエージェント展開フレームワーク、低コスト推論チップ（Trainium3後継）、マルチモーダルモデルが注目されています。AIを活用したクラウドネイティブな基盤整備が加速するなか、AWSの発表は国内AI活用戦略にも直接影響を与えます。AI企業・開発者は今週のAWSの動向を注視することが推奨されます。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 AWS -->
+  <section class="section section-aws" id="aws">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div>
+          <div class="section-title">
+            <span>Amazon Web Services</span>
+            AWS 最新<br>アップデート
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / re:Invent 2026</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">イベント開幕</span>
+            <span class="card-date">2026-11-28</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://ecorpit.com/aws-reinvent-2026-keynotes-what-to-watch/" target="_blank" rel="noopener">AWS re:Invent 2026 開幕2日前—CEO Matt Garman基調講演は12月1日、re:InforceをAWSセキュリティデーとして統合</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWSの年次最大カンファレンス「re:Invent 2026」が11月30日（現地時間）からラスベガスで開幕します。CEO Matt Garman氏による基調講演は12月1日（火）8:30 AM〜10:30 AM PT、パートナー向け基調講演は12月2日（水）が予定されています。今年はセキュリティ専門イベント「re:Inforce」がre:Inventに統合され、12月3日（木）はAWSセキュリティデーとして設けられます。エージェント型AI・Trainium新世代チップ・生成AIの本番運用支援ツールが主な発表テーマとして注目されています。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">AWS / Partner Network</div>
+          <div class="card-badges">
+            <span class="impact impact-low">参考情報</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://aws.amazon.com/blogs/apn/know-before-you-go-an-aws-partners-guide-to-reinvent-2026/" target="_blank" rel="noopener">AWSパートナー向けre:Invent 2026 参加ガイド公開—必見セッション・ネットワーキングイベントの要点まとめ</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">AWS Partner Network（APN）ブログが、re:Invent 2026参加パートナー向けの「Know Before You Go」ガイドを公開しました。CEO基調講演（12月1日）やPartner Keynote（12月2日）のスケジュール、AI/MLおよびセキュリティの必見セッション選択の要点が詳細にまとめられています。パートナー向けには特別ネットワーキングイベント、デモブース、エキスパートとの1対1セッションも提供される予定です。AWS認定資格保有者やISVパートナーは事前予約が推奨されています。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 セキュリティ -->
+  <section class="section section-security" id="security">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div>
+          <div class="section-title">
+            <span>Security</span>
+            セキュリティ<br>最新情報
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">VMware / Broadcom</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://techtarget.itmedia.co.jp/tt/article/2611/27/2000003514/" target="_blank" rel="noopener">VMware vCenter CVE-2026-123890（CVSS 9.8）—中国系APT「ARMORY CASTLE」がゼロデイ悪用、即時パッチ必須</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">BroadcomはVMSA-2026-0009として、VMware vCenter ServerのVMware Directory Serviceに認証バイパスの脆弱性（CVE-2026-123890、CVSS 9.8）を公表しました。認証なしでネットワーク隣接から管理者権限を奪取できる深刻度で、MandiantはGoogle傘下GTIGの分析として中国系APTグループ「ARMORY CASTLE」が2026年9月（公開前）からゼロデイとして悪用していたと報告しています。修正版はvCenter 9.1.1.0200/9.0.2.0200/8.0 U3m。ワークアラウンドなし—即時パッチ適用が不可欠です。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">US Air Force / Cloud One</div>
+          <div class="card-badges">
+            <span class="impact impact-high">重要度 高</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://www.digitaltrends.com/computing/hackers-reportedly-cracked-a-major-us-military-cloud-putting-sensitive-systems-at-risk/" target="_blank" rel="noopener">Reuters報告：米空軍の主力クラウド「Cloud One」が侵害—コントロールプレーンへ不正アクセス、約1,300システムに影響懸念</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">Reutersは、米空軍が利用するクラウドコンピューティング基盤「Cloud One」（AWS上に構築、約1,300顧客システムを管理）に対する不正侵入を確認したと報道しました。攻撃者はソフトウェア脆弱性を悪用してコントロールプレーンへのアクセスを取得しており、被害の全容とデータ流出の有無については調査中です。攻撃者の身元は現時点で不明とされています。国防関連クラウドへの侵害は、米軍のゼロトラスト移行の遅れを改めて浮き彫りにした重大インシデントです。</p>
+        </details>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <div class="card-service">デジタル庁 / JVN</div>
+          <div class="card-badges">
+            <span class="impact impact-medium">重要度 中</span>
+            <span class="card-date">2026-11-27</span>
+          </div>
+        </div>
+        <div class="card-title"><a href="https://smhn.info/202611-myna-app-vulnerabilities-jvn" target="_blank" rel="noopener">マイナアプリに3件の脆弱性（CVE-2026-130398〜130400）—JVN公表、Ver2026.11.0への更新で解消</a></div>
+        <details>
+          <summary>詳細を表示</summary>
+          <p class="card-desc">IPAとJPCERT/CCが共同運営する脆弱性情報データベース「JVN」が、マイナンバーカード公式アプリ「マイナアプリ」の3件の脆弱性（CVE-2026-130398、CVE-2026-130399、CVE-2026-130400）を公表しました。いずれも不正なリンクのクリックを起点として、カード情報の窃取につながる可能性があります。修正済みのVer2026.11.0がAndroid/iOS向けに配信済みで、早急な更新が推奨されています。マイナンバーカード利用者が多い法人・自治体環境では、端末管理ポリシーの確認も求められます。</p>
+        </details>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-brand">DX・AI・AWS Update</div>
+    <div>Generated 2026-11-28 JST &nbsp;·&nbsp; RSS: AWS What's New FAILED / ITmedia NEWS FAILED / ITmedia AI+ FAILED / Security NEXT FAILED / JVN iPedia FAILED / 窓の杜 FAILED / Impress Watch FAILED &nbsp;·&nbsp; セキュリティ系フィード全て失敗 → Web検索でサイト指定補完実施</div>
+  </div>
+</footer>
+
+</body>
+</html>
