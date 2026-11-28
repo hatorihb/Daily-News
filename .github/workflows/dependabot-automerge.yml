@@ -22,6 +22,11 @@ on: pull_request
 permissions:
   contents: write
   pull-requests: write
+  # Reading the PR's check runs and commit statuses. An explicit permissions
+  # block grants nothing it doesn't list, and without these the checks come
+  # back empty and nothing ever merges.
+  checks: read
+  statuses: read
 
 concurrency:
   group: dependabot-automerge-${{ github.event.pull_request.number }}
@@ -63,7 +68,18 @@ jobs:
           grace=$((SECONDS + 5 * 60))
           deadline=$((SECONDS + 40 * 60))
           while :; do
-            checks=$(gh pr checks "$PR_URL" --json name,bucket,workflow 2>/dev/null || true)
+            # gh exits non-zero while checks are pending or failing but still
+            # prints them; it prints nothing when there are none yet, or on a
+            # real error. Only the first of those two may read as "none".
+            checks=$(gh pr checks "$PR_URL" --json name,bucket,workflow 2>"$RUNNER_TEMP/gh-checks.err") || true
+            if [ -z "$checks" ]; then
+              if ! grep -qi 'no checks reported' "$RUNNER_TEMP/gh-checks.err"; then
+                echo "::error::Could not read this PR's checks — not merging."
+                cat "$RUNNER_TEMP/gh-checks.err"
+                exit 1
+              fi
+              checks='[]'
+            fi
             others=$(jq --arg self "$SELF" '[.[] | select(.workflow != $self)]' <<<"${checks:-[]}")
             total=$(jq length <<<"$others")
             pending=$(jq '[.[] | select(.bucket == "pending")] | length' <<<"$others")
